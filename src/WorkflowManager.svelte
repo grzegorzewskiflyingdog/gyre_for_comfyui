@@ -121,7 +121,9 @@
             {:else}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div on:click={(e) => {foldOut=true}} class="title">{name}</div>
-                [S]
+                <div style="display: inline-block">
+                    <svg on:click={(e) => {saveWorkflow()}} xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-device-floppy" aria-hidden="true" focusable="false"><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M14 4l0 4l-6 0l0 -4"></path></svg>
+                </div>
             {/if}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div class="foldout" on:click={(e) => {foldOut=true}}>v</div>
