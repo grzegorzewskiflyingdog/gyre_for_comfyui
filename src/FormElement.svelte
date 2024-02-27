@@ -38,6 +38,9 @@
     function closeProperties() {
         dispatch('closeProperties',{})
     }
+    function deleteElement() {
+        dispatch("delete",{})
+    }
 </script>
 
 <div class="element-preview">
@@ -138,6 +141,8 @@
             <input name="step" type="number" value={element.step} on:input={(e) => updateElement({ step: e.target.value })} />
        </div>
     {/if}
+    <div><button on:click={() => deleteElement()} class="delete">Delete</button></div>
+
 </div>
 {/if}
 
@@ -161,13 +166,13 @@
         width:50px;
         text-align: center;
     }
+
     .element-preview:hover .editElementButton {
         display: block;
     }
     .element-preview select {
         margin-right: 10px;
         background-color: black;
-        text-align: center;
         color: white;
         padding: 5px;   
         display: inline-block;
@@ -225,8 +230,24 @@
         padding: 5px;
         width: 20px;
     }    
+ 
     .slidervalue {
         vertical-align: 10px;
         margin-right: 10px;
+    } 
+    .element-properties button {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
+        font-size: 15px;
+        min-width: 70px;
+        color: black;
+        background-color: rgb(227, 206, 116);
+        border-color: rgb(128, 128, 128);
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
     }
+    .element-properties .delete {
+        background-color: red;
+        color: white;
+    }       
 </style>

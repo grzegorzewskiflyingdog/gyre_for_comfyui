@@ -85,6 +85,7 @@
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
         on:update={(e) => { $formElements[index]=e.detail }}
+        on:delete={(e) => { $formElements.splice(showPropertiesIdx,1);$formElements=$formElements;showPropertiesIdx=-1 }}
         showProperties={showPropertiesIdx===index}/>
       </div>
   {/each}
@@ -133,18 +134,20 @@
   }
   .formBuilder .add_field_select {
         margin-right: 10px;
-        background-color: rgb(51, 51, 51);
-        text-align: center;
+        background-color: black;
         color: white;
         padding: 5px;   
         display: inline-block;
   }
     .formBuilder button {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
+        font-size: 15px;
+        min-width: 70px;
+        color: black;
+        background-color: rgb(227, 206, 116);
+        border-color: rgb(128, 128, 128);
+        border-radius: 5px;
+        cursor: pointer;
         margin-right: 10px;
-        background-color: rgb(51, 51, 51);
-        width:100px;
-        text-align: center;
-        color: white;
-        padding: 5px;
     }
 </style>
