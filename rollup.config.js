@@ -31,6 +31,7 @@ function serve() {
 }
 
 export default {
+	external: ["/scripts/app.js", "/scripts/api.js"],
 	input: 'src/main.js',
 	output: {
 		sourcemap: true,
@@ -38,20 +39,24 @@ export default {
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
-	plugins: [  
+
+	plugins: [
 
 		json({
 			compact: true
 		  }),
 		svelte({
+			emitCss: false,
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
 			}
 		}),
+
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
-		css({ output: 'bundle.css' }),
+
+		//css({ output: 'bundle.css' }),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
