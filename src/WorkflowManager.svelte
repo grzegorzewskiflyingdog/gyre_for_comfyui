@@ -163,12 +163,13 @@
         // 2. set unsaved state to false
         // 3. load list of all workflows again
         alert("save workflow " + name) // remove
-        loadList()
+        //loadList()
     }
 
 
 
-    export async function updateFile(file_path , jsonData ) {
+    async function updateFile(file_path , jsonData ) {
+        debugger;
         try {
             const response = await fetch("/workspace/update_file", {
                 method: "POST",
