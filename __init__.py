@@ -35,6 +35,9 @@ if os.path.exists(dist_path):
 server.PromptServer.instance.app.add_subapp("/build/", workspace_app)
 
 
+def get_my_workflows_dir():
+    return os.path.join(comfy_path, 'my_workflows')
+
 
 @server.PromptServer.instance.routes.post("/workspace/update_file")
 async def update_file(request):

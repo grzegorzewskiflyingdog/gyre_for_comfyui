@@ -4,7 +4,6 @@ const targetNode = document.body;
 const config = { childList: true, subtree: true };
 
 // @ts-ignore
-debugger;
 const callback = function (mutationsList, observer) {
   for (const mutation of mutationsList) {
     if (mutation.type === "childList") {

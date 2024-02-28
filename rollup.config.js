@@ -31,6 +31,10 @@ function serve() {
 }
 
 export default {
+	rollupOptions: {
+		// externalize deps that shouldn't be bundled into your library
+		//external: ["/scripts/app.js", "/scripts/api.js"],
+	},
 	external: ["/scripts/app.js", "/scripts/api.js"],
 	input: 'src/main.js',
 	output: {

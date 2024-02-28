@@ -1,13 +1,14 @@
 <script>
     import FormBuilder from "./FormBuilder.svelte"
     import RuleEditor from "./RuleEditor.svelte"
-
+    //import { app } from "/scripts/app.js";
     import {writable} from 'svelte/store'
+    import {onMount} from 'svelte'
     import testdata_workflow1 from './testdata/Inpainting Test with Gyre Tags.json'
     import testdata_workflow2 from './testdata/SDXL Lightning.json'
     import {get_all_dirty_from_scope} from "svelte/internal";
 
-
+    let allworkflows;
     let moving = false;
     let left = 10
     let top = 10
@@ -22,6 +23,10 @@
             top += e.movementY;
         }
     }
+
+    onMount(async () => {
+       await loadList();
+    });
 
     function onMouseUp() {
         moving = false;
@@ -49,15 +54,52 @@
     let selectedTag = ""
 
     function isVisible(workflow) {
-        let tags = workflow.gyre.tags
+
+        let mytags = workflow?.gyre?.tags||[];
         for (let activeTag in activatedTags) {
-            if (activatedTags[activeTag] && !tags.includes(activeTag)) return false
+            if (activatedTags[activeTag] && !mytags.includes(activeTag)) return false
         }
         return true
     }
 
-    function loadList() {
+
+
+
+    async function loadList() {
         // todo: make server request and read metadata of all existing workflows on filesystem
+        console.log("load list");
+        let result = await scanLocalNewFiles("/workspace/ComfyUI/my_workflows")
+        let data_workflow_list = result.map((el)=>{
+            let res = {name:el.name}
+            let gyre = null;
+            if(el.json) gyre = JSON.parse(el.json).extra.gyre;
+            if(gyre) res.gyre = gyre;
+            res.last_changed =  "2024-03-01";
+            return res
+        })
+        console.log(data_workflow_list);
+        workflowList.set(data_workflow_list)
+    }
+
+    async function scanLocalNewFiles(path, existFlowIds) {
+        existFlowIds = [];
+        try {
+            const response = await fetch("/workspace/scan_local_new_files", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    path,
+                    existFlowIds,
+                }),
+            });
+            const result = await response.json();
+            allworkflows = result;
+            return result;
+        } catch (error) {
+            console.error("Error scan local new files:", error);
+        }
     }
 
     function loadWorkflow(workflow) {
@@ -66,6 +108,12 @@
         // 2. update ComfyUI with new workflow
         // 3. set name and metadata here
 
+        console.log("load workflow!!");
+        name = workflow.name
+        metadata = workflow.gyre;
+
+        loadWorkflowIDImpl(workflow)
+        /*
         // only for testing:
         if (workflow.name === "Inpainting Test with Gyre Tags") {
             name = workflow.name
@@ -75,10 +123,40 @@
             name = workflow.name
             metadata = testdata_workflow2.extra.gyre
         }
-
+        */
     }
 
-    function saveWorkflow() {
+
+
+
+
+    async function loadWorkflowIDImpl(workflow){
+        if (window.app.graph == null) {
+            console.error("app.graph is null cannot load workflow");
+            return;
+        }
+
+        //setCurFlowIDAndName(id, flow.name);
+        //window.app.ui.dialog.close();
+        console.log(allworkflows);
+        let current = allworkflows.find((el)=>{
+            return el.name==workflow.name;
+        })
+        window.app.loadGraphData(JSON.parse(current.json));
+    };
+
+
+
+
+    async function saveWorkflow() {
+                debugger;
+                console.log("saveWorkflow");
+                let graph = window.app.graph.serialize();
+                let file_path =  graph.extra?.workspace_info?.name || "new.json";
+                if(metadata && graph.extra) graph.extra.gyre =  metadata;
+                const graphJson = JSON.stringify(graph);
+                await updateFile(file_path,graphJson);
+
         // todo:get workflow fom comfyUI
         // metadata should already point to extras.gyre - so nothing to do here
         // 1. make server request, with  name and full workflow, store it on filesystem there
@@ -87,6 +165,32 @@
         alert("save workflow " + name) // remove
         loadList()
     }
+
+
+
+    export async function updateFile(file_path , jsonData ) {
+        try {
+            const response = await fetch("/workspace/update_file", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    file_path: file_path,
+                    json_str: jsonData,
+                }),
+            });
+            const result = await response.text();
+            return result;
+        } catch (error) {
+            alert("Error saving workflow .json file: " + error);
+            console.error("Error saving workspace:", error);
+        }
+    }
+
+
+
+
 
     function addTag() {
         if (!selectedTag) return
