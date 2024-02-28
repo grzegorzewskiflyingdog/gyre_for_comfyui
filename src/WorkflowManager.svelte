@@ -153,6 +153,7 @@
                 console.log("saveWorkflow");
                 let graph = window.app.graph.serialize();
                 let file_path =  graph.extra?.workspace_info?.name || "new.json";
+                file_path = file_path.replace(/\.[^/.]+$/, "");
                 if(metadata && graph.extra) graph.extra.gyre =  metadata;
                 const graphJson = JSON.stringify(graph);
                 await updateFile(file_path,graphJson);
