@@ -3,15 +3,17 @@
     import RuleEditor from "./RuleEditor.svelte"
     //import { app } from "/scripts/app.js";
     import {writable} from 'svelte/store'
-    import {onMount} from 'svelte'
+    import {onMount,beforeUpdate} from 'svelte'
     import testdata_workflow1 from './testdata/Inpainting Test with Gyre Tags.json'
     import testdata_workflow2 from './testdata/SDXL Lightning.json'
     import {get_all_dirty_from_scope} from "svelte/internal";
+    import {stylestr} from './styles';
 
     let allworkflows;
     let moving = false;
     let left = 10
     let top = 10
+    let styleel;
 
     function onMouseDown() {
         moving = true;
@@ -23,6 +25,12 @@
             top += e.movementY;
         }
     }
+    beforeUpdate(() => {
+        if (  styleel && stylestr) {
+            styleel.innerHTML = stylestr;
+        }
+    })
+
 
     onMount(async () => {
        await loadList();
@@ -322,134 +330,6 @@
 </div>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
 
-<style>
-    .workflowManager {
-        position: fixed;
-        left: 10px;
-        top: 10px;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
-        padding: 10px;
-        background-color: rgb(0, 0, 0);
-        color: white;
-        width: 490px;
-        display: block;
-        border-radius: 5px
-    }
-
-    .miniMenu .title {
-        display: inline-block;
-        cursor: pointer;
-    }
-
-    .tagedit .title {
-        margin-bottom: 10px;
-    }
-
-    .tagedit .tag:hover {
-        background-color: red;
-    }
-
-    .tagedit .tagselect:focus {
-        outline: none;
-    }
-
-    .tagedit .tagselect {
-        background-color: grey;
-        font-size: 15px;
-        color: white;
-        border: none;
-        margin-top: 10px;
-    }
-
-    .foldout {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    .foldout:hover {
-        color: rgb(227, 206, 116);
-    }
-
-    .tags {
-        user-select: none;
-    }
-
-    .workflowManager button {
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
-        font-size: 15px;
-        min-width: 70px;
-        color: black;
-        background-color: rgb(227, 206, 116);
-        border-color: rgb(128, 128, 128);
-        border-radius: 5px;
-        cursor: pointer;
-        margin-right: 10px;
-    }
-
-    .workflowManager button:hover {
-        background-color: #ddb74f;
-
-    }
-
-    .workflowEntry {
-        border: 1px solid grey;
-        border-radius: 3px;
-        margin-bottom: 10px;;
-        padding: 5px;
-        cursor: pointer;
-    }
-
-    .workflowEntry .last_changed {
-        margin-top: 5px;
-        font-size: 12px;
-    }
-
-    .workflowEntry:hover {
-        background-color: #ddb74f;
-        color: black;
-    }
-
-    .workflowEntry .tags {
-        margin-top: 5px;
-    }
-
-    .tag {
-        display: inline-block;
-        background-color: dimgray;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        padding: 5px;
-        cursor: pointer;
-        font-size: 12px;
-    }
-
-    .on {
-        background-color: #ddb74f;
-        color: black;
-    }
-
-    .workflowEntry .tag {
-        font-size: 12px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        padding: 5px;
-        opacity: 0.6;
-    }
-
-    .workflowManager h1 {
-        font-size: 18px;
-    }
-
-    .text_input {
-        background: transparent;
-        border: 1px solid white;
-        color: white;
-        width: 300px;
-    }
-    .saveIcon {
-      vertical-align: -5px;
-    }
-</style>
+{#if stylestr}
+    <style bind:this={styleel}/>
+{/if}
