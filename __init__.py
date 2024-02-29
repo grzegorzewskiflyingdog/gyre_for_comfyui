@@ -99,7 +99,8 @@ def folder_handle(path, existFlowIds):
 @server.PromptServer.instance.routes.post("/workspace/readworkflowdir")
 async def readworkflowdir(request):
     reqJson = await request.json()
-    path = reqJson['path']
+    #path = reqJson['path']
+    path = get_my_workflows_dir()
     existFlowIds = reqJson['existFlowIds']
 
     fileList = folder_handle(path, existFlowIds)
