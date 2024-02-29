@@ -57,11 +57,12 @@ async def update_json_file(request):
     await asyncio.to_thread(write_json_to_file, json_str)
     return web.Response(text="File updated successfully")
 
-def file_handle(name, file, existFlowIds, fileList):
+def file_handle(name, file, existFlowIds, fileList,lastmodified):
     json_data = json.load(file)
     fileInfo = {
         'json': json.dumps(json_data),
-        'name': '.'.join(name.split('.')[:-1])
+        'name': '.'.join(name.split('.')[:-1]),
+        'lastmodified':lastmodified
     }
     if 'extra' in json_data and 'workspace_info' in json_data['extra'] and 'id' in json_data['extra']['workspace_info']:
         if json_data['extra']['workspace_info']['id'] not in existFlowIds:
@@ -81,8 +82,9 @@ def folder_handle(path, existFlowIds):
     for item in os.listdir(path):
         item_path = os.path.join(path, item)
         if os.path.isfile(item_path) and item_path.endswith('.json'):
+            lastmodified = os.path.getmtime(item_path)
             with open(item_path, 'r') as f:
-                file_handle(item, f, existFlowIds, fileList)
+                file_handle(item, f, existFlowIds, fileList,lastmodified)
 
         elif os.path.isdir(item_path):
             fileList.append({
