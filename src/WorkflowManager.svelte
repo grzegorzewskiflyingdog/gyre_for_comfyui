@@ -15,6 +15,17 @@
     let top = 10
     let styleel;
     let loadedworkflow;
+
+    let foldOut = false
+    let name = ""   // current loaded workflow name
+    let metadata = null // all Gyre data of current workflow: tags, forms, mappings,...
+    let state = "list"
+    let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated"]
+    let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
+    let activatedTags = {}
+    let selectedTag = ""
+
+
     function onMouseDown() {
         moving = true;
     }
@@ -84,14 +95,7 @@
         moving = false;
     }
 
-    let foldOut = false
-    let name = ""   // current loaded workflow name
-    let metadata = null // all Gyre data of current workflow: tags, forms, mappings,...
-    let state = "list"
-    let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated"]
-    let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
-    let activatedTags = {}
-    let selectedTag = ""
+
 
     function isVisible(workflow) {
         let mytags = workflow?.gyre?.tags||[];
@@ -176,13 +180,15 @@
 
 
     async function saveWorkflow() {
-                debugger;
                 console.log("saveWorkflow");
                 let graph = window.app.graph.serialize();
                 if(loadedworkflow && loadedworkflow.extra.workspace_info){
                     graph.extra.workspace_info = loadedworkflow.extra.workspace_info;
                 }
                 let file_path =  graph.extra?.workspace_info?.name || "new.json";
+                if(name){file_path = name}
+                if(metadata){graph.extra.gyre =  metadata;}
+                file_path = file_path || "new.json";
                 //file_path = file_path.replace(/\.[^/.]+$/, "");
                 if (!file_path.endsWith('.json')) {
                     // Add .json extension if it doesn't exist
