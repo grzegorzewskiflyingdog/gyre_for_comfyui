@@ -71,6 +71,13 @@ def file_handle(name, file, existFlowIds, fileList):
 
 def folder_handle(path, existFlowIds):
     fileList = []
+    # Create the directory if it doesn't exist
+    #my_workflows_dir = get_my_workflows_dir()
+    #full_path = os.path.join(my_workflows_dir, file_path)
+    print(f"###path ({path})") 
+    os.makedirs(path, exist_ok=True)
+    #my_workflows_dir = get_my_workflows_dir()
+    #os.makedirs(os.path.dirname(my_workflows_dir), exist_ok=True)
     for item in os.listdir(path):
         item_path = os.path.join(path, item)
         if os.path.isfile(item_path) and item_path.endswith('.json'):
