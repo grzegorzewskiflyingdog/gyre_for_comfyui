@@ -67,7 +67,7 @@
                         graph.extra.gyre = {};
                     }
                     graph.extra.gyre.lastModified = fileInput.files[0].lastModified;
-                    graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
+                    graph.extra.gyre.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
 
                     loadedworkflow = graph;
                     loadWorkflow(graph);
@@ -123,10 +123,10 @@
             let res = {name:el.name}
             let gyre = null;
             if(el.json) gyre = JSON.parse(el.json).extra.gyre;
-            res.last_changed =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
+            res.lastModifiedReadable =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
             if(gyre){
                 res.gyre = gyre;
-                res.last_changed =  JSON.parse(el.json).workspace_info?.lastModified || "";
+                res.lastModifiedReadable =  JSON.parse(el.json).workspace_info?.lastModified || "";
             }
 
 
@@ -358,7 +358,7 @@
                         <!-- svelte-ignore a11y-click-events-have-key-events -->
                         <div class="workflowEntry" on:click={loadWorkflow(workflow)}>
                             {workflow.name}
-                            <div class="last_changed">{workflow.last_changed}</div>
+                            <div class="last_changed">{workflow.lastModifiedReadable}</div>
                             <div class="tags">
                                 {#if workflow.gyre && workflow.gyre.tags}
                                     {#each workflow.gyre.tags as tag}
