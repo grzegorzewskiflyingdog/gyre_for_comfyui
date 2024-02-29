@@ -63,6 +63,11 @@
                     graph.extra.workspace_info.name = fixedfilename;
                     graph.extra.workspace_info.lastModified = fileInput.files[0].lastModified;
                     graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
+                    if(!graph.extra.gyre){
+                        graph.extra.gyre = {};
+                        graph.extra.gyre.lastModified = fileInput.files[0].lastModified;
+                        graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
+                    }
                     loadedworkflow = graph;
                     loadWorkflow(graph);
             }
@@ -117,8 +122,13 @@
             let res = {name:el.name}
             let gyre = null;
             if(el.json) gyre = JSON.parse(el.json).extra.gyre;
-            if(gyre) res.gyre = gyre;
-            res.last_changed =  JSON.parse(el.json).workspace_info?.lastModifiedReadable || "";
+            res.last_changed =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
+            if(gyre){
+                res.gyre = gyre;
+                res.last_changed =  JSON.parse(el.json).workspace_info?.lastModified || "";
+            }
+
+
             return res
         })
         console.log(data_workflow_list);
