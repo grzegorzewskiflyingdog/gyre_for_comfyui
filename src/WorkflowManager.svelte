@@ -146,7 +146,10 @@
         // 1. make server request by workflow.name, getting full workflow data here
         // 2. update ComfyUI with new workflow
         // 3. set name and metadata here
-
+        if(!workflow.gyre){
+            workflow.gyre = {};
+            workflow.gyre.tags = [];
+        }
         console.log("load workflow!!");
         name = workflow.name
         metadata = workflow.gyre;
@@ -162,7 +165,9 @@
         if(!current){
             window.app.loadGraphData(workflow);
         } else {
-            window.app.loadGraphData(JSON.parse(current.json));
+            let wf =  JSON.parse(current.json);
+            if(!wf.name && name) wf.name = name;
+            window.app.loadGraphData(wf);
         }
     }
 
