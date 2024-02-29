@@ -126,7 +126,8 @@
             res.lastModifiedReadable =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
             if(gyre){
                 res.gyre = gyre;
-                res.lastModifiedReadable =  JSON.parse(el.json).workspace_info?.lastModified || "";
+                res.gyre.lastModifiedReadable =  JSON.parse(el.json).workspace_info?.lastModifiedReadable || "";
+                res.gyre.lastModified =  JSON.parse(el.json).workspace_info?.lastModified || "";
             }
 
 
