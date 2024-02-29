@@ -63,11 +63,12 @@
                     graph.extra.workspace_info.name = fixedfilename;
                     graph.extra.workspace_info.lastModified = fileInput.files[0].lastModified;
                     graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
-                    if(!graph.extra.gyre){
+                    if(!graph.extra.gyre) {
                         graph.extra.gyre = {};
-                        graph.extra.gyre.lastModified = fileInput.files[0].lastModified;
-                        graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
                     }
+                    graph.extra.gyre.lastModified = fileInput.files[0].lastModified;
+                    graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
+
                     loadedworkflow = graph;
                     loadWorkflow(graph);
             }
