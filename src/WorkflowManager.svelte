@@ -14,7 +14,7 @@
     let left = 10
     let top = 10
     let styleel;
-
+    let loadedworkflow;
     function onMouseDown() {
         moving = true;
     }
@@ -34,35 +34,66 @@
 
     onMount(async () => {
        await loadList();
+        addExternalLoadListener();
     });
+
+
+    function addExternalLoadListener(){
+        const fileInput = document.getElementById("comfy-file-input");
+        const fileInputListener = async () => {
+            if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                    console.log(fileInput,fileInput.files);
+                    new Date(fileInput.files[0].lastModified).toDateString()
+                    let fixedfilename = getAvalableFileName(fileInput.files[0].name);
+                    let graph = window.app.graph.serialize();
+                    graph.name = fixedfilename;
+                    graph.lastModified = fileInput.files[0].lastModified
+                    if(!graph.extra?.workspace_info) graph.extra.workspace_info =[];
+                    graph.extra.workspace_info.name = fixedfilename;
+                    graph.extra.workspace_info.lastModified = fileInput.files[0].lastModified;
+                    loadedworkflow = graph;
+                    loadWorkflow(graph);
+            }
+        };
+        fileInput?.addEventListener("change", fileInputListener);
+    }
+    function getAvalableFileName(name){
+        if (!name) return 'new';
+        let ind = 1;
+        let goodname = false;
+        let ext = name.split('.').pop();
+        name = name.replace(/\.[^/.]+$/, "");
+        let newname = name;
+        while(!goodname){
+            let allcurrnames = allworkflows.map((el)=>el.name);
+            if(allcurrnames.includes(name)){
+                newname = `${name}(${ind})`;
+                ind = ind+1;
+            } else {
+                goodname = true;
+            }
+        }
+        return  `${newname}`;
+    }
+
+
+
+
 
     function onMouseUp() {
         moving = false;
     }
 
-    let testdata_workflow_list = [
-        {
-            name: "Inpainting Test with Gyre Tags",
-            last_changed: "2024-03-01",
-            gyre: testdata_workflow1.extra.gyre
-        },
-        {
-            name: "SDXL Lightning",
-            last_changed: "2024-02-24",
-            gyre: testdata_workflow2.extra.gyre
-        }
-    ]
     let foldOut = false
     let name = ""   // current loaded workflow name
     let metadata = null // all Gyre data of current workflow: tags, forms, mappings,...
     let state = "list"
     let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated"]
-    let workflowList = writable(testdata_workflow_list)    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
+    let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
     let activatedTags = {}
     let selectedTag = ""
 
     function isVisible(workflow) {
-
         let mytags = workflow?.gyre?.tags||[];
         for (let activeTag in activatedTags) {
             if (activatedTags[activeTag] && !mytags.includes(activeTag)) return false
@@ -110,7 +141,7 @@
         }
     }
 
-    function loadWorkflow(workflow) {
+    async function loadWorkflow(workflow) {
         // todo:check if current workflow is unsaved and make confirm otherwise
         // 1. make server request by workflow.name, getting full workflow data here
         // 2. update ComfyUI with new workflow
@@ -120,38 +151,21 @@
         name = workflow.name
         metadata = workflow.gyre;
 
-        loadWorkflowIDImpl(workflow)
-        /*
-        // only for testing:
-        if (workflow.name === "Inpainting Test with Gyre Tags") {
-            name = workflow.name
-            metadata = testdata_workflow1.extra.gyre
-        }
-        if (workflow.name === "SDXL Lightning") {
-            name = workflow.name
-            metadata = testdata_workflow2.extra.gyre
-        }
-        */
-    }
-
-
-
-
-
-    async function loadWorkflowIDImpl(workflow){
         if (window.app.graph == null) {
             console.error("app.graph is null cannot load workflow");
             return;
         }
 
-        //setCurFlowIDAndName(id, flow.name);
-        //window.app.ui.dialog.close();
-        console.log(allworkflows);
         let current = allworkflows.find((el)=>{
             return el.name==workflow.name;
         })
-        window.app.loadGraphData(JSON.parse(current.json));
-    };
+        if(!current){
+            window.app.loadGraphData(workflow);
+        } else {
+            window.app.loadGraphData(JSON.parse(current.json));
+        }
+    }
+
 
 
 
@@ -160,8 +174,15 @@
                 debugger;
                 console.log("saveWorkflow");
                 let graph = window.app.graph.serialize();
+                if(loadedworkflow && loadedworkflow.extra.workspace_info){
+                    graph.extra.workspace_info = loadedworkflow.extra.workspace_info;
+                }
                 let file_path =  graph.extra?.workspace_info?.name || "new.json";
-                file_path = file_path.replace(/\.[^/.]+$/, "");
+                //file_path = file_path.replace(/\.[^/.]+$/, "");
+                if (!file_path.endsWith('.json')) {
+                    // Add .json extension if it doesn't exist
+                    file_path += '.json';
+                }
                 if(metadata && graph.extra) graph.extra.gyre =  metadata;
                 const graphJson = JSON.stringify(graph);
                 await updateFile(file_path,graphJson);
@@ -178,7 +199,6 @@
 
 
     async function updateFile(file_path , jsonData ) {
-        debugger;
         try {
             const response = await fetch("/workspace/update_file", {
                 method: "POST",

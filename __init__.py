@@ -56,3 +56,44 @@ async def update_file(request):
     # Offload the file update to a separate thread
     await asyncio.to_thread(write_json_to_file, json_str)
     return web.Response(text="File updated successfully")
+
+def file_handle(name, file, existFlowIds, fileList):
+    json_data = json.load(file)
+    fileInfo = {
+        'json': json.dumps(json_data),
+        'name': '.'.join(name.split('.')[:-1])
+    }
+    if 'extra' in json_data and 'workspace_info' in json_data['extra'] and 'id' in json_data['extra']['workspace_info']:
+        if json_data['extra']['workspace_info']['id'] not in existFlowIds:
+            fileList.append(fileInfo)
+    else:
+        fileList.append(fileInfo)
+
+def folder_handle(path, existFlowIds):
+    fileList = []
+    for item in os.listdir(path):
+        item_path = os.path.join(path, item)
+        if os.path.isfile(item_path) and item_path.endswith('.json'):
+            with open(item_path, 'r') as f:
+                file_handle(item, f, existFlowIds, fileList)
+
+        elif os.path.isdir(item_path):
+            fileList.append({
+                'name': item,
+                'list': folder_handle(item_path, existFlowIds)
+            })
+    return fileList
+
+
+
+# Scan all files and subfolders in the local save directory.
+# For files, compare the extra.workspace_info.id in the json format file with the flow of the current DB to determine whether it is a flow that needs to be added;
+# For subfolders, scan the json files in the subfolder and use the same processing method as the file to determine whether it is a flow that needs to be added;
+@server.PromptServer.instance.routes.post("/workspace/scan_local_new_files")
+async def scan_local_new_files(request):
+    reqJson = await request.json()
+    path = reqJson['path']
+    existFlowIds = reqJson['existFlowIds']
+
+    fileList = folder_handle(path, existFlowIds)
+    return web.Response(text=json.dumps(fileList), content_type='application/json')
