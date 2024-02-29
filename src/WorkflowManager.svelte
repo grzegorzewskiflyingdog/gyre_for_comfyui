@@ -62,6 +62,7 @@
                     if(!graph.extra?.workspace_info) graph.extra.workspace_info =[];
                     graph.extra.workspace_info.name = fixedfilename;
                     graph.extra.workspace_info.lastModified = fileInput.files[0].lastModified;
+                    graph.extra.workspace_info.lastModifiedReadable = fileInput.files[0].lastModified.toISOString().split('T')[0];
                     loadedworkflow = graph;
                     loadWorkflow(graph);
             }
@@ -117,7 +118,7 @@
             let gyre = null;
             if(el.json) gyre = JSON.parse(el.json).extra.gyre;
             if(gyre) res.gyre = gyre;
-            res.last_changed =  "2024-03-01";
+            res.last_changed =  JSON.parse(el.json).workspace_info?.lastModifiedReadable || "";
             return res
         })
         console.log(data_workflow_list);
@@ -146,6 +147,7 @@
     }
 
     async function loadWorkflow(workflow) {
+        await loadList();
         // todo:check if current workflow is unsaved and make confirm otherwise
         // 1. make server request by workflow.name, getting full workflow data here
         // 2. update ComfyUI with new workflow
