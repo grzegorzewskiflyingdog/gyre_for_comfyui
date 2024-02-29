@@ -39,8 +39,8 @@ def get_my_workflows_dir():
     return os.path.join(comfy_path, 'my_workflows')
 
 
-@server.PromptServer.instance.routes.post("/workspace/update_file")
-async def update_file(request):
+@server.PromptServer.instance.routes.post("/workspace/update_json_file")
+async def update_json_file(request):
     data = await request.json()
     file_path = data['file_path']
     json_str = data['json_str']
@@ -96,8 +96,8 @@ def folder_handle(path, existFlowIds):
 # Scan all files and subfolders in the local save directory.
 # For files, compare the extra.workspace_info.id in the json format file with the flow of the current DB to determine whether it is a flow that needs to be added;
 # For subfolders, scan the json files in the subfolder and use the same processing method as the file to determine whether it is a flow that needs to be added;
-@server.PromptServer.instance.routes.post("/workspace/scan_local_new_files")
-async def scan_local_new_files(request):
+@server.PromptServer.instance.routes.post("/workspace/readworkflowdir")
+async def readworkflowdir(request):
     reqJson = await request.json()
     path = reqJson['path']
     existFlowIds = reqJson['existFlowIds']

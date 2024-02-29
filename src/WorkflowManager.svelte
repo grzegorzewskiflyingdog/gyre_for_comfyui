@@ -123,7 +123,7 @@
     async function scanLocalNewFiles(path, existFlowIds) {
         existFlowIds = [];
         try {
-            const response = await fetch("/workspace/scan_local_new_files", {
+            const response = await fetch("/workspace/readworkflowdir", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -205,7 +205,7 @@
 
     async function updateFile(file_path , jsonData ) {
         try {
-            const response = await fetch("/workspace/update_file", {
+            const response = await fetch("/workspace/update_json_file", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
