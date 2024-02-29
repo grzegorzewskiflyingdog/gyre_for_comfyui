@@ -36,7 +36,7 @@ server.PromptServer.instance.app.add_subapp("/build/", workspace_app)
 
 
 def get_my_workflows_dir():
-    return os.path.join(comfy_path, 'my_workflows')
+    return os.path.join(comfy_path, 'my_workflows_dir')
 
 
 @server.PromptServer.instance.routes.post("/workspace/update_json_file")

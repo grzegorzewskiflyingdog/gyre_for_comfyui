@@ -107,7 +107,7 @@
     async function loadList() {
         // todo: make server request and read metadata of all existing workflows on filesystem
         console.log("load list");
-        let result = await scanLocalNewFiles("/workspace/ComfyUI/my_workflows")
+        let result = await scanLocalNewFiles("/workspace/ComfyUI/my_workflows_dir")
         let data_workflow_list = result.map((el)=>{
             let res = {name:el.name}
             let gyre = null;
