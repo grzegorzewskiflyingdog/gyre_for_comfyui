@@ -126,8 +126,8 @@
             res.lastModifiedReadable =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
             if(gyre){
                 res.gyre = gyre;
-                res.gyre.lastModifiedReadable =  JSON.parse(el.json).workspace_info?.lastModifiedReadable || "";
-                res.gyre.lastModified =  JSON.parse(el.json).workspace_info?.lastModified || "";
+                res.gyre.lastModifiedReadable =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
+                res.gyre.lastModified =  JSON.parse(el.json).extra.gyre?.lastModified || "";
             }
 
 
@@ -198,7 +198,8 @@
                 console.log("saveWorkflow");
                 let graph = window.app.graph.serialize();
                 if(loadedworkflow && loadedworkflow.extra.workspace_info){
-                    graph.extra.workspace_info = loadedworkflow.extra.workspace_info;
+                    graph.extra = loadedworkflow.extra;
+                    metadata = loadedworkflow.extra.gyre;
                 }
                 let file_path =  graph.extra?.workspace_info?.name || "new.json";
                 if(name){file_path = name}
