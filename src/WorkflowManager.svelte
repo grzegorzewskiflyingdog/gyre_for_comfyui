@@ -198,13 +198,14 @@
                 const graphJson = JSON.stringify(graph);
                 await updateFile(file_path,graphJson);
 
+
         // todo:get workflow fom comfyUI
         // metadata should already point to extras.gyre - so nothing to do here
         // 1. make server request, with  name and full workflow, store it on filesystem there
         // 2. set unsaved state to false
         // 3. load list of all workflows again
         alert("save workflow " + name) // remove
-        //loadList()
+        await loadList();
     }
 
 
