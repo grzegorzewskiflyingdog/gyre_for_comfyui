@@ -183,6 +183,7 @@
             window.app.loadGraphData(workflow);
         } else {
             let wf =  JSON.parse(current.json);
+            metadata = wf.gyre;
             if(!wf.name && name) wf.name = name;
             window.app.loadGraphData(wf);
         }
