@@ -7,7 +7,6 @@
   export let form_key='default'  // support for multiple forms (e.g. wizards) in the future
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
-  console.log("elements",$metadata.forms[form_key].elements)
   let formElements = $metadata.forms[form_key].elements
   let dragStartIndex=-1;
   let showPropertiesIdx=0;
@@ -39,7 +38,6 @@
     formElements.push(newElement)
     formElements=formElements
     showPropertiesIdx=formElements.length-1
-    console.log("add",$metadata.forms[form_key].elements)
   }
 
   function handleDragStart(event, index) {
@@ -52,19 +50,21 @@
 
   function handleDrop(event, dropIndex) {
     event.preventDefault();
-    if (dragStartIndex === dropIndex) return; // No change
-  /*  formElements.push({
-       draggedItem: formElements[dragStartIndex];
-      const remainingItems = formElements.filter((_, index) => index !== dragStartIndex);
-      const reorderedItems = [
+    if (dragStartIndex === dropIndex) return
+    
+    const draggedItem = formElements[dragStartIndex];
+    const remainingItems = formElements.filter((_, index) => index !== dragStartIndex)
+    const reorderedItems = [
         ...remainingItems.slice(0, dropIndex),
         draggedItem,
         ...remainingItems.slice(dropIndex)
-    });*/
+    ]
+    // Reassign the reordered items back to formElements
+    formElements = reorderedItems
     formElements=formElements
     // Reset dragged index
-    dragStartIndex = -1;
-  }
+    dragStartIndex = -1
+}
 
   function removeElement(index) {
     formElements.update(elements => elements.filter((_, i) => i !== index));
