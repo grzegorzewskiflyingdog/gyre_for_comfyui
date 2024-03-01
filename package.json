@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run copy:styles && rollup -c",
-    "dev": "rollup -c -w",
+    "dev": "npm run copy:styles && rollup -c -w",
     "start": "sirv public --no-clear",
     "copy:styles": "mkdir -p public/dist/build && mkdir -p dist/build && cp src/gyrestyles.css dist/build && cp src/gyrestyles.css public/dist/build"
   },

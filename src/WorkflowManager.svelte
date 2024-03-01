@@ -1,11 +1,8 @@
 <script>
     import FormBuilder from "./FormBuilder.svelte"
     import RuleEditor from "./RuleEditor.svelte"
-    //import { app } from "/scripts/app.js";
     import {writable} from 'svelte/store'
     import {onMount,beforeUpdate} from 'svelte'
-    import testdata_workflow1 from './testdata/Inpainting Test with Gyre Tags.json'
-    import testdata_workflow2 from './testdata/SDXL Lightning.json'
     import {get_all_dirty_from_scope} from "svelte/internal";
 
     let allworkflows;
@@ -35,8 +32,6 @@
             top += e.movementY;
         }
     }
-
-
 
     onMount(async () => {
        await loadList();
