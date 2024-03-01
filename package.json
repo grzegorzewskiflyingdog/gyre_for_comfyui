@@ -7,7 +7,7 @@
     "build": "npm run copy:styles && rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "copy:styles": "cp src/gyrestyles.css dist/build && mkdir -p public/dist/build && cp src/gyrestyles.css public/dist/build"
+    "copy:styles": "cp src/gyrestyles.css dist/build && mkdir -p public/dist/build && mkdir -p public/dist/build && cp src/gyrestyles.css public/dist/build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
