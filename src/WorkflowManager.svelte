@@ -77,6 +77,7 @@
     }
     function getAvalableFileName(name){
         if (!name) return 'new';
+        return name;
         let ind = 1;
         let goodname = false;
         let ext = name.split('.').pop();
