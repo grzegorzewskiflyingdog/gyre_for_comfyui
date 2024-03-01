@@ -7,7 +7,6 @@
     import testdata_workflow1 from './testdata/Inpainting Test with Gyre Tags.json'
     import testdata_workflow2 from './testdata/SDXL Lightning.json'
     import {get_all_dirty_from_scope} from "svelte/internal";
-    import {stylestr} from './styles';
 
     let allworkflows;
     let moving = false;
@@ -36,11 +35,7 @@
             top += e.movementY;
         }
     }
-    beforeUpdate(() => {
-        if (  styleel && stylestr) {
-            styleel.innerHTML = stylestr;
-        }
-    })
+
 
 
     onMount(async () => {
@@ -119,7 +114,7 @@
     async function loadList() {
         // todo: make server request and read metadata of all existing workflows on filesystem
         console.log("load list");
-        let result = await scanLocalNewFiles("/workspace/ComfyUI/my_workflows_dir")
+        let result = await scanLocalNewFiles()
         let data_workflow_list = result.map((el)=>{
             let res = {name:el.name}
             let gyre = null;
@@ -130,16 +125,14 @@
                 res.gyre.lastModifiedReadable =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
                 res.gyre.lastModified =  JSON.parse(el.json).extra.gyre?.lastModified || "";
             }
-
-
             return res
         })
         console.log(data_workflow_list);
         workflowList.set(data_workflow_list)
     }
 
-    async function scanLocalNewFiles(path, existFlowIds) {
-        existFlowIds = [];
+    async function scanLocalNewFiles() {
+        let existFlowIds = [];
         try {
             const response = await fetch("/workspace/readworkflowdir", {
                 method: "POST",
@@ -147,7 +140,7 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    path,
+                    path:"",
                     existFlowIds,
                 }),
             });
@@ -163,8 +156,9 @@
     function fixDatesFromServer(result){
         let newel = result.map((el)=>{
             let objjs =  JSON.parse(el.json);
-            objjs.extra.gyre.lastModified = new Date(el.lastmodified * 1000).getTime()
-            objjs.extra.gyre.lastModifiedReadable = new Date(el.lastmodified * 1000).toISOString().split('T')[0];
+            objjs.extra.gyre.lastModified = new Date(el.lastmodified * 1000).getTime();
+            let datestr = new Date(el.lastmodified * 1000).toISOString();
+            objjs.extra.gyre.lastModifiedReadable = datestr.split('T')[0]+" "+datestr.split('T')[1].replace(/\.[^/.]+$/, "");
             let json = JSON.stringify(objjs);
             return{...el,json}
         })
@@ -392,10 +386,6 @@
 </div>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
 
-{#if false && stylestr}
-    <style bind:this={styleel}/>
-{/if}
-
-    <style>
-       @import 'dist/build/gyrestyles.css';
-    </style>
+<style>
+  @import 'dist/build/gyrestyles.css';
+</style>
