@@ -37,12 +37,19 @@ export default {
 	},
 	external: ["/scripts/app.js", "/scripts/api.js"],
 	input: 'src/main.js',
-	output: {
+	output: [ {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
 		file: 'dist/build/bundle.js'
 	},
+	{
+	sourcemap: true,
+	format: 'iife',
+	name: 'app',
+	file: 'public/build/bundle.js'
+	}
+	],
 
 	plugins: [
 
