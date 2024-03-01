@@ -11,7 +11,7 @@ const callback = function (mutationsList, observer) {
       mutation.addedNodes.forEach((node) => {
         if (node.nodeName === "CANVAS") {
           // @ts-ignore
-          import("/build/bundle.js");
+          import("/dist/build/bundle.js");
           observer.disconnect();
         }
       });
