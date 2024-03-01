@@ -4,7 +4,7 @@
     import {writable} from 'svelte/store'
     import {onMount,beforeUpdate} from 'svelte'
     import {get_all_dirty_from_scope} from "svelte/internal";
-
+    import { metadata} from './stores/metadata'
     let allworkflows;
     let moving = false;
     let left = 10
@@ -14,7 +14,6 @@
 
     let foldOut = false
     let name = ""   // current loaded workflow name
-    let metadata = null // all Gyre data of current workflow: tags, forms, mappings,...
     let state = "list"
     let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated"]
     let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
@@ -107,7 +106,7 @@
 
 
     async function loadList() {
-        // todo: make server request and read metadata of all existing workflows on filesystem
+        // todo: make server request and read $metadata of all existing workflows on filesystem
         console.log("load list");
         let result = await scanLocalNewFiles()
         let data_workflow_list = result.map((el)=>{
@@ -167,14 +166,14 @@
         // todo:check if current workflow is unsaved and make confirm otherwise
         // 1. make server request by workflow.name, getting full workflow data here
         // 2. update ComfyUI with new workflow
-        // 3. set name and metadata here
+        // 3. set name and $metadata here
         if(!workflow.gyre){
             workflow.gyre = {};
             workflow.gyre.tags = [];
         }
         console.log("load workflow!!");
         name = workflow.name
-        metadata = workflow.gyre;
+        $metadata = workflow.gyre;
 
         if (window.app.graph == null) {
             console.error("app.graph is null cannot load workflow");
@@ -202,24 +201,24 @@
                 let graph = window.app.graph.serialize();
                 if(loadedworkflow && loadedworkflow.extra.workspace_info){
                     graph.extra = loadedworkflow.extra;
-                    metadata = loadedworkflow.extra.gyre;
+                    $metadata = loadedworkflow.extra.gyre;
                 }
                 let file_path =  graph.extra?.workspace_info?.name || "new.json";
                 if(name){file_path = name}
-                if(metadata){graph.extra.gyre =  metadata;}
+                if($metadata){graph.extra.gyre =  $metadata;}
                 file_path = file_path || "new.json";
                 //file_path = file_path.replace(/\.[^/.]+$/, "");
                 if (!file_path.endsWith('.json')) {
                     // Add .json extension if it doesn't exist
                     file_path += '.json';
                 }
-                if(metadata && graph.extra) graph.extra.gyre =  metadata;
+                if($metadata && graph.extra) graph.extra.gyre =  $metadata;
                 const graphJson = JSON.stringify(graph);
                 await updateFile(file_path,graphJson);
 
 
         // todo:get workflow fom comfyUI
-        // metadata should already point to extras.gyre - so nothing to do here
+        // $metadata should already point to extras.gyre - so nothing to do here
         // 1. make server request, with  name and full workflow, store it on filesystem there
         // 2. set unsaved state to false
         // 3. load list of all workflows again
@@ -255,15 +254,15 @@
 
     function addTag() {
         if (!selectedTag) return
-        if (!metadata.tags) metadata.tags = []
-        metadata.tags.push(selectedTag)
-        metadata = metadata
+        if (!$metadata.tags) $metadata.tags = []
+        $metadata.tags.push(selectedTag)
+        $metadata = $metadata
     }
 
     function removeTag(tag) {
-        const index = metadata.tags.indexOf(tag);
-        metadata.tags.splice(index, 1);
-        metadata = metadata
+        const index = $metadata.tags.indexOf(tag);
+        $metadata.tags.splice(index, 1);
+        $metadata = $metadata
     }
 </script>
 
@@ -307,7 +306,7 @@
         </svg>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>^</div>
-        {#if metadata}
+        {#if $metadata}
             <input type="text" bind:value={name} class="text_input">
             <button on:click={(e) => {saveWorkflow()}}>Save</button>
             <br>
@@ -321,9 +320,9 @@
             <div class="tagedit">
                 <div class="title">Click on a Tag to remove it</div>
                 <div class="tags">
-                    {#if metadata.tags}
+                    {#if $metadata.tags}
                         <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        {#each metadata.tags as tag}
+                        {#each $metadata.tags as tag}
                             <div class="tag" on:click={(e) => {removeTag(tag)}}>{tag}</div>
                         {/each}
                     {/if}
@@ -331,7 +330,7 @@
                 <select class="tagselect" bind:value={selectedTag} on:change={(e) => {addTag()}}>
                     <option selected value="">Add Tag...</option>
                     {#each tags as tag}
-                        {#if !metadata.tags.includes(tag)}
+                        {#if !$metadata.tags.includes(tag)}
                             <option value="{tag}">{tag}</option>
                         {/if}
                     {/each}
@@ -340,12 +339,12 @@
         {/if}
         {#if state === "editForm"}
             <div style="margin-top:10px"></div>
-            <!-- todo: set to metadata.forms.default -->
+            <!-- todo: set to $metadata.forms.default -->
             <FormBuilder></FormBuilder>
         {/if}
         {#if state === "editRules"}
             <div style="margin-top:10px"></div>
-            <!-- todo: set to metadata.forms.default -->
+            <!-- todo: set to $metadata.forms.default -->
             <RuleEditor></RuleEditor>
         {/if}        
         {#if state === "list"}
