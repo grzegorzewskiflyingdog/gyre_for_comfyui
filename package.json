@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rollup -c",
+    "build": "npm run copy:styles && rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "start": "sirv public --no-clear",
+    "copy:styles": "cp src/gyrestyles.css dist/build && cp src/gyrestyles.css public"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",

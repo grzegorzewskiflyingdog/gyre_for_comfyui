@@ -392,6 +392,10 @@
 </div>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
 
-{#if stylestr}
+{#if false && stylestr}
     <style bind:this={styleel}/>
 {/if}
+
+    <style>
+       @import './gyrestyles.css';
+    </style>
