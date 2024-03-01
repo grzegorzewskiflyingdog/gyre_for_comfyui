@@ -32,7 +32,7 @@ if os.path.exists(dist_path):
         web.static("/", dist_path),
     ])
 
-server.PromptServer.instance.app.add_subapp("dist/build/", workspace_app)
+server.PromptServer.instance.app.add_subapp("/dist/build/", workspace_app)
 
 
 def get_my_workflows_dir():
