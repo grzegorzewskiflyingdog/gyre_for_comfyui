@@ -5,12 +5,13 @@
     let conditions = ['==', '!=', '>', '<', '>=', '<='];
     let editingIndex = null; // Index of the currently editing rule
     import { metadata} from './stores/metadata'
-    if (!metadata.rules) metadata.rules=[]
-    let rules = metadata.rules
+    if (!$metadata.rules) $metadata.rules=[]
+    let rules = $metadata.rules
     function addRule() {
       rules.push({ fieldName: '', condition: '', actionType: '', rightValue:'', targetField: '', actionValue: '' });
       rules=rules
       editingIndex=rules.length-1
+      $metadata.rules = rules;
     }
   
     function deleteRule(index) {
@@ -19,6 +20,7 @@
         editingIndex = null; // Reset editing index if the currently edited rule is deleted
       }
       rules=rules
+      $metadata.rules = rules;
     }
   
     function editRule(index) {
