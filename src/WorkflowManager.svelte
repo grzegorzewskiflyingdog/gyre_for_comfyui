@@ -306,7 +306,7 @@
         </svg>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>^</div>
-        {#if $metadata}
+        {#if $metadata && $metadata.lastModified}
             <input type="text" bind:value={name} class="text_input">
             <button on:click={(e) => {saveWorkflow()}}>Save</button>
             <br>
