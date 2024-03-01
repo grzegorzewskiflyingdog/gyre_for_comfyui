@@ -397,5 +397,5 @@
 {/if}
 
     <style>
-       @import './gyrestyles.css';
+       @import 'dist/build/gyrestyles.css';
     </style>
