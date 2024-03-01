@@ -150,13 +150,27 @@
                     existFlowIds,
                 }),
             });
-            const result = await response.json();
+            let  result = await response.json();
+            result = fixDatesFromServer(result);
             allworkflows = result;
             return result;
         } catch (error) {
             console.error("Error scan local new files:", error);
         }
     }
+
+    function fixDatesFromServer(result){
+        let newel = result.map((el)=>{
+            let objjs =  JSON.parse(el.json);
+            objjs.extra.gyre.lastModified = new Date(el.lastmodified * 1000).getTime()
+            objjs.extra.gyre.lastModifiedReadable = new Date(el.lastmodified * 1000).toISOString().split('T')[0];
+            let json = JSON.stringify(objjs);
+            return{...el,json}
+        })
+        return newel;
+    }
+
+
 
     async function loadWorkflow(workflow) {
         await loadList();
