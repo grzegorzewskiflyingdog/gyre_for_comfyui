@@ -1,11 +1,14 @@
 <script>
   import { writable } from 'svelte/store';
   import FormElement from './FormElement.svelte';
+  import { metadata} from './stores/metadata'
+  if (!$metadata.forms) $metadata.forms={}
 
-
-  let formElements = writable([
-    // Initial JSON structure, can be empty or predefined elements
-  ]);
+  export let form_key='default'  // support for multiple forms (e.g. wizards) in the future
+  if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
+  if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
+  console.log("elements",$metadata.forms[form_key].elements)
+  let formElements = $metadata.forms[form_key].elements
   let dragStartIndex=-1;
   let showPropertiesIdx=0;
   let selectedType;
@@ -33,8 +36,10 @@
     if (type==="text" || type==="textarea") {
       newElement.placeholder=""
     }
-    formElements.update(current => [...current, newElement]);
-    showPropertiesIdx=$formElements.length-1
+    formElements.push(newElement)
+    formElements=formElements
+    showPropertiesIdx=formElements.length-1
+    console.log("add",$metadata.forms[form_key].elements)
   }
 
   function handleDragStart(event, index) {
@@ -48,16 +53,14 @@
   function handleDrop(event, dropIndex) {
     event.preventDefault();
     if (dragStartIndex === dropIndex) return; // No change
-    formElements.update(currentElements => {
-      const draggedItem = currentElements[dragStartIndex];
-      const remainingItems = currentElements.filter((_, index) => index !== dragStartIndex);
+  /*  formElements.push({
+       draggedItem: formElements[dragStartIndex];
+      const remainingItems = formElements.filter((_, index) => index !== dragStartIndex);
       const reorderedItems = [
         ...remainingItems.slice(0, dropIndex),
         draggedItem,
         ...remainingItems.slice(dropIndex)
-      ];
-      return reorderedItems;
-    });
+    });*/
     formElements=formElements
     // Reset dragged index
     dragStartIndex = -1;
@@ -73,7 +76,7 @@
 <div class="formBuilder">
 <h1>Edit form</h1>
 <div class="form">
-  {#each $formElements as element, index (element.name)}
+  {#each formElements as element, index (element.name)}
     <div
       class="draggable"
       draggable="true"
@@ -84,8 +87,8 @@
         on:remove={() => removeElement(index)}  
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
-        on:update={(e) => { $formElements[index]=e.detail }}
-        on:delete={(e) => { $formElements.splice(showPropertiesIdx,1);$formElements=$formElements;showPropertiesIdx=-1 }}
+        on:update={(e) => { formElements[index]=e.detail }}
+        on:delete={(e) => { formElements.splice(showPropertiesIdx,1);formElements=formElements;showPropertiesIdx=-1 }}
         showProperties={showPropertiesIdx===index}/>
       </div>
   {/each}
