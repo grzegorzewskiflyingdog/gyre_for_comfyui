@@ -8,8 +8,8 @@
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
   let formElements = $metadata.forms[form_key].elements
-  let dragStartIndex=-1;
-  let showPropertiesIdx=0;
+  let dragStartIndex=-1
+  let showPropertiesIdx=-1
   let selectedType;
   function addElement(type) {
     if (!type) return
