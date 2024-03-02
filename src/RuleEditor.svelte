@@ -66,17 +66,21 @@
         display: inline-block;
         margin-right: 10px;
         width:120px;
+        font-size: 14px;
+
     }
     .input {
         background-color: black;
         color: white;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
+        padding: 3px;
     }
     .rightValue {
         width: 150px;
     }
     .ruleEditor button {
         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
-        font-size: 15px;
+        font-size: 14px;
         min-width: 70px;
         color: black;
         background-color: rgb(227, 206, 116);
@@ -89,11 +93,16 @@
         background-color: red;
         color: white;
     }
+    .ruleEditor h1 {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
   </style>
   
 
-  <h2>Rules</h2>
  <div class="ruleEditor">
+  <h1>Rules</h1>
+
   {#each rules as rule, index}
     <div class="rule-row">
       {#if editingIndex === index}

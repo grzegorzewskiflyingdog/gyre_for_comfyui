@@ -314,9 +314,9 @@
 
             {#if state === "properties"}
                 <h1>Workflow Properties</h1>
-                <input type="text" bind:value={name} class="text_input">
+                <label for="name">Name:</label><input name="name" type="text" bind:value={name} class="text_input">
                 <div class="tagedit">
-                    <div class="title">Click on a Tag to remove it</div>
+                    <div class="tagTitle">Click on a Tag to remove it</div>
                     <div class="tags">
                         {#if $metadata.tags}
                             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -334,6 +334,18 @@
                         {/each}
                     </select>
                 </div>
+                <label for="license">License:</label>
+                <select class="input license" name="license" bind:value={$metadata.license}>
+                    <option selected value="">Select...</option>
+                    <option selected value="yes_commercial">Commercial allowed</option>
+                    <option selected value="non_commercial">Non Commercial</option>
+                    <option selected value="needs_license">Needs license for Commercial use</option>
+                </select>
+                <div class="inputLine" >
+                    <label for="description" style="vertical-align:top">Description:</label>
+                    <textarea class="text_input" bind:value={$metadata.description}></textarea>                    
+                </div>
+
             {/if}
             {#if state === "editForm"}
                 <div style="margin-top:10px"></div>

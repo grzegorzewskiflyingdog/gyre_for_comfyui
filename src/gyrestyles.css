@@ -23,7 +23,10 @@
     margin-left: 20px;
     vertical-align: 5px;
 }
-
+.workflowManager label {
+    display: inline-block;
+    width: 80px;
+}
 * {
     box-sizing: border-box;
 }
@@ -47,7 +50,12 @@
     display: inline-block;
     vertical-align: -7px;
 }
-.tagedit .title {
+.tagedit {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+.tagedit .tagTitle {
     margin-bottom: 10px;
 }
 
@@ -55,16 +63,29 @@
     background-color: red;
 }
 
-.tagedit .tagselect:focus {
+.tagedit .tagselect:focus, .workflowManager .license:focus {
     outline: none;
 }
 
-.tagedit .tagselect {
+.tagedit .tagselect, .workflowManager .license {
     background-color: grey;
     font-size: 14px;
     color: white;
     border: none;
     margin-top: 10px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
+    padding: 3px;
+}
+.workflowManager .license {
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.workflowManager .license option {
+    background: black;
+}
+.workflowManager .inputLine {
+    margin-top:20px;
 }
 
 .foldout {
@@ -147,6 +168,7 @@
 
 .workflowManager h1 {
     font-size: 16px;
+    margin-bottom: 30px;
 }
 
 .text_input {
@@ -156,6 +178,7 @@
     width: 300px;
     border-radius: 5px;
     font-size: 14px;
+    margin-bottom: 10px;
 }
 .saveIcon {
     vertical-align: -5px;

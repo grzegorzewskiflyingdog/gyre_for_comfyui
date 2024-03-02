@@ -116,7 +116,8 @@
     display: block;
   }
   .formBuilder h1 {
-    font-size:18px;
+    font-size: 16px;
+    margin-bottom: 30px;
   }
   .draggable {
     cursor: grab;
@@ -143,7 +144,7 @@
   }
     .formBuilder button {
         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
-        font-size: 15px;
+        font-size: 14px;
         min-width: 70px;
         color: black;
         background-color: rgb(227, 206, 116);
