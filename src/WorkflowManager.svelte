@@ -2,9 +2,9 @@
     import FormBuilder from "./FormBuilder.svelte"
     import RuleEditor from "./RuleEditor.svelte"
     import {writable} from 'svelte/store'
-    import {onMount,beforeUpdate} from 'svelte'
+    import {onMount, beforeUpdate} from 'svelte'
     import {get_all_dirty_from_scope} from "svelte/internal";
-    import { metadata} from './stores/metadata'
+    import {metadata} from './stores/metadata'
     let allworkflows;
     let moving = false;
     let left = 10
@@ -33,38 +33,38 @@
     }
 
     onMount(async () => {
-       await loadList();
+        await loadList();
         addExternalLoadListener();
     });
 
 
-    function addExternalLoadListener(){
+    function addExternalLoadListener() {
         const fileInput = document.getElementById("comfy-file-input");
         const fileInputListener = async () => {
             if (fileInput && fileInput.files && fileInput.files.length > 0) {
-                    console.log(fileInput,fileInput.files);
-                    new Date(fileInput.files[0].lastModified).toDateString()
-                    let fixedfilename = getAvalableFileName(fileInput.files[0].name);
-                    let graph = window.app.graph.serialize();
-                    graph.name = fixedfilename;
-                    graph.lastModified = fileInput.files[0].lastModified
-                    if(!graph.extra?.workspace_info) graph.extra.workspace_info =[];
-                    graph.extra.workspace_info.name = fixedfilename;
-                    graph.extra.workspace_info.lastModified = fileInput.files[0].lastModified;
-                    graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
-                    if(!graph.extra.gyre) {
-                        graph.extra.gyre = {};
-                    }
-                    graph.extra.gyre.lastModified = fileInput.files[0].lastModified;
-                    graph.extra.gyre.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
+                console.log(fileInput, fileInput.files);
+                new Date(fileInput.files[0].lastModified).toDateString()
+                let fixedfilename = getAvalableFileName(fileInput.files[0].name);
+                let graph = window.app.graph.serialize();
+                graph.name = fixedfilename;
+                graph.lastModified = fileInput.files[0].lastModified
+                if (!graph.extra?.workspace_info) graph.extra.workspace_info = [];
+                graph.extra.workspace_info.name = fixedfilename;
+                graph.extra.workspace_info.lastModified = fileInput.files[0].lastModified;
+                graph.extra.workspace_info.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
+                if (!graph.extra.gyre) {
+                    graph.extra.gyre = {};
+                }
+                graph.extra.gyre.lastModified = fileInput.files[0].lastModified;
+                graph.extra.gyre.lastModifiedReadable = new Date(fileInput.files[0].lastModified).toISOString().split('T')[0];
 
-                    loadedworkflow = graph;
-                    loadWorkflow(graph);
+                loadedworkflow = graph;
+                loadWorkflow(graph);
             }
         };
         fileInput?.addEventListener("change", fileInputListener);
     }
-    function getAvalableFileName(name){
+    function getAvalableFileName(name) {
         if (!name) return 'new';
         return name;
         let ind = 1;
@@ -72,20 +72,17 @@
         let ext = name.split('.').pop();
         name = name.replace(/\.[^/.]+$/, "");
         let newname = name;
-        while(!goodname){
-            let allcurrnames = allworkflows.map((el)=>el.name);
-            if(allcurrnames.includes(name)){
+        while (!goodname) {
+            let allcurrnames = allworkflows.map((el) => el.name);
+            if (allcurrnames.includes(name)) {
                 newname = `${name}(${ind})`;
-                ind = ind+1;
+                ind = ind + 1;
             } else {
                 goodname = true;
             }
         }
-        return  `${newname}`;
+        return `${newname}`;
     }
-
-
-
 
 
     function onMouseUp() {
@@ -93,9 +90,8 @@
     }
 
 
-
     function isVisible(workflow) {
-        let mytags = workflow?.gyre?.tags||[];
+        let mytags = workflow?.gyre?.tags || [];
         for (let activeTag in activatedTags) {
             if (activatedTags[activeTag] && !mytags.includes(activeTag)) return false
         }
@@ -103,20 +99,18 @@
     }
 
 
-
-
     async function loadList() {
         // todo: make server request and read $metadata of all existing workflows on filesystem
         let result = await scanLocalNewFiles()
-        let data_workflow_list = result.map((el)=>{
-            let res = {name:el.name}
+        let data_workflow_list = result.map((el) => {
+            let res = {name: el.name}
             let gyre = null;
-            if(el.json) gyre = JSON.parse(el.json).extra.gyre;
-            res.lastModifiedReadable =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
-            if(gyre){
+            if (el.json) gyre = JSON.parse(el.json).extra.gyre;
+            res.lastModifiedReadable = JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
+            if (gyre) {
                 res.gyre = gyre;
-                res.gyre.lastModifiedReadable =  JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
-                res.gyre.lastModified =  JSON.parse(el.json).extra.gyre?.lastModified || "";
+                res.gyre.lastModifiedReadable = JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
+                res.gyre.lastModified = JSON.parse(el.json).extra.gyre?.lastModified || "";
             }
             return res
         })
@@ -133,11 +127,11 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    path:"",
+                    path: "",
                     existFlowIds,
                 }),
             });
-            let  result = await response.json();
+            let result = await response.json();
             result = fixDatesFromServer(result);
             allworkflows = result;
             return result;
@@ -146,18 +140,17 @@
         }
     }
 
-    function fixDatesFromServer(result){
-        let newel = result.map((el)=>{
-            let objjs =  JSON.parse(el.json);
+    function fixDatesFromServer(result) {
+        let newel = result.map((el) => {
+            let objjs = JSON.parse(el.json);
             objjs.extra.gyre.lastModified = new Date(el.lastmodified * 1000).getTime();
             let datestr = new Date(el.lastmodified * 1000).toISOString();
-            objjs.extra.gyre.lastModifiedReadable = datestr.split('T')[0]+" "+datestr.split('T')[1].replace(/\.[^/.]+$/, "");
+            objjs.extra.gyre.lastModifiedReadable = datestr.split('T')[0] + " " + datestr.split('T')[1].replace(/\.[^/.]+$/, "");
             let json = JSON.stringify(objjs);
-            return{...el,json}
+            return {...el, json}
         })
         return newel;
     }
-
 
 
     async function loadWorkflow(workflow) {
@@ -166,7 +159,7 @@
         // 1. make server request by workflow.name, getting full workflow data here
         // 2. update ComfyUI with new workflow
         // 3. set name and $metadata here
-        if(!workflow.gyre){
+        if (!workflow.gyre) {
             workflow.gyre = {};
             workflow.gyre.tags = [];
         }
@@ -179,43 +172,46 @@
             return;
         }
 
-        let current = allworkflows.find((el)=>{
-            return el.name==workflow.name;
+        let current = allworkflows.find((el) => {
+            return el.name == workflow.name;
         })
-        if(!current){
-            window.app.loadGraphData(workflow);
-        } else {
-            let wf =  JSON.parse(current.json);
-            if(!wf.name && name) wf.name = name;
-            window.app.loadGraphData(wf);
-        }
+
+        if (!loadedworkflow) {
+            if (!current) {
+                window.app.loadGraphData(workflow);
+            } else {
+                let wf = JSON.parse(current.json);
+                if (!wf.name && name) wf.name = name;
+                window.app.loadGraphData(wf);
+            }
         state="properties"
+        }
     }
 
 
-
-
-
     async function saveWorkflow() {
-                console.log("saveWorkflow");
-                let graph = window.app.graph.serialize();
-                if(loadedworkflow && loadedworkflow.extra.workspace_info){
-                    graph.extra = loadedworkflow.extra;
-                    $metadata = loadedworkflow.extra.gyre;
-                }
-                let file_path =  graph.extra?.workspace_info?.name || "new.json";
-                if(name){file_path = name}
-                if($metadata){graph.extra.gyre =  $metadata;}
-                file_path = file_path || "new.json";
-                //file_path = file_path.replace(/\.[^/.]+$/, "");
-                if (!file_path.endsWith('.json')) {
-                    // Add .json extension if it doesn't exist
-                    file_path += '.json';
-                }
-                if($metadata && graph.extra) graph.extra.gyre =  $metadata;
-                const graphJson = JSON.stringify(graph);
-                await updateFile(file_path,graphJson);
+        console.log("saveWorkflow");
+        let graph = window.app.graph.serialize();
 
+        // this is scenario just after loading workflow and not save it
+        if (loadedworkflow && loadedworkflow.extra.workspace_info) {
+            graph.extra = loadedworkflow.extra;
+            $metadata = loadedworkflow.extra.gyre;
+        }
+        loadedworkflow = null;
+
+        let file_path = graph.extra?.workspace_info?.name || "new.json";
+        if (name) {
+            file_path = name
+        }
+        if (!file_path.endsWith('.json')) {
+            // Add .json extension if it doesn't exist
+            file_path += '.json';
+        }
+        if ($metadata && graph.extra) graph.extra.gyre = $metadata;
+
+        const graphJson = JSON.stringify(graph);
+        await updateFile(file_path, graphJson);
 
         // todo:get workflow fom comfyUI
         // $metadata should already point to extras.gyre - so nothing to do here
@@ -223,12 +219,12 @@
         // 2. set unsaved state to false
         // 3. load list of all workflows again
         alert("save workflow " + name) // remove
+
         await loadList();
     }
 
 
-
-    async function updateFile(file_path , jsonData ) {
+    async function updateFile(file_path, jsonData) {
         try {
             const response = await fetch("/workspace/update_json_file", {
                 method: "POST",
@@ -247,9 +243,6 @@
             console.error("Error saving workspace:", error);
         }
     }
-
-
-
 
 
     function addTag() {
@@ -312,7 +305,7 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>
             <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"  width="15" height="15"><path d="M9.39 265.4l127.1-128C143.6 131.1 151.8 128 160 128s16.38 3.125 22.63 9.375l127.1 128c9.156 9.156 11.9 22.91 6.943 34.88S300.9 320 287.1 320H32.01c-12.94 0-24.62-7.781-29.58-19.75S.2333 274.5 9.39 265.4z"/></svg>
-        
+
         </div>
         {#if $metadata && $metadata.lastModified && state !== "list"}
             <input type="text" bind:value={name} class="text_input">
@@ -338,7 +331,7 @@
                 <select class="tagselect" bind:value={selectedTag} on:change={(e) => {addTag()}}>
                     <option selected value="">Add Tag...</option>
                     {#each tags as tag}
-                        {#if !$metadata.tags.includes(tag)}
+                        {#if $metadata.tags && !$metadata.tags.includes(tag)}
                             <option value="{tag}">{tag}</option>
                         {/if}
                     {/each}
@@ -356,7 +349,7 @@
             {:else}
                 Please define a form first
             {/if}
-        {/if}        
+        {/if}
         {#if state === "list"}
             <h1>Workflow List</h1>
             <div class="tags">
@@ -391,5 +384,5 @@
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
 
 <style>
-  @import 'dist/build/gyrestyles.css';
+    @import 'dist/build/gyrestyles.css';
 </style>
