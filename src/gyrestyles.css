@@ -8,13 +8,25 @@
     backdrop-filter: blur(20px) brightness(80%);
     box-shadow: 0 0 1rem 0 rgba(255, 255, 255, 0.2);
     color: white;
-    width: 490px;
+    width: 540px;
     display: block;
     border-radius: 10px;
     font-size: 14px;
 
 }
-
+* {
+    box-sizing: border-box;
+}
+.main {
+    display:flex;
+}
+.main .leftMenu {
+    flex:50px;
+    padding-top:8px;
+}
+.main .content {
+    flex: 490px;
+}
 .miniMenu .title {
     display: inline-block;
     cursor: pointer;

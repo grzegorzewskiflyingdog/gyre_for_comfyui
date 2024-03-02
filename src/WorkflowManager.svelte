@@ -6,6 +6,7 @@
     import {get_all_dirty_from_scope} from "svelte/internal";
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
+    import { tick } from "svelte"
 
     let allworkflows;
     let moving = false;
@@ -265,6 +266,7 @@
 
     {#if !foldOut}
         <div class="miniMenu">
+
             <Icon name="move" on:mousedown={onMouseDown}></Icon>
             {#if !name}
                 <Icon name="Gyre" class="gyreLogo"></Icon>
@@ -285,82 +287,95 @@
     {/if}
     {#if foldOut}
         <Icon name="move" on:mousedown={onMouseDown}></Icon>
+        {name}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>
             <Icon name="up"></Icon>
         </div>
-        {#if $metadata && $metadata.lastModified && state !== "list"}
-            <input type="text" bind:value={name} class="text_input">
-            <button on:click={(e) => {saveWorkflow()}}>Save</button>
-            <br>
-            <button style="margin-left:20px" on:click={(e) => {state="list"}}>List</button>
-            <button on:click={(e) => {state="properties"}}>Properties</button>
-            <button on:click={(e) => {state="editForm"}}>Form Builder</button>
-            <button on:click={(e) => {state="editRules"}}>Rules</button>
-        {/if}
-        {#if state === "properties"}
-            <h1>Workflow Properties</h1>
-            <div class="tagedit">
-                <div class="title">Click on a Tag to remove it</div>
-                <div class="tags">
-                    {#if $metadata.tags}
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        {#each $metadata.tags as tag}
-                            <div class="tag" on:click={(e) => {removeTag(tag)}}>{tag}</div>
+        <div class="main">
+        <div class="leftMenu">
+            {#key state}
+                <Icon name="list" {state} on:click={ (e) =>  {state="list" }} ></Icon>
+                {#if $metadata && $metadata.lastModified}
+                    <Icon name="properties" {state} on:click={async (e) =>  {state="properties" }}  ></Icon>
+                    <Icon name="editForm" {state} on:click={async (e) =>  {state="editForm" }}  ></Icon>
+                    <Icon name="editRules" {state} on:click={async (e) =>  {state="editRules" }}  ></Icon>
+                {:else}
+                    <Icon name="properties" deactivate="deactivate"  ></Icon>
+                    <Icon name="editForm"   deactivate="deactivate" ></Icon>
+                    <Icon name="editRules"   deactivate="deactivate"></Icon>                
+                {/if}
+            {/key}
+        </div>
+        <div class="content">
+
+            {#if state === "properties"}
+                <h1>Workflow Properties</h1>
+                <input type="text" bind:value={name} class="text_input">
+                <div class="tagedit">
+                    <div class="title">Click on a Tag to remove it</div>
+                    <div class="tags">
+                        {#if $metadata.tags}
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            {#each $metadata.tags as tag}
+                                <div class="tag" on:click={(e) => {removeTag(tag)}}>{tag}</div>
+                            {/each}
+                        {/if}
+                    </div>
+                    <select class="tagselect" bind:value={selectedTag} on:change={(e) => {addTag()}}>
+                        <option selected value="">Add Tag...</option>
+                        {#each tags as tag}
+                            {#if $metadata.tags && !$metadata.tags.includes(tag)}
+                                <option value="{tag}">{tag}</option>
+                            {/if}
                         {/each}
-                    {/if}
+                    </select>
                 </div>
-                <select class="tagselect" bind:value={selectedTag} on:change={(e) => {addTag()}}>
-                    <option selected value="">Add Tag...</option>
+            {/if}
+            {#if state === "editForm"}
+                <div style="margin-top:10px"></div>
+                <FormBuilder></FormBuilder>
+            {/if}
+            {#if state === "editRules"}
+                <div style="margin-top:10px"></div>
+                {#if $metadata.forms && $metadata.forms.default && $metadata.forms.default.elements}
+                    <RuleEditor></RuleEditor>
+                {:else}
+                    Please define a form first
+                {/if}
+            {/if}
+            {#if state === "list"}
+                <h1>Workflow List</h1>
+                <div class="tags">
                     {#each tags as tag}
-                        {#if $metadata.tags && !$metadata.tags.includes(tag)}
-                            <option value="{tag}">{tag}</option>
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div class="tag"
+                            on:click={ (e) => { activatedTags[tag]=!activatedTags[tag];$workflowList=$workflowList}}
+                            class:on={activatedTags[tag]}>{tag}</div>
+                    {/each}
+                </div>
+                {#if workflowList}
+                    {#each $workflowList as workflow}
+                        {#if isVisible(workflow)}
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            <div class="workflowEntry" on:click={loadWorkflow(workflow)}>
+                                {workflow.name}
+                                <div class="last_changed">{workflow.lastModifiedReadable}</div>
+                                <div class="tags">
+                                    {#if workflow.gyre && workflow.gyre.tags}
+                                        {#each workflow.gyre.tags as tag}
+                                            <div class="tag">{tag}</div>
+                                        {/each}
+                                    {/if}
+                                </div>
+                            </div>
                         {/if}
                     {/each}
-                </select>
-            </div>
-        {/if}
-        {#if state === "editForm"}
-            <div style="margin-top:10px"></div>
-            <FormBuilder></FormBuilder>
-        {/if}
-        {#if state === "editRules"}
-            <div style="margin-top:10px"></div>
-            {#if $metadata.forms && $metadata.forms.default && $metadata.forms.default.elements}
-                <RuleEditor></RuleEditor>
-            {:else}
-                Please define a form first
+                {/if}
+
             {/if}
-        {/if}
-        {#if state === "list"}
-            <h1>Workflow List</h1>
-            <div class="tags">
-                {#each tags as tag}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div class="tag"
-                         on:click={ (e) => { activatedTags[tag]=!activatedTags[tag];$workflowList=$workflowList}}
-                         class:on={activatedTags[tag]}>{tag}</div>
-                {/each}
-            </div>
-            {#if workflowList}
-                {#each $workflowList as workflow}
-                    {#if isVisible(workflow)}
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <div class="workflowEntry" on:click={loadWorkflow(workflow)}>
-                            {workflow.name}
-                            <div class="last_changed">{workflow.lastModifiedReadable}</div>
-                            <div class="tags">
-                                {#if workflow.gyre && workflow.gyre.tags}
-                                    {#each workflow.gyre.tags as tag}
-                                        <div class="tag">{tag}</div>
-                                    {/each}
-                                {/if}
-                            </div>
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
-        {/if}
+        </div>
+    </div>
     {/if} <!-- foldOut -->
 </div>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>

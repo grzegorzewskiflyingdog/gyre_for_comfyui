@@ -13,10 +13,8 @@ const callback = function (mutationsList, observer) {
           // @ts-ignore
           import("/dist/build/bundle.js");
           observer.disconnect();
-          debugger;
           const getNodeMenuOptions = LGraphCanvas.prototype.getNodeMenuOptions;
           LGraphCanvas.prototype.getNodeMenuOptions = function (node) {
-            debugger;
             const response = getNodeMenuOptions.apply(this, arguments);
 
             response.push({

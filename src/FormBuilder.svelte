@@ -111,7 +111,6 @@
 <style>
   .formBuilder {
     padding: 10px;
-    background-color: rgb(51, 51, 51);
     color: white;
     width: 470px;
     display: block;
