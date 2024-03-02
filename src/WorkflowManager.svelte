@@ -183,12 +183,15 @@
         let current = allworkflows.find((el)=>{
             return el.name==workflow.name;
         })
-        if(!current){
-            window.app.loadGraphData(workflow);
-        } else {
-            let wf =  JSON.parse(current.json);
-            if(!wf.name && name) wf.name = name;
-            window.app.loadGraphData(wf);
+
+        if(!loadedworkflow) {
+            if (!current) {
+                window.app.loadGraphData(workflow);
+            } else {
+                let wf = JSON.parse(current.json);
+                if (!wf.name && name) wf.name = name;
+                window.app.loadGraphData(wf);
+            }
         }
     }
 
@@ -332,7 +335,7 @@
                 <select class="tagselect" bind:value={selectedTag} on:change={(e) => {addTag()}}>
                     <option selected value="">Add Tag...</option>
                     {#each tags as tag}
-                        {#if !$metadata.tags.includes(tag)}
+                        {#if $metadata.tags && !$metadata.tags.includes(tag)}
                             <option value="{tag}">{tag}</option>
                         {/if}
                     {/each}
