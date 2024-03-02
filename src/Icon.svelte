@@ -26,7 +26,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class={className}  on:mousedown={(e) => { dispatch("mousedown",e) }}  on:click={(e) => { dispatch("click",e) }}    >
     {#if name==="move"}
-        <svg   xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFF"
+        <svg   xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFF"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         id="dragModelManagerTopBarIcon" cursor="move">
         <path d="M9 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>

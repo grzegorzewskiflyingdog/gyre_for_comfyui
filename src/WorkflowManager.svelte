@@ -263,31 +263,34 @@
 </script>
 
 <div id="workflowManager" class="workflowManager" style="left: {left}px; top: {top}px;">
+  <div class="miniMenu">
+            <div class="moveIcon">
+                <Icon name="move" on:mousedown={onMouseDown}></Icon>
+            </div>
+            <div class="title">
 
+                {#if !name}
+                    <Icon name="Gyre" class="gyreLogo"></Icon>
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <div on:click={(e) => {foldOut=true}} style="display:inline-block">Gyre</div>
+                {:else}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <div on:click={(e) => {foldOut=true}} style="display:inline-block">{name}</div>
+                    <div style="display: inline-block" class="saveIcon">
+                        <Icon name="save" on:click={(e) => {saveWorkflow()}} ></Icon>                
+                    </div>
+                {/if}
+            </div>
+
+        </div>
     {#if !foldOut}
-        <div class="miniMenu">
-
-            <Icon name="move" on:mousedown={onMouseDown}></Icon>
-            {#if !name}
-                <Icon name="Gyre" class="gyreLogo"></Icon>
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div on:click={(e) => {foldOut=true}} class="title">Gyre</div>
-            {:else}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div on:click={(e) => {foldOut=true}} class="title">{name}</div>
-                <div style="display: inline-block" class="saveIcon">
-                    <Icon name="save" on:click={(e) => {saveWorkflow()}} ></Icon>                
-                </div>
-            {/if}
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                  <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div class="foldout" on:click={(e) => {foldOut=true}}>
                 <Icon name="down"></Icon>
             </div>
-        </div>
     {/if}
     {#if foldOut}
-        <Icon name="move" on:mousedown={onMouseDown}></Icon>
-        {name}
+ 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>
             <Icon name="up"></Icon>

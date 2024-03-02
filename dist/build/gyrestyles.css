@@ -14,6 +14,16 @@
     font-size: 14px;
 
 }
+.workflowManager .moveIcon {
+    display: inline-block;
+    margin-left: 4px;
+}
+.workflowManager .title {
+    display: inline-block;
+    margin-left: 20px;
+    vertical-align: 5px;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -22,9 +32,10 @@
 }
 .main .leftMenu {
     flex:50px;
-    padding-top:8px;
+    padding-top:28px;
 }
 .main .content {
+    padding-top: 20px;
     flex: 490px;
 }
 .miniMenu .title {
