@@ -4,19 +4,26 @@
     left: 10px;
     top: 10px;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
-    padding: 10px;
-    background-color: rgb(0, 0, 0);
+    padding: 20px;
+    backdrop-filter: blur(20px) brightness(80%);
+    box-shadow: 0 0 1rem 0 rgba(255, 255, 255, 0.2);
     color: white;
     width: 490px;
     display: block;
-    border-radius: 5px
+    border-radius: 10px;
+    font-size: 14px;
+
 }
 
 .miniMenu .title {
     display: inline-block;
     cursor: pointer;
+    vertical-align: 2px;
 }
-
+.miniMenu img {
+    display: inline-block;
+    vertical-align: -7px;
+}
 .tagedit .title {
     margin-bottom: 10px;
 }
@@ -31,7 +38,7 @@
 
 .tagedit .tagselect {
     background-color: grey;
-    font-size: 15px;
+    font-size: 14px;
     color: white;
     border: none;
     margin-top: 10px;
@@ -39,10 +46,11 @@
 
 .foldout {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 10px;
+    top: 10px;
     font-size: 20px;
     cursor: pointer;
+    fill: white;
 }
 
 .foldout:hover {
@@ -55,7 +63,7 @@
 
 .workflowManager button {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Segoe UI", Helvetica, Arial;
-    font-size: 15px;
+    font-size: 14px;
     min-width: 70px;
     color: black;
     background-color: rgb(227, 206, 116);
@@ -71,7 +79,6 @@
 }
 
 .workflowEntry {
-    border: 1px solid grey;
     border-radius: 3px;
     margin-bottom: 10px;;
     padding: 5px;
@@ -116,7 +123,7 @@
 }
 
 .workflowManager h1 {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .text_input {
@@ -124,6 +131,8 @@
     border: 1px solid white;
     color: white;
     width: 300px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 .saveIcon {
     vertical-align: -5px;
