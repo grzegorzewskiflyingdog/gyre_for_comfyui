@@ -199,31 +199,33 @@
     async function saveWorkflow() {
                 console.log("saveWorkflow");
                 let graph = window.app.graph.serialize();
+
+                // this is scenario just after loading workflow and not save it
                 if(loadedworkflow && loadedworkflow.extra.workspace_info){
                     graph.extra = loadedworkflow.extra;
                     $metadata = loadedworkflow.extra.gyre;
                 }
+                loadedworkflow = null;
+
                 let file_path =  graph.extra?.workspace_info?.name || "new.json";
                 if(name){file_path = name}
-                if($metadata){graph.extra.gyre =  $metadata;}
-                file_path = file_path || "new.json";
-                //file_path = file_path.replace(/\.[^/.]+$/, "");
                 if (!file_path.endsWith('.json')) {
                     // Add .json extension if it doesn't exist
                     file_path += '.json';
                 }
                 if($metadata && graph.extra) graph.extra.gyre =  $metadata;
+
                 const graphJson = JSON.stringify(graph);
                 await updateFile(file_path,graphJson);
 
+                // todo:get workflow fom comfyUI
+                // $metadata should already point to extras.gyre - so nothing to do here
+                // 1. make server request, with  name and full workflow, store it on filesystem there
+                // 2. set unsaved state to false
+                // 3. load list of all workflows again
+                alert("save workflow " + name) // remove
 
-        // todo:get workflow fom comfyUI
-        // $metadata should already point to extras.gyre - so nothing to do here
-        // 1. make server request, with  name and full workflow, store it on filesystem there
-        // 2. set unsaved state to false
-        // 3. load list of all workflows again
-        alert("save workflow " + name) // remove
-        await loadList();
+                await loadList();
     }
 
 
