@@ -1,11 +1,12 @@
 <script>
-    export let fields=[{name:"steps"},{name:"model"}]; // Assume fields are passed as a prop: {name}
   
     
     let conditions = ['==', '!=', '>', '<', '>=', '<='];
     let editingIndex = null; // Index of the currently editing rule
     import { metadata} from './stores/metadata'
     if (!$metadata.rules) $metadata.rules=[]
+    let fields=$metadata.forms.default.elements // get form fields
+
     let rules = $metadata.rules
     function addRule() {
       rules.push({ fieldName: '', condition: '', actionType: '', rightValue:'', targetField: '', actionValue: '' });

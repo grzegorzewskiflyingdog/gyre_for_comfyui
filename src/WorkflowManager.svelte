@@ -339,13 +339,15 @@
         {/if}
         {#if state === "editForm"}
             <div style="margin-top:10px"></div>
-            <!-- todo: set to $metadata.forms.default -->
             <FormBuilder></FormBuilder>
         {/if}
         {#if state === "editRules"}
             <div style="margin-top:10px"></div>
-            <!-- todo: set to $metadata.forms.default -->
-            <RuleEditor></RuleEditor>
+            {#if $metadata.forms && $metadata.forms.default && $metadata.forms.default.elements}
+                <RuleEditor></RuleEditor>
+            {:else}
+                Please define a form first
+            {/if}
         {/if}        
         {#if state === "list"}
             <h1>Workflow List</h1>
