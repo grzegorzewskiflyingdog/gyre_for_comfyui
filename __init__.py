@@ -83,7 +83,7 @@ def folder_handle(path, existFlowIds):
         item_path = os.path.join(path, item)
         if os.path.isfile(item_path) and item_path.endswith('.json'):
             lastmodified = os.path.getmtime(item_path)
-            with open(item_path, 'r') as f:
+            with open(item_path, 'r', encoding='utf-8') as f:
                 file_handle(item, f, existFlowIds, fileList,lastmodified)
 
         elif os.path.isdir(item_path):
