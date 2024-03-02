@@ -13,11 +13,26 @@ const callback = function (mutationsList, observer) {
           // @ts-ignore
           import("/dist/build/bundle.js");
           observer.disconnect();
+          debugger;
+          const getNodeMenuOptions = LGraphCanvas.prototype.getNodeMenuOptions;
+          LGraphCanvas.prototype.getNodeMenuOptions = function (node) {
+            debugger;
+            const response = getNodeMenuOptions.apply(this, arguments);
+            /*
+            response.push({
+              "content": "My menu Entry",
+              "callback": (item, options, e, menu, node)=>{}
+            })
+            */
+            return response;
+          }
         }
       });
     }
   }
 };
+
+
 
 // Create an instance of the MutationObserver
 const observer = new MutationObserver(callback);
