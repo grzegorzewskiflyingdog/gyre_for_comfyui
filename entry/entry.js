@@ -18,12 +18,11 @@ const callback = function (mutationsList, observer) {
           LGraphCanvas.prototype.getNodeMenuOptions = function (node) {
             debugger;
             const response = getNodeMenuOptions.apply(this, arguments);
-            /*
+
             response.push({
               "content": "My menu Entry",
-              "callback": (item, options, e, menu, node)=>{}
-            })
-            */
+              "callback": (item, options, e, menu, node)=>{console.log("my entry clicked!!")}            })
+
             return response;
           }
         }
