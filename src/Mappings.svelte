@@ -8,15 +8,20 @@
     let widgets=[]
     let nodeType=""
     let mappingFields=getMappingFields()
+    let nodeId=0
     function openGyreMappings(node,e) {
         console.log("openGyreMappings")
         mappingFields=getMappingFields()
         showGyreMappings="block"
+        nodeId=node.id
         console.log(node)
         gyreMappingsDialogLeft=e.clientX-100+"px"
         gyreMappingsDialogTop=e.clientY-200+"px"
         widgets=node.widgets
         nodeType=node.type
+        if (!$metadata.mappings) $metadata.mappings={}
+        mappings=$metadata.mappings[nodeId]
+        if (!mappings) mappings=[]
     }
 
     window.openGyreMappings=openGyreMappings    // expose open function so it can be called from ComfyUI menu extension
@@ -39,21 +44,21 @@
         return res
     }
 
-    let mappings = $metadata.mappings
-    if (!mappings) mappings=[]
+    let mappings = []
     let fromField=""
     let toField=""
     function addMapping() {
         if (!toField || !fromField) return
+        if (!nodeId) return
         mappings.push({ fromField,toField  })
         mappings=mappings
-        $metadata.mappings = mappings
+        $metadata.mappings[nodeId] = mappings
         fromField=toField=""
     }    
     function deleteMapping(index) {
         mappings.splice(index, 1);
         mappings=mappings
-        $metadata.mappings = mappings
+        $metadata.mappings[nodeId] = mappings
     }
       
 </script>
