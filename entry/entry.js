@@ -43,6 +43,7 @@ const callback = function (mutationsList, observer) {
             var margin = 15;
             // now only change some labels (color+mapping)
             for (var i = 0; i < widgets.length; ++i) {
+
               var w = widgets[i];
               var y = posY;
               if (w.y) {
@@ -54,12 +55,11 @@ const callback = function (mutationsList, observer) {
               ctx.textAlign = "left";
               if (w.disabled) ctx.globalAlpha *= 0.5;
               let widget_width = w.width || width
-
-
+              if (window.gyreSetCombovalues) window.gyreSetCombovalues(w)
+              
               if (!window.checkGyreMapping) continue
               let label=window.checkGyreMapping(node,w)
               if (label) {
-                console.log(w)
               switch (w.type) {
                 case "button":            
                     ctx.textAlign = "center"
@@ -99,7 +99,6 @@ const callback = function (mutationsList, observer) {
                 case "customtext":  // multiline input (e.g. prompt), draw information below because textarea is on top
                     ctx.textAlign = "left"
                     ctx.fillStyle = text_color
-                    console.log(w,w.element.offsetHeight)
                     y+=w.element.offsetHeight+1
                     ctx.fillText(label, 2, y + H * 0.7);                                     
                     break;                  

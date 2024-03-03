@@ -1,7 +1,8 @@
 <script>
     import { metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
-
+    import { combo_values } from './stores/combo_values'
+ 
     let showGyreMappings="none"
     let gyreMappingsDialogLeft="100px"
     let gyreMappingsDialogTop="100px"
@@ -10,7 +11,7 @@
     let mappingFields=getMappingFields()
     let nodeId=0
     function openGyreMappings(node,e) {
-        console.log("openGyreMappings")
+        console.log("openGyreMappings",node)
         mappingFields=getMappingFields()
         showGyreMappings="block"
         nodeId=node.id
@@ -39,6 +40,14 @@
         }
     }
     window.checkGyreMapping=checkGyreMapping
+
+    function setComboValue(widget) {
+        if (widget.type!=="combo" || !widget.options  || !widget.options.values || !widget.name ) return
+        $combo_values[widget.name]=widget.options.values //widget.options
+    }
+    window.gyreSetCombovalues=setComboValue
+
+
     function closeDialog() {
         showGyreMappings="none"
     }

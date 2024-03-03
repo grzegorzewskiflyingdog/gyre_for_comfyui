@@ -4,6 +4,7 @@
     let conditions = ['==', '!=', '>', '<', '>=', '<='];
     let editingIndex = null; // Index of the currently editing rule
     import { metadata} from './stores/metadata'
+    import InputCombo  from './InputCombo.svelte'
     if (!$metadata.rules) $metadata.rules=[]
     let fields=$metadata.forms.default.elements // get form fields
 
@@ -138,7 +139,8 @@
                   <option value={field.name}>{field.name}</option>
                 {/each}
               </select>
-              = <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">
+              = <InputCombo  bind:value={rule.actionValue} }></InputCombo>
+              <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
           </div>
         {/if}
         <div><button on:click={() => deleteRule(index)} class="delete">Delete</button></div>
