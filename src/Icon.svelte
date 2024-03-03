@@ -14,6 +14,7 @@
             "up":{class:"default"},
             "close":{class:"default leftMenuIcon"},
             "list":{class:"default leftMenuIcon"},
+            "arrowRight":{class:" arrowRight "},
             "properties":{class:"default leftMenuIcon2 leftMenuTopMargin"},
             "editForm":{class:"default leftMenuIcon2 leftMenuTopMargin"},
             "editRules":{class:"default leftMenuIcon2 leftMenuTopMargin"}
@@ -66,6 +67,9 @@
     {#if name==="close"}
         <svg viewBox="0 0 14 14" width="15" height="15" xmlns="http://www.w3.org/2000/svg"><path d="m12 10.047142q0 .3367-.235692.572383l-1.144783 1.144783q-.235683.235692-.572383.235692-.3367003 0-.572392-.235692l-2.47475-2.47475-2.47475 2.47475q-.2356917.235692-.5723917.235692-.3367 0-.5723833-.235692l-1.1447833-1.144783q-.2356917-.235683-.2356917-.572383 0-.3367.2356917-.572392l2.47475-2.47475-2.47475-2.47475q-.2356917-.2356917-.2356917-.5723917 0-.3367.2356917-.5723833l1.1447833-1.1447833q.2356833-.2356917.5723833-.2356917.3367 0 .5723917.2356917l2.47475 2.47475 2.47475-2.47475q.2356917-.2356917.572392-.2356917.3367 0 .572383.2356917l1.144783 1.1447833q.235692.2356833.235692.5723833 0 .3367-.235692.5723917l-2.4747497 2.47475 2.4747497 2.47475q.235692.235692.235692.572392z"/></svg>
     {/if}
+    {#if name==="arrowRight"}
+    <svg viewBox="0 0 14 14"  width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="m8.578947 3.30551v2.431332h-7.578947v2.526316h7.578947v2.431332l4.421053-3.69449z"/></svg>
+    {/if}
 </div>
 
 <style>
@@ -85,6 +89,7 @@
         fill: grey;
         cursor: default;
     }
+
     .deactivate:hover {
         fill: grey;
         background: transparent;
@@ -108,5 +113,12 @@
     .outer {
         display:inline-block;
         cursor: pointer;
+    }
+    .arrowRight {
+        fill: white;
+        display:inline-block;
+        width: 30px;
+        text-align: center;
+        vertical-align: -5px;
     }
 </style>

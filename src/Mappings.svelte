@@ -19,7 +19,11 @@
         nodeType=node.type
     }
 
-    window.openGyreMappings=openGyreMappings
+    window.openGyreMappings=openGyreMappings    // expose open function so it can be called from ComfyUI menu extension
+
+    function closeDialog() {
+        showGyreMappings="none"
+    }
     /**
      * get list of fields which can be used for widget mappings of each ComfyUI node:
      * fields: the form fields, defined by user
@@ -39,12 +43,7 @@
 <div id="gyre_mappings" style="display:{showGyreMappings};left:{gyreMappingsDialogLeft};top:{gyreMappingsDialogTop}" >
     <h1>Field Mappings</h1>
         <div>{nodeType}</div>
-        <select >
-            <option value="">Select...</option>
-            {#each widgets as widget}
-                <option value={widget.name}>{widget.name}</option>
-            {/each}
-        </select>
+
         <select >
             <option value="">Select...</option>
             <optgroup label="Form fields">
@@ -63,7 +62,14 @@
                 {/each}
             </optgroup>                    
         </select>
-        <div class="close"><Icon name="close"></Icon></div>
+        <Icon name="arrowRight"></Icon>
+        <select >
+            <option value="">Select...</option>
+            {#each widgets as widget}
+                <option value={widget.name}>{widget.name}</option>
+            {/each}
+        </select>        
+        <div class="close"><Icon name="close" on:click={(e)=>{closeDialog()}}></Icon></div>
 </div>
 
 <style>
