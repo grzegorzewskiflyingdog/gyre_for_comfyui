@@ -1,6 +1,7 @@
 <script>
     import { metadata} from './stores/metadata'
-    
+    import Icon from './Icon.svelte'
+
     let showGyreMappings="none"
     let gyreMappingsDialogLeft="100px"
     let gyreMappingsDialogTop="100px"
@@ -62,6 +63,7 @@
                 {/each}
             </optgroup>                    
         </select>
+        <div class="close"><Icon name="close"></Icon></div>
 </div>
 
 <style>
@@ -79,11 +81,10 @@
     display: block;
     border-radius: 10px;
     font-size: 14px;
-
 }
 #gyre_mappings {
     display:none;
-    width:300px;
+    width:400px;
     left:200px;
     top:200px;
 }
@@ -106,7 +107,12 @@
 }
 #gyre_mappings h1 {
     font-size: 16px;
+    margin-top: 5px;
     margin-bottom: 30px;
 }
-
+#gyre_mappings .close {
+    position: absolute;
+    right: 20px;
+    top:20px;
+}
 </style>
