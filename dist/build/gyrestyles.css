@@ -169,7 +169,10 @@
     opacity: 0.6;
 }
 
-
+.workflowManager h1 {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
 .text_input {
     background: transparent;
     border: 1px solid white;
