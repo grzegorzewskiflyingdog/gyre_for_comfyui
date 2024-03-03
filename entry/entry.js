@@ -18,8 +18,12 @@ const callback = function (mutationsList, observer) {
             const response = getNodeMenuOptions.apply(this, arguments);
 
             response.push({
-              "content": "My menu Entry",
-              "callback": (item, options, e, menu, node)=>{console.log("my entry clicked!!")}            })
+              "content": "Gyre Mappings...",
+              "callback": (item, options, e, menu, node)=>{
+                console.log("node:",node.id,node.widgets )
+                window.openGyreMappings(node,e)
+              }            
+            })
 
             return response;
           }

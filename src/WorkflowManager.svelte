@@ -1,6 +1,8 @@
 <script>
     import FormBuilder from "./FormBuilder.svelte"
     import RuleEditor from "./RuleEditor.svelte"
+    import Mappings from "./Mappings.svelte"
+
     import {writable} from 'svelte/store'
     import {onMount, beforeUpdate} from 'svelte'
     import {get_all_dirty_from_scope} from "svelte/internal";
@@ -23,6 +25,7 @@
     let activatedTags = {}
     let selectedTag = ""
 
+  
 
     function onMouseDown() {
         moving = true;
@@ -38,7 +41,7 @@
     onMount(async () => {
         await loadList();
         addExternalLoadListener();
-    });
+    })
 
 
     function addExternalLoadListener() {
@@ -393,8 +396,9 @@
     </div>
     {/if} <!-- foldOut -->
 </div>
+<Mappings></Mappings>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
-
+ 
 <style>
     @import 'dist/build/gyrestyles.css';
 </style>
