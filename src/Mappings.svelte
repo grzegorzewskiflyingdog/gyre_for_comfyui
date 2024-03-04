@@ -60,7 +60,7 @@
     function getMappingFields() {
         let fields= []
         if ($metadata.forms && $metadata.forms.default && $metadata.forms.default.elements) fields=$metadata.forms.default.elements
-        let defaultFields=[{name:"mergedImage"},{name:"mask"},{name:"hasMask"},{name:"prompt"},{name:"negativePrompt"}]
+        let defaultFields=[{name:"mergedImage"},{name:"mask"},{name:"hasMask"},{name:"prompt"},{name:"negativePrompt"},{name:"controlnet[].type"},{name:"controlnet[].image"},{name:"controlnet[].strength"},{name:"controlnet[].start_percent"},{name:"controlnet[].end_percent"},{name:"controlnet[].model"}]
         let outputFields=[{name:"resultImage"}]
         let res= {fields,defaultFields,outputFields}
         return res
