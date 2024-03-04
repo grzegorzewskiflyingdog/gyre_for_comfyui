@@ -1,21 +1,29 @@
 <script>
   
     
-    let conditions = ['==', '!=', '>', '<', '>=', '<='];
-    let editingIndex = null; // Index of the currently editing rule
+
     import { metadata} from './stores/metadata'
     import InputCombo  from './InputCombo.svelte'
+    import Mappings from './Mappings.svelte';
+    import { onMount } from 'svelte';
+
+    let MappingsCopmponent
+    let conditions = ['==', '!=', '>', '<', '>=', '<='];
+    let editingIndex = null; // Index of the currently editing rule
     if (!$metadata.rules) $metadata.rules=[]
     let fields=$metadata.forms.default.elements // get form fields
-
     let rules = $metadata.rules
+    let mappingFields={defaultfields:[]}
     function addRule() {
       rules.push({ fieldName: '', condition: '', actionType: '', rightValue:'', targetField: '', actionValue: '' });
       rules=rules
       editingIndex=rules.length-1
       $metadata.rules = rules;
     }
-  
+    onMount(() => {
+      mappingFields=MappingsCopmponent.getMappingFields()
+      console.log(mappingFields)
+    });
     function deleteRule(index) {
       rules.splice(index, 1);
       if (editingIndex === index) {
@@ -114,9 +122,16 @@
 
           <select bind:value={rule.fieldName}  class="oneLine input">
             <option value="">Field...</option>
-            {#each fields as field}
-              <option value={field.name}>{field.name}</option>
-            {/each}
+            <optgroup label="Form">
+              {#each fields as field}
+                <option value={field.name}>{field.name}</option>
+              {/each}
+              </optgroup>
+              <optgroup label="Defaults">
+                {#each mappingFields.defaultFields as field}
+                  <option value={field.name}>{field.name}</option>
+                {/each}
+              </optgroup>
           </select>
           <select bind:value={rule.condition} class="oneLine input">
             <option value="">Condition...</option>
@@ -135,9 +150,16 @@
           <div class="action-row">
               <select bind:value={rule.targetField} class="oneLine input">
                 <option value="">Field...</option>
-                {#each fields as field}
-                  <option value={field.name}>{field.name}</option>
-                {/each}
+                <optgroup label="Form">
+                  {#each fields as field}
+                    <option value={field.name}>{field.name}</option>
+                  {/each}
+                </optgroup>
+                <optgroup label="Defaults">
+                  {#each mappingFields.defaultFields as field}
+                    <option value={field.name}>{field.name}</option>
+                  {/each}
+                </optgroup>
               </select>
               = <InputCombo  bind:value={rule.actionValue} }></InputCombo>
               <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
@@ -156,3 +178,4 @@
   {/each}
   <button on:click={addRule}>Add Rule</button>
 </div>
+<div style="display:none"><Mappings bind:this={MappingsCopmponent}></Mappings></div>

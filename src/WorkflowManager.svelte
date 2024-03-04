@@ -4,11 +4,9 @@
     import Mappings from "./Mappings.svelte"
 
     import {writable} from 'svelte/store'
-    import {onMount, beforeUpdate} from 'svelte'
-    import {get_all_dirty_from_scope} from "svelte/internal";
+    import {onMount} from 'svelte'
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
-    import { tick } from "svelte"
 
     let allworkflows;
     let moving = false;
