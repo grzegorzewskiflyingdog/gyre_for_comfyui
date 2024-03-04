@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 import subprocess
 import os
 import json
+from .nodes import *
 
 WEB_DIRECTORY = "entry"
 DEFAULT_USER = "guest"
