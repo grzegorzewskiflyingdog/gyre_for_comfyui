@@ -20,11 +20,11 @@ class LoopStart:
 
     RETURN_TYPES = (AlwaysEqualProxy("*"),)
 
-    RETURN_NAMES = "ANY"
+    RETURN_NAMES = ("ANY",)
 
     FUNCTION = "do_nothing"
 
-    CATEGORY = "Logic"
+    CATEGORY = "Gyre"
 
     def do_nothing(self, ANY):
         return (ANY,)
@@ -32,12 +32,12 @@ class LoopStart:
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
 NODE_CLASS_MAPPINGS = {
-    "GyreLoopStart": LoopStart
+    "GyreLoopStart": LoopStart,
 }
 
 # A dictionary that contains the friendly/humanly readable titles for the nodes
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "GyreLoopStart": "GyreLoopStart"
+    "GyreLoopStart": "Loop Start",
 }    
 
 
