@@ -225,8 +225,54 @@
         // 2. set unsaved state to false
         // 3. load list of all workflows again
         alert("save workflow " + name) // remove
-
+        saveDevelopJson(graph);
         await loadList();
+    }
+
+    async function saveDevelopJson(graph) {
+
+        window.app.graphToPrompt().then(p=> {
+            const apirawjson = JSON.stringify(p.output, null, 2); // convert the data to a JSON string
+            console.log("json for devellop!!",apirawjson);
+             createGyreApiJson(graph,apirawjson);
+        });
+    }
+
+
+
+    function createGyreApiJson(graph,apirawjson){
+        debugger;
+        let apirawjsonobj =  JSON.parse(apirawjson);
+        let alldata = JSON.stringify({graph,apirawjsonobj});
+        let file_path = graph.extra?.workspace_info?.name || "new.json";
+        if (name) {
+            file_path = name
+        }
+        if (!file_path.endsWith('.json')) {
+            // Add .json extension if it doesn't exist
+            file_path += '.json';
+        }
+        updateApiFile(file_path,alldata);
+    }
+
+    async function updateApiFile(file_path,jsonData) {
+        try {
+            const response = await fetch("/workspace/update_api_json_file", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    file_path: file_path,
+                    json_str: jsonData,
+                }),
+            });
+            const result = await response.text();
+            return result;
+        } catch (error) {
+            alert("Error saving workflow .json file: " + error);
+            console.error("Error saving workspace:", error);
+        }
     }
 
 
