@@ -401,7 +401,10 @@
                     <label for="description" style="vertical-align:top">Description:</label>
                     <textarea class="text_input" bind:value={$metadata.description}></textarea>                    
                 </div>
-
+                <div class="inputLine" >
+                    <label for="category" style="vertical-align:top">Category (only layer menu):</label>
+                    <input type="text" class="text_input" bind:value={$metadata.category}>                 
+                </div>
             {/if}
             {#if state === "editForm"}
                 <div style="margin-top:10px"></div>
