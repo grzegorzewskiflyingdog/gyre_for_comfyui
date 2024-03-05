@@ -41,15 +41,18 @@
   }
 
   function handleDragStart(event, index) {
-    dragStartIndex = index;
+    if (!advancedOptions) return
+    dragStartIndex = index
   }
 
   function handleDragOver(event) {
-    event.preventDefault(); // Necessary to allow dropping
+    if (!advancedOptions) return
+    event.preventDefault() // Necessary to allow dropping
   }
 
   function handleDrop(event, dropIndex) {
-    event.preventDefault();
+    if (!advancedOptions) return
+    event.preventDefault()
     if (dragStartIndex === dropIndex) return
     
     const draggedItem = formElements[dragStartIndex];
@@ -69,6 +72,24 @@
   function removeElement(index) {
     formElements.update(elements => elements.filter((_, i) => i !== index));
   }
+
+  let advancedOptions=true
+  function checkAdvancedOptions(element,index) {
+    if (advancedOptions) return "block"
+    if (element.type==="advanced_options") return "block"
+    let advancedOptionsIndex=-1
+    for(let i=0;i<formElements.length;i++) {
+      let e=formElements[i]
+      if  (e.type==="advanced_options") advancedOptionsIndex=i
+    }
+
+    if (advancedOptionsIndex<0) { // element does not exists anymore
+      advancedOptions=true
+      return "block"
+    }
+    if (index <advancedOptionsIndex) return "block" // before advanced options
+    return "none"
+  }
 </script>
 
 
@@ -80,10 +101,12 @@
     <div
       class="draggable"
       draggable="true"
+      style="display:{checkAdvancedOptions(element,index)}"
       on:dragstart={() => handleDragStart(event, index)}
       on:dragover={handleDragOver}
       on:drop={() => handleDrop(event, index)}>
-      <FormElement {element} 
+      <FormElement {element} bind:advancedOptions={advancedOptions}
+        on:redrawAll={(e) => {formElements=formElements}}
         on:remove={() => removeElement(index)}  
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
@@ -104,6 +127,7 @@
     <option value="slider">Slider</option>
     <option value="number">Number</option>
     <option value="layer_image">Layer Image</option>
+    <option value="advanced_options">Advanced Options Switch</option>
   </select>
   <button on:click={() => addElement(selectedType)}>Add</button>
 </div>

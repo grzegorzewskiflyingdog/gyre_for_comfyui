@@ -41,12 +41,19 @@
     function deleteElement() {
         dispatch("delete",{})
     }
+
+    export let advancedOptions=true
 </script>
 
 <div class="element-preview">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="editElementButton" on:click={openProperties}>Edit</div>
     <!-- Element preview based on type -->
+    {#if element.type==="advanced_options"} 
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <button on:click={(e) => { advancedOptions=!advancedOptions; dispatch("redrawAll",{}) }}>Show Advanced Options</button>
+    {/if}
+
     {#if element.type==="layer_image"} 
         <label for={element.name} class="layer_image_label">{element.name}:</label>
         <!-- svelte-ignore a11y-missing-attribute -->
@@ -81,7 +88,7 @@
 <div class="element-properties" >
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="formClose" on:click={closeProperties}>X</div>
-    {#if element.type !== 'layer_image' }
+    {#if element.type !== 'layer_image' &&  element.type!=="advanced_options"} 
         <div class="formLine">
             <label for="label">Label:</label>
             <input type="text" name="label" value={element.label} on:input={(e) => updateElement({ label: e.target.value })} />
