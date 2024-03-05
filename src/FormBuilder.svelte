@@ -124,6 +124,7 @@
     <option value="textarea">Textarea</option>
     <option value="checkbox">Checkbox</option>
     <option value="dropdown">Dropdown</option>
+    <option value="pre_filled_dropdown">Pre-filled Dropdown</option>
     <option value="slider">Slider</option>
     <option value="number">Number</option>
     <option value="layer_image">Layer Image</option>

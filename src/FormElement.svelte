@@ -1,9 +1,11 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import { combo_values } from './stores/combo_values'
 
     export let element;
     export let showProperties=false
     import {layer_image_preview} from "./images"
+  import { fix_and_outro_and_destroy_block } from 'svelte/internal';
     const dispatch = createEventDispatcher();
     let value=1
     
@@ -76,6 +78,19 @@
                 <option value={option.value}>{option.text} </option>
             {/each}
         </select>
+    {:else if element.type === 'pre_filled_dropdown'}
+    <label for={element.name}>{element.label}:</label>
+        {#if element.widget_name && $combo_values[element.widget_name] }        
+        <select name="{element.name}" class="dropdown">
+          {#each $combo_values[element.widget_name] as v}
+                <option value={v}>{v} </option>
+            {/each} 
+        </select>      
+        {:else if !element.widget_name}  
+            Select Widget
+        {:else}
+            Widget {element.widget_name} not found.
+        {/if}
     {:else if element.type === 'slider'}
         <label for={element.name} class="slider_label">{element.label}:</label>
         <span class="slidervalue">{value}</span><input type="range" min={element.min} max={element.max} step={element.step} value="{element.default}" name="{element.name}" on:change={(e) => {value=e.target.value}}/>
@@ -133,6 +148,19 @@
             </div>
         {/each}
         <button on:click={addOption}>Add Option</button>
+    {/if}
+    {#if element.type === 'pre_filled_dropdown'}
+        <div class="formLine">
+            <label  for="widget_name"> Combo Widget: </label>
+            <select  name="widget_name"  on:change={(e) => updateElement({ widget_name: e.target.value })} bind:value={element.widget_name}  >
+                <option>Select...</option>
+                {#if $combo_values}
+                    {#each Object.entries($combo_values) as [widget_name,values]}
+                        <option value={widget_name}>{widget_name}</option>
+                    {/each}
+                {/if}
+            </select>
+    </div>
     {/if}
     {#if element.type === 'slider' || element.type === 'number'}
         <div class="formLine">
