@@ -3133,17 +3133,17 @@ var app = (function () {
     const file$5 = "src\\FormBuilder.svelte";
 
     function add_css$6(target) {
-    	append_styles(target, "svelte-1yl6ahv", ".formBuilder.svelte-1yl6ahv.svelte-1yl6ahv{padding:10px;color:white;width:470px;display:block}.formBuilder.svelte-1yl6ahv h1.svelte-1yl6ahv{font-size:16px;margin-bottom:30px}.draggable.svelte-1yl6ahv.svelte-1yl6ahv{cursor:grab}.form.svelte-1yl6ahv.svelte-1yl6ahv{border-radius:5px;background-color:black;width:450px;padding:10px;color:white;font:\"Segoe UI\", Roboto, system-ui;font-size:14px;margin-bottom:10px}.formBuilder.svelte-1yl6ahv .add_field_select_label.svelte-1yl6ahv{display:inline-block}.formBuilder.svelte-1yl6ahv .add_field_select.svelte-1yl6ahv{margin-right:10px;background-color:black;color:white;padding:5px;display:inline-block}.formBuilder.svelte-1yl6ahv button.svelte-1yl6ahv{font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;font-size:14px;min-width:70px;color:black;background-color:rgb(227, 206, 116);border-color:rgb(128, 128, 128);border-radius:5px;cursor:pointer;margin-right:10px}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRm9ybUJ1aWxkZXIuc3ZlbHRlIiwic291cmNlcyI6WyJGb3JtQnVpbGRlci5zdmVsdGUiXSwic291cmNlc0NvbnRlbnQiOlsiPHNjcmlwdD5cclxuICBpbXBvcnQgeyB3cml0YWJsZSB9IGZyb20gJ3N2ZWx0ZS9zdG9yZSc7XHJcbiAgaW1wb3J0IEZvcm1FbGVtZW50IGZyb20gJy4vRm9ybUVsZW1lbnQuc3ZlbHRlJztcclxuICBpbXBvcnQgeyBtZXRhZGF0YX0gZnJvbSAnLi9zdG9yZXMvbWV0YWRhdGEnXHJcbiAgaWYgKCEkbWV0YWRhdGEuZm9ybXMpICRtZXRhZGF0YS5mb3Jtcz17fVxyXG5cclxuICBleHBvcnQgbGV0IGZvcm1fa2V5PSdkZWZhdWx0JyAgLy8gc3VwcG9ydCBmb3IgbXVsdGlwbGUgZm9ybXMgKGUuZy4gd2l6YXJkcykgaW4gdGhlIGZ1dHVyZVxyXG4gIGlmICghJG1ldGFkYXRhLmZvcm1zW2Zvcm1fa2V5XSkgJG1ldGFkYXRhLmZvcm1zW2Zvcm1fa2V5XT17ZWxlbWVudHM6W119XHJcbiAgaWYgKCEkbWV0YWRhdGEuZm9ybXNbZm9ybV9rZXldLmVsZW1lbnRzKSAkbWV0YWRhdGEuZm9ybXNbZm9ybV9rZXldLmVsZW1lbnRzPVtdXHJcbiAgbGV0IGZvcm1FbGVtZW50cyA9ICRtZXRhZGF0YS5mb3Jtc1tmb3JtX2tleV0uZWxlbWVudHNcclxuICBsZXQgZHJhZ1N0YXJ0SW5kZXg9LTFcclxuICBsZXQgc2hvd1Byb3BlcnRpZXNJZHg9LTFcclxuICBsZXQgc2VsZWN0ZWRUeXBlO1xyXG4gIGZ1bmN0aW9uIGFkZEVsZW1lbnQodHlwZSkge1xyXG4gICAgaWYgKCF0eXBlKSByZXR1cm5cclxuICAgIGxldCBuYW1lPVwidmFsdWVfXCIrTWF0aC5yYW5kb20oKS50b1N0cmluZygzNikuc3Vic3RyKDIsIDUpXHJcbiAgICBcclxuICAgIGxldCBuZXdFbGVtZW50ID0ge1xyXG4gICAgICBuYW1lOiBuYW1lLCAvLyBVbmlxdWUgSUQgZm9yIGtleSB0cmFja2luZyBhbmQgcmVhY3Rpdml0eVxyXG4gICAgICB0eXBlOiB0eXBlLFxyXG4gICAgICBsYWJlbDogbmFtZS5jaGFyQXQoMCkudG9VcHBlckNhc2UoKSArIG5hbWUuc2xpY2UoMSksXHJcbiAgICAgIG5hbWU6IG5hbWUsIC8vIEV4YW1wbGUgbmFtaW5nIGNvbnZlbnRpb25cclxuICAgICAgb3B0aW9uczogdHlwZSA9PT0gJ2Ryb3Bkb3duJyA/IFt7IHRleHQ6ICdPcHRpb24gMScsIGtleTogJzEnIH1dIDogW10sXHJcbiAgICAgIGRlZmF1bHQ6IFwiXCJcclxuICAgIH1cclxuICAgIGlmICh0eXBlPT09XCJzbGlkZXJcIiB8fCB0eXBlPT09XCJudW1iZXJcIikge1xyXG4gICAgICBuZXdFbGVtZW50Lm1pbj0xXHJcbiAgICAgIG5ld0VsZW1lbnQubWF4PTIwXHJcbiAgICAgIG5ld0VsZW1lbnQuc3RlcD0xXHJcbiAgICAgIG5ld0VsZW1lbnQuZGVmYXVsdD0xXHJcbiAgICB9XHJcbiAgICBpZiAodHlwZT09PVwiY2hlY2tib3hcIikge1xyXG4gICAgICBuZXdFbGVtZW50LmRlZmF1bHQ9ZmFsc2VcclxuICAgIH1cclxuICAgIGlmICh0eXBlPT09XCJ0ZXh0XCIgfHwgdHlwZT09PVwidGV4dGFyZWFcIikge1xyXG4gICAgICBuZXdFbGVtZW50LnBsYWNlaG9sZGVyPVwiXCJcclxuICAgIH1cclxuICAgIGZvcm1FbGVtZW50cy5wdXNoKG5ld0VsZW1lbnQpXHJcbiAgICBmb3JtRWxlbWVudHM9Zm9ybUVsZW1lbnRzXHJcbiAgICBzaG93UHJvcGVydGllc0lkeD1mb3JtRWxlbWVudHMubGVuZ3RoLTFcclxuICB9XHJcblxyXG4gIGZ1bmN0aW9uIGhhbmRsZURyYWdTdGFydChldmVudCwgaW5kZXgpIHtcclxuICAgIGlmICghYWR2YW5jZWRPcHRpb25zKSByZXR1cm5cclxuICAgIGRyYWdTdGFydEluZGV4ID0gaW5kZXhcclxuICB9XHJcblxyXG4gIGZ1bmN0aW9uIGhhbmRsZURyYWdPdmVyKGV2ZW50KSB7XHJcbiAgICBpZiAoIWFkdmFuY2VkT3B0aW9ucykgcmV0dXJuXHJcbiAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpIC8vIE5lY2Vzc2FyeSB0byBhbGxvdyBkcm9wcGluZ1xyXG4gIH1cclxuXHJcbiAgZnVuY3Rpb24gaGFuZGxlRHJvcChldmVudCwgZHJvcEluZGV4KSB7XHJcbiAgICBpZiAoIWFkdmFuY2VkT3B0aW9ucykgcmV0dXJuXHJcbiAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpXHJcbiAgICBpZiAoZHJhZ1N0YXJ0SW5kZXggPT09IGRyb3BJbmRleCkgcmV0dXJuXHJcbiAgICBcclxuICAgIGNvbnN0IGRyYWdnZWRJdGVtID0gZm9ybUVsZW1lbnRzW2RyYWdTdGFydEluZGV4XTtcclxuICAgIGNvbnN0IHJlbWFpbmluZ0l0ZW1zID0gZm9ybUVsZW1lbnRzLmZpbHRlcigoXywgaW5kZXgpID0+IGluZGV4ICE9PSBkcmFnU3RhcnRJbmRleClcclxuICAgIGNvbnN0IHJlb3JkZXJlZEl0ZW1zID0gW1xyXG4gICAgICAgIC4uLnJlbWFpbmluZ0l0ZW1zLnNsaWNlKDAsIGRyb3BJbmRleCksXHJcbiAgICAgICAgZHJhZ2dlZEl0ZW0sXHJcbiAgICAgICAgLi4ucmVtYWluaW5nSXRlbXMuc2xpY2UoZHJvcEluZGV4KVxyXG4gICAgXVxyXG4gICAgLy8gUmVhc3NpZ24gdGhlIHJlb3JkZXJlZCBpdGVtcyBiYWNrIHRvIGZvcm1FbGVtZW50c1xyXG4gICAgZm9ybUVsZW1lbnRzID0gcmVvcmRlcmVkSXRlbXNcclxuICAgIGZvcm1FbGVtZW50cz1mb3JtRWxlbWVudHNcclxuICAgIC8vIFJlc2V0IGRyYWdnZWQgaW5kZXhcclxuICAgIGRyYWdTdGFydEluZGV4ID0gLTFcclxufVxyXG5cclxuICBmdW5jdGlvbiByZW1vdmVFbGVtZW50KGluZGV4KSB7XHJcbiAgICBmb3JtRWxlbWVudHMudXBkYXRlKGVsZW1lbnRzID0+IGVsZW1lbnRzLmZpbHRlcigoXywgaSkgPT4gaSAhPT0gaW5kZXgpKTtcclxuICB9XHJcblxyXG4gIGxldCBhZHZhbmNlZE9wdGlvbnM9dHJ1ZVxyXG4gIGZ1bmN0aW9uIGNoZWNrQWR2YW5jZWRPcHRpb25zKGVsZW1lbnQsaW5kZXgpIHtcclxuICAgIGlmIChhZHZhbmNlZE9wdGlvbnMpIHJldHVybiBcImJsb2NrXCJcclxuICAgIGlmIChlbGVtZW50LnR5cGU9PT1cImFkdmFuY2VkX29wdGlvbnNcIikgcmV0dXJuIFwiYmxvY2tcIlxyXG4gICAgbGV0IGFkdmFuY2VkT3B0aW9uc0luZGV4PS0xXHJcbiAgICBmb3IobGV0IGk9MDtpPGZvcm1FbGVtZW50cy5sZW5ndGg7aSsrKSB7XHJcbiAgICAgIGxldCBlPWZvcm1FbGVtZW50c1tpXVxyXG4gICAgICBpZiAgKGUudHlwZT09PVwiYWR2YW5jZWRfb3B0aW9uc1wiKSBhZHZhbmNlZE9wdGlvbnNJbmRleD1pXHJcbiAgICB9XHJcblxyXG4gICAgaWYgKGFkdmFuY2VkT3B0aW9uc0luZGV4PDApIHsgLy8gZWxlbWVudCBkb2VzIG5vdCBleGlzdHMgYW55bW9yZVxyXG4gICAgICBhZHZhbmNlZE9wdGlvbnM9dHJ1ZVxyXG4gICAgICByZXR1cm4gXCJibG9ja1wiXHJcbiAgICB9XHJcbiAgICBpZiAoaW5kZXggPGFkdmFuY2VkT3B0aW9uc0luZGV4KSByZXR1cm4gXCJibG9ja1wiIC8vIGJlZm9yZSBhZHZhbmNlZCBvcHRpb25zXHJcbiAgICByZXR1cm4gXCJub25lXCJcclxuICB9XHJcbjwvc2NyaXB0PlxyXG5cclxuXHJcblxyXG48ZGl2IGNsYXNzPVwiZm9ybUJ1aWxkZXJcIj5cclxuPGgxPkVkaXQgZm9ybTwvaDE+XHJcbjxkaXYgY2xhc3M9XCJmb3JtXCI+XHJcbiAgeyNlYWNoIGZvcm1FbGVtZW50cyBhcyBlbGVtZW50LCBpbmRleCAoZWxlbWVudC5uYW1lKX1cclxuICAgIDxkaXZcclxuICAgICAgY2xhc3M9XCJkcmFnZ2FibGVcIlxyXG4gICAgICBkcmFnZ2FibGU9XCJ0cnVlXCJcclxuICAgICAgc3R5bGU9XCJkaXNwbGF5OntjaGVja0FkdmFuY2VkT3B0aW9ucyhlbGVtZW50LGluZGV4KX1cIlxyXG4gICAgICBvbjpkcmFnc3RhcnQ9eygpID0+IGhhbmRsZURyYWdTdGFydChldmVudCwgaW5kZXgpfVxyXG4gICAgICBvbjpkcmFnb3Zlcj17aGFuZGxlRHJhZ092ZXJ9XHJcbiAgICAgIG9uOmRyb3A9eygpID0+IGhhbmRsZURyb3AoZXZlbnQsIGluZGV4KX0+XHJcbiAgICAgIDxGb3JtRWxlbWVudCB7ZWxlbWVudH0gYmluZDphZHZhbmNlZE9wdGlvbnM9e2FkdmFuY2VkT3B0aW9uc31cclxuICAgICAgICBvbjpyZWRyYXdBbGw9eyhlKSA9PiB7Zm9ybUVsZW1lbnRzPWZvcm1FbGVtZW50c319XHJcbiAgICAgICAgb246cmVtb3ZlPXsoKSA9PiByZW1vdmVFbGVtZW50KGluZGV4KX0gIFxyXG4gICAgICAgIG9uOm9wZW5Qcm9wZXJ0aWVzPXsoKSA9PiB7c2hvd1Byb3BlcnRpZXNJZHg9aW5kZXggfX0gXHJcbiAgICAgICAgb246Y2xvc2VQcm9wZXJ0aWVzPXsoKSA9PiB7c2hvd1Byb3BlcnRpZXNJZHg9LTEgfX1cclxuICAgICAgICBvbjp1cGRhdGU9eyhlKSA9PiB7IGZvcm1FbGVtZW50c1tpbmRleF09ZS5kZXRhaWwgfX1cclxuICAgICAgICBvbjpkZWxldGU9eyhlKSA9PiB7IGZvcm1FbGVtZW50cy5zcGxpY2Uoc2hvd1Byb3BlcnRpZXNJZHgsMSk7Zm9ybUVsZW1lbnRzPWZvcm1FbGVtZW50cztzaG93UHJvcGVydGllc0lkeD0tMSB9fVxyXG4gICAgICAgIHNob3dQcm9wZXJ0aWVzPXtzaG93UHJvcGVydGllc0lkeD09PWluZGV4fS8+XHJcbiAgICAgIDwvZGl2PlxyXG4gIHsvZWFjaH1cclxuPC9kaXY+XHJcbjxkaXY+XHJcbjxsYWJlbCBmb3I9XCJhZGRfZmllbGRfc2VsZWN0XCIgY2xhc3M9XCJhZGRfZmllbGRfc2VsZWN0X2xhYmVsXCI+IEFkZCBmb3JtIGZpZWxkOjwvbGFiZWw+IFxyXG4gIDxzZWxlY3QgY2xhc3M9XCJhZGRfZmllbGRfc2VsZWN0XCIgbmFtZT1cImFkZF9maWVsZF9zZWxlY3RcIiBiaW5kOnZhbHVlPXtzZWxlY3RlZFR5cGV9PlxyXG4gICAgPG9wdGlvbiB2YWx1ZT1cIlwiPlNlbGVjdC4uLjwvb3B0aW9uPlxyXG4gICAgPG9wdGlvbiB2YWx1ZT1cInRleHRcIj5UZXh0IElucHV0PC9vcHRpb24+XHJcbiAgICA8b3B0aW9uIHZhbHVlPVwidGV4dGFyZWFcIj5UZXh0YXJlYTwvb3B0aW9uPlxyXG4gICAgPG9wdGlvbiB2YWx1ZT1cImNoZWNrYm94XCI+Q2hlY2tib3g8L29wdGlvbj5cclxuICAgIDxvcHRpb24gdmFsdWU9XCJkcm9wZG93blwiPkRyb3Bkb3duPC9vcHRpb24+XHJcbiAgICA8b3B0aW9uIHZhbHVlPVwicHJlX2ZpbGxlZF9kcm9wZG93blwiPlByZS1maWxsZWQgRHJvcGRvd248L29wdGlvbj5cclxuICAgIDxvcHRpb24gdmFsdWU9XCJzbGlkZXJcIj5TbGlkZXI8L29wdGlvbj5cclxuICAgIDxvcHRpb24gdmFsdWU9XCJudW1iZXJcIj5OdW1iZXI8L29wdGlvbj5cclxuICAgIDxvcHRpb24gdmFsdWU9XCJsYXllcl9pbWFnZVwiPkxheWVyIEltYWdlPC9vcHRpb24+XHJcbiAgICA8b3B0aW9uIHZhbHVlPVwiYWR2YW5jZWRfb3B0aW9uc1wiPkFkdmFuY2VkIE9wdGlvbnMgU3dpdGNoPC9vcHRpb24+XHJcbiAgPC9zZWxlY3Q+XHJcbiAgPGJ1dHRvbiBvbjpjbGljaz17KCkgPT4gYWRkRWxlbWVudChzZWxlY3RlZFR5cGUpfT5BZGQ8L2J1dHRvbj5cclxuPC9kaXY+XHJcbjwvZGl2PlxyXG48c3R5bGU+XHJcbiAgLmZvcm1CdWlsZGVyIHtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB3aWR0aDogNDcwcHg7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICB9XHJcbiAgLmZvcm1CdWlsZGVyIGgxIHtcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDMwcHg7XHJcbiAgfVxyXG4gIC5kcmFnZ2FibGUge1xyXG4gICAgY3Vyc29yOiBncmFiO1xyXG4gIH1cclxuICAuZm9ybSB7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxuICAgIHdpZHRoOiA0NTBweDtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICBmb250OiBcIlNlZ29lIFVJXCIsIFJvYm90bywgc3lzdGVtLXVpO1xyXG4gICAgZm9udC1zaXplOjE0cHg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xyXG4gIH1cclxuICAuZm9ybUJ1aWxkZXIgLmFkZF9maWVsZF9zZWxlY3RfbGFiZWwge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gIH1cclxuICAuZm9ybUJ1aWxkZXIgLmFkZF9maWVsZF9zZWxlY3Qge1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogMTBweDtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxuICAgICAgICBjb2xvcjogd2hpdGU7XHJcbiAgICAgICAgcGFkZGluZzogNXB4OyAgIFxyXG4gICAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICB9XHJcbiAgICAuZm9ybUJ1aWxkZXIgYnV0dG9uIHtcclxuICAgICAgICBmb250LWZhbWlseTogc3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBcIlNlZ29lIFVJXCIsIFJvYm90bywgVWJ1bnR1LCBDYW50YXJlbGwsIFwiTm90byBTYW5zXCIsIHNhbnMtc2VyaWYsIFwiU2Vnb2UgVUlcIiwgSGVsdmV0aWNhLCBBcmlhbDtcclxuICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcbiAgICAgICAgbWluLXdpZHRoOiA3MHB4O1xyXG4gICAgICAgIGNvbG9yOiBibGFjaztcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjI3LCAyMDYsIDExNik7XHJcbiAgICAgICAgYm9yZGVyLWNvbG9yOiByZ2IoMTI4LCAxMjgsIDEyOCk7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6IDEwcHg7XHJcbiAgICB9XHJcbjwvc3R5bGU+Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQXdJRSwwQ0FBYSxDQUNYLE9BQU8sQ0FBRSxJQUFJLENBQ2IsS0FBSyxDQUFFLEtBQUssQ0FDWixLQUFLLENBQUUsS0FBSyxDQUNaLE9BQU8sQ0FBRSxLQUNYLENBQ0EsMkJBQVksQ0FBQyxpQkFBRyxDQUNkLFNBQVMsQ0FBRSxJQUFJLENBQ2YsYUFBYSxDQUFFLElBQ2pCLENBQ0Esd0NBQVcsQ0FDVCxNQUFNLENBQUUsSUFDVixDQUNBLG1DQUFNLENBQ0osYUFBYSxDQUFFLEdBQUcsQ0FDbEIsZ0JBQWdCLENBQUUsS0FBSyxDQUN2QixLQUFLLENBQUUsS0FBSyxDQUNaLE9BQU8sQ0FBRSxJQUFJLENBQ2IsS0FBSyxDQUFFLEtBQUssQ0FDWixJQUFJLENBQUUsVUFBVSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsU0FBUyxDQUNuQyxVQUFVLElBQUksQ0FDZCxhQUFhLENBQUUsSUFDakIsQ0FDQSwyQkFBWSxDQUFDLHNDQUF3QixDQUNuQyxPQUFPLENBQUUsWUFDWCxDQUNBLDJCQUFZLENBQUMsZ0NBQWtCLENBQ3pCLFlBQVksQ0FBRSxJQUFJLENBQ2xCLGdCQUFnQixDQUFFLEtBQUssQ0FDdkIsS0FBSyxDQUFFLEtBQUssQ0FDWixPQUFPLENBQUUsR0FBRyxDQUNaLE9BQU8sQ0FBRSxZQUNmLENBQ0UsMkJBQVksQ0FBQyxxQkFBTyxDQUNoQixXQUFXLENBQUUsU0FBUyxDQUFDLENBQUMsYUFBYSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsS0FBSyxDQUNuSSxTQUFTLENBQUUsSUFBSSxDQUNmLFNBQVMsQ0FBRSxJQUFJLENBQ2YsS0FBSyxDQUFFLEtBQUssQ0FDWixnQkFBZ0IsQ0FBRSxJQUFJLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUNwQyxZQUFZLENBQUUsSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FDaEMsYUFBYSxDQUFFLEdBQUcsQ0FDbEIsTUFBTSxDQUFFLE9BQU8sQ0FDZixZQUFZLENBQUUsSUFDbEIifQ== */");
+    	append_styles(target, "svelte-1yl6ahv", ".formBuilder.svelte-1yl6ahv.svelte-1yl6ahv{padding:10px;color:white;width:470px;display:block}.formBuilder.svelte-1yl6ahv h1.svelte-1yl6ahv{font-size:16px;margin-bottom:30px}.draggable.svelte-1yl6ahv.svelte-1yl6ahv{cursor:grab}.form.svelte-1yl6ahv.svelte-1yl6ahv{border-radius:5px;background-color:black;width:450px;padding:10px;color:white;font:\"Segoe UI\", Roboto, system-ui;font-size:14px;margin-bottom:10px}.formBuilder.svelte-1yl6ahv .add_field_select_label.svelte-1yl6ahv{display:inline-block}.formBuilder.svelte-1yl6ahv .add_field_select.svelte-1yl6ahv{margin-right:10px;background-color:black;color:white;padding:5px;display:inline-block}.formBuilder.svelte-1yl6ahv button.svelte-1yl6ahv{font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;font-size:14px;min-width:70px;color:black;background-color:rgb(227, 206, 116);border-color:rgb(128, 128, 128);border-radius:5px;cursor:pointer;margin-right:10px}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRm9ybUJ1aWxkZXIuc3ZlbHRlIiwic291cmNlcyI6WyJGb3JtQnVpbGRlci5zdmVsdGUiXSwic291cmNlc0NvbnRlbnQiOlsiPHNjcmlwdD5cclxuICBpbXBvcnQgeyB3cml0YWJsZSB9IGZyb20gJ3N2ZWx0ZS9zdG9yZSc7XHJcbiAgaW1wb3J0IEZvcm1FbGVtZW50IGZyb20gJy4vRm9ybUVsZW1lbnQuc3ZlbHRlJztcclxuICBpbXBvcnQgeyBtZXRhZGF0YX0gZnJvbSAnLi9zdG9yZXMvbWV0YWRhdGEnXHJcbiAgaWYgKCEkbWV0YWRhdGEuZm9ybXMpICRtZXRhZGF0YS5mb3Jtcz17fVxyXG5cclxuICBleHBvcnQgbGV0IGZvcm1fa2V5PSdkZWZhdWx0JyAgLy8gc3VwcG9ydCBmb3IgbXVsdGlwbGUgZm9ybXMgKGUuZy4gd2l6YXJkcykgaW4gdGhlIGZ1dHVyZVxyXG4gIGlmICghJG1ldGFkYXRhLmZvcm1zW2Zvcm1fa2V5XSkgJG1ldGFkYXRhLmZvcm1zW2Zvcm1fa2V5XT17ZWxlbWVudHM6W119XHJcbiAgaWYgKCEkbWV0YWRhdGEuZm9ybXNbZm9ybV9rZXldLmVsZW1lbnRzKSAkbWV0YWRhdGEuZm9ybXNbZm9ybV9rZXldLmVsZW1lbnRzPVtdXHJcbiAgbGV0IGZvcm1FbGVtZW50cyA9ICRtZXRhZGF0YS5mb3Jtc1tmb3JtX2tleV0uZWxlbWVudHNcclxuICBlbnN1cmVVbmlxdWVOYW1lcygpXHJcbiAgbGV0IGRyYWdTdGFydEluZGV4PS0xXHJcbiAgbGV0IHNob3dQcm9wZXJ0aWVzSWR4PS0xXHJcbiAgbGV0IHNlbGVjdGVkVHlwZVxyXG5cclxuICBmdW5jdGlvbiBlbnN1cmVVbmlxdWVOYW1lcygpIHtcclxuICBjb25zdCBuYW1lTWFwID0ge307IC8vIE9iamVjdCB0byBrZWVwIHRyYWNrIG9mIG5hbWVzIGFuZCB0aGVpciBvY2N1cnJlbmNlc1xyXG5cclxuICBmb3JtRWxlbWVudHMuZm9yRWFjaChlbGVtZW50ID0+IHtcclxuICAgIGxldCBuYW1lID0gZWxlbWVudC5uYW1lO1xyXG4gICAgLy8gQ2hlY2sgaWYgdGhlIG5hbWUgYWxyZWFkeSBleGlzdHMgaW4gdGhlIG5hbWVNYXBcclxuICAgIGlmIChuYW1lTWFwW25hbWVdKSB7XHJcbiAgICAgIC8vIElmIHRoZSBuYW1lIGV4aXN0cywgaW5jcmVtZW50IHRoZSBjb3VudCBhbmQgYXBwZW5kIGl0IHRvIHRoZSBuYW1lXHJcbiAgICAgIGxldCBjb3VudCA9IG5hbWVNYXBbbmFtZV07XHJcbiAgICAgIGxldCBuZXdOYW1lID0gYCR7bmFtZX1fJHtjb3VudH1gO1xyXG4gICAgICB3aGlsZSAobmFtZU1hcFtuZXdOYW1lXSkgeyAvLyBFbnN1cmUgdGhlIG5ldyBuYW1lIGlzIGFsc28gdW5pcXVlXHJcbiAgICAgICAgY291bnQrKztcclxuICAgICAgICBuZXdOYW1lID0gYCR7bmFtZX1fJHtjb3VudH1gO1xyXG4gICAgICB9XHJcbiAgICAgIGVsZW1lbnQubmFtZSA9IG5ld05hbWU7XHJcbiAgICAgIG5hbWVNYXBbbmFtZV0rKztcclxuICAgICAgbmFtZU1hcFtuZXdOYW1lXSA9IDE7IC8vIEluaXRpYWxpemUgdGhpcyBuZXcgbmFtZSBpbiB0aGUgbmFtZU1hcFxyXG4gICAgfSBlbHNlIHtcclxuICAgICAgLy8gSWYgdGhlIG5hbWUgZG9lc24ndCBleGlzdCwgYWRkIGl0IHRvIHRoZSBuYW1lTWFwXHJcbiAgICAgIG5hbWVNYXBbbmFtZV0gPSAxXHJcbiAgICB9XHJcbiAgfSk7XHJcbn1cclxuICBmdW5jdGlvbiBhZGRFbGVtZW50KHR5cGUpIHtcclxuICAgIGlmICghdHlwZSkgcmV0dXJuXHJcbiAgICBsZXQgbmFtZT1cInZhbHVlX1wiK01hdGgucmFuZG9tKCkudG9TdHJpbmcoMzYpLnN1YnN0cigyLCA1KVxyXG4gICAgXHJcbiAgICBsZXQgbmV3RWxlbWVudCA9IHtcclxuICAgICAgbmFtZTogbmFtZSwgLy8gVW5pcXVlIElEIGZvciBrZXkgdHJhY2tpbmcgYW5kIHJlYWN0aXZpdHlcclxuICAgICAgdHlwZTogdHlwZSxcclxuICAgICAgbGFiZWw6IG5hbWUuY2hhckF0KDApLnRvVXBwZXJDYXNlKCkgKyBuYW1lLnNsaWNlKDEpLFxyXG4gICAgICBuYW1lOiBuYW1lLCAvLyBFeGFtcGxlIG5hbWluZyBjb252ZW50aW9uXHJcbiAgICAgIG9wdGlvbnM6IHR5cGUgPT09ICdkcm9wZG93bicgPyBbeyB0ZXh0OiAnT3B0aW9uIDEnLCBrZXk6ICcxJyB9XSA6IFtdLFxyXG4gICAgICBkZWZhdWx0OiBcIlwiXHJcbiAgICB9XHJcbiAgICBpZiAodHlwZT09PVwic2xpZGVyXCIgfHwgdHlwZT09PVwibnVtYmVyXCIpIHtcclxuICAgICAgbmV3RWxlbWVudC5taW49MVxyXG4gICAgICBuZXdFbGVtZW50Lm1heD0yMFxyXG4gICAgICBuZXdFbGVtZW50LnN0ZXA9MVxyXG4gICAgICBuZXdFbGVtZW50LmRlZmF1bHQ9MVxyXG4gICAgfVxyXG4gICAgaWYgKHR5cGU9PT1cImNoZWNrYm94XCIpIHtcclxuICAgICAgbmV3RWxlbWVudC5kZWZhdWx0PWZhbHNlXHJcbiAgICB9XHJcbiAgICBpZiAodHlwZT09PVwidGV4dFwiIHx8IHR5cGU9PT1cInRleHRhcmVhXCIpIHtcclxuICAgICAgbmV3RWxlbWVudC5wbGFjZWhvbGRlcj1cIlwiXHJcbiAgICB9XHJcbiAgICBmb3JtRWxlbWVudHMucHVzaChuZXdFbGVtZW50KVxyXG4gICAgZW5zdXJlVW5pcXVlTmFtZXMoKVxyXG4gICAgZm9ybUVsZW1lbnRzPWZvcm1FbGVtZW50c1xyXG4gICAgc2hvd1Byb3BlcnRpZXNJZHg9Zm9ybUVsZW1lbnRzLmxlbmd0aC0xXHJcbiAgfVxyXG5cclxuICBmdW5jdGlvbiBoYW5kbGVEcmFnU3RhcnQoZXZlbnQsIGluZGV4KSB7XHJcbiAgICBpZiAoIWFkdmFuY2VkT3B0aW9ucykgcmV0dXJuXHJcbiAgICBkcmFnU3RhcnRJbmRleCA9IGluZGV4XHJcbiAgfVxyXG5cclxuICBmdW5jdGlvbiBoYW5kbGVEcmFnT3ZlcihldmVudCkge1xyXG4gICAgaWYgKCFhZHZhbmNlZE9wdGlvbnMpIHJldHVyblxyXG4gICAgZXZlbnQucHJldmVudERlZmF1bHQoKSAvLyBOZWNlc3NhcnkgdG8gYWxsb3cgZHJvcHBpbmdcclxuICB9XHJcblxyXG4gIGZ1bmN0aW9uIGhhbmRsZURyb3AoZXZlbnQsIGRyb3BJbmRleCkge1xyXG4gICAgaWYgKCFhZHZhbmNlZE9wdGlvbnMpIHJldHVyblxyXG4gICAgZXZlbnQucHJldmVudERlZmF1bHQoKVxyXG4gICAgaWYgKGRyYWdTdGFydEluZGV4ID09PSBkcm9wSW5kZXgpIHJldHVyblxyXG4gICAgXHJcbiAgICBjb25zdCBkcmFnZ2VkSXRlbSA9IGZvcm1FbGVtZW50c1tkcmFnU3RhcnRJbmRleF07XHJcbiAgICBjb25zdCByZW1haW5pbmdJdGVtcyA9IGZvcm1FbGVtZW50cy5maWx0ZXIoKF8sIGluZGV4KSA9PiBpbmRleCAhPT0gZHJhZ1N0YXJ0SW5kZXgpXHJcbiAgICBjb25zdCByZW9yZGVyZWRJdGVtcyA9IFtcclxuICAgICAgICAuLi5yZW1haW5pbmdJdGVtcy5zbGljZSgwLCBkcm9wSW5kZXgpLFxyXG4gICAgICAgIGRyYWdnZWRJdGVtLFxyXG4gICAgICAgIC4uLnJlbWFpbmluZ0l0ZW1zLnNsaWNlKGRyb3BJbmRleClcclxuICAgIF1cclxuICAgIC8vIFJlYXNzaWduIHRoZSByZW9yZGVyZWQgaXRlbXMgYmFjayB0byBmb3JtRWxlbWVudHNcclxuICAgIGZvcm1FbGVtZW50cyA9IHJlb3JkZXJlZEl0ZW1zXHJcbiAgICBmb3JtRWxlbWVudHM9Zm9ybUVsZW1lbnRzXHJcbiAgICAvLyBSZXNldCBkcmFnZ2VkIGluZGV4XHJcbiAgICBkcmFnU3RhcnRJbmRleCA9IC0xXHJcbn1cclxuXHJcbiAgZnVuY3Rpb24gcmVtb3ZlRWxlbWVudChpbmRleCkge1xyXG4gICAgZm9ybUVsZW1lbnRzLnVwZGF0ZShlbGVtZW50cyA9PiBlbGVtZW50cy5maWx0ZXIoKF8sIGkpID0+IGkgIT09IGluZGV4KSk7XHJcbiAgfVxyXG5cclxuICBsZXQgYWR2YW5jZWRPcHRpb25zPXRydWVcclxuICBmdW5jdGlvbiBjaGVja0FkdmFuY2VkT3B0aW9ucyhlbGVtZW50LGluZGV4KSB7XHJcbiAgICBpZiAoYWR2YW5jZWRPcHRpb25zKSByZXR1cm4gXCJibG9ja1wiXHJcbiAgICBpZiAoZWxlbWVudC50eXBlPT09XCJhZHZhbmNlZF9vcHRpb25zXCIpIHJldHVybiBcImJsb2NrXCJcclxuICAgIGxldCBhZHZhbmNlZE9wdGlvbnNJbmRleD0tMVxyXG4gICAgZm9yKGxldCBpPTA7aTxmb3JtRWxlbWVudHMubGVuZ3RoO2krKykge1xyXG4gICAgICBsZXQgZT1mb3JtRWxlbWVudHNbaV1cclxuICAgICAgaWYgIChlLnR5cGU9PT1cImFkdmFuY2VkX29wdGlvbnNcIikgYWR2YW5jZWRPcHRpb25zSW5kZXg9aVxyXG4gICAgfVxyXG5cclxuICAgIGlmIChhZHZhbmNlZE9wdGlvbnNJbmRleDwwKSB7IC8vIGVsZW1lbnQgZG9lcyBub3QgZXhpc3RzIGFueW1vcmVcclxuICAgICAgYWR2YW5jZWRPcHRpb25zPXRydWVcclxuICAgICAgcmV0dXJuIFwiYmxvY2tcIlxyXG4gICAgfVxyXG4gICAgaWYgKGluZGV4IDxhZHZhbmNlZE9wdGlvbnNJbmRleCkgcmV0dXJuIFwiYmxvY2tcIiAvLyBiZWZvcmUgYWR2YW5jZWQgb3B0aW9uc1xyXG4gICAgcmV0dXJuIFwibm9uZVwiXHJcbiAgfVxyXG48L3NjcmlwdD5cclxuXHJcblxyXG5cclxuPGRpdiBjbGFzcz1cImZvcm1CdWlsZGVyXCI+XHJcbjxoMT5FZGl0IGZvcm08L2gxPlxyXG48ZGl2IGNsYXNzPVwiZm9ybVwiPlxyXG4gIHsjZWFjaCBmb3JtRWxlbWVudHMgYXMgZWxlbWVudCwgaW5kZXggKGVsZW1lbnQubmFtZSl9XHJcbiAgICA8ZGl2XHJcbiAgICAgIGNsYXNzPVwiZHJhZ2dhYmxlXCJcclxuICAgICAgZHJhZ2dhYmxlPVwidHJ1ZVwiXHJcbiAgICAgIHN0eWxlPVwiZGlzcGxheTp7Y2hlY2tBZHZhbmNlZE9wdGlvbnMoZWxlbWVudCxpbmRleCl9XCJcclxuICAgICAgb246ZHJhZ3N0YXJ0PXsoKSA9PiBoYW5kbGVEcmFnU3RhcnQoZXZlbnQsIGluZGV4KX1cclxuICAgICAgb246ZHJhZ292ZXI9e2hhbmRsZURyYWdPdmVyfVxyXG4gICAgICBvbjpkcm9wPXsoKSA9PiBoYW5kbGVEcm9wKGV2ZW50LCBpbmRleCl9PlxyXG4gICAgICA8Rm9ybUVsZW1lbnQge2VsZW1lbnR9IGJpbmQ6YWR2YW5jZWRPcHRpb25zPXthZHZhbmNlZE9wdGlvbnN9XHJcbiAgICAgICAgb246cmVkcmF3QWxsPXsoZSkgPT4ge2Zvcm1FbGVtZW50cz1mb3JtRWxlbWVudHN9fVxyXG4gICAgICAgIG9uOnJlbW92ZT17KCkgPT4gcmVtb3ZlRWxlbWVudChpbmRleCl9ICBcclxuICAgICAgICBvbjpvcGVuUHJvcGVydGllcz17KCkgPT4ge3Nob3dQcm9wZXJ0aWVzSWR4PWluZGV4IH19IFxyXG4gICAgICAgIG9uOmNsb3NlUHJvcGVydGllcz17KCkgPT4ge3Nob3dQcm9wZXJ0aWVzSWR4PS0xIH19XHJcbiAgICAgICAgb246dXBkYXRlPXsoZSkgPT4geyBmb3JtRWxlbWVudHNbaW5kZXhdPWUuZGV0YWlsOyBlbnN1cmVVbmlxdWVOYW1lcygpIH19XHJcbiAgICAgICAgb246ZGVsZXRlPXsoZSkgPT4geyBmb3JtRWxlbWVudHMuc3BsaWNlKHNob3dQcm9wZXJ0aWVzSWR4LDEpO2Zvcm1FbGVtZW50cz1mb3JtRWxlbWVudHM7c2hvd1Byb3BlcnRpZXNJZHg9LTEgfX1cclxuICAgICAgICBzaG93UHJvcGVydGllcz17c2hvd1Byb3BlcnRpZXNJZHg9PT1pbmRleH0vPlxyXG4gICAgICA8L2Rpdj5cclxuICB7L2VhY2h9XHJcbjwvZGl2PlxyXG48ZGl2PlxyXG48bGFiZWwgZm9yPVwiYWRkX2ZpZWxkX3NlbGVjdFwiIGNsYXNzPVwiYWRkX2ZpZWxkX3NlbGVjdF9sYWJlbFwiPiBBZGQgZm9ybSBmaWVsZDo8L2xhYmVsPiBcclxuICA8c2VsZWN0IGNsYXNzPVwiYWRkX2ZpZWxkX3NlbGVjdFwiIG5hbWU9XCJhZGRfZmllbGRfc2VsZWN0XCIgYmluZDp2YWx1ZT17c2VsZWN0ZWRUeXBlfT5cclxuICAgIDxvcHRpb24gdmFsdWU9XCJcIj5TZWxlY3QuLi48L29wdGlvbj5cclxuICAgIDxvcHRpb24gdmFsdWU9XCJ0ZXh0XCI+VGV4dCBJbnB1dDwvb3B0aW9uPlxyXG4gICAgPG9wdGlvbiB2YWx1ZT1cInRleHRhcmVhXCI+VGV4dGFyZWE8L29wdGlvbj5cclxuICAgIDxvcHRpb24gdmFsdWU9XCJjaGVja2JveFwiPkNoZWNrYm94PC9vcHRpb24+XHJcbiAgICA8b3B0aW9uIHZhbHVlPVwiZHJvcGRvd25cIj5Ecm9wZG93bjwvb3B0aW9uPlxyXG4gICAgPG9wdGlvbiB2YWx1ZT1cInByZV9maWxsZWRfZHJvcGRvd25cIj5QcmUtZmlsbGVkIERyb3Bkb3duPC9vcHRpb24+XHJcbiAgICA8b3B0aW9uIHZhbHVlPVwic2xpZGVyXCI+U2xpZGVyPC9vcHRpb24+XHJcbiAgICA8b3B0aW9uIHZhbHVlPVwibnVtYmVyXCI+TnVtYmVyPC9vcHRpb24+XHJcbiAgICA8b3B0aW9uIHZhbHVlPVwibGF5ZXJfaW1hZ2VcIj5MYXllciBJbWFnZTwvb3B0aW9uPlxyXG4gICAgPG9wdGlvbiB2YWx1ZT1cImFkdmFuY2VkX29wdGlvbnNcIj5BZHZhbmNlZCBPcHRpb25zIFN3aXRjaDwvb3B0aW9uPlxyXG4gIDwvc2VsZWN0PlxyXG4gIDxidXR0b24gb246Y2xpY2s9eygpID0+IGFkZEVsZW1lbnQoc2VsZWN0ZWRUeXBlKX0+QWRkPC9idXR0b24+XHJcbjwvZGl2PlxyXG48L2Rpdj5cclxuPHN0eWxlPlxyXG4gIC5mb3JtQnVpbGRlciB7XHJcbiAgICBwYWRkaW5nOiAxMHB4O1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgd2lkdGg6IDQ3MHB4O1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgfVxyXG4gIC5mb3JtQnVpbGRlciBoMSB7XHJcbiAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAzMHB4O1xyXG4gIH1cclxuICAuZHJhZ2dhYmxlIHtcclxuICAgIGN1cnNvcjogZ3JhYjtcclxuICB9XHJcbiAgLmZvcm0ge1xyXG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICB3aWR0aDogNDUwcHg7XHJcbiAgICBwYWRkaW5nOiAxMHB4O1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgZm9udDogXCJTZWdvZSBVSVwiLCBSb2JvdG8sIHN5c3RlbS11aTtcclxuICAgIGZvbnQtc2l6ZToxNHB4O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICB9XHJcbiAgLmZvcm1CdWlsZGVyIC5hZGRfZmllbGRfc2VsZWN0X2xhYmVsIHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICB9XHJcbiAgLmZvcm1CdWlsZGVyIC5hZGRfZmllbGRfc2VsZWN0IHtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6IDEwcHg7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgICAgIHBhZGRpbmc6IDVweDsgICBcclxuICAgICAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgfVxyXG4gICAgLmZvcm1CdWlsZGVyIGJ1dHRvbiB7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgXCJTZWdvZSBVSVwiLCBSb2JvdG8sIFVidW50dSwgQ2FudGFyZWxsLCBcIk5vdG8gU2Fuc1wiLCBzYW5zLXNlcmlmLCBcIlNlZ29lIFVJXCIsIEhlbHZldGljYSwgQXJpYWw7XHJcbiAgICAgICAgZm9udC1zaXplOiAxNHB4O1xyXG4gICAgICAgIG1pbi13aWR0aDogNzBweDtcclxuICAgICAgICBjb2xvcjogYmxhY2s7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIyNywgMjA2LCAxMTYpO1xyXG4gICAgICAgIGJvcmRlci1jb2xvcjogcmdiKDEyOCwgMTI4LCAxMjgpO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OiAxMHB4O1xyXG4gICAgfVxyXG48L3N0eWxlPiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFrS0UsMENBQWEsQ0FDWCxPQUFPLENBQUUsSUFBSSxDQUNiLEtBQUssQ0FBRSxLQUFLLENBQ1osS0FBSyxDQUFFLEtBQUssQ0FDWixPQUFPLENBQUUsS0FDWCxDQUNBLDJCQUFZLENBQUMsaUJBQUcsQ0FDZCxTQUFTLENBQUUsSUFBSSxDQUNmLGFBQWEsQ0FBRSxJQUNqQixDQUNBLHdDQUFXLENBQ1QsTUFBTSxDQUFFLElBQ1YsQ0FDQSxtQ0FBTSxDQUNKLGFBQWEsQ0FBRSxHQUFHLENBQ2xCLGdCQUFnQixDQUFFLEtBQUssQ0FDdkIsS0FBSyxDQUFFLEtBQUssQ0FDWixPQUFPLENBQUUsSUFBSSxDQUNiLEtBQUssQ0FBRSxLQUFLLENBQ1osSUFBSSxDQUFFLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLFNBQVMsQ0FDbkMsVUFBVSxJQUFJLENBQ2QsYUFBYSxDQUFFLElBQ2pCLENBQ0EsMkJBQVksQ0FBQyxzQ0FBd0IsQ0FDbkMsT0FBTyxDQUFFLFlBQ1gsQ0FDQSwyQkFBWSxDQUFDLGdDQUFrQixDQUN6QixZQUFZLENBQUUsSUFBSSxDQUNsQixnQkFBZ0IsQ0FBRSxLQUFLLENBQ3ZCLEtBQUssQ0FBRSxLQUFLLENBQ1osT0FBTyxDQUFFLEdBQUcsQ0FDWixPQUFPLENBQUUsWUFDZixDQUNFLDJCQUFZLENBQUMscUJBQU8sQ0FDaEIsV0FBVyxDQUFFLFNBQVMsQ0FBQyxDQUFDLGFBQWEsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLEtBQUssQ0FDbkksU0FBUyxDQUFFLElBQUksQ0FDZixTQUFTLENBQUUsSUFBSSxDQUNmLEtBQUssQ0FBRSxLQUFLLENBQ1osZ0JBQWdCLENBQUUsSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FDcEMsWUFBWSxDQUFFLElBQUksR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQ2hDLGFBQWEsQ0FBRSxHQUFHLENBQ2xCLE1BQU0sQ0FBRSxPQUFPLENBQ2YsWUFBWSxDQUFFLElBQ2xCIn0= */");
     }
 
     function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[24] = list[i];
-    	child_ctx[26] = i;
+    	child_ctx[25] = list[i];
+    	child_ctx[27] = i;
     	return child_ctx;
     }
 
-    // (100:2) {#each formElements as element, index (element.name)}
+    // (126:2) {#each formElements as element, index (element.name)}
     function create_each_block$4(key_1, ctx) {
     	let div;
     	let formelement;
@@ -3154,24 +3154,24 @@ var app = (function () {
     	let dispose;
 
     	function formelement_advancedOptions_binding(value) {
-    		/*formelement_advancedOptions_binding*/ ctx[11](value);
+    		/*formelement_advancedOptions_binding*/ ctx[12](value);
     	}
 
     	function remove_handler() {
-    		return /*remove_handler*/ ctx[13](/*index*/ ctx[26]);
+    		return /*remove_handler*/ ctx[14](/*index*/ ctx[27]);
     	}
 
     	function openProperties_handler() {
-    		return /*openProperties_handler*/ ctx[14](/*index*/ ctx[26]);
+    		return /*openProperties_handler*/ ctx[15](/*index*/ ctx[27]);
     	}
 
     	function update_handler(...args) {
-    		return /*update_handler*/ ctx[16](/*index*/ ctx[26], ...args);
+    		return /*update_handler*/ ctx[17](/*index*/ ctx[27], ...args);
     	}
 
     	let formelement_props = {
-    		element: /*element*/ ctx[24],
-    		showProperties: /*showPropertiesIdx*/ ctx[1] === /*index*/ ctx[26]
+    		element: /*element*/ ctx[25],
+    		showProperties: /*showPropertiesIdx*/ ctx[1] === /*index*/ ctx[27]
     	};
 
     	if (/*advancedOptions*/ ctx[3] !== void 0) {
@@ -3180,19 +3180,19 @@ var app = (function () {
 
     	formelement = new FormElement({ props: formelement_props, $$inline: true });
     	binding_callbacks.push(() => bind(formelement, 'advancedOptions', formelement_advancedOptions_binding));
-    	formelement.$on("redrawAll", /*redrawAll_handler*/ ctx[12]);
+    	formelement.$on("redrawAll", /*redrawAll_handler*/ ctx[13]);
     	formelement.$on("remove", remove_handler);
     	formelement.$on("openProperties", openProperties_handler);
-    	formelement.$on("closeProperties", /*closeProperties_handler*/ ctx[15]);
+    	formelement.$on("closeProperties", /*closeProperties_handler*/ ctx[16]);
     	formelement.$on("update", update_handler);
-    	formelement.$on("delete", /*delete_handler*/ ctx[17]);
+    	formelement.$on("delete", /*delete_handler*/ ctx[18]);
 
     	function dragstart_handler() {
-    		return /*dragstart_handler*/ ctx[18](/*index*/ ctx[26]);
+    		return /*dragstart_handler*/ ctx[19](/*index*/ ctx[27]);
     	}
 
     	function drop_handler() {
-    		return /*drop_handler*/ ctx[19](/*index*/ ctx[26]);
+    		return /*drop_handler*/ ctx[20](/*index*/ ctx[27]);
     	}
 
     	const block = {
@@ -3204,8 +3204,8 @@ var app = (function () {
     			t = space();
     			attr_dev(div, "class", "draggable svelte-1yl6ahv");
     			attr_dev(div, "draggable", "true");
-    			set_style(div, "display", /*checkAdvancedOptions*/ ctx[9](/*element*/ ctx[24], /*index*/ ctx[26]));
-    			add_location(div, file$5, 100, 4, 3187);
+    			set_style(div, "display", /*checkAdvancedOptions*/ ctx[10](/*element*/ ctx[25], /*index*/ ctx[27]));
+    			add_location(div, file$5, 126, 4, 4030);
     			this.first = div;
     		},
     		m: function mount(target, anchor) {
@@ -3217,7 +3217,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					listen_dev(div, "dragstart", dragstart_handler, false, false, false, false),
-    					listen_dev(div, "dragover", /*handleDragOver*/ ctx[6], false, false, false, false),
+    					listen_dev(div, "dragover", /*handleDragOver*/ ctx[7], false, false, false, false),
     					listen_dev(div, "drop", drop_handler, false, false, false, false)
     				];
 
@@ -3227,8 +3227,8 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
     			const formelement_changes = {};
-    			if (dirty & /*formElements*/ 1) formelement_changes.element = /*element*/ ctx[24];
-    			if (dirty & /*showPropertiesIdx, formElements*/ 3) formelement_changes.showProperties = /*showPropertiesIdx*/ ctx[1] === /*index*/ ctx[26];
+    			if (dirty & /*formElements*/ 1) formelement_changes.element = /*element*/ ctx[25];
+    			if (dirty & /*showPropertiesIdx, formElements*/ 3) formelement_changes.showProperties = /*showPropertiesIdx*/ ctx[1] === /*index*/ ctx[27];
 
     			if (!updating_advancedOptions && dirty & /*advancedOptions*/ 8) {
     				updating_advancedOptions = true;
@@ -3239,7 +3239,7 @@ var app = (function () {
     			formelement.$set(formelement_changes);
 
     			if (!current || dirty & /*formElements*/ 1) {
-    				set_style(div, "display", /*checkAdvancedOptions*/ ctx[9](/*element*/ ctx[24], /*index*/ ctx[26]));
+    				set_style(div, "display", /*checkAdvancedOptions*/ ctx[10](/*element*/ ctx[25], /*index*/ ctx[27]));
     			}
     		},
     		i: function intro(local) {
@@ -3263,7 +3263,7 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(100:2) {#each formElements as element, index (element.name)}",
+    		source: "(126:2) {#each formElements as element, index (element.name)}",
     		ctx
     	});
 
@@ -3299,7 +3299,7 @@ var app = (function () {
     	let dispose;
     	let each_value = /*formElements*/ ctx[0];
     	validate_each_argument(each_value);
-    	const get_key = ctx => /*element*/ ctx[24].name;
+    	const get_key = ctx => /*element*/ ctx[25].name;
     	validate_each_keys(ctx, each_value, get_each_context$4, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -3350,51 +3350,51 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Add";
     			attr_dev(h1, "class", "svelte-1yl6ahv");
-    			add_location(h1, file$5, 97, 0, 3086);
+    			add_location(h1, file$5, 123, 0, 3929);
     			attr_dev(div0, "class", "form svelte-1yl6ahv");
-    			add_location(div0, file$5, 98, 0, 3106);
+    			add_location(div0, file$5, 124, 0, 3949);
     			attr_dev(label, "for", "add_field_select");
     			attr_dev(label, "class", "add_field_select_label svelte-1yl6ahv");
-    			add_location(label, file$5, 119, 0, 4022);
+    			add_location(label, file$5, 145, 0, 4886);
     			option0.__value = "";
     			option0.value = option0.__value;
-    			add_location(option0, file$5, 121, 4, 4201);
+    			add_location(option0, file$5, 147, 4, 5065);
     			option1.__value = "text";
     			option1.value = option1.__value;
-    			add_location(option1, file$5, 122, 4, 4242);
+    			add_location(option1, file$5, 148, 4, 5106);
     			option2.__value = "textarea";
     			option2.value = option2.__value;
-    			add_location(option2, file$5, 123, 4, 4288);
+    			add_location(option2, file$5, 149, 4, 5152);
     			option3.__value = "checkbox";
     			option3.value = option3.__value;
-    			add_location(option3, file$5, 124, 4, 4336);
+    			add_location(option3, file$5, 150, 4, 5200);
     			option4.__value = "dropdown";
     			option4.value = option4.__value;
-    			add_location(option4, file$5, 125, 4, 4384);
+    			add_location(option4, file$5, 151, 4, 5248);
     			option5.__value = "pre_filled_dropdown";
     			option5.value = option5.__value;
-    			add_location(option5, file$5, 126, 4, 4432);
+    			add_location(option5, file$5, 152, 4, 5296);
     			option6.__value = "slider";
     			option6.value = option6.__value;
-    			add_location(option6, file$5, 127, 4, 4502);
+    			add_location(option6, file$5, 153, 4, 5366);
     			option7.__value = "number";
     			option7.value = option7.__value;
-    			add_location(option7, file$5, 128, 4, 4546);
+    			add_location(option7, file$5, 154, 4, 5410);
     			option8.__value = "layer_image";
     			option8.value = option8.__value;
-    			add_location(option8, file$5, 129, 4, 4590);
+    			add_location(option8, file$5, 155, 4, 5454);
     			option9.__value = "advanced_options";
     			option9.value = option9.__value;
-    			add_location(option9, file$5, 130, 4, 4644);
+    			add_location(option9, file$5, 156, 4, 5508);
     			attr_dev(select, "class", "add_field_select svelte-1yl6ahv");
     			attr_dev(select, "name", "add_field_select");
-    			if (/*selectedType*/ ctx[2] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[20].call(select));
-    			add_location(select, file$5, 120, 2, 4112);
+    			if (/*selectedType*/ ctx[2] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[21].call(select));
+    			add_location(select, file$5, 146, 2, 4976);
     			attr_dev(button, "class", "svelte-1yl6ahv");
-    			add_location(button, file$5, 132, 2, 4726);
-    			add_location(div1, file$5, 118, 0, 4015);
+    			add_location(button, file$5, 158, 2, 5590);
+    			add_location(div1, file$5, 144, 0, 4879);
     			attr_dev(div2, "class", "formBuilder svelte-1yl6ahv");
-    			add_location(div2, file$5, 96, 0, 3059);
+    			add_location(div2, file$5, 122, 0, 3902);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3433,15 +3433,15 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(select, "change", /*select_change_handler*/ ctx[20]),
-    					listen_dev(button, "click", /*click_handler*/ ctx[21], false, false, false, false)
+    					listen_dev(select, "change", /*select_change_handler*/ ctx[21]),
+    					listen_dev(button, "click", /*click_handler*/ ctx[22], false, false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*checkAdvancedOptions, formElements, handleDragStart, event, handleDragOver, handleDrop, showPropertiesIdx, advancedOptions, removeElement*/ 1003) {
+    			if (dirty & /*checkAdvancedOptions, formElements, handleDragStart, event, handleDragOver, handleDrop, showPropertiesIdx, advancedOptions, removeElement, ensureUniqueNames*/ 2011) {
     				each_value = /*formElements*/ ctx[0];
     				validate_each_argument(each_value);
     				group_outros();
@@ -3496,7 +3496,7 @@ var app = (function () {
     function instance$6($$self, $$props, $$invalidate) {
     	let $metadata;
     	validate_store(metadata, 'metadata');
-    	component_subscribe($$self, metadata, $$value => $$invalidate(23, $metadata = $$value));
+    	component_subscribe($$self, metadata, $$value => $$invalidate(24, $metadata = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('FormBuilder', slots, []);
     	if (!$metadata.forms) set_store_value(metadata, $metadata.forms = {}, $metadata);
@@ -3504,9 +3504,40 @@ var app = (function () {
     	if (!$metadata.forms[form_key]) set_store_value(metadata, $metadata.forms[form_key] = { elements: [] }, $metadata);
     	if (!$metadata.forms[form_key].elements) set_store_value(metadata, $metadata.forms[form_key].elements = [], $metadata);
     	let formElements = $metadata.forms[form_key].elements;
+    	ensureUniqueNames();
     	let dragStartIndex = -1;
     	let showPropertiesIdx = -1;
     	let selectedType;
+
+    	function ensureUniqueNames() {
+    		const nameMap = {}; // Object to keep track of names and their occurrences
+
+    		formElements.forEach(element => {
+    			let name = element.name;
+
+    			// Check if the name already exists in the nameMap
+    			if (nameMap[name]) {
+    				// If the name exists, increment the count and append it to the name
+    				let count = nameMap[name];
+
+    				let newName = `${name}_${count}`;
+
+    				while (nameMap[newName]) {
+    					// Ensure the new name is also unique
+    					count++;
+
+    					newName = `${name}_${count}`;
+    				}
+
+    				element.name = newName;
+    				nameMap[name]++;
+    				nameMap[newName] = 1; // Initialize this new name in the nameMap
+    			} else {
+    				// If the name doesn't exist, add it to the nameMap
+    				nameMap[name] = 1;
+    			}
+    		});
+    	}
 
     	function addElement(type) {
     		if (!type) return;
@@ -3539,6 +3570,7 @@ var app = (function () {
     		}
 
     		formElements.push(newElement);
+    		ensureUniqueNames();
     		$$invalidate(0, formElements);
     		$$invalidate(1, showPropertiesIdx = formElements.length - 1);
     	}
@@ -3629,6 +3661,7 @@ var app = (function () {
 
     	const update_handler = (index, e) => {
     		$$invalidate(0, formElements[index] = e.detail, formElements);
+    		ensureUniqueNames();
     	};
 
     	const delete_handler = e => {
@@ -3648,7 +3681,7 @@ var app = (function () {
     	const click_handler = () => addElement(selectedType);
 
     	$$self.$$set = $$props => {
-    		if ('form_key' in $$props) $$invalidate(10, form_key = $$props.form_key);
+    		if ('form_key' in $$props) $$invalidate(11, form_key = $$props.form_key);
     	};
 
     	$$self.$capture_state = () => ({
@@ -3660,6 +3693,7 @@ var app = (function () {
     		dragStartIndex,
     		showPropertiesIdx,
     		selectedType,
+    		ensureUniqueNames,
     		addElement,
     		handleDragStart,
     		handleDragOver,
@@ -3671,7 +3705,7 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('form_key' in $$props) $$invalidate(10, form_key = $$props.form_key);
+    		if ('form_key' in $$props) $$invalidate(11, form_key = $$props.form_key);
     		if ('formElements' in $$props) $$invalidate(0, formElements = $$props.formElements);
     		if ('dragStartIndex' in $$props) dragStartIndex = $$props.dragStartIndex;
     		if ('showPropertiesIdx' in $$props) $$invalidate(1, showPropertiesIdx = $$props.showPropertiesIdx);
@@ -3688,6 +3722,7 @@ var app = (function () {
     		showPropertiesIdx,
     		selectedType,
     		advancedOptions,
+    		ensureUniqueNames,
     		addElement,
     		handleDragStart,
     		handleDragOver,
@@ -3712,7 +3747,7 @@ var app = (function () {
     class FormBuilder extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { form_key: 10 }, add_css$6);
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { form_key: 11 }, add_css$6);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,

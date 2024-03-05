@@ -8,9 +8,34 @@
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
   let formElements = $metadata.forms[form_key].elements
+  ensureUniqueNames()
   let dragStartIndex=-1
   let showPropertiesIdx=-1
-  let selectedType;
+  let selectedType
+
+  function ensureUniqueNames() {
+  const nameMap = {}; // Object to keep track of names and their occurrences
+
+  formElements.forEach(element => {
+    let name = element.name;
+    // Check if the name already exists in the nameMap
+    if (nameMap[name]) {
+      // If the name exists, increment the count and append it to the name
+      let count = nameMap[name];
+      let newName = `${name}_${count}`;
+      while (nameMap[newName]) { // Ensure the new name is also unique
+        count++;
+        newName = `${name}_${count}`;
+      }
+      element.name = newName;
+      nameMap[name]++;
+      nameMap[newName] = 1; // Initialize this new name in the nameMap
+    } else {
+      // If the name doesn't exist, add it to the nameMap
+      nameMap[name] = 1
+    }
+  });
+}
   function addElement(type) {
     if (!type) return
     let name="value_"+Math.random().toString(36).substr(2, 5)
@@ -36,6 +61,7 @@
       newElement.placeholder=""
     }
     formElements.push(newElement)
+    ensureUniqueNames()
     formElements=formElements
     showPropertiesIdx=formElements.length-1
   }
@@ -110,7 +136,7 @@
         on:remove={() => removeElement(index)}  
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
-        on:update={(e) => { formElements[index]=e.detail }}
+        on:update={(e) => { formElements[index]=e.detail; ensureUniqueNames() }}
         on:delete={(e) => { formElements.splice(showPropertiesIdx,1);formElements=formElements;showPropertiesIdx=-1 }}
         showProperties={showPropertiesIdx===index}/>
       </div>
