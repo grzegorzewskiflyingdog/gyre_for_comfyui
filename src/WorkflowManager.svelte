@@ -7,6 +7,7 @@
     import {onMount} from 'svelte'
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
+    import { workflowStructurePass } from './workflowStructurePass.js'
 
     let allworkflows;
     let moving = false;
@@ -193,6 +194,14 @@
     }
 
 
+    function testFirstPass() {
+        let workflow=window.app.graph.serialize()
+        console.log(workflow)
+        let ws=new workflowStructurePass()
+        workflow=ws.duplicateGroup(workflow,"controlnet",3)
+        console.log(workflow)
+    }
+
     async function saveWorkflow() {
         console.log("saveWorkflow");
         let graph = window.app.graph.serialize();
@@ -337,7 +346,7 @@
             </div>
     {/if}
     {#if foldOut}
- 
+ <button on:click={(e) => { testFirstPass()} }>Test</button>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>
             <Icon name="up"></Icon>
