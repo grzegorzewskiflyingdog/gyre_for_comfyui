@@ -1,11 +1,12 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import { combo_values } from './stores/combo_values'
+
 
     export let element;
     export let showProperties=false
     import {layer_image_preview} from "./images"
   import { fix_and_outro_and_destroy_block } from 'svelte/internal';
+    import {metadata} from "./stores/metadata";
     const dispatch = createEventDispatcher();
     let value=1
     
@@ -80,9 +81,9 @@
         </select>
     {:else if element.type === 'pre_filled_dropdown'}
     <label for={element.name}>{element.label}:</label>
-        {#if element.widget_name && $combo_values[element.widget_name] }        
+        {#if element.widget_name && $metadata.combo_values[element.widget_name] }
         <select name="{element.name}" class="dropdown">
-          {#each $combo_values[element.widget_name] as v}
+          {#each $metadata.combo_values[element.widget_name] as v}
                 <option value={v}>{v} </option>
             {/each} 
         </select>      
@@ -154,8 +155,8 @@
             <label  for="widget_name"> Combo Widget: </label>
             <select  name="widget_name"  on:change={(e) => updateElement({ widget_name: e.target.value })} bind:value={element.widget_name}  >
                 <option>Select...</option>
-                {#if $combo_values}
-                    {#each Object.entries($combo_values) as [widget_name,values]}
+                {#if $metadata.combo_values}
+                    {#each Object.entries($metadata.combo_values) as [widget_name,values]}
                         <option value={widget_name}>{widget_name}</option>
                     {/each}
                 {/if}

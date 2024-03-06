@@ -1,6 +1,8 @@
 <script>
   
-  import { combo_values } from './stores/combo_values'
+
+  import {metadata} from "./stores/metadata";
+
   export let value=""
   import Icon from './Icon.svelte'
   let showBox=false
@@ -27,7 +29,7 @@
 {#if showBox}
   <select class="input" on:change={(e) => { value=e.target.value; showBox=false}}>
     <option>Select...</option>
-    {#each Object.entries($combo_values) as [title,values]}
+    {#each Object.entries($metadata.combo_values) as [title,values]}
       <optgroup label={title}>
       {#each values as v}
         <option {v}>{v}</option>
