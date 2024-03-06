@@ -171,7 +171,7 @@
         console.log("load workflow!!");
         name = workflow.name
         $metadata = workflow.gyre;
-
+        if (!$metadata.tags) $metadata.tags=[]
         if (window.app.graph == null) {
             console.error("app.graph is null cannot load workflow");
             return;
