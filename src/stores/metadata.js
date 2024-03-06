@@ -4,5 +4,6 @@ export const metadata = writable({
     tags: [],
     forms: { default: {elements:[]}},
     rules: [],
-    mappings: []
+    mappings: [],
+    combo_values:[]
 })

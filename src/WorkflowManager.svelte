@@ -197,9 +197,10 @@
     function testFirstPass() {
         let workflow=window.app.graph.serialize()
         console.log(workflow)
-        let ws=new workflowStructurePass()
-        workflow=ws.duplicateGroup(workflow,"controlnet",3)
+        let ws=new workflowStructurePass(workflow)
+        ws.duplicateGroupWithNodesAndLinks("controlnet[]")
         console.log(workflow)
+        window.app.loadGraphData(workflow);
     }
 
     async function saveWorkflow() {
