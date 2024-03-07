@@ -7519,17 +7519,21 @@ var app = (function () {
 
       // Gyre loops: reroute end loop link and make new link between groups
       adjustLinksForSpecialNodes(groupName) {
+        // 1. reroute to end loop
         // Assuming `this.nodeMapping` maps original node IDs to their new duplicated IDs
         const gyreLoopEndNodes = this.workflow.nodes.filter(node => node.type === "GyreLoopEnd").map(node => node.id);
 
-        const linksToRemove = [];
+        const linksToRemove = []; // Ids only
+        let removedLinks = [];  // store link objects for new links between groups
         const newLinks = [];
+      
         this.workflow.links.forEach(link => {
           const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link;
 
           if (gyreLoopEndNodes.includes(toNodeID) && this.isNodeInGroup(fromNodeID, groupName)) {
             // Mark this link for removal
             linksToRemove.push(linkID);
+            removedLinks.push([...link]); 
             // Create a new link from the cloned node to the "GyreLoopEnd" node
             const newLink = [this.workflow.last_link_id + 1, this.nodeMapping[fromNodeID], fromSlot, toNodeID, toSlot, type];
             newLinks.push(newLink);
@@ -7542,6 +7546,34 @@ var app = (function () {
 
         // Add new links
         this.workflow.links.push(...newLinks);
+
+        // Iterate over removed links specifically aiming for those ending at "GyreLoopEnd"
+    removedLinks.forEach(removedLink => {
+      const [removedLinkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = removedLink;
+      // Find if the toNode was a "GyreLoopEnd" type
+      const toNode = this.workflow.nodes.find(node => node.id === toNodeID);
+      
+      // Check if the destination node of the removed link was "GyreLoopEnd"
+      if (toNode.type === "GyreLoopEnd") {
+        // Assuming `nodeMapping` holds the mapping from original to cloned nodes
+        // And assuming the fromNode is inside the group and needs to be connected to its cloned counterpart
+        const clonedFromNodeID = this.nodeMapping[fromNodeID];
+        
+        // Only create a new link if there's a cloned node ID mapped
+        if (clonedFromNodeID) {
+          const newLinkID = ++this.workflow.last_link_id;
+          // The new link connects the cloned source node inside the group to the original "GyreLoopEnd" node outside
+          const newLink = [newLinkID, clonedFromNodeID, fromSlot, toNodeID, toSlot, type];
+          console.log("new link between groups",newLink);
+          this.workflow.links.push(newLink);
+        }
+      }
+    });
+
+
+
+
+
       }
 
       duplicateGroupWithNodesAndLinks(groupName) {
