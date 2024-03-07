@@ -27,7 +27,41 @@ export class workflowStructurePass {
       return nx >= gx && nx <= gx + gWidth && ny >= gy && ny <= gy + gHeight;
     })
   }
-
+   updateNodeLinks() {
+    // Step 1: Clear existing link IDs from inputs and outputs
+    this.workflow.nodes.forEach(node => {
+      if (node.inputs) {
+        node.inputs.forEach(input => {
+          input.link = null;
+        });
+      }
+      if (node.outputs) {
+        node.outputs.forEach(output => {
+          output.links = [];
+        });
+      }
+    });
+  
+    // Step 2: Iterate over links to update inputs and outputs
+    this.workflow.links.forEach(link => {
+      const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link;
+      const fromNode = this.workflow.nodes.find(node => node.id === fromNodeID);
+      const toNode = this.workflow.nodes.find(node => node.id === toNodeID);
+  
+      if (fromNode && fromNode.outputs && fromNode.outputs[fromSlot]) {
+        if (!fromNode.outputs[fromSlot].links) {
+          fromNode.outputs[fromSlot].links = [];
+        }
+        fromNode.outputs[fromSlot].links.push(linkID);
+      }
+  
+      if (toNode && toNode.inputs && toNode.inputs[toSlot]) {
+        toNode.inputs[toSlot].link = linkID;
+      }
+    });
+  }
+  
+  
    duplicateGroupWithNodesAndLinks(groupName) {
     // Assuming getGroupByName and isNodeInGroup functions are defined elsewhere
     const originalGroup = this.getGroupByName( groupName);
@@ -45,41 +79,36 @@ export class workflowStructurePass {
   
     const nodeMapping = {}; // Map old node IDs to new node IDs
   
-  
+    // Duplicate nodes
     this.workflow.nodes.forEach(node => {
       if (this.isNodeInGroup(node.id)) {
         const newNode = JSON.parse(JSON.stringify(node));
         newNode.id = ++maxNodeId;
-        nodeMapping[node.id] = newNode.id;
         newNode.pos[0]+=1000
-        // Initialize or clear the outputs array for the new node
-        newNode.outputs = newNode.outputs.map(output => {
-          const newOutput = {...output, links: []}; // Prepare to populate with new link IDs
-          return newOutput;
-        });
-    
+        nodeMapping[node.id] = newNode.id; // Map old ID to new ID
         this.workflow.nodes.push(newNode);
+        console.log("add node",newNode)
       }
     });
-    
-    // After nodes have been duplicated, duplicate links and update outputs accordingly
+  
     this.workflow.links.forEach(link => {
-      const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link;
+      const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link; // Destructure the original link array
+      // Check if both source and target nodes are within the group being duplicated
       if (nodeMapping[fromNodeID] && nodeMapping[toNodeID]) {
-        const newLinkID = ++maxLinkId;
-        const newLink = [newLinkID, nodeMapping[fromNodeID], fromSlot, nodeMapping[toNodeID], toSlot, type];
-        this.workflow.links.push(newLink);
-    
-        // Update outputs for the new source node
-        const newFromNode = this.workflow.nodes.find(n => n.id === nodeMapping[fromNodeID]);
-        if (newFromNode && newFromNode.outputs && newFromNode.outputs[fromSlot]) {
-          newFromNode.outputs[fromSlot].links.push(newLinkID);
-        }
+        // Create a new link for the duplicated nodes
+        const newLink = [
+          ++maxLinkId, // Assign a new unique ID for the link
+          nodeMapping[fromNodeID], // Map old source node ID to new
+          fromSlot, // Preserve the original fromSlot
+          nodeMapping[toNodeID], // Map old target node ID to new
+          toSlot, // Preserve the original toSlot
+          type // Preserve the link type
+        ];
+        this.workflow.links.push(newLink); // Add this new link to the workflow
       }
     });
-    
   
-  
+    this.updateNodeLinks()
     // Update the workflow's metadata
     this.workflow.last_node_id = maxNodeId;
     this.workflow.last_link_id = maxLinkId;

@@ -196,13 +196,17 @@
 
     function testFirstPass() {
         let workflow=window.app.graph.serialize()
+        workflow=JSON.parse(JSON.stringify(workflow))
         console.log(workflow)
         let ws=new workflowStructurePass(workflow)
         ws.duplicateGroupWithNodesAndLinks("controlnet[]")
         console.log(workflow)
         window.app.loadGraphData(workflow);
     }
-
+    function showStructure() {
+        let workflow=window.app.graph.serialize()
+        console.log(workflow)
+    }
     async function saveWorkflow() {
         console.log("saveWorkflow");
         let graph = window.app.graph.serialize();
@@ -348,6 +352,8 @@
     {/if}
     {#if foldOut}
  <button on:click={(e) => { testFirstPass()} }>Test</button>
+ <button on:click={(e) => { showStructure()} }>WF JSON</button>
+
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>
             <Icon name="up"></Icon>
