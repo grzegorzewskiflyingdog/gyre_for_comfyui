@@ -45,34 +45,39 @@ export class workflowStructurePass {
   
     const nodeMapping = {}; // Map old node IDs to new node IDs
   
-    // Duplicate nodes
+  
     this.workflow.nodes.forEach(node => {
       if (this.isNodeInGroup(node.id)) {
         const newNode = JSON.parse(JSON.stringify(node));
         newNode.id = ++maxNodeId;
+        nodeMapping[node.id] = newNode.id;
         newNode.pos[0]+=1000
-        nodeMapping[node.id] = newNode.id; // Map old ID to new ID
+        // Initialize or clear the outputs array for the new node
+        newNode.outputs = newNode.outputs.map(output => {
+          const newOutput = {...output, links: []}; // Prepare to populate with new link IDs
+          return newOutput;
+        });
+    
         this.workflow.nodes.push(newNode);
-        console.log("add node",newNode)
       }
     });
-  
+    
+    // After nodes have been duplicated, duplicate links and update outputs accordingly
     this.workflow.links.forEach(link => {
-      const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link; // Destructure the original link array
-      // Check if both source and target nodes are within the group being duplicated
+      const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link;
       if (nodeMapping[fromNodeID] && nodeMapping[toNodeID]) {
-        // Create a new link for the duplicated nodes
-        const newLink = [
-          ++maxLinkId, // Assign a new unique ID for the link
-          nodeMapping[fromNodeID], // Map old source node ID to new
-          fromSlot, // Preserve the original fromSlot
-          nodeMapping[toNodeID], // Map old target node ID to new
-          toSlot, // Preserve the original toSlot
-          type // Preserve the link type
-        ];
-        this.workflow.links.push(newLink); // Add this new link to the workflow
+        const newLinkID = ++maxLinkId;
+        const newLink = [newLinkID, nodeMapping[fromNodeID], fromSlot, nodeMapping[toNodeID], toSlot, type];
+        this.workflow.links.push(newLink);
+    
+        // Update outputs for the new source node
+        const newFromNode = this.workflow.nodes.find(n => n.id === nodeMapping[fromNodeID]);
+        if (newFromNode && newFromNode.outputs && newFromNode.outputs[fromSlot]) {
+          newFromNode.outputs[fromSlot].links.push(newLinkID);
+        }
       }
     });
+    
   
   
     // Update the workflow's metadata
