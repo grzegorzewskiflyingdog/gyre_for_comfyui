@@ -199,7 +199,7 @@
         workflow=JSON.parse(JSON.stringify(workflow))
         console.log(workflow)
         let ws=new workflowStructurePass(workflow)
-        ws.duplicateGroupWithNodesAndLinks("controlnet[]")
+        ws.duplicateGroupWithNodesAndLinks("controlnet[]","controlnet[1]")
         console.log(workflow)
         window.app.loadGraphData(workflow);
     }

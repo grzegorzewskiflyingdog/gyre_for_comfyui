@@ -29,7 +29,9 @@ export class workflowStructurePass {
     const [nx, ny] = node.pos;
     return nx >= gx && nx <= gx + gWidth && ny >= gy && ny <= gy + gHeight;
   }
-
+  /**
+   * link data structures are redudant in ComfyUI so re-generate link infos from global linkk structure
+   */
   updateNodeLinks() {
     // Step 1: Clear existing link IDs from inputs and outputs
     this.workflow.nodes.forEach(node => {
@@ -47,24 +49,85 @@ export class workflowStructurePass {
 
     // Step 2: Iterate over links to update inputs and outputs
     this.workflow.links.forEach(link => {
-      const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link;
-      const fromNode = this.workflow.nodes.find(node => node.id === fromNodeID);
-      const toNode = this.workflow.nodes.find(node => node.id === toNodeID);
+      const [linkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = link
+      const fromNode = this.workflow.nodes.find(node => node.id === fromNodeID)
+      const toNode = this.workflow.nodes.find(node => node.id === toNodeID)
 
       if (fromNode && fromNode.outputs && fromNode.outputs[fromSlot]) {
         if (!fromNode.outputs[fromSlot].links) {
-          fromNode.outputs[fromSlot].links = [];
+          fromNode.outputs[fromSlot].links = []
         }
-        fromNode.outputs[fromSlot].links.push(linkID);
+        fromNode.outputs[fromSlot].links.push(linkID)
       }
 
       if (toNode && toNode.inputs && toNode.inputs[toSlot]) {
-        toNode.inputs[toSlot].link = linkID;
+        toNode.inputs[toSlot].link = linkID
       }
-    });
+    })
   }
 
-  // Gyre loops: reroute end loop link and make new link between groups
+ removeGyreNodesAndLinkDirectly() {
+    // Iterate backwards to avoid indexing issues after removal
+    for (let i = this.workflow.nodes.length - 1; i >= 0; i--) {
+      const node = this.workflow.nodes[i];
+      if (node.type === "GyreLoopStart" || node.type === "GyreLoopEnd") {
+        const outgoingLink = this.workflow.links.find(link => link[1] === node.id);
+        const incomingLink = this.workflow.links.find(link => link[3] === node.id);
+        
+        if (outgoingLink && incomingLink) {
+          // Create a new link replacing the GyreNode
+          const newLink = [this.workflow.last_link_id + 1, incomingLink[1], incomingLink[2], outgoingLink[3], outgoingLink[4], outgoingLink[5]];
+          this.workflow.last_link_id++; // Update last link ID
+          this.workflow.links.push(newLink);
+          // Remove the original links
+          this.workflow.links = this.workflow.links.filter(link => link[0] !== outgoingLink[0] && link[0] !== incomingLink[0]);
+  
+          // Remove the GyreLoop node
+          this.workflow.nodes.splice(i, 1);
+        }
+      }
+    }
+  }
+  
+
+  /*
+  for the conections between the groups add a GyreLoopStart node in-between so it is easier to make another group 
+   */
+  splitLinkWithGyreStartNode(linkID) {
+    const linkIndex = this.workflow.links.findIndex(link => link[0] === linkID)
+    if (linkIndex === -1) return // Link not found
+    const originalLink = this.workflow.links[linkIndex];
+    const [_, fromNodeID, fromSlot, toNodeID, toSlot, type] = originalLink
+  
+    // Assuming workflow.last_node_id and workflow.last_link_id are correctly set
+    const newGyreStartNodeID = ++this.workflow.last_node_id
+    const newLink1ID = ++this.workflow.last_link_id
+    const newLink2ID = ++this.workflow.last_link_id
+  
+    // Create GyreStartNode
+    const gyreStartNode = {
+      id: newGyreStartNodeID,
+      type: 'GyreLoopStart',
+      pos: [0, 0],    // willbe removed anyway
+      inputs:[
+        {
+            "name": "ANY",
+            "type": "*",
+            "link": 16
+        }
+    ]}
+    this.workflow.nodes.push(gyreStartNode);
+    // Create the first new link from the original source to the GyreStartNode
+    const newLink1 = [newLink1ID, fromNodeID, fromSlot, newGyreStartNodeID, 0 /* Assuming slot 0 for GyreStartNode */, type]
+    // Create the second new link from the GyreStartNode to the original destination
+    const newLink2 = [newLink2ID, newGyreStartNodeID, 0 /* Assuming slot 0 for output */, toNodeID, toSlot, type]  
+    // Add the new links to the workflow
+    this.workflow.links.push(newLink1, newLink2)
+    // Remove the original link
+    this.workflow.links.splice(linkIndex, 1)
+  }
+  /* Gyre loops: reroute end loop link and make new link between groups
+  */
   adjustLinksForSpecialNodes(groupName) {
     // 1. reroute to end loop
     // Assuming `this.nodeMapping` maps original node IDs to their new duplicated IDs
@@ -115,7 +178,8 @@ export class workflowStructurePass {
           const newLinkID = ++this.workflow.last_link_id;
           const newLink = [newLinkID, fromNodeID, fromSlot, clonedToNodeID, fromSlot, type] // same slot here, this is current limitation
     //      console.log("new between groups link",newLink)
-          this.workflow.links.push(newLink);
+          this.workflow.links.push(newLink)
+          this.splitLinkWithGyreStartNode(newLinkID)
         }
       }
     })
@@ -133,7 +197,7 @@ export class workflowStructurePass {
     // Duplicate group
     const newGroup = JSON.parse(JSON.stringify(originalGroup))
     newGroup.title += " Copy"; // Adjust the group title
-    newGroup.bounding[0] += 1000; // Shift the new group to prevent overlap
+    newGroup.bounding[0] += originalGroup.bounding[2]+70 // Shift the new group to prevent overlap
     this.workflow.groups.push(newGroup);
 
     this.nodeMapping = {}; // Map old node IDs to new node IDs
@@ -143,7 +207,7 @@ export class workflowStructurePass {
       if (this.isNodeInGroup(node.id, groupName)) {
         const newNode = JSON.parse(JSON.stringify(node));
         newNode.id = ++maxNodeId;
-        newNode.pos[0] += 1000
+        newNode.pos[0] += originalGroup.bounding[2]+70 // Shift the new group to prevent overlap
         this.nodeMapping[node.id] = newNode.id; // Map old ID to new ID
         this.workflow.nodes.push(newNode);
         console.log("add node", newNode)
@@ -183,13 +247,19 @@ export class workflowStructurePass {
       }
     })
     this.workflow.last_link_id = maxLinkId
+    this.workflow.last_node_id = maxNodeId
+  
    this.adjustLinksForSpecialNodes(groupName)
     maxLinkId = this.workflow.last_link_id
+    maxNodeId = this.workflow.last_node_id
+    this.removeGyreNodesAndLinkDirectly()
 
     this.updateNodeLinks()
     // Update the workflow's metadata
     this.workflow.last_node_id = maxNodeId
     this.workflow.last_link_id = maxLinkId
+
+
   }
 
 
