@@ -199,7 +199,7 @@
         workflow=JSON.parse(JSON.stringify(workflow))
         console.log(workflow)
         let loop=new loopPreparser(workflow)
-        loop.generateLoop("controlnet",0)
+        loop.generateLoop("controlnet",3)
 //        console.log(workflow)
         window.app.loadGraphData(workflow);
         $metadata=workflow.extra.gyre
