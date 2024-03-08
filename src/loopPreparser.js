@@ -1,4 +1,4 @@
-export class workflowStructurePass {
+export class loopPreparser {
 
   constructor(workflow) {
     this.workflow = workflow
@@ -185,18 +185,17 @@ export class workflowStructurePass {
     })
   }
 
-  duplicateGroupWithNodesAndLinks(groupName) {
+  duplicateGroupWithNodesAndLinks(groupName,groupNameClone) {
     // Assuming getGroupByName and isNodeInGroup functions are defined elsewhere
     const originalGroup = this.getGroupByName(groupName);
     if (!originalGroup) return; // Exit if group not found
-    console.log("# nodes", this.workflow.nodes.length)
 
     let maxNodeId = this.workflow.last_node_id;
     let maxLinkId = this.workflow.last_link_id;
 
     // Duplicate group
     const newGroup = JSON.parse(JSON.stringify(originalGroup))
-    newGroup.title += " Copy"; // Adjust the group title
+    newGroup.title = groupNameClone 
     newGroup.bounding[0] += originalGroup.bounding[2]+70 // Shift the new group to prevent overlap
     this.workflow.groups.push(newGroup);
 

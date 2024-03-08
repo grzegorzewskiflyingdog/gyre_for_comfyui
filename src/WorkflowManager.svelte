@@ -7,7 +7,7 @@
     import {onMount} from 'svelte'
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
-    import { workflowStructurePass } from './workflowStructurePass.js'
+    import { loopPreparser } from './loopPreparser.js'
 
     let allworkflows;
     let moving = false;
@@ -198,8 +198,8 @@
         let workflow=window.app.graph.serialize()
         workflow=JSON.parse(JSON.stringify(workflow))
         console.log(workflow)
-        let ws=new workflowStructurePass(workflow)
-        ws.duplicateGroupWithNodesAndLinks("controlnet[]","controlnet[1]")
+        let loop=new loopPreparser(workflow)
+        loop.duplicateGroupWithNodesAndLinks("controlnet[]","controlnet[1]")
         console.log(workflow)
         window.app.loadGraphData(workflow);
     }
