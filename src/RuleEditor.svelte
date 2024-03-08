@@ -4,8 +4,9 @@
 
     import { metadata} from './stores/metadata'
     import InputCombo  from './InputCombo.svelte'
-    import Mappings from './Mappings.svelte';
     import { onMount } from 'svelte';
+    import { mappingsHelper } from './mappingsHelper.js'
+    let mH=new mappingsHelper()
 
     let MappingsCopmponent
     let conditions = ['==', '!=', '>', '<', '>=', '<='];
@@ -21,7 +22,7 @@
       $metadata.rules = rules;
     }
     onMount(() => {
-      mappingFields=MappingsCopmponent.getMappingFields()
+      mappingFields=mH.getMappingFields($metadata)
       console.log(mappingFields)
     });
     function deleteRule(index) {
@@ -178,4 +179,3 @@
   {/each}
   <button on:click={addRule}>Add Rule</button>
 </div>
-<div style="display:none"><Mappings bind:this={MappingsCopmponent}></Mappings></div>

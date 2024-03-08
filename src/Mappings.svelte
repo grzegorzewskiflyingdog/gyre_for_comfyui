@@ -2,20 +2,21 @@
     import { metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
 
- 
+    export let render=true
+    import { mappingsHelper } from './mappingsHelper.js'
+
     let showGyreMappings="none"
     let gyreMappingsDialogLeft="100px"
     let gyreMappingsDialogTop="100px"
     let widgets=[]
     let nodeType=""
-    let mappingFields=getMappingFields()
+    let mH=new mappingsHelper()
+    let mappingFields=mH.getMappingFields($metadata)
     let nodeId=0
     function openGyreMappings(node,e) {
-        console.log("openGyreMappings",node)
-        mappingFields=getMappingFields()
+        mappingFields=mH.getMappingFields($metadata)
         showGyreMappings="block"
         nodeId=node.id
-        console.log(node)
         gyreMappingsDialogLeft=e.clientX-100+"px"
         gyreMappingsDialogTop=e.clientY-200+"px"
         widgets=node.widgets
@@ -52,20 +53,7 @@
     function closeDialog() {
         showGyreMappings="none"
     }
-    /**
-     * get list of fields which can be used for widget mappings of each ComfyUI node:
-     * fields: the form fields, defined by user
-     * defaultFields: the fields whoch are usually available 
-     * outputFields: the output fields, like an image or multiple images
-     */
-    export function getMappingFields() {
-        let fields= []
-        if ($metadata.forms && $metadata.forms.default && $metadata.forms.default.elements) fields=$metadata.forms.default.elements
-        let defaultFields=[{name:"mergedImage",notInRuleEditor:true},{name:"mask",notInRuleEditor:true},{name:"hasMask"},{name:"prompt"},{name:"negativePrompt"},{name:"controlnet[].type"},{name:"controlnet[].image",notInRuleEditor:true},{name:"controlnet[].strength"},{name:"controlnet[].start_percent"},{name:"controlnet[].end_percent"},{name:"controlnet[].model"}]
-        let outputFields=[{name:"resultImage"}]
-        let res= {fields,defaultFields,outputFields}
-        return res
-    }
+
 
     let mappings = []
     let fromField=""
@@ -85,7 +73,7 @@
     }
       
 </script>
-
+{#if render}
 <div id="gyre_mappings" style="display:{showGyreMappings};left:{gyreMappingsDialogLeft};top:{gyreMappingsDialogTop}" >
     <h1>Field Mappings</h1>
         <div>{nodeType}</div>
@@ -125,7 +113,7 @@
         {/each}
         <div class="close"><Icon name="close" on:click={(e)=>{closeDialog()}}></Icon></div>
 </div>
-
+{/if}
 <style>
 
 
