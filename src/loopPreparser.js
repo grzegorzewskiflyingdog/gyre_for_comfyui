@@ -248,18 +248,16 @@ export class loopPreparser {
     this.workflow.last_link_id = maxLinkId
     this.workflow.last_node_id = maxNodeId
   
-   this.adjustLinksForSpecialNodes(groupName)
-    maxLinkId = this.workflow.last_link_id
-    maxNodeId = this.workflow.last_node_id
-    this.removeGyreNodesAndLinkDirectly()
-    
-    this.updateNodeLinks()
-    // Update the workflow's metadata
-    this.workflow.last_node_id = maxNodeId
-    this.workflow.last_link_id = maxLinkId
+    this.adjustLinksForSpecialNodes(groupName)
     this.cloneMappings(groupName)
 
   }
+
+  /**
+   * clone mappings
+   * @param string groupName 
+   * @returns 
+   */
   cloneMappings(groupName) {
     let mappings=this.workflow.extra.gyre.mappings
     if (!mappings) return
@@ -270,17 +268,42 @@ export class loopPreparser {
         if (nodeMappings) {
           let newNodeID=this.nodeMapping[node.id]
           if (newNodeID) {
-            console.log("n",node,newNodeID)
-
             mappings[newNodeID]=JSON.parse(JSON.stringify(nodeMappings))
           }
           
         }
       }
     }
-    console.log(mappings)
 
     this.workflow.extra.gyre.mappings=mappings
+  }
+  deactivateGroup(groupName) {
+    for (let i = this.workflow.nodes.length - 1; i >= 0; i--) {
+      const node = this.workflow.nodes[i]
+      if (this.isNodeInGroup(node.id,groupName)) {
+        node.mode=4 // deactivate it
+      }
+    }
+    
+  }
+  generateLoop(arrayName,arraySize) {
+    let group=this.getGroupByName(arrayName+"[]")
+    if (!group) return
+    group.title=arrayName+"[0]"
+
+    if (arraySize===0) {  // deactivate group nodes
+      this.deactivateGroup(arrayName+"[0]")
+      this.removeGyreNodesAndLinkDirectly()    
+      this.updateNodeLinks()
+      return
+    }
+    if (arraySize>1) {  // only rename group and remove loop nodes
+      for(let i=0;i<arraySize-1;i++) {  
+        this.duplicateGroupWithNodesAndLinks(arrayName+"["+i+"]",arrayName+"["+(i+1)+"]")    
+      }
+    }
+    this.removeGyreNodesAndLinkDirectly()    
+    this.updateNodeLinks()
   }
 
 }

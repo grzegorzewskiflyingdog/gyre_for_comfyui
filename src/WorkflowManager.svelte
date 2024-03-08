@@ -199,8 +199,8 @@
         workflow=JSON.parse(JSON.stringify(workflow))
         console.log(workflow)
         let loop=new loopPreparser(workflow)
-        loop.duplicateGroupWithNodesAndLinks("controlnet[]","controlnet[1]")
-        console.log(workflow)
+        loop.generateLoop("controlnet",0)
+//        console.log(workflow)
         window.app.loadGraphData(workflow);
         $metadata=workflow.extra.gyre
     }
@@ -237,7 +237,7 @@
         // 1. make server request, with  name and full workflow, store it on filesystem there
         // 2. set unsaved state to false
         // 3. load list of all workflows again
-        alert("save workflow " + name) // remove
+      //  alert("save workflow " + name) // remove
         saveDevelopJson(graph);
         await loadList();
     }
