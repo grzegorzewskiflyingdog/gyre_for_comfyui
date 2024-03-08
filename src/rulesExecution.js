@@ -14,6 +14,13 @@ export class rulesExecution {
     isFloat(value) {
         return !isNaN(value) && !Number.isInteger(parseInt(value)) && !isNaN(parseFloat(value));
     }    
+    /**
+     * execute rules on real data
+     * @param {object} data the form data 
+     * @param {array} fieldList the list of field definitions
+     * @param {array} rules the rules list
+     * @returns {object} {data,hiddenFields}  data and list of hidden fields
+     */
     execute(data,fieldList,rules) {
         if (!data) return {data,hiddenFields:{}}
         let hiddenFields=[]
