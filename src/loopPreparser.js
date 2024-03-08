@@ -199,7 +199,7 @@ export class loopPreparser {
     newGroup.bounding[0] += originalGroup.bounding[2]+70 // Shift the new group to prevent overlap
     this.workflow.groups.push(newGroup);
 
-    this.nodeMapping = {}; // Map old node IDs to new node IDs
+    this.nodeMapping = {} // Map old node IDs to new node IDs
 
     // Duplicate nodes
     this.workflow.nodes.forEach(node => {
@@ -252,14 +252,35 @@ export class loopPreparser {
     maxLinkId = this.workflow.last_link_id
     maxNodeId = this.workflow.last_node_id
     this.removeGyreNodesAndLinkDirectly()
-
+    
     this.updateNodeLinks()
     // Update the workflow's metadata
     this.workflow.last_node_id = maxNodeId
     this.workflow.last_link_id = maxLinkId
-
+    this.cloneMappings(groupName)
 
   }
+  cloneMappings(groupName) {
+    let mappings=this.workflow.extra.gyre.mappings
+    if (!mappings) return
+    for (let i = this.workflow.nodes.length - 1; i >= 0; i--) {
+      const node = this.workflow.nodes[i]
+      if (this.isNodeInGroup(node.id,groupName)) {
+        let nodeMappings=mappings[node.id]
+        if (nodeMappings) {
+          let newNodeID=this.nodeMapping[node.id]
+          if (newNodeID) {
+            console.log("n",node,newNodeID)
 
+            mappings[newNodeID]=JSON.parse(JSON.stringify(nodeMappings))
+          }
+          
+        }
+      }
+    }
+    console.log(mappings)
+
+    this.workflow.extra.gyre.mappings=mappings
+  }
 
 }

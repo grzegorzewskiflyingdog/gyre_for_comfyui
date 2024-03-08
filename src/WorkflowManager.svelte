@@ -202,6 +202,7 @@
         loop.duplicateGroupWithNodesAndLinks("controlnet[]","controlnet[1]")
         console.log(workflow)
         window.app.loadGraphData(workflow);
+        $metadata=workflow.extra.gyre
     }
     function showStructure() {
         let workflow=window.app.graph.serialize()
