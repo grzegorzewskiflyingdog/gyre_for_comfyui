@@ -7547,33 +7547,31 @@ var app = (function () {
         // Add new links
         this.workflow.links.push(...newLinks);
 
-        // Iterate over removed links specifically aiming for those ending at "GyreLoopEnd"
-    removedLinks.forEach(removedLink => {
-      const [removedLinkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = removedLink;
-      // Find if the toNode was a "GyreLoopEnd" type
-      const toNode = this.workflow.nodes.find(node => node.id === toNodeID);
-      
-      // Check if the destination node of the removed link was "GyreLoopEnd"
-      if (toNode.type === "GyreLoopEnd") {
-        // Assuming `nodeMapping` holds the mapping from original to cloned nodes
-        // And assuming the fromNode is inside the group and needs to be connected to its cloned counterpart
-        const clonedFromNodeID = this.nodeMapping[fromNodeID];
-        
-        // Only create a new link if there's a cloned node ID mapped
-        if (clonedFromNodeID) {
-          const newLinkID = ++this.workflow.last_link_id;
-          // The new link connects the cloned source node inside the group to the original "GyreLoopEnd" node outside
-          const newLink = [newLinkID, clonedFromNodeID, fromSlot, toNodeID, toSlot, type];
-          console.log("new link between groups",newLink);
-          this.workflow.links.push(newLink);
-        }
-      }
-    });
 
-
-
-
-
+        // For each link removed earlier...
+        // Assuming removedLinks and nodeMapping are already defined
+        // generate connections between groups
+        removedLinks.forEach(removedLink => {
+          const [removedLinkID, fromNodeID, fromSlot, toNodeID, toSlot, type] = removedLink;
+          // Find a link where the toNode is the destination of a link from a "GyreLoopStart"
+          let linkFromGyreLoopStart; 
+          this.workflow.links.forEach(link => {
+            const [_, linkFromNodeID, __, linkToNodeID, slot, linkType] = link;
+            if (this.getNodeById(linkFromNodeID).type==="GyreLoopStart" && this.isNodeInGroup(linkToNodeID,groupName)) {
+              if (fromSlot===slot) linkFromGyreLoopStart=link;
+            }
+          });
+          if (linkFromGyreLoopStart) {
+            // Assuming you can find the cloned node ID for the node that was linked to by the GyreLoopStart
+            const clonedToNodeID = this.nodeMapping[linkFromGyreLoopStart[3]]; // Use the toNodeID of the linkFromGyreLoopStart for mapping
+            if (clonedToNodeID) {
+              const newLinkID = ++this.workflow.last_link_id;
+              const newLink = [newLinkID, fromNodeID, fromSlot, clonedToNodeID, fromSlot, type]; // same slot here, this is current limitation
+        //      console.log("new between groups link",newLink)
+              this.workflow.links.push(newLink);
+            }
+          }
+        });
       }
 
       duplicateGroupWithNodesAndLinks(groupName) {
