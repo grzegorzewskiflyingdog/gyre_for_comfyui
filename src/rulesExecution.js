@@ -1,5 +1,9 @@
 export class rulesExecution {
-
+    /**
+     * @param {string} fieldName 
+     * @param {array} fieldList 
+     * @returns {object} the field object
+     */
     getField(fieldName,fieldList) {
         if (!fieldList) return
         for(let i=0;i<fieldList.length;i++) {
@@ -8,11 +12,11 @@ export class rulesExecution {
         }
     }
     isInteger(value) {
-        return !isNaN(value) && Number.isInteger(parseInt(value));
+        return !isNaN(value) && Number.isInteger(parseInt(value))
     }
     
     isFloat(value) {
-        return !isNaN(value) && !Number.isInteger(parseInt(value)) && !isNaN(parseFloat(value));
+        return !isNaN(value) && !Number.isInteger(parseInt(value)) && !isNaN(parseFloat(value))
     }    
     /**
      * execute rules on real data
@@ -31,7 +35,7 @@ export class rulesExecution {
             let rightValue=rule.rightValue
             let field=this.getField(rule.fieldName,fieldList)
             if (!field) {
-                console.error("rule exeution field not found:",rule.fieldName)
+              //  console.error("rule execution field not found:",rule.fieldName)
                 continue
             }
             // type conversion based on field type
@@ -75,12 +79,14 @@ export class rulesExecution {
                     break 
 
             }
+            console.log("executed:",leftValue,rule.condition,rightValue,res)
             if (!res) continue // rule will be not executed because condition is false
             if (rule.actionType==="setValue") {
+
                 let targetFieldName=rule.targetField
-                let targetField=this.getField(targetFieldName)
+                let targetField=this.getField(targetFieldName,fieldList)
                 if (!targetField) {
-                    console.error("rule exeution target field not found:",targetFieldName)
+                    console.error("rule execution target field not found:",targetFieldName)
                     continue                    
                 }
                 let value=rule.actionValue
@@ -97,6 +103,7 @@ export class rulesExecution {
                         value=parseFloat(value)
                     }
                 }                
+                console.log("setValue",targetFieldName,value)
                 data[targetFieldName]=value
             }
             if (rule.actionType==="hideField") {

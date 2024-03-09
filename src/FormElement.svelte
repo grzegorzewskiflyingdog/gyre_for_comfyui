@@ -5,11 +5,12 @@
     export let element;
     export let showProperties=false
     import {layer_image_preview} from "./images"
-  import { fix_and_outro_and_destroy_block } from 'svelte/internal';
-    import {metadata} from "./stores/metadata";
-    const dispatch = createEventDispatcher();
-    let value=1
-    
+    import {metadata} from "./stores/metadata"
+    const dispatch = createEventDispatcher()
+    export let value
+    if (element.type==="slider") {
+        if (!value) value=element.min
+    }
     // Function to immediately update the parent component
     function updateElement(updatedProps) {
         element={ ...element, ...updatedProps }
@@ -19,20 +20,20 @@
 
     // Function to handle option updates for dropdowns
     function handleOptionChange(event, index, key) {
-        const updatedOptions = [...element.options];
-        updatedOptions[index][key] = event.target.value;
-        updateElement({ options: updatedOptions });
+        const updatedOptions = [...element.options]
+        updatedOptions[index][key] = event.target.value
+        updateElement({ options: updatedOptions })
     }
 
     // Add a new option to the dropdown
     function addOption() {
-        updateElement({ options: [...element.options, { text: '', key: '' }] });
+        updateElement({ options: [...element.options, { text: '', key: '' }] })
     }
 
     // Remove an option from the dropdown
     function removeOption(index) {
-        const updatedOptions = element.options.filter((_, i) => i !== index);
-        updateElement({ options: updatedOptions });
+        const updatedOptions = element.options.filter((_, i) => i !== index)
+        updateElement({ options: updatedOptions })
     }
 
     function openProperties() {
@@ -44,7 +45,10 @@
     function deleteElement() {
         dispatch("delete",{})
     }
-
+    function changeValue(newValue) {
+        value=newValue
+        dispatch("change",{value:value})
+    }
     export let advancedOptions=true
 </script>
 
@@ -64,27 +68,27 @@
     {/if}
     {#if element.type === 'text'}
         <label for={element.name}>{element.label}:</label>
-        <input type="text" class="textInput" placeholder="{element.placeholder}"  value="{element.default}"/>
+        <input type="text" class="textInput" placeholder="{element.placeholder}"  {value} on:change={e => {changeValue(e.target.value)}}/>
     {:else if element.type === 'textarea'}
         <label for={element.name} class="textarea_label">{element.label}:</label>
-        <textarea class="textarea" placeholder="{element.placeholder}" name="{element.name}">{element.default}</textarea>
+        <textarea class="textarea" placeholder="{element.placeholder}" name="{element.name}" on:change={e => {changeValue(e.target.value)}}>{value}</textarea>
     {:else if element.type === 'checkbox'}
         <label>
-            <input type="checkbox" checked={element.default==="true"}  /> {element.label}
+            <input type="checkbox" checked={value}  on:change={e => {changeValue(e.target.value)}}/> {element.label}
         </label>
     {:else if element.type === 'dropdown'}
     <label for={element.name}>{element.label}:</label>
-        <select name="{element.name}" class="dropdown">
+        <select name="{element.name}" class="dropdown" on:change={e => {changeValue(e.target.value)}} >
             {#each element.options as option}
-                <option value={option.value}>{option.text} </option>
+                <option value={option.value} selected={value===option.value}>{option.text} </option>
             {/each}
         </select>
     {:else if element.type === 'pre_filled_dropdown'}
     <label for={element.name}>{element.label}:</label>
         {#if element.widget_name && $metadata.combo_values[element.widget_name] }
-        <select name="{element.name}" class="dropdown">
+        <select name="{element.name}" class="dropdown" on:change={e => {changeValue(e.target.value)}}>
           {#each $metadata.combo_values[element.widget_name] as v}
-                <option value={v}>{v} </option>
+                <option value={v}  selected={value===v}>{v} </option>
             {/each} 
         </select>      
         {:else if !element.widget_name}  
@@ -94,10 +98,10 @@
         {/if}
     {:else if element.type === 'slider'}
         <label for={element.name} class="slider_label">{element.label}:</label>
-        <span class="slidervalue">{value}</span><input type="range" min={element.min} max={element.max} step={element.step} value="{element.default}" name="{element.name}" on:change={(e) => {value=e.target.value}}/>
+        <span class="slidervalue">{value}</span><input type="range" min={element.min} max={element.max} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
     {:else if element.type === 'number'}
         <label for={element.name}>{element.label}:</label>
-        <input type="number" min={element.min} max={element.max} step={element.step} value="{element.default}" name="{element.name}" />
+        <input type="number" min={element.min} max={element.max} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
     {/if}    
 </div>
 {#if showProperties}

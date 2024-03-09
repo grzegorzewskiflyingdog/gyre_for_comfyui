@@ -1,14 +1,19 @@
 <script>
-  import { writable } from 'svelte/store';
   import FormElement from './FormElement.svelte';
   import { metadata} from './stores/metadata'
+  import { rulesExecution } from './rulesExecution.js'
+  
   if (!$metadata.forms) $metadata.forms={}
 
   export let form_key='default'  // support for multiple forms (e.g. wizards) in the future
+  export let data={}            // the form data
+
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
   let formElements = $metadata.forms[form_key].elements
   ensureUniqueNames()
+  setDefaultValues()
+
   let dragStartIndex=-1
   let showPropertiesIdx=-1
   let selectedType
@@ -36,6 +41,7 @@
     }
   });
 }
+
   function addElement(type) {
     if (!type) return
     let name="value_"+Math.random().toString(36).substr(2, 5)
@@ -64,6 +70,7 @@
     ensureUniqueNames()
     formElements=formElements
     showPropertiesIdx=formElements.length-1
+    setDefaultValue()
   }
 
   function handleDragStart(event, index) {
@@ -96,7 +103,7 @@
 }
 
   function removeElement(index) {
-    formElements.update(elements => elements.filter((_, i) => i !== index));
+    formElements.update(elements => elements.filter((_, i) => i !== index))
   }
 
   let advancedOptions=true
@@ -115,6 +122,23 @@
     }
     if (index <advancedOptionsIndex) return "block" // before advanced options
     return "none"
+  }
+
+  function executeRules(element,value) {
+    // first set the new value
+    data[element.name]=value
+    // now execute rules
+    let re=new rulesExecution()
+    let res=re.execute(data,formElements,$metadata.rules)
+    if (!res) return
+    data=res.data
+  }
+  function setDefaultValues() {
+    if (!formElements) return
+    for(let i=0;i<formElements.length;i++) {
+      let field=formElements[i]
+      if (!data[field.name]) data[field.name]=field.default
+    }
   }
 </script>
 
@@ -138,6 +162,8 @@
         on:closeProperties={() => {showPropertiesIdx=-1 }}
         on:update={(e) => { formElements[index]=e.detail; ensureUniqueNames() }}
         on:delete={(e) => { formElements.splice(showPropertiesIdx,1);formElements=formElements;showPropertiesIdx=-1 }}
+        value={data[element.name]}
+        on:change={e => { executeRules(element,e.detail.value)}}
         showProperties={showPropertiesIdx===index}/>
       </div>
   {/each}
