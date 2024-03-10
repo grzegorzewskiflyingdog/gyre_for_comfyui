@@ -127,9 +127,11 @@
   function executeRules(element,value) {
     // first set the new value
     data[element.name]=value
+    data.controlnet=[]
+    data.controlnet[0]={"type":"pose"}
     // now execute rules
-    let re=new rulesExecution()
-    let res=re.execute(data,formElements,$metadata.rules)
+    let re=new rulesExecution()    
+    let res=re.execute(data,formElements,$metadata.rules,{"controlnet":0})
     if (!res) return
     data=res.data
   }
