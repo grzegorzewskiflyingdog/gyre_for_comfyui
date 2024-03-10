@@ -25,6 +25,10 @@ export class rulesExecution {
     checkArray(fieldName) {
         return fieldName.includes("[]")
     }
+    getArrayName(fieldName) {
+        if (!this.checkArray(fieldName)) return
+        return fieldName.split("[")[0]  // e.g. controlnet
+    }    
     // type conversion based on field type
     convertValue(value,field) {
         if (field.type==="checkbox" || field.type==="boolean") {
@@ -88,21 +92,25 @@ export class rulesExecution {
      * @param {array} fieldList the list of field definitions
      * @param {array} rules the rules list
      * @param {object} arrayIdx array index for each array (e.g. controlnet: 0)
+     * @param {string} arrayName optional: limit rules execution to that array only
      * @returns {object} {data,hiddenFields}  data and list of hidden fields
      */
-    execute(data,fieldList,rules,arrayIdx={}) {
+    execute(data,fieldList,rules,arrayIdx={},arrayName="") {
         if (!data) return {data,hiddenFields:{}}
         let hiddenFields=[]
         for(let i=0;i<rules.length;i++) {
             // { fieldName, condition, actionType, rightValue, targetField, actionValue }
             let rule=rules[i]
+            let field=this.getField(rule.fieldName,fieldList)
+            if (arrayName==="__ignore_arrays" &&  this.checkArray(field.name)) continue 
             let leftValue=this.getValue(data,rule.fieldName,fieldList,arrayIdx)
             let rightValue=rule.rightValue
-            let field=this.getField(rule.fieldName,fieldList)
             if (!field) {
                 console.error("rule execution field not found:",rule.fieldName)
                 continue
             }
+            if (arrayName && !this.checkArray(field.name)) continue  // array mode, but field is not an array
+            if (arrayName && this.getArrayName(field.name)!==arrayName) continue    // other arrays ignore
             rightValue=this.convertValue(rightValue,field)
             leftValue=this.convertValue(leftValue,field)
 

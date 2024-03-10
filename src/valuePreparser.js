@@ -6,10 +6,11 @@ export class valuePreparser {
 
     constructor(workflow) {
       this.workflow = workflow
-      this.metadata=workflow.extra.gyre
-      this.rules=new rulesExecution()
-      this.fieldList=[]
       this.loopParser=new loopPreparser(workflow)
+      this.rules=new rulesExecution()
+      if (!workflow.extra.gyre) return
+      this.metadata=workflow.extra.gyre
+      this.fieldList=[]
       if (this.metadata.forms && this.metadata.forms.default)  this.fieldList=this.metadata.forms.default.elements
     }
 
@@ -57,6 +58,11 @@ export class valuePreparser {
 
     /**
      * Modify workflow values by using mapping and data from image editor
+     * data object has to be filled with
+     *  prompt
+     *  negativePrompt
+     *  hasMask
+     *  optional: controlnet array
      * @param {object} data 
      */
     async setValues(data) {

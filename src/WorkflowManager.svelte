@@ -7,7 +7,7 @@
     import {onMount} from 'svelte'
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
-    import { loopPreparser } from './loopPreparser.js'
+    import { ComfyUIPreparser } from './ComfyUIPreparser.js'
 
     let allworkflows;
     let moving = false;
@@ -198,9 +198,11 @@
         let workflow=window.app.graph.serialize()
         workflow=JSON.parse(JSON.stringify(workflow))
         console.log(workflow)
-        let loop=new loopPreparser(workflow)
-        loop.generateLoop("controlnet",3)
+//        let loop=new loopPreparser(workflow)
+//        loop.generateLoop("controlnet",3)
 //        console.log(workflow)
+        let parser=new ComfyUIPreparser(workflow)
+        parser.execute(parser.getTestData())
         window.app.loadGraphData(workflow);
         $metadata=workflow.extra.gyre
     }
