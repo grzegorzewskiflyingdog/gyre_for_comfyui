@@ -70,7 +70,7 @@
     ensureUniqueNames()
     formElements=formElements
     showPropertiesIdx=formElements.length-1
-    setDefaultValue()
+    setDefaultValues()
   }
 
   function handleDragStart(event, index) {
