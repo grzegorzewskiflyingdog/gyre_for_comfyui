@@ -16,6 +16,7 @@ class IfElse:
             "required": {
                 "true": (AlwaysEqualProxy("*"),),
                 "false": (AlwaysEqualProxy("*"),),
+                "route": ("BOOLEAN", {"default": False}),
             },
                                      
         }
@@ -24,12 +25,12 @@ class IfElse:
 
     RETURN_NAMES = ("ANY",)
 
-    FUNCTION = "do_nothing"
+    FUNCTION = "live_route"
 
     CATEGORY = "Gyre"
 
-    def do_nothing(self, ANY):
-        return (ANY,)
+    def live_route(self, true,false,route ):
+        return (true if route else false,)
 
 
 class LoopStart:
