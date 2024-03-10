@@ -77,16 +77,10 @@
 
       <!-- <input type="checkbox" checked={value}  on:change={e => {changeValue(e.target.value)}}/> {element.label}-->  
 
-        <div class="checkbox-wrapper-51">
-            <input type="checkbox" id="cbx-51" />
-            <label for="cbx-51" class="toggle">
-              <span>
-                <svg width="10px" height="10px" viewBox="0 0 10 10">
-                  <path d="M5,1 L5,1 C2.790861,1 1,2.790861 1,5 L1,5 C1,7.209139 2.790861,9 5,9 L5,9 C7.209139,9 9,7.209139 9,5 L9,5 C9,2.790861 7.209139,1 5,1 L5,9 L5,1 Z"></path>
-                </svg>
-              </span>
-            </label>
-          </div>
+        <div class="checkbox-wrapper-3">
+        <input type="checkbox" id="cbx-3"  checked={value}  on:change={e => {changeValue(e.target.value)}} />
+        <label for="cbx-3" class="toggle"><span></span></label>
+        </div>
 
     {:else if element.type === 'dropdown'}
     <label for={element.name}>{element.label}:</label>
@@ -244,7 +238,7 @@
         display: inline-block;
     }
     .element-preview .checkboxLabel {
-        vertical-align: 8px;
+        vertical-align: 5px;
 
     }
     .element-preview .textarea_label {
@@ -308,70 +302,73 @@
         color: white;
     }       
 /* checkbox */
-.checkbox-wrapper-51 {
+.checkbox-wrapper-3 {
     display: inline-block;
-}
-    .checkbox-wrapper-51 input[type="checkbox"] {
+} .checkbox-wrapper-3 input[type="checkbox"] {
     visibility: hidden;
     display: none;
   }
 
-  .checkbox-wrapper-51 .toggle {
+  .checkbox-wrapper-3 .toggle {
     position: relative;
     display: block;
-    width: 42px;
-    height: 24px;
+    width: 40px;
+    height: 20px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transform: translate3d(0, 0, 0);
   }
-  .checkbox-wrapper-51 .toggle:before {
+  .checkbox-wrapper-3 .toggle:before {
     content: "";
     position: relative;
-    top: 1px;
-    left: 1px;
-    width: 40px;
-    height: 22px;
+    top: 3px;
+    left: 3px;
+    width: 34px;
+    height: 14px;
     display: block;
-    background: #c8ccd4;
-    border-radius: 12px;
+    background: #9A9999;
+    border-radius: 8px;
     transition: background 0.2s ease;
   }
-  .checkbox-wrapper-51 .toggle span {
+  .checkbox-wrapper-3 .toggle span {
     position: absolute;
     top: 0;
     left: 0;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: block;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(154,153,153,0.75);
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
     transition: all 0.2s ease;
   }
-  .checkbox-wrapper-51 .toggle span svg {
-    margin: 7px;
-    fill: none;
+  .checkbox-wrapper-3 .toggle span:before {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: -18px;
+    width: 56px;
+    height: 56px;
+    background: rgba(79, 46, 220, 0.5);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 1;
+    pointer-events: none;
   }
-  .checkbox-wrapper-51 .toggle span svg path {
-    stroke: #c8ccd4;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 24;
-    stroke-dashoffset: 0;
-    transition: all 0.5s linear;
+
+  .checkbox-wrapper-3 #cbx-3:checked + .toggle:before {
+    background: rgb(227, 206, 116);
   }
-  .checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle:before {
-    background: #52d66b;
+  .checkbox-wrapper-3 #cbx-3:checked + .toggle span {
+    background: #cda600;
+    transform: translateX(20px);
+    transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+    box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
   }
-  .checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle span {
-    transform: translateX(18px);
-  }
-  .checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle span path {
-    stroke: #52d66b;
-    stroke-dasharray: 25;
-    stroke-dashoffset: 25;
+  .checkbox-wrapper-3 #cbx-3:checked + .toggle span:before {
+    transform: scale(1);
+    opacity: 0;
+    transition: all 0.4s ease;
   }
 
 </style>
