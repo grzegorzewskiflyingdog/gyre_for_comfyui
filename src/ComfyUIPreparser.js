@@ -66,9 +66,9 @@ export class ComfyUIPreparser {
             negativePrompt: "ugly",
             hasMask: false,
             controlnet:[
-                { type:"pose"},
-                { type:"depth"},
-                { type:"scribble"}
+                { type:"pose",image:"empty"},
+                { type:"depth",image:"empty"},
+                { type:"scribble",image:"empty"}
             ],
             // some custom fields
             seed: 123,

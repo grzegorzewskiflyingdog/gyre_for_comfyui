@@ -18,13 +18,51 @@ export class valuePreparser {
     getNodeById(nodeId) {
         return this.workflow.nodes.find(node => node.id === nodeId)
       }
+    /* mergedImage, mask, controlnet[].image
+    */
+    async getImage(propertyName,arrayName="",index=0) {   
+        console.log("get image ",propertyName,arrayName,index)
+        return "" // filename on comfyUI
+    }
+    /**
+     * get layer image
+     * @param {string} layerName , special names: currentLayer, currentLayerAbove, currentLayerBelow
+     */
+    async getLayerImage(layerName) {
+        console.log("get layer image ",layerName)
+        return "" // filename on comfyUI
+    }
+    /**
+     * convert value (e.g. boolean) also get images from frontend
+     * @param {*} value 
+     * @param {object} field 
+     * @param {string} arrayName 
+     * @param {number} index 
+     * @returns 
+     */
+    async convertValue(value,field,arrayName="",index=0) {
+        if (field.type==="image") {
+
+                if (!arrayName) {
+                    console.log("get image for field",field.name)
+                    return await this.getImage(field.name)
+                } else {
+                    let propertyName= field.name.split(".")[1]  // e.g. image from controlnet[].image
+                    return await this.getImage(propertyName,arrayName,index) // e.g. image,controlnet,0 for controlnet[0].image            
+                }
+        }
+        if (field.type==="layer_image") {
+            return await this.getImage(field.name)
+        }
+        return  this.rules.convertValue(value,field)
+    }
     /**
      * find all nodes which are connected to a mapping (nodeId, fieldFrom,toField) and set value
      * @param {object} field the field object {name,type,min,max,...}
      * @param {string} fromFieldName full name with array name and index (e.g. "steps" or "controlnet[0].model")
      * @param {*} value 
      */
-    setNodesValue(field,fromFieldName,value) {
+    async setNodesValue(field,fromFieldName,value) {
         for (let nodeId in this.metadata.mappings) {
             let mappingList=this.metadata.mappings[nodeId]
             let nodeIdInt=parseInt(nodeId)
@@ -37,7 +75,7 @@ export class valuePreparser {
                     let mapping=mappingList[i]
                     
                     if (mapping && mapping.fromField===fromFieldName) {
-                        value=this.rules.convertValue(value,field)
+                        value=await this.convertValue(value,field)
 //                        console.log("setNodesValue",node,value,mapping.toIndex)
                         node.widgets_values[parseInt(mapping.toIndex)]=value
                     }                
@@ -51,9 +89,11 @@ export class valuePreparser {
      * @param {object} field the field object {name,type,min,max,...}
      * @param {string} fromFieldName full name with array name without index "controlnet[].model")
      * @param {string} groupName the group name - e.g. controlnet[0], controlnet[1],...
+     * @param {string} arrayName  the array name - e.g. controlnet
+     * @param {number} arrayName  the index in array (0,1,...)
     * @param {*} value 
      */
-    setNodesValueGroup(field,fromFieldName,groupName,value) {
+    async setNodesValueGroup(field,fromFieldName,groupName,value,arrayName,index) {
         for (let i=0;i<this.workflow.nodes.length;i++) {
             let node=this.workflow.nodes[i]
             if (this.loopParser.isNodeInGroup(node.id,groupName)) { // only nodes in group
@@ -61,7 +101,7 @@ export class valuePreparser {
                 for(let i=0;i<mappingList.length;i++) {
                     let mapping=mappingList[i]
                     if (mapping && mapping.fromField===fromFieldName) {
-                        value=this.rules.convertValue(value,field)
+                        value=await this.convertValue(value,field,arrayName,index)
                         node.widgets_values[parseInt(mapping.toIndex)]=value
                     }
                 }          
@@ -86,7 +126,7 @@ export class valuePreparser {
             let value=data[name]
             if (!Array.isArray(value)) {
                 let field=this.rules.getField(name,this.fieldList)
-                this.setNodesValue(field,field.name,value)
+                await this.setNodesValue(field,field.name,value)
             } else {
                 // replace array of object values
                 let arrayName=name
@@ -97,9 +137,9 @@ export class valuePreparser {
                         let fieldNameIndex=arrayName+"["+i+"]."+propName      // e.g. controlnet[0].type
                         let value=element[propName]
                         let field=this.rules.getField(fieldName,this.fieldList)
-                        this.setNodesValue(field,fieldNameIndex,value)
+                        await this.setNodesValue(field,fieldNameIndex,value)
                         let groupName=arrayName+"["+i+"]"                // e.g. controlnet[0]
-                        this.setNodesValueGroup(field,fieldName,groupName,value)
+                        await this.setNodesValueGroup(field,fieldName,groupName,value,arrayName,i)
                     }
                 }
             }
