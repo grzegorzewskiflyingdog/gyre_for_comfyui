@@ -1,6 +1,8 @@
 <script>
     import { metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher()
 
     export let render=true
     import { mappingsHelper } from './mappingsHelper.js'
@@ -81,13 +83,14 @@
         let label=fieldName
         label=label.replace(/_/g, " ");
         label=label.charAt(0).toUpperCase() + label.slice(1)
-        let field={name:fieldName,label}
+        let field={name:fieldName,label,default:""}
         if (type==="number") {
             field.type="number"
             if (widget.options) {
                 field.min=widget.options.min
                 field.max=widget.options.max
-                field.step=widget.options.round                
+                field.step=widget.options.round       
+                field.default=field.min         
             }            
         }
         if (type==="customtext") {
@@ -100,6 +103,10 @@
             field.type="pre_filled_dropdown"
             field.widget_name=fieldName
         }
+        if (type==="toggle") {
+            field.type="checkbox"
+            field.default="false"
+        }
         if (!field.type) return
     
         if (!$metadata.forms) $metadata.forms={}
@@ -111,6 +118,7 @@
         mappings=mappings
         $metadata.mappings[nodeId] = mappings
         fromField=toField=addField=""
+      //  dispatch("updateForm",{})
     }   
     function getWidget(fieldName) {
         if (!widgets) return

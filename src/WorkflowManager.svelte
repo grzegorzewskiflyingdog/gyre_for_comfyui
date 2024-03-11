@@ -8,6 +8,7 @@
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
     import { ComfyUIPreparser } from './ComfyUIPreparser.js'
+  import { select_option } from "svelte/internal";
 
     let allworkflows;
     let moving = false;
@@ -324,6 +325,13 @@
         $metadata.tags.splice(index, 1);
         $metadata = $metadata
     }
+    function updateForm() {
+        if (state!=="editForm") return
+        state="properties"
+        sleep(100)
+        state="editForm"
+
+    }
 </script>
 
 <div id="workflowManager" class="workflowManager" style="left: {left}px; top: {top}px;">
@@ -462,7 +470,7 @@
     </div>
     {/if} <!-- foldOut -->
 </div>
-<Mappings></Mappings>
+<Mappings on:updateForm={(e) => {updateForm()}}></Mappings>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
  
 <style>
