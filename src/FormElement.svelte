@@ -222,6 +222,8 @@
         color: white;
         padding: 5px;   
         display: inline-block;
+        min-width: 280px;
+
   }
     .element-preview input,textarea {
         background: none;
@@ -229,6 +231,7 @@
         display: inline-block;
         color:white;
         margin: 0;
+        min-width: 280px;
     }
     .textInput,.textarea {
         width: 280px;

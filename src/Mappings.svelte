@@ -59,20 +59,89 @@
     let mappings = []
     let fromField=""
     let toField=""
+    let addField=""
+
     function addMapping() {
         if (!toField || !fromField) return
         if (!nodeId) return
         mappings.push({ fromField,toField  })
         mappings=mappings
         $metadata.mappings[nodeId] = mappings
-        fromField=toField=""
+        fromField=toField=addField=""
     }    
+
+    function addFormField(fieldName) {
+        if (!nodeId) return
+        if (!fieldName) return
+//        console.log(widgets)
+        if (checkIfFieldNameExists(fieldName)) return
+        let widget=getWidget(fieldName)
+        if (!widget) return
+        let type=widget.type
+        let label=fieldName
+        label=label.replace(/_/g, " ");
+        label=label.charAt(0).toUpperCase() + label.slice(1)
+        let field={name:fieldName,label}
+        if (type==="number") {
+            field.type="number"
+            if (widget.options) {
+                field.min=widget.options.min
+                field.max=widget.options.max
+                field.step=widget.options.round                
+            }            
+        }
+        if (type==="customtext") {
+            field.type="textarea"
+        }
+        if (type==="text") {
+            field.type="text"
+        }
+        if (type==="combo") {
+            field.type="pre_filled_dropdown"
+            field.widget_name=fieldName
+        }
+        if (!field.type) return
+    
+        if (!$metadata.forms) $metadata.forms={}
+        if (!$metadata.forms.default) $metadata.forms.default={}
+        if (!$metadata.forms.default.elements) $metadata.forms.default.elements=[]
+        let formFields=$metadata.forms.default.elements
+        formFields.push(field)
+        mappings.push({ fromField:fieldName,toField:fieldName  })
+        mappings=mappings
+        $metadata.mappings[nodeId] = mappings
+        fromField=toField=addField=""
+    }   
+    function getWidget(fieldName) {
+        if (!widgets) return
+        for(let i=0;i<widgets.length;i++) {
+            let widget=widgets[i]
+            if (widget.name===fieldName) return widget
+        }    
+    }
     function deleteMapping(index) {
         mappings.splice(index, 1);
         mappings=mappings
         $metadata.mappings[nodeId] = mappings
     }
-      
+    function checkIfFieldNameExists(name) {
+        if (!$metadata.forms) return false
+        if (!$metadata.forms.default) return false
+        let formFields=$metadata.forms.default.elements
+        if (!formFields) return false
+        for(let i=0;i<formFields.length;i++) {
+            let field=formFields[i]
+            if (field.name===name) return true            
+        }       
+        return false
+    }
+    function addAllFormFields() {
+        if (!widgets) return
+        for(let i=0;i<widgets.length;i++) {
+            let widget=widgets[i]
+            addFormField(widget.name)
+        }    
+    }
 </script>
 {#if render}
 <div id="gyre_mappings" style="display:{showGyreMappings};left:{gyreMappingsDialogLeft};top:{gyreMappingsDialogTop}" >
@@ -104,7 +173,22 @@
                 <option value={widget.name}>{widget.name}</option>
             {/each}
         </select>
-        <button on:click={(e) => {addMapping()}}>+ Add</button>     
+        <button on:click={(e) => {addMapping()}}>+ Add</button>  
+        <div>
+            <button on:click={(e) => {addFormField(addField)}}>Add form field from</button>     
+            <select bind:value={addField} >
+                <option value="">Select...</option>
+                {#each widgets as widget}
+                    {#if !checkIfFieldNameExists(widget.name)}
+                       <option value={widget.name}>{widget.name}</option>
+                    {/if}
+                {/each}
+            </select>
+        </div>
+        <div>
+            <button on:click={(e) => {addAllFormFields()}}>Add  all fields to form</button>     
+        </div>
+
         {#each mappings as mapping, index}
             <div class="mapping">
                 {mapping.fromField} <Icon name="arrowRight"></Icon>{mapping.toField}
@@ -112,6 +196,7 @@
                 <div class="del" on:click={(e) => {deleteMapping()}}><Icon name="removeFromList"></Icon></div>
             </div>
         {/each}
+
         <div class="close"><Icon name="close" on:click={(e)=>{closeDialog()}}></Icon></div>
 </div>
 {/if}
