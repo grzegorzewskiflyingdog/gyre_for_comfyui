@@ -56,6 +56,7 @@ export class ComfyUIPreparser {
     async execute(data) {
         this.generateLoops(data)
         this.executeAllRules(data)
+        console.log(data)
         await this.setValues(data)
     }
 

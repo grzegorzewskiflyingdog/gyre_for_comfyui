@@ -35,6 +35,7 @@
         for(let i=0;i<$metadata.mappings[node.id].length;i++) {
             let mapping=$metadata.mappings[node.id][i]
             if (mapping.toField===widget.name) {
+                mapping.toIndex=i
                 let label=(widget.label || widget.name)
                 return label+"="+mapping.fromField
             }
