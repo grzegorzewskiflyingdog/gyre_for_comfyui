@@ -75,22 +75,23 @@
     function addFormField(fieldName) {
         if (!nodeId) return
         if (!fieldName) return
-//        console.log(widgets)
         if (checkIfFieldNameExists(fieldName)) return
         let widget=getWidget(fieldName)
         if (!widget) return
+        console.log(widget)
+
         let type=widget.type
         let label=fieldName
         label=label.replace(/_/g, " ");
         label=label.charAt(0).toUpperCase() + label.slice(1)
-        let field={name:fieldName,label,default:""}
+        let field={name:fieldName,label,default:widget.value}
         if (type==="number") {
             field.type="number"
             if (widget.options) {
                 field.min=widget.options.min
                 field.max=widget.options.max
                 field.step=widget.options.round       
-                field.default=field.min         
+               // field.default=field.min         
             }            
         }
         if (type==="customtext") {
@@ -105,7 +106,7 @@
         }
         if (type==="toggle") {
             field.type="checkbox"
-            field.default="false"
+         //   field.default="false"
         }
         if (!field.type) return
     
@@ -118,7 +119,7 @@
         mappings=mappings
         $metadata.mappings[nodeId] = mappings
         fromField=toField=addField=""
-      //  dispatch("updateForm",{})
+      // 
     }   
     function getWidget(fieldName) {
         if (!widgets) return
@@ -149,6 +150,7 @@
             let widget=widgets[i]
             addFormField(widget.name)
         }    
+        dispatch("updateForm",{})
     }
 </script>
 {#if render}
@@ -183,7 +185,7 @@
         </select>
         <button on:click={(e) => {addMapping()}}>+ Add</button>  
         <div>
-            <button on:click={(e) => {addFormField(addField)}}>Add form field from</button>     
+            <button on:click={(e) => {addFormField(addField);dispatch("updateForm",{})}}>Add form field from</button>     
             <select bind:value={addField} >
                 <option value="">Select...</option>
                 {#each widgets as widget}

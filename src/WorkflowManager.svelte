@@ -332,11 +332,10 @@
         $metadata.tags.splice(index, 1);
         $metadata = $metadata
     }
+    let refresh=0
     function updateForm() {
         if (state!=="editForm") return
-        state="properties"
-        sleep(100)
-        state="editForm"
+        refresh++
 
     }
 </script>
@@ -433,7 +432,7 @@
             {/if}
             {#if state === "editForm"}
                 <div style="margin-top:10px"></div>
-                <FormBuilder></FormBuilder>
+                <FormBuilder {refresh}></FormBuilder>
             {/if}
             {#if state === "editRules"}
                 <div style="margin-top:10px"></div>
@@ -477,7 +476,7 @@
     </div>
     {/if} <!-- foldOut -->
 </div>
-<Mappings on:updateForm={(e) => {updateForm()}}></Mappings>
+<Mappings on:updateForm={(e) => {updateForm()}} ></Mappings>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
  
 <style>

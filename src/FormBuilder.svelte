@@ -7,7 +7,7 @@
 
   export let form_key='default'  // support for multiple forms (e.g. wizards) in the future
   export let data={}            // the form data
-
+  export let refresh
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
   let formElements = $metadata.forms[form_key].elements
@@ -41,7 +41,15 @@
     }
   });
 }
-
+  $: {
+    if (refresh) {
+      for(let i=0;i<formElements.length;i++) {
+        let element=formElements[i]
+        if (!data[element.name]) data[element.name]=element.default
+      }
+      formElements=formElements
+    }
+  }
   function addElement(type) {
     if (!type) return
     let name="value_"+Math.random().toString(36).substr(2, 5)
