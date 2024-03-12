@@ -213,8 +213,14 @@
     }
     async function saveWorkflow() {
         console.log("saveWorkflow");
-        let graph = window.app.graph.serialize();
-
+        window.app.graph.serialize_widgets=true
+        let graph = window.app.graph.serialize()
+        for(let i=0;i<graph.nodes.length;i++) {
+            let node=graph.nodes[i]
+            let _node=window.app.graph._nodes[i]
+            node.widgets=_node.widgets
+        }
+        console.log("window.app.graph",graph)
         // this is scenario just after loading workflow and not save it
         if (loadedworkflow && loadedworkflow.extra.workspace_info) {
             graph.extra = loadedworkflow.extra;
@@ -257,6 +263,7 @@
 
 
     function createGyreApiJson(graph,apirawjson){
+        return
         debugger;
         let apirawjsonobj =  JSON.parse(apirawjson);
         let alldata = JSON.stringify({graph,apirawjsonobj});
