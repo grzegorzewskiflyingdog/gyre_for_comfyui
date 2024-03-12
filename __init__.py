@@ -109,3 +109,11 @@ async def readworkflowdir(request):
 
     fileList = folder_handle(path, existFlowIds)
     return web.Response(text=json.dumps(fileList), content_type='application/json')
+
+
+
+@server.PromptServer.instance.routes.get("/workspace/readworkflowdir")
+async def readworkflowdir(request):
+    path = get_my_workflows_dir()
+    fileList = folder_handle(path, [])
+    return web.Response(text=json.dumps(fileList), content_type='application/json')
