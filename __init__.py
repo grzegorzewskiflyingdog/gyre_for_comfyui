@@ -39,28 +39,6 @@ server.PromptServer.instance.app.add_subapp("/dist/build/", workspace_app)
 def get_my_workflows_dir():
     return os.path.join(comfy_path, 'my_workflows_dir')
 
-def get_my_api_workflows_dir():
-    return os.path.join(comfy_path, 'my_api_workflows_dir')
-
-
-@server.PromptServer.instance.routes.post("/workspace/update_api_json_file")
-async def update_api_json_file(request):
-    data = await request.json()
-    file_path = data['file_path']
-    json_str = data['json_str']
-
-    def write_json_to_file(json_str):
-        my_workflows_dir = get_my_api_workflows_dir()
-        full_path = os.path.join(my_workflows_dir, file_path)
-        # Create the directory if it doesn't exist
-        os.makedirs(os.path.dirname(full_path), exist_ok=True)
-        with open(full_path, 'w', encoding='utf-8') as file:
-            file.write(json_str)
-
-    # Offload the file update to a separate thread
-    await asyncio.to_thread(write_json_to_file, json_str)
-    return web.Response(text="File updated successfully")
-
 
 
 @server.PromptServer.instance.routes.post("/workspace/update_json_file")
@@ -128,18 +106,6 @@ async def readworkflowdir(request):
     #path = reqJson['path']
     path = get_my_workflows_dir()
     existFlowIds = reqJson['existFlowIds']
-
-    fileList = folder_handle(path, existFlowIds)
-    return web.Response(text=json.dumps(fileList), content_type='application/json')
-
-
-
-@server.PromptServer.instance.routes.get("/workspace/readworkflowapidir")
-async def readworkflowapidir(request):
-
-
-    path = get_my_api_workflows_dir()
-    existFlowIds =  []
 
     fileList = folder_handle(path, existFlowIds)
     return web.Response(text=json.dumps(fileList), content_type='application/json')
