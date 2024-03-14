@@ -14,7 +14,6 @@ const callback = function (mutationsList, observer) {
           import("/dist/build/bundle.js");
           observer.disconnect();
 
-
           const drawNodeWidgets = LGraphCanvas.prototype.drawNodeWidgets
           LGraphCanvas.prototype.drawNodeWidgets = function (
             node,

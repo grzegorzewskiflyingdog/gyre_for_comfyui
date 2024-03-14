@@ -218,7 +218,9 @@
         for(let i=0;i<graph.nodes.length;i++) {
             let node=graph.nodes[i]
             let _node=window.app.graph._nodes[i]
-            node.widgets=_node.widgets
+            if (!$metadata.nodeWidgets) $metadata.nodeWidgets={}
+            $metadata.nodeWidgets[node.id]=_node.widgets
+         //   node.widgets=_node.widgets
         }
         console.log("window.app.graph",graph)
         // this is scenario just after loading workflow and not save it
