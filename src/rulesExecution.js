@@ -138,7 +138,7 @@ export class rulesExecution {
                     break 
 
             }
-            console.log("executed:",leftValue,rule.condition,rightValue,res)
+         //   console.log("executed:",leftValue,rule.condition,rightValue,res)
             if (!res) continue // rule will be not executed because condition is false
             if (rule.actionType==="setValue") {
 

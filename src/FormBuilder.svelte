@@ -171,10 +171,10 @@
         on:remove={() => removeElement(index)}  
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
-        on:update={(e) => { formElements[index]=e.detail; ensureUniqueNames() }}
+        on:update={(e) => { formElements[index]=e.detail; ensureUniqueNames(); setDefaultValues() }}
         on:delete={(e) => { formElements.splice(showPropertiesIdx,1);formElements=formElements;showPropertiesIdx=-1 }}
         value={data[element.name]}
-        on:change={e => { executeRules(element,e.detail.value)}}
+        on:change={e => { executeRules(element,e.detail.value); }}
         showProperties={showPropertiesIdx===index}/>
       </div>
   {/each}
