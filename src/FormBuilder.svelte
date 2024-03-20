@@ -108,6 +108,7 @@
     formElements=formElements
     // Reset dragged index
     dragStartIndex = -1
+    $metadata.forms[form_key].elements=formElements
 }
 
   function removeElement(index) {
