@@ -25,7 +25,7 @@
         color: white;
     }
   </style>
-<input type="text" {value} class="input"><Icon name="comboList" on:click={(e) => {showBox=true}}></Icon>
+<input type="text" {value} class="input" on:change={(e) => { value=e.target.value; showBox=false}}><Icon name="comboList" on:click={(e) => {showBox=true}}></Icon>
 {#if showBox}
   <select class="input" on:change={(e) => { value=e.target.value; showBox=false}}>
     <option>Select...</option>

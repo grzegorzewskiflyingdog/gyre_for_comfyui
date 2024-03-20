@@ -5132,19 +5132,19 @@ var app = (function () {
     const file$3 = "src\\InputCombo.svelte";
 
     function add_css$4(target) {
-    	append_styles(target, "svelte-12v7n6u", ".input.svelte-12v7n6u.svelte-12v7n6u{background-color:black;color:white;font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;padding:3px}.input.svelte-12v7n6u option.svelte-12v7n6u{background-color:black;color:white}.input.svelte-12v7n6u optgroup.svelte-12v7n6u{background-color:black;color:white}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5wdXRDb21iby5zdmVsdGUiLCJzb3VyY2VzIjpbIklucHV0Q29tYm8uc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgXHJcblxyXG4gIGltcG9ydCB7bWV0YWRhdGF9IGZyb20gXCIuL3N0b3Jlcy9tZXRhZGF0YVwiO1xyXG5cclxuICBleHBvcnQgbGV0IHZhbHVlPVwiXCJcclxuICBpbXBvcnQgSWNvbiBmcm9tICcuL0ljb24uc3ZlbHRlJ1xyXG4gIGxldCBzaG93Qm94PWZhbHNlXHJcbiAgPC9zY3JpcHQ+XHJcbiAgXHJcbiAgPHN0eWxlPlxyXG4gICAgXHJcbiAgICAuaW5wdXQge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgICAgICBmb250LWZhbWlseTogc3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBcIlNlZ29lIFVJXCIsIFJvYm90bywgVWJ1bnR1LCBDYW50YXJlbGwsIFwiTm90byBTYW5zXCIsIHNhbnMtc2VyaWYsIFwiU2Vnb2UgVUlcIiwgSGVsdmV0aWNhLCBBcmlhbDtcclxuICAgICAgICBwYWRkaW5nOiAzcHg7XHJcbiAgICB9XHJcbiAgICAuaW5wdXQgb3B0aW9uIHtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gICAgLmlucHV0IG9wdGdyb3VwIHtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gIDwvc3R5bGU+XHJcbjxpbnB1dCB0eXBlPVwidGV4dFwiIHt2YWx1ZX0gY2xhc3M9XCJpbnB1dFwiPjxJY29uIG5hbWU9XCJjb21ib0xpc3RcIiBvbjpjbGljaz17KGUpID0+IHtzaG93Qm94PXRydWV9fT48L0ljb24+XHJcbnsjaWYgc2hvd0JveH1cclxuICA8c2VsZWN0IGNsYXNzPVwiaW5wdXRcIiBvbjpjaGFuZ2U9eyhlKSA9PiB7IHZhbHVlPWUudGFyZ2V0LnZhbHVlOyBzaG93Qm94PWZhbHNlfX0+XHJcbiAgICA8b3B0aW9uPlNlbGVjdC4uLjwvb3B0aW9uPlxyXG4gICAgeyNlYWNoIE9iamVjdC5lbnRyaWVzKCRtZXRhZGF0YS5jb21ib192YWx1ZXMpIGFzIFt0aXRsZSx2YWx1ZXNdfVxyXG4gICAgICA8b3B0Z3JvdXAgbGFiZWw9e3RpdGxlfT5cclxuICAgICAgeyNlYWNoIHZhbHVlcyBhcyB2fVxyXG4gICAgICAgIDxvcHRpb24ge3Z9Pnt2fTwvb3B0aW9uPlxyXG4gICAgICB7L2VhY2h9XHJcbiAgICA8L29wdGdyb3VwPlxyXG4gICAgey9lYWNofVxyXG4gIDwvc2VsZWN0PlxyXG57L2lmfSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFZSSxvQ0FBTyxDQUNILGdCQUFnQixDQUFFLEtBQUssQ0FDdkIsS0FBSyxDQUFFLEtBQUssQ0FDWixXQUFXLENBQUUsU0FBUyxDQUFDLENBQUMsYUFBYSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsS0FBSyxDQUNuSSxPQUFPLENBQUUsR0FDYixDQUNBLHFCQUFNLENBQUMscUJBQU8sQ0FDWixnQkFBZ0IsQ0FBRSxLQUFLLENBQ3JCLEtBQUssQ0FBRSxLQUNYLENBQ0EscUJBQU0sQ0FBQyx1QkFBUyxDQUNkLGdCQUFnQixDQUFFLEtBQUssQ0FDckIsS0FBSyxDQUFFLEtBQ1gifQ== */");
+    	append_styles(target, "svelte-12v7n6u", ".input.svelte-12v7n6u.svelte-12v7n6u{background-color:black;color:white;font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;padding:3px}.input.svelte-12v7n6u option.svelte-12v7n6u{background-color:black;color:white}.input.svelte-12v7n6u optgroup.svelte-12v7n6u{background-color:black;color:white}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5wdXRDb21iby5zdmVsdGUiLCJzb3VyY2VzIjpbIklucHV0Q29tYm8uc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgXHJcblxyXG4gIGltcG9ydCB7bWV0YWRhdGF9IGZyb20gXCIuL3N0b3Jlcy9tZXRhZGF0YVwiO1xyXG5cclxuICBleHBvcnQgbGV0IHZhbHVlPVwiXCJcclxuICBpbXBvcnQgSWNvbiBmcm9tICcuL0ljb24uc3ZlbHRlJ1xyXG4gIGxldCBzaG93Qm94PWZhbHNlXHJcbiAgPC9zY3JpcHQ+XHJcbiAgXHJcbiAgPHN0eWxlPlxyXG4gICAgXHJcbiAgICAuaW5wdXQge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgICAgICBmb250LWZhbWlseTogc3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBcIlNlZ29lIFVJXCIsIFJvYm90bywgVWJ1bnR1LCBDYW50YXJlbGwsIFwiTm90byBTYW5zXCIsIHNhbnMtc2VyaWYsIFwiU2Vnb2UgVUlcIiwgSGVsdmV0aWNhLCBBcmlhbDtcclxuICAgICAgICBwYWRkaW5nOiAzcHg7XHJcbiAgICB9XHJcbiAgICAuaW5wdXQgb3B0aW9uIHtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gICAgLmlucHV0IG9wdGdyb3VwIHtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gIDwvc3R5bGU+XHJcbjxpbnB1dCB0eXBlPVwidGV4dFwiIHt2YWx1ZX0gY2xhc3M9XCJpbnB1dFwiIG9uOmNoYW5nZT17KGUpID0+IHsgdmFsdWU9ZS50YXJnZXQudmFsdWU7IHNob3dCb3g9ZmFsc2V9fT48SWNvbiBuYW1lPVwiY29tYm9MaXN0XCIgb246Y2xpY2s9eyhlKSA9PiB7c2hvd0JveD10cnVlfX0+PC9JY29uPlxyXG57I2lmIHNob3dCb3h9XHJcbiAgPHNlbGVjdCBjbGFzcz1cImlucHV0XCIgb246Y2hhbmdlPXsoZSkgPT4geyB2YWx1ZT1lLnRhcmdldC52YWx1ZTsgc2hvd0JveD1mYWxzZX19PlxyXG4gICAgPG9wdGlvbj5TZWxlY3QuLi48L29wdGlvbj5cclxuICAgIHsjZWFjaCBPYmplY3QuZW50cmllcygkbWV0YWRhdGEuY29tYm9fdmFsdWVzKSBhcyBbdGl0bGUsdmFsdWVzXX1cclxuICAgICAgPG9wdGdyb3VwIGxhYmVsPXt0aXRsZX0+XHJcbiAgICAgIHsjZWFjaCB2YWx1ZXMgYXMgdn1cclxuICAgICAgICA8b3B0aW9uIHt2fT57dn08L29wdGlvbj5cclxuICAgICAgey9lYWNofVxyXG4gICAgPC9vcHRncm91cD5cclxuICAgIHsvZWFjaH1cclxuICA8L3NlbGVjdD5cclxuey9pZn0iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBWUksb0NBQU8sQ0FDSCxnQkFBZ0IsQ0FBRSxLQUFLLENBQ3ZCLEtBQUssQ0FBRSxLQUFLLENBQ1osV0FBVyxDQUFFLFNBQVMsQ0FBQyxDQUFDLGFBQWEsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLEtBQUssQ0FDbkksT0FBTyxDQUFFLEdBQ2IsQ0FDQSxxQkFBTSxDQUFDLHFCQUFPLENBQ1osZ0JBQWdCLENBQUUsS0FBSyxDQUNyQixLQUFLLENBQUUsS0FDWCxDQUNBLHFCQUFNLENBQUMsdUJBQVMsQ0FDZCxnQkFBZ0IsQ0FBRSxLQUFLLENBQ3JCLEtBQUssQ0FBRSxLQUNYIn0= */");
     }
 
     function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i][0];
-    	child_ctx[6] = list[i][1];
+    	child_ctx[6] = list[i][0];
+    	child_ctx[7] = list[i][1];
     	return child_ctx;
     }
 
     function get_each_context_1$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
+    	child_ctx[10] = list[i];
     	return child_ctx;
     }
 
@@ -5175,9 +5175,9 @@ var app = (function () {
     			option.__value = "Select...";
     			option.value = option.__value;
     			attr_dev(option, "class", "svelte-12v7n6u");
-    			add_location(option, file$3, 30, 4, 811);
+    			add_location(option, file$3, 30, 4, 869);
     			attr_dev(select, "class", "input svelte-12v7n6u");
-    			add_location(select, file$3, 29, 2, 725);
+    			add_location(select, file$3, 29, 2, 783);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, select, anchor);
@@ -5190,7 +5190,7 @@ var app = (function () {
     			}
 
     			if (!mounted) {
-    				dispose = listen_dev(select, "change", /*change_handler*/ ctx[4], false, false, false, false);
+    				dispose = listen_dev(select, "change", /*change_handler_1*/ ctx[5], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -5241,7 +5241,7 @@ var app = (function () {
     // (34:6) {#each values as v}
     function create_each_block_1$3(ctx) {
     	let option;
-    	let t_value = /*v*/ ctx[9] + "";
+    	let t_value = /*v*/ ctx[10] + "";
     	let t;
     	let option_v_value;
     	let option_value_value;
@@ -5250,24 +5250,24 @@ var app = (function () {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			attr_dev(option, "v", option_v_value = /*v*/ ctx[9]);
-    			option.__value = option_value_value = /*v*/ ctx[9];
+    			attr_dev(option, "v", option_v_value = /*v*/ ctx[10]);
+    			option.__value = option_value_value = /*v*/ ctx[10];
     			option.value = option.__value;
     			attr_dev(option, "class", "svelte-12v7n6u");
-    			add_location(option, file$3, 34, 8, 976);
+    			add_location(option, file$3, 34, 8, 1034);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
     			append_dev(option, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$metadata*/ 4 && t_value !== (t_value = /*v*/ ctx[9] + "")) set_data_dev(t, t_value);
+    			if (dirty & /*$metadata*/ 4 && t_value !== (t_value = /*v*/ ctx[10] + "")) set_data_dev(t, t_value);
 
-    			if (dirty & /*$metadata*/ 4 && option_v_value !== (option_v_value = /*v*/ ctx[9])) {
+    			if (dirty & /*$metadata*/ 4 && option_v_value !== (option_v_value = /*v*/ ctx[10])) {
     				attr_dev(option, "v", option_v_value);
     			}
 
-    			if (dirty & /*$metadata*/ 4 && option_value_value !== (option_value_value = /*v*/ ctx[9])) {
+    			if (dirty & /*$metadata*/ 4 && option_value_value !== (option_value_value = /*v*/ ctx[10])) {
     				prop_dev(option, "__value", option_value_value);
     				option.value = option.__value;
     			}
@@ -5292,7 +5292,7 @@ var app = (function () {
     function create_each_block$3(ctx) {
     	let optgroup;
     	let optgroup_label_value;
-    	let each_value_1 = /*values*/ ctx[6];
+    	let each_value_1 = /*values*/ ctx[7];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -5308,9 +5308,9 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(optgroup, "label", optgroup_label_value = /*title*/ ctx[5]);
+    			attr_dev(optgroup, "label", optgroup_label_value = /*title*/ ctx[6]);
     			attr_dev(optgroup, "class", "svelte-12v7n6u");
-    			add_location(optgroup, file$3, 32, 6, 915);
+    			add_location(optgroup, file$3, 32, 6, 973);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, optgroup, anchor);
@@ -5323,7 +5323,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*Object, $metadata*/ 4) {
-    				each_value_1 = /*values*/ ctx[6];
+    				each_value_1 = /*values*/ ctx[7];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -5346,7 +5346,7 @@ var app = (function () {
     				each_blocks.length = each_value_1.length;
     			}
 
-    			if (dirty & /*$metadata*/ 4 && optgroup_label_value !== (optgroup_label_value = /*title*/ ctx[5])) {
+    			if (dirty & /*$metadata*/ 4 && optgroup_label_value !== (optgroup_label_value = /*title*/ ctx[6])) {
     				attr_dev(optgroup, "label", optgroup_label_value);
     			}
     		},
@@ -5373,13 +5373,15 @@ var app = (function () {
     	let t;
     	let if_block_anchor;
     	let current;
+    	let mounted;
+    	let dispose;
 
     	icon = new Icon({
     			props: { name: "comboList" },
     			$$inline: true
     		});
 
-    	icon.$on("click", /*click_handler*/ ctx[3]);
+    	icon.$on("click", /*click_handler*/ ctx[4]);
     	let if_block = /*showBox*/ ctx[1] && create_if_block$3(ctx);
 
     	const block = {
@@ -5404,6 +5406,11 @@ var app = (function () {
     			if (if_block) if_block.m(target, anchor);
     			insert_dev(target, if_block_anchor, anchor);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(input, "change", /*change_handler*/ ctx[3], false, false, false, false);
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
     			if (!current || dirty & /*value*/ 1 && input.value !== /*value*/ ctx[0]) {
@@ -5438,6 +5445,8 @@ var app = (function () {
     			if (detaching) detach_dev(t);
     			if (if_block) if_block.d(detaching);
     			if (detaching) detach_dev(if_block_anchor);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -5466,11 +5475,16 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<InputCombo> was created with unknown prop '${key}'`);
     	});
 
+    	const change_handler = e => {
+    		$$invalidate(0, value = e.target.value);
+    		$$invalidate(1, showBox = false);
+    	};
+
     	const click_handler = e => {
     		$$invalidate(1, showBox = true);
     	};
 
-    	const change_handler = e => {
+    	const change_handler_1 = e => {
     		$$invalidate(0, value = e.target.value);
     		$$invalidate(1, showBox = false);
     	};
@@ -5496,7 +5510,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [value, showBox, $metadata, click_handler, change_handler];
+    	return [value, showBox, $metadata, change_handler, click_handler, change_handler_1];
     }
 
     class InputCombo extends SvelteComponentDev {
