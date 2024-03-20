@@ -45,13 +45,18 @@
     }
     window.checkGyreMapping=checkGyreMapping
 
-    function setComboValue(widget) {
+    function gyreSetComboValues(widget) {           // todo: find out in future where to directly get these information
         if (widget.type!=="combo" || !widget.options  || !widget.options.values || !widget.name ) return
-        if(!$metadata.combo_values) $metadata.combo_values = {};
+        if (widget.name==="image") return
+        if(!$metadata.combo_values) $metadata.combo_values = {}
         $metadata.combo_values[widget.name]=widget.options.values //widget.options
     }
-    window.gyreSetCombovalues=setComboValue
+    window.gyreSetComboValues=gyreSetComboValues
 
+    function gyreClearAllComboValues() {
+        $metadata.combo_values = {}
+    }
+    window.gyreClearAllComboValues=gyreClearAllComboValues
 
     function closeDialog() {
         showGyreMappings="none"

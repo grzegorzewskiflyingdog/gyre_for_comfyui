@@ -13,6 +13,7 @@ const callback = function (mutationsList, observer) {
           // @ts-ignore
           import("/dist/build/bundle.js");
           observer.disconnect();
+          if (window.gyreClearAllComboValues) window.gyreClearAllComboValues()
 
           const drawNodeWidgets = LGraphCanvas.prototype.drawNodeWidgets
           LGraphCanvas.prototype.drawNodeWidgets = function (
@@ -54,7 +55,7 @@ const callback = function (mutationsList, observer) {
               ctx.textAlign = "left";
               if (w.disabled) ctx.globalAlpha *= 0.5;
               let widget_width = w.width || width
-              if (window.gyreSetCombovalues) window.gyreSetCombovalues(w)
+              if (window.gyreSetComboValues) window.gyreSetComboValues(w)
               
               if (!window.checkGyreMapping) continue
               let label=window.checkGyreMapping(node,w)
