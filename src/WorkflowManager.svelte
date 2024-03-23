@@ -26,7 +26,7 @@
     let selectedTag = ""
 
   
-
+    let debug=false
     function onMouseDown() {
         moving = true;
     }
@@ -278,12 +278,21 @@
     function addTag() {
         if (!selectedTag) return
         if (!$metadata.tags) $metadata.tags = []
+        if (selectedTag==="LayerMenu") {
+            removeTag("ControlNet")
+            removeTag("Txt2Image")
+            removeTag("Inpainting")
+        } 
+        if (selectedTag==="Txt2Image" || selectedTag==="Inpainting" || selectedTag==="ControlNet") {
+            removeTag("LayerMenu")
+        }
         $metadata.tags.push(selectedTag)
         $metadata = $metadata
     }
 
     function removeTag(tag) {
-        const index = $metadata.tags.indexOf(tag);
+        const index = $metadata.tags.indexOf(tag)
+        if (index<0) return
         $metadata.tags.splice(index, 1);
         $metadata = $metadata
     }
@@ -323,9 +332,10 @@
             </div>
     {/if}
     {#if foldOut}
+    {#if debug}
  <button on:click={(e) => { testFirstPass()} }>Test</button>
  <button on:click={(e) => { showStructure()} }>WF JSON</button>
-
+{/if}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="foldout" on:click={(e) => {foldOut=false}}>
             <Icon name="up"></Icon>

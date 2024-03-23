@@ -36,8 +36,18 @@
     display:flex;
 }
 .main .leftMenu {
-    flex:50px;
-    padding-top:28px;
+    flex: 40px;
+    padding-top: 5px;
+    margin-top: 23px;
+    /* border-right: 1px solid white; */
+    /* margin-right: 10px; */
+    background-color: #353535;
+    /* padding-left: 5px; */
+    padding-right: 5px;
+    margin-left: -20px;
+    margin-right: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .main .content {
     padding-top: 20px;
