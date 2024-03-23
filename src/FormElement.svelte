@@ -14,8 +14,14 @@
     // Function to immediately update the parent component
     function updateElement(updatedProps) {
         element={ ...element, ...updatedProps }
+        if (element.type==="slider" || element.type==="number") {
+            value=element.default
+            element.min=parseFloat(element.min)
+            element.max=parseFloat(element.max)
+            element.default=parseFloat(element.default)
+        }
         dispatch('update', element)
-        if (element.type==="slider" || element.type==="number") value=element.default
+
     }
 
     // Function to handle option updates for dropdowns
