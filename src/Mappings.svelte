@@ -19,8 +19,16 @@
         mappingFields=mH.getMappingFields($metadata)
         showGyreMappings="block"
         nodeId=node.id
-        gyreMappingsDialogLeft=e.clientX-100+"px"
-        gyreMappingsDialogTop=e.clientY-200+"px"
+        let x=e.clientX-540/2
+        let y=e.clientY-200
+        if (x<0) x=0
+        if (y<0) y=0
+        if (x+540>window.innerWidth) x=window.innerWidth-540
+        if (y+400>window.innerHeight) y=window.innerHeight-400
+
+        gyreMappingsDialogLeft=x+"px"
+        gyreMappingsDialogTop=y+"px"
+        
         widgets=node.widgets
         nodeType=node.type
         if (!$metadata.mappings) $metadata.mappings={}
