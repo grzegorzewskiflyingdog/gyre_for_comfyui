@@ -397,7 +397,7 @@
             {/if}
             {#if state === "editForm"}
                 <div style="margin-top:10px"></div>
-                <FormBuilder {refresh}></FormBuilder>
+                <FormBuilder {refresh} ></FormBuilder>
             {/if}
             {#if state === "editRules"}
                 <div style="margin-top:10px"></div>

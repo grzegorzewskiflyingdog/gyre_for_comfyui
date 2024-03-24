@@ -3,12 +3,15 @@
   import { metadata} from './stores/metadata'
   import { rulesExecution } from './rulesExecution.js'
   import formTemplate_Txt2Image  from './form_templates/txt2image.json'
+  import formTemplate_LayerMenu  from './form_templates/layermenu.json'
+  import { mappingsHelper } from './mappingsHelper.js'
 
   if (!$metadata.forms) $metadata.forms={}
 
   export let form_key='default'  // support for multiple forms (e.g. wizards) in the future
   export let data={}            // the form data
-  export let refresh
+  export let refresh  
+
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
   let formElements = $metadata.forms[form_key].elements
@@ -157,11 +160,40 @@
 
 let selectWorkflowType=false
  function quickstart(type) {
+  let workflow=window.app.graph.serialize()
+  let helper=new mappingsHelper
+  // 1. set default form
   if (type==="Txt2Image" || type==="Inpainting") {
     $metadata.forms=formTemplate_Txt2Image
     formElements=$metadata.forms.default.elements
+    setDefaultValues()
+  } 
+  if (type==="LayerMenu") {
+    $metadata.forms=formTemplate_LayerMenu
+    formElements=$metadata.forms.default.elements
+    setDefaultValues()
   }
+  // 2. set default mappings: output image
+  let node=helper.getNodeByType(workflow,"SaveImage")
+  if (node) {   
+    helper.addMapping($metadata,node.id,"resultImage","filename_prefix")
+  }
+  // 3. input image mappings
+  if (type==="LayerMenu") {
+    let node=helper.getNodeByType(workflow,"LoadImage")
+    if (node) {   
+      helper.addMapping($metadata,node.id,"currentLayer","image")
+    }
+  }
+  // 3. input image mappings
+  if (type==="Txt2Image") {
+    let node=helper.getNodeByType(workflow,"LoadImage")
+    if (node) {   
+      helper.addMapping($metadata,node.id,"mergedImage","image")
+    }
+  }  
   selectWorkflowType=false
+
  }
 </script>
 

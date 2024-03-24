@@ -19,4 +19,19 @@ export class mappingsHelper {
         let res= {fields,defaultFields,outputFields}
         return res
     }
+
+    getNodeByType(workflow,type) {
+        return workflow.nodes.find(node => node.type === type)
+      }
+    addMapping(metadata,nodeId,fromField,toField) {
+        if (!toField || !fromField) return
+        if (!nodeId) return
+        if (!metadata.mappings) metadata.mappings={}
+        let mappings=metadata.mappings[nodeId]
+        if (!mappings) mappings=[]
+        mappings.push({ fromField,toField  })
+        mappings=mappings
+        metadata.mappings[nodeId] = mappings
+    }    
+
 }

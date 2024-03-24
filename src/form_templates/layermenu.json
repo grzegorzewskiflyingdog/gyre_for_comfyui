@@ -1,0 +1,28 @@
+{
+    "default": {
+        "elements": [
+            {
+                "name": "currentLayer",
+                "type": "layer_image",
+                "label": "Value_6y0om",
+                "options": [],
+                "default": ""
+            },
+            {
+                "name": "advanced_options",
+                "type": "advanced_options",
+                "label": "",
+                "options": [],
+                "default": ""
+            },            
+            {
+                "name": "preview",
+                "type": "checkbox",
+                "label": "Preview",
+                "options": [],
+                "default": "true",
+                "hidden": true
+            }        
+        ]
+    }
+}
