@@ -2,7 +2,8 @@
   import FormElement from './FormElement.svelte';
   import { metadata} from './stores/metadata'
   import { rulesExecution } from './rulesExecution.js'
-  
+  import formTemplate_Txt2Image  from './form_templates/txt2image.json'
+
   if (!$metadata.forms) $metadata.forms={}
 
   export let form_key='default'  // support for multiple forms (e.g. wizards) in the future
@@ -52,6 +53,7 @@
   }
   function addElement(type) {
     if (!type) return
+    selectWorkflowType=false
     let name="value_"+Math.random().toString(36).substr(2, 5)
     
     let newElement = {
@@ -112,6 +114,7 @@
 }
 
   function removeElement(index) {
+    selectWorkflowType=false
     formElements.update(elements => elements.filter((_, i) => i !== index))
   }
 
@@ -151,6 +154,15 @@
       if (!data[field.name]) data[field.name]=field.default
     }
   }
+
+let selectWorkflowType=false
+ function quickstart(type) {
+  if (type==="Txt2Image" || type==="Inpainting") {
+    $metadata.forms=formTemplate_Txt2Image
+    formElements=$metadata.forms.default.elements
+  }
+  selectWorkflowType=false
+ }
 </script>
 
 
@@ -158,6 +170,18 @@
 <div class="formBuilder">
 <h1>Edit form</h1>
 <div class="form">
+  {#if !formElements.length}
+    {#if !selectWorkflowType}
+      <button on:click={()=>{selectWorkflowType=true}}>Quickstart</button>
+    {:else}
+      Quickstart - Select type:<br><br>
+      <button on:click={()=>{quickstart("Txt2Image")}}>Txt2Image</button>
+      <button on:click={()=>{quickstart("Inpainting")}}>Inpainting</button>
+      <button on:click={()=>{quickstart("LayerMenu")}}>LayerMenu</button>
+    {/if}
+
+
+  {/if}
   {#each formElements as element, index (element.name)}
     <div
       class="draggable"

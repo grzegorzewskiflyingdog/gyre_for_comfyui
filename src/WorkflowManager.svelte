@@ -26,7 +26,7 @@
     let selectedTag = ""
 
   
-    let debug=false
+    let debug=true
     function onMouseDown() {
         moving = true;
     }
