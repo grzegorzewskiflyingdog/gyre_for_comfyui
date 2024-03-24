@@ -208,7 +208,7 @@
             <div class="mapping">
                 {mapping.fromField} <Icon name="arrowRight"></Icon>{mapping.toField}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div class="del" on:click={(e) => {deleteMapping()}}><Icon name="removeFromList"></Icon></div>
+                <div class="del" on:click={(e) => {deleteMapping(index)}}><Icon name="removeFromList"></Icon></div>
             </div>
         {/each}
 
