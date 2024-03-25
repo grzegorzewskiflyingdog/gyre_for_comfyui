@@ -6,6 +6,8 @@
   import formTemplate_LayerMenu  from './form_templates/layermenu.json'
   import { mappingsHelper } from './mappingsHelper.js'
   import FieldSelector from "./fieldSelector.svelte"
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
 
   if (!$metadata.forms) $metadata.forms={}
 
@@ -148,12 +150,20 @@ let selectWorkflowType=false
     $metadata.forms=formTemplate_Txt2Image
     formElements=$metadata.forms.default.elements
     setDefaultValues()
+    if (($metadata.tags || !$metadata.tags.length) && type==="Txt2Image") {
+      $metadata.tags=["Txt2Image"]
+    }
+    if (($metadata.tags || !$metadata.tags.length) && type==="Inpainting") {
+      $metadata.tags=["Txt2Image","Inpainting"]
+    }    
   } 
   if (type==="LayerMenu") {
     $metadata.forms=formTemplate_LayerMenu
     formElements=$metadata.forms.default.elements
+    if (!$metadata.tags || !$metadata.tags.length) $metadata.tags=["LayerMenu"]
     setDefaultValues()
   }
+
   // 2. set default mappings: output image
   let node=helper.getNodeByType(workflow,"SaveImage")
   if (node) {   
@@ -174,7 +184,7 @@ let selectWorkflowType=false
     }
   }  
   selectWorkflowType=false
-
+   dispatch("refreshTags",$metadata.tags)
  }
  let fieldSelector
 
