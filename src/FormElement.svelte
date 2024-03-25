@@ -59,7 +59,7 @@
     export let advancedOptions=true
 </script>
 
-<div class="element-preview">
+<div class="element-preview" class:showHidden={element.hidden}>
     {#if readonly!=="readonly"}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="editElementButton" on:click={openProperties}>Edit</div>
@@ -81,7 +81,7 @@
     {:else if element.type === 'textarea'}
         <label for={element.name} class="textarea_label">{element.label}:</label>
         <textarea class="textarea" placeholder="{element.placeholder}"  {readonly} name="{element.name}" on:change={e => {changeValue(e.target.value)}}>{value}</textarea>
-    {:else if element.type === 'checkbox'}
+    {:else if element.type === 'checkbox' }
         <label for={element.name} class="checkboxLabel">{element.label}:</label>
 
       <!-- <input type="checkbox" checked={value}  on:change={e => {changeValue(e.target.value)}}/> {element.label}-->  
@@ -124,7 +124,7 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="formClose" on:click={closeProperties}>X</div>
     {#if element.type !== 'layer_image' &&  element.type!=="advanced_options"} 
-        <div class="formLine">
+        <div class="formLine" >
             <label for="label">Label:</label>
             <input type="text" name="label" value={element.label} on:input={(e) => updateElement({ label: e.target.value })} />
         </div>
@@ -382,5 +382,7 @@
     opacity: 0;
     transition: all 0.4s ease;
   }
-
+  .showHidden {
+    opacity: 0.5;
+  }
 </style>
