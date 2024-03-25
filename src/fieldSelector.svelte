@@ -12,12 +12,12 @@
     let top="100px"
     export function openDialog(e) {
         showFieldSelector="block"
-        let x=e.clientX-480/2
-        let y=e.clientY-200
+        let x=e.clientX-460/2
+        let y=e.clientY-560
         if (x<0) x=0
         if (y<0) y=0
-        if (x+480>window.innerWidth) x=window.innerWidth-540
-        if (y+400>window.innerHeight) y=window.innerHeight-400
+        if (x+460>window.innerWidth) x=window.innerWidth-540
+        if (y+560>window.innerHeight) y=window.innerHeight-400
         left=x+"px"
         top=y+"px"    
     }
@@ -57,7 +57,8 @@
             border-radius: 10px;
             font-size: 14px;
             display:none;
-            width:450px;
+            width:460px;
+            padding-left: 20px;
         }
         #fieldSelector h1 {
             font-size: 16px;
