@@ -8,6 +8,7 @@
     import {metadata} from "./stores/metadata"
     const dispatch = createEventDispatcher()
     export let value
+    export let readonly=""
     if (element.type==="slider") {
         if (!value) value=element.min
     }
@@ -59,8 +60,10 @@
 </script>
 
 <div class="element-preview">
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="editElementButton" on:click={openProperties}>Edit</div>
+    {#if readonly!=="readonly"}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div class="editElementButton" on:click={openProperties}>Edit</div>
+    {/if}
     <!-- Element preview based on type -->
     {#if element.type==="advanced_options"} 
         <!-- svelte-ignore a11y-missing-attribute -->
@@ -74,23 +77,23 @@
     {/if}
     {#if element.type === 'text'}
         <label for={element.name}>{element.label}:</label>
-        <input type="text" class="textInput" placeholder="{element.placeholder}"  {value} on:change={e => {changeValue(e.target.value)}}/>
+        <input type="text" class="textInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
     {:else if element.type === 'textarea'}
         <label for={element.name} class="textarea_label">{element.label}:</label>
-        <textarea class="textarea" placeholder="{element.placeholder}" name="{element.name}" on:change={e => {changeValue(e.target.value)}}>{value}</textarea>
+        <textarea class="textarea" placeholder="{element.placeholder}"  {readonly} name="{element.name}" on:change={e => {changeValue(e.target.value)}}>{value}</textarea>
     {:else if element.type === 'checkbox'}
         <label for={element.name} class="checkboxLabel">{element.label}:</label>
 
       <!-- <input type="checkbox" checked={value}  on:change={e => {changeValue(e.target.value)}}/> {element.label}-->  
 
         <div class="checkbox-wrapper-3">
-        <input type="checkbox" id="cbx-3"  checked={value}  on:change={e => {changeValue(e.target.value)}} />
+        <input type="checkbox" id="cbx-3"  {readonly}  checked={value}  on:change={e => {changeValue(e.target.value)}} />
         <label for="cbx-3" class="toggle"><span></span></label>
         </div>
 
     {:else if element.type === 'dropdown'}
     <label for={element.name}>{element.label}:</label>
-        <select name="{element.name}" class="dropdown" on:change={e => {changeValue(e.target.value)}} >
+        <select name="{element.name}" class="dropdown"  {readonly} on:change={e => {changeValue(e.target.value)}} >
             {#each element.options as option}
                 <option value={option.value} selected={value===option.value}>{option.text} </option>
             {/each}
@@ -98,7 +101,7 @@
     {:else if element.type === 'pre_filled_dropdown'}
     <label for={element.name}>{element.label}:</label>
         {#if element.widget_name && $metadata.combo_values[element.widget_name] }
-        <select name="{element.name}" class="dropdown" on:change={e => {changeValue(e.target.value)}}>
+        <select name="{element.name}" class="dropdown"  {readonly} on:change={e => {changeValue(e.target.value)}}>
           {#each $metadata.combo_values[element.widget_name] as v}
                 <option value={v}  selected={value===v}>{v} </option>
             {/each} 
@@ -110,10 +113,10 @@
         {/if}
     {:else if element.type === 'slider'}
         <label for={element.name} class="slider_label">{element.label}:</label>
-        <span class="slidervalue">{value}</span><input type="range" min={element.min} max={element.max} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
+        <span class="slidervalue">{value}</span><input  {readonly} type="range" min={element.min} max={element.max} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
     {:else if element.type === 'number'}
         <label for={element.name}>{element.label}:</label>
-        <input type="number" min={element.min} max={element.max} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
+        <input type="number" min={element.min} max={element.max}  {readonly} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
     {/if}    
 </div>
 {#if showProperties}

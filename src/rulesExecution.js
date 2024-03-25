@@ -31,6 +31,7 @@ export class rulesExecution {
     }    
     // type conversion based on field type
     convertValue(value,field) {
+        if (!field) return ""
         if (field.type==="checkbox" || field.type==="boolean") {
             if (value==="true") return true
             if (value==="false") return false

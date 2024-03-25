@@ -8,7 +8,6 @@
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
     import { ComfyUIPreparser } from './ComfyUIPreparser.js'
-  import { select_option } from "svelte/internal";
 
     let allworkflows;
     let moving = false;

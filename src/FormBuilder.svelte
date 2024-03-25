@@ -5,6 +5,7 @@
   import formTemplate_Txt2Image  from './form_templates/txt2image.json'
   import formTemplate_LayerMenu  from './form_templates/layermenu.json'
   import { mappingsHelper } from './mappingsHelper.js'
+  import FieldSelector from "./fieldSelector.svelte"
 
   if (!$metadata.forms) $metadata.forms={}
 
@@ -54,36 +55,16 @@
       formElements=formElements
     }
   }
-  function addElement(type) {
-    if (!type) return
-    selectWorkflowType=false
-    let name="value_"+Math.random().toString(36).substr(2, 5)
-    
-    let newElement = {
-      name: name, // Unique ID for key tracking and reactivity
-      type: type,
-      label: name.charAt(0).toUpperCase() + name.slice(1),
-      name: name, // Example naming convention
-      options: type === 'dropdown' ? [{ text: 'Option 1', key: '1' }] : [],
-      default: ""
-    }
-    if (type==="slider" || type==="number") {
-      newElement.min=1
-      newElement.max=20
-      newElement.step=1
-      newElement.default=1
-    }
-    if (type==="checkbox") {
-      newElement.default=false
-    }
-    if (type==="text" || type==="textarea") {
-      newElement.placeholder=""
-    }
+
+  function addElement(e) {
+    fieldSelector.hideDialog()
+    let newElement=e.detail
+    if (!newElement) return
     formElements.push(newElement)
     ensureUniqueNames()
     formElements=formElements
     showPropertiesIdx=formElements.length-1
-    setDefaultValues()
+    setDefaultValues()    
   }
 
   function handleDragStart(event, index) {
@@ -195,8 +176,11 @@ let selectWorkflowType=false
   selectWorkflowType=false
 
  }
+ let fieldSelector
+
 </script>
 
+<FieldSelector bind:this={fieldSelector} on:select={(e)=>{ addElement(e)}}></FieldSelector>
 
 
 <div class="formBuilder">
@@ -236,20 +220,8 @@ let selectWorkflowType=false
   {/each}
 </div>
 <div>
-<label for="add_field_select" class="add_field_select_label"> Add form field:</label> 
-  <select class="add_field_select" name="add_field_select" bind:value={selectedType}>
-    <option value="">Select...</option>
-    <option value="text">Text Input</option>
-    <option value="textarea">Textarea</option>
-    <option value="checkbox">Checkbox</option>
-    <option value="dropdown">Dropdown</option>
-    <option value="pre_filled_dropdown">Pre-filled Dropdown</option>
-    <option value="slider">Slider</option>
-    <option value="number">Number</option>
-    <option value="layer_image">Layer Image</option>
-    <option value="advanced_options">Advanced Options Switch</option>
-  </select>
-  <button on:click={() => addElement(selectedType)}>Add</button>
+ 
+  <button on:click={(e) => fieldSelector.openDialog(e)}>+ Add Element</button>
 </div>
 </div>
 <style>
