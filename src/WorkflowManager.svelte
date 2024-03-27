@@ -23,8 +23,8 @@
     let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
     let activatedTags = {}
     let selectedTag = ""
-
-  
+    let orginalname;
+    let duplicate = false;
     let debug=true
     function onMouseDown() {
         moving = true;
@@ -40,6 +40,15 @@
     onMount(async () => {
         await loadList();
         addExternalLoadListener();
+        let lastloadedworkflowname = localStorage.getItem("lastgyreworkflowloaded");
+        if(lastloadedworkflowname) {
+            let current = $workflowList.find((el) => {
+                return el.name == lastloadedworkflowname;
+            })
+
+            loadWorkflow(current)
+        }
+
     })
 
 
@@ -116,12 +125,15 @@
                 res.gyre = gyre;
                 res.gyre.lastModifiedReadable = JSON.parse(el.json).extra.gyre?.lastModifiedReadable || "";
                 res.gyre.lastModified = JSON.parse(el.json).extra.gyre?.lastModified || "";
+                if(!res.gyre.workflowid) res.gyre.workflowid =  (Math.random() + 1).toString(36).substring(2);
             }
             return res
         })
         console.log(data_workflow_list);
         workflowList.set(data_workflow_list)
     }
+
+
 
     async function scanLocalNewFiles() {
         let existFlowIds = [];
@@ -169,6 +181,7 @@
             workflow.gyre.tags = [];
         }
         console.log("load workflow!!");
+        if(!orginalname) orginalname = workflow.name;
         name = workflow.name
         $metadata = workflow.gyre        
         if (!$metadata.tags) $metadata.tags=[]
@@ -180,7 +193,7 @@
         let current = allworkflows.find((el) => {
             return el.name == workflow.name;
         })
-
+        localStorage.setItem('lastgyreworkflowloaded',workflow.name);
         if (!loadedworkflow) {
             if (!current) {
                 window.app.loadGraphData(workflow);
@@ -238,9 +251,27 @@
             file_path += '.json';
         }
         if ($metadata && graph.extra) graph.extra.gyre = $metadata;
-
         const graphJson = JSON.stringify(graph);
-        await updateFile(file_path, graphJson);
+
+
+
+
+
+        if(orginalname != name && !duplicate) {
+            let new_file_path;
+            if (orginalname) {
+                new_file_path = orginalname
+            }
+            if (!new_file_path.endsWith('.json')) {
+                new_file_path += '.json';
+            }
+            debugger;
+            await updateFile(new_file_path, graphJson);
+            await renameFile(new_file_path,file_path)
+        } else{
+            await updateFile(file_path, graphJson);
+            duplicate = false;
+        }
 
         // todo:get workflow fom comfyUI
         // $metadata should already point to extras.gyre - so nothing to do here
@@ -252,6 +283,28 @@
         await loadList();
     }
 
+
+
+
+    async function renameFile(file_path, new_file_path) {
+        try {
+            const response = await fetch("/workspace/rename_workflowfile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    file_path: file_path,
+                    new_file_path: new_file_path,
+                }),
+            });
+            const result = await response.text();
+            return result;
+        } catch (error) {
+            alert("Error rename .json file: " + error);
+            console.error("Error rename workspace:", error);
+        }
+    }
 
     async function updateFile(file_path, jsonData) {
         try {
@@ -269,6 +322,25 @@
             return result;
         } catch (error) {
             alert("Error saving workflow .json file: " + error);
+            console.error("Error saving workspace:", error);
+        }
+    }
+
+    async function deleteFile(file_path) {
+        try {
+            const response = await fetch("/workspace/delete_workflow_file", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    file_path: file_path,
+                }),
+            });
+            const result = await response.text();
+            return result;
+        } catch (error) {
+            alert("Error delete workflow .json file: " + error);
             console.error("Error saving workspace:", error);
         }
     }
@@ -295,6 +367,26 @@
         $metadata.tags.splice(index, 1);
         $metadata = $metadata
     }
+    function deleteWorkflow(workflow) {
+        console.log("delete workflow",workflow);
+        if (confirm("Delete Workflow?") == true) {
+            let name = workflow.name;
+            if (!name.endsWith('.json')) {
+                name += '.json';
+            }
+            deleteFile(name);
+            debugger;
+            $workflowList=$workflowList
+        }
+    }
+    function duplicateWorkflow() {
+        name = 'Copy of '+name;
+        $metadata.workflowid = (Math.random() + 1).toString(36).substring(2);
+        duplicate = true;
+        saveWorkflow();
+    }
+
+
     let refresh=0
     function updateForm() {
         if (state!=="editForm") return
@@ -359,6 +451,9 @@
             {#if state === "properties"}
                 <h1>Workflow Properties</h1>
                 <label for="name">Name:</label><input name="name" type="text" bind:value={name} class="text_input">
+                {#if name}
+                    <button on:click={(e) => { duplicateWorkflow()} }>Duplicate Workflow</button>
+                {/if}
                 <div class="tagedit">
                     <div class="tagTitle">Click on a Tag to remove it</div>
                     <div class="tags">
@@ -420,7 +515,7 @@
                     {#each $workflowList as workflow}
                         {#if isVisible(workflow)}
                             <!-- svelte-ignore a11y-click-events-have-key-events -->
-                            <div class="workflowEntry" on:click={loadWorkflow(workflow)}>
+                            <div style="position: relative" class="workflowEntry" on:click={loadWorkflow(workflow)}>
                                 {workflow.name}
                                 <div class="last_changed">{workflow.lastModifiedReadable}</div>
                                 <div class="tags">
@@ -429,6 +524,9 @@
                                             <div class="tag">{tag}</div>
                                         {/each}
                                     {/if}
+                                </div>
+                                <div  class="deleteicon">
+                                    <Icon name="close" on:click={(e)=>{deleteWorkflow(workflow)}}></Icon>
                                 </div>
                             </div>
                         {/if}
