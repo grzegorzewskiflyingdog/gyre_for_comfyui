@@ -37,7 +37,7 @@ server.PromptServer.instance.app.add_subapp("/dist/build/", workspace_app)
 
 
 def get_my_workflows_dir():
-    return os.path.join(comfy_path, 'my_workflows_dir')
+    return os.path.join(comfy_path, 'gyre_workflows')
 
 
 
@@ -117,3 +117,43 @@ async def readworkflowdir(request):
     path = get_my_workflows_dir()
     fileList = folder_handle(path, [])
     return web.Response(text=json.dumps(fileList), content_type='application/json')
+
+
+@server.PromptServer.instance.routes.post("/workspace/delete_workflow_file")
+async def delete_workflow_file(request):
+    data = await request.json()
+    file_path = data['file_path']
+
+    def delete_file_sync(file_path):
+        my_workflows_dir = get_my_workflows_dir()
+        full_path = os.path.join(my_workflows_dir, file_path)
+
+        if os.path.exists(full_path):
+            os.remove(full_path)
+            directory = os.path.dirname(full_path)
+            return "Deleted success"
+        else:
+            return "File was not found"
+
+    response_text = await asyncio.to_thread(delete_file_sync, file_path)
+
+    if response_text == "File not found":
+        return web.Response(text=response_text, status=404)
+    else:
+        return web.Response(text=response_text)
+
+@server.PromptServer.instance.routes.post("/workspace/rename_workflowfile")
+async def rename_workflowfile(request):
+    data = await request.json()
+    file_path = data['file_path']
+    new_name = data['new_file_path']
+    path = get_my_workflows_dir()
+
+    file_path_full = os.path.join(path, file_path)
+    new_name_path_full = os.path.join(path, new_name)
+
+    if os.path.exists(file_path_full):
+        os.rename(file_path_full,new_name_path_full)
+        return web.Response(text="Renamed successfully")
+    else:
+        return web.Response(text="Not found", status=404)
