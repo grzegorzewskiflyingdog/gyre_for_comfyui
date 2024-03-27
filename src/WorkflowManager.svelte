@@ -8,6 +8,7 @@
     import {metadata} from './stores/metadata'
     import Icon from './Icon.svelte'
     import { ComfyUIPreparser } from './ComfyUIPreparser.js'
+  import { component_subscribe } from "svelte/internal";
 
     let allworkflows;
     let moving = false;
@@ -393,6 +394,9 @@
         refresh++
 
     }
+    function refreshTags(e) {
+        $metadata.tags=e.detail
+    }
 </script>
 
 <div id="workflowManager" class="workflowManager" style="left: {left}px; top: {top}px;">
@@ -491,7 +495,7 @@
             {/if}
             {#if state === "editForm"}
                 <div style="margin-top:10px"></div>
-                <FormBuilder {refresh} ></FormBuilder>
+                <FormBuilder {refresh} on:refreshTags={(e)=>{ refreshTags(e)}}></FormBuilder>
             {/if}
             {#if state === "editRules"}
                 <div style="margin-top:10px"></div>
