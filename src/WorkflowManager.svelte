@@ -530,7 +530,7 @@
                                     {/if}
                                 </div>
                                 <div  class="deleteicon">
-                                    <Icon name="close" on:click={(e)=>{deleteWorkflow(workflow)}}></Icon>
+                                    <Icon name="delete" on:click={(e)=>{deleteWorkflow(workflow)}}></Icon>
                                 </div>
                             </div>
                         {/if}
