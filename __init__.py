@@ -40,6 +40,10 @@ def get_my_workflows_dir():
     return os.path.join(comfy_path, 'gyre_workflows')
 
 
+def get_my_log_dir():
+    return os.path.join(comfy_path, 'gyre_logs')
+
+
 
 @server.PromptServer.instance.routes.post("/workspace/update_json_file")
 async def update_json_file(request):
@@ -157,3 +161,22 @@ async def rename_workflowfile(request):
         return web.Response(text="Renamed successfully")
     else:
         return web.Response(text="Not found", status=404)
+
+
+@server.PromptServer.instance.routes.post("/workspace/upload_log_json_file")
+async def upload_log_json_file(request):
+    data = await request.json()
+    file_path = data['file_path']
+    json_str = data['json_str']
+
+    def write_json_to_file(json_str):
+        my_workflows_dir = get_my_log_dir()
+        full_path = os.path.join(my_workflows_dir, file_path)
+        # Create the directory if it doesn't exist
+        os.makedirs(os.path.dirname(full_path), exist_ok=True)
+        with open(full_path, 'w', encoding='utf-8') as file:
+            file.write(json_str)
+
+    # Offload the file update to a separate thread
+    await asyncio.to_thread(write_json_to_file, json_str)
+    return web.Response(text="File log updated successfully")
