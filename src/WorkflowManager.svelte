@@ -22,6 +22,7 @@
     let state = "list"
     let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated"]
     let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
+    let workflowapiList= writable([]);
     let activatedTags = {}
     let selectedTag = ""
     let orginalname;
@@ -40,6 +41,7 @@
 
     onMount(async () => {
         await loadList();
+        await loadLogList();
         addExternalLoadListener();
         let lastloadedworkflowname = localStorage.getItem("lastgyreworkflowloaded");
         if(lastloadedworkflowname) {
@@ -114,6 +116,13 @@
     }
 
 
+    async function loadLogList() {
+        // todo: make server request and read $metadata of all existing workflows on filesystem
+        let result = await scanLocalNewFiles('logs')
+        workflowapiList.set(result)
+    }
+
+
     async function loadList() {
         // todo: make server request and read $metadata of all existing workflows on filesystem
         let result = await scanLocalNewFiles()
@@ -136,7 +145,7 @@
 
 
 
-    async function scanLocalNewFiles() {
+    async function scanLocalNewFiles(type) {
         let existFlowIds = [];
         try {
             const response = await fetch("/workspace/readworkflowdir", {
@@ -147,11 +156,14 @@
                 body: JSON.stringify({
                     path: "",
                     existFlowIds,
+                    type
                 }),
             });
             let result = await response.json();
-            result = fixDatesFromServer(result);
-            allworkflows = result;
+            if(type!='logs') {
+                result = fixDatesFromServer(result);
+                allworkflows = result;
+            }
             return result;
         } catch (error) {
             console.error("Error scan local new files:", error);
@@ -194,6 +206,14 @@
         let current = allworkflows.find((el) => {
             return el.name == workflow.name;
         })
+        if (state=="errorlogs"){
+            current = $workflowapiList.find((el) => {
+                return el.name == workflow.name;
+            })
+            window.app.loadApiJson(JSON.parse(current.json));
+            state="errorlogs"
+            return;
+        }
         localStorage.setItem('lastgyreworkflowloaded',workflow.name);
         if (!loadedworkflow) {
             if (!current) {
@@ -266,7 +286,6 @@
             if (!new_file_path.endsWith('.json')) {
                 new_file_path += '.json';
             }
-            debugger;
             await updateFile(new_file_path, graphJson);
             await renameFile(new_file_path,file_path)
         } else{
@@ -376,7 +395,6 @@
                 name += '.json';
             }
             deleteFile(name);
-            debugger;
             $workflowList=$workflowList
         }
     }
@@ -443,10 +461,12 @@
                     <Icon name="properties" {state} on:click={async (e) =>  {state="properties" }}  ></Icon>
                     <Icon name="editForm" {state} on:click={async (e) =>  {state="editForm" }}  ></Icon>
                     <Icon name="editRules" {state} on:click={async (e) =>  {state="editRules" }}  ></Icon>
+                    <Icon name="errorlogs" {state} on:click={async (e) =>  {state="errorlogs" }}  ></Icon>
                 {:else}
                     <Icon name="properties" deactivate="deactivate"  ></Icon>
                     <Icon name="editForm"   deactivate="deactivate" ></Icon>
-                    <Icon name="editRules"   deactivate="deactivate"></Icon>                
+                    <Icon name="editRules"   deactivate="deactivate"></Icon>
+                    <Icon name="errorlogs" {state} on:click={async (e) =>  {state="errorlogs" }}  ></Icon>
                 {/if}
             {/key}
         </div>
@@ -537,6 +557,20 @@
                     {/each}
                 {/if}
 
+            {/if}
+
+            {#if state === "errorlogs"}
+                <h1>Error logs</h1>
+                {#if workflowList}
+                    {#each $workflowapiList as workflow}
+                        {#if isVisible(workflow)}
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            <div style="position: relative" class="workflowEntry" on:click={loadWorkflow(workflow)}>
+                                {workflow.name}
+                            </div>
+                        {/if}
+                    {/each}
+                {/if}
             {/if}
         </div>
     </div>
