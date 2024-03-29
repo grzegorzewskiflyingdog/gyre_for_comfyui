@@ -193,8 +193,8 @@
             workflow.gyre = {};
             workflow.gyre.tags = [];
         }
-        console.log("load workflow!!");
-        if(!orginalname) orginalname = workflow.name;
+        orginalname = workflow.name;
+        console.log("load workflow!!",orginalname,workflow.name);
         name = workflow.name
         $metadata = workflow.gyre        
         if (!$metadata.tags) $metadata.tags=[]
