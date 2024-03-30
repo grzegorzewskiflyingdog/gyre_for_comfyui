@@ -78,7 +78,7 @@
     {/if}
     {#if element.type === 'color_picker'}
         <label for={element.name}>{element.label}:</label>
-        <input type="color" class="textInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
+        <input type="color" class="textInput colorInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
     {/if}    
     {#if element.type === 'text'}
         <label for={element.name}>{element.label}:</label>
@@ -252,6 +252,10 @@
         color:white;
         margin: 0;
         min-width: 280px;
+    }
+    .colorInput {
+        padding:0;
+        border:0;
     }
     .textInput,.textarea {
         width: 280px;
