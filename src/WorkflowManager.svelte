@@ -515,7 +515,7 @@
             {/if}
             {#if state === "editForm"}
                 <div style="margin-top:10px"></div>
-                <FormBuilder {refresh} on:refreshTags={(e)=>{ refreshTags(e)}}></FormBuilder>
+                <FormBuilder {refresh} on:refreshTags={(e)=>{ refreshTags(e)}} posX={parseInt(left)} posY={parseInt(top)}}></FormBuilder>
             {/if}
             {#if state === "editRules"}
                 <div style="margin-top:10px"></div>
@@ -577,6 +577,7 @@
     {/if} <!-- foldOut -->
 </div>
 <Mappings on:updateForm={(e) => {updateForm()}} ></Mappings>
+
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove}/>
  
 <style>

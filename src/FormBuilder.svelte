@@ -14,7 +14,7 @@
   export let form_key='default'  // support for multiple forms (e.g. wizards) in the future
   export let data={}            // the form data
   export let refresh  
-
+  export let posX,posY        // position of the parent dialog
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
   let formElements = $metadata.forms[form_key].elements
@@ -257,7 +257,7 @@ let selectWorkflowType=false
 </div>
 <div>
  
-  <button on:click={(e) => fieldSelector.openDialog(e)}>+ Add Element</button>
+  <button on:click={(e) => fieldSelector.openDialog(e,posX,posY)}>+ Add Element</button>
 </div>
 </div>
 <style>

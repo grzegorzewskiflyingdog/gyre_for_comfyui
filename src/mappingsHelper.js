@@ -49,13 +49,11 @@ export class mappingsHelper {
             let field=allFields.outputFields[i]
             fieldNames[field.name]=true
         }                
-        console.log(fieldNames)
         for (let nodeId in metadata.mappings) {
             let mappings=metadata.mappings[nodeId]
             let filteredArray=[]
             for(let i=0;i<mappings.length;i++) {
                 let m=mappings[i]
-                console.log(m)
                 if (fieldNames[m.fromField]) filteredArray.push(m)
             }
             metadata.mappings[nodeId]=filteredArray            

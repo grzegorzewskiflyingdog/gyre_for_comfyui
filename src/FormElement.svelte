@@ -76,6 +76,10 @@
         <!-- svelte-ignore a11y-missing-attribute -->
         <img name="{element.name}" src="{layer_image_preview}">
     {/if}
+    {#if element.type === 'color_picker'}
+        <label for={element.name}>{element.label}:</label>
+        <input type="color" class="textInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
+    {/if}    
     {#if element.type === 'text'}
         <label for={element.name}>{element.label}:</label>
         <input type="text" class="textInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
@@ -142,7 +146,7 @@
             <input type="checkbox" name="hidden" bind:checked={element.hidden}  /> Hide Input in form
         </div>       
     {/if}
-    {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'}
+    {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'  || element.type === 'color_picker'}}
         <div class="formLine">
             <label  for="placeholder"> Placeholder: </label>
         <input type="text" name="placeholder" value={element.placeholder} on:input={(e) => updateElement({ placeholder: e.target.value })} />

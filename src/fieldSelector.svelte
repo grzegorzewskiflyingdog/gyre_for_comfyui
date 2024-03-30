@@ -10,14 +10,14 @@
     
     let left="100px"
     let top="100px"
-    export function openDialog(e) {
+    export function openDialog(e,posX,posY) {
         showFieldSelector="block"
-        let x=e.clientX-460/2
-        let y=e.clientY-560
+        let x=e.clientX-460/2-posX
+        let y=e.clientY-560-posY
         if (x<0) x=0
         if (y<0) y=0
-        if (x+460>window.innerWidth) x=window.innerWidth-540
-        if (y+560>window.innerHeight) y=window.innerHeight-400
+        if (x+460>window.innerWidth) x=window.innerWidth-460
+        if (y+560>window.innerHeight) y=window.innerHeight-560
         left=x+"px"
         top=y+"px"    
     }
@@ -117,7 +117,10 @@
     <div class="field"  on:click={(e) => {selectElement("number")}}>
         <Icon name="form_text"></Icon><span>Number</span>
     </div>     
-
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div class="field" on:click={(e) => { selectElement("color_picker")}}>
+        <Icon name="form_colorpicker" ></Icon><span>Color Picker</span>
+    </div>
     <h1>Special fields</h1>
     <!-- svelte-ignore a11y-click-events-have-key-events -->    
     <div class="field"  on:click={(e) => {selectElement("layer_image")}}>
