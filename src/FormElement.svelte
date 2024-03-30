@@ -9,6 +9,7 @@
     const dispatch = createEventDispatcher()
     export let value
     export let readonly=""
+
     if (element.type==="slider") {
         if (!value) value=element.min
     }
@@ -22,7 +23,7 @@
             element.default=parseFloat(element.default)
         }
         dispatch('update', element)
-
+        
     }
 
     // Function to handle option updates for dropdowns

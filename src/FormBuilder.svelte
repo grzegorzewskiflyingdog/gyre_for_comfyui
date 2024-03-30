@@ -73,7 +73,10 @@
     if (!advancedOptions) return
     dragStartIndex = index
   }
-
+  /**
+   * drag and drop to change order in list
+   * @param event
+   */
   function handleDragOver(event) {
     if (!advancedOptions) return
     event.preventDefault() // Necessary to allow dropping
@@ -98,13 +101,35 @@
     dragStartIndex = -1
     $metadata.forms[form_key].elements=formElements
 }
+/**
+ * updates elements data (e.g. name, label,...)
+ * @param index
+ * @param element
+ */
+  function updateElement(index,element) {
+    formElements[index]=element
+    ensureUniqueNames()
+    setDefaultValues()
+    $metadata.forms[form_key].elements=formElements
+    let helper=new mappingsHelper()
+    helper.cleanUpMappings($metadata)
 
+  }
+  /**
+   * remove one element from form
+   * @param index
+   */
   function removeElement(index) {
     selectWorkflowType=false
     formElements.update(elements => elements.filter((_, i) => i !== index))
   }
 
   let advancedOptions=true
+  /**
+   * hide/show parts of the form
+   * @param element
+   * @param index
+   */
   function checkAdvancedOptions(element,index) {
     if (advancedOptions) return "block"
     if (element.type==="advanced_options") return "block"
@@ -121,6 +146,7 @@
     if (index <advancedOptionsIndex) return "block" // before advanced options
     return "none"
   }
+
 
   function executeRules(element,value) {
     // first set the new value
@@ -221,7 +247,7 @@ let selectWorkflowType=false
         on:remove={() => removeElement(index)}  
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
-        on:update={(e) => { formElements[index]=e.detail; ensureUniqueNames(); setDefaultValues() }}
+        on:update={(e) => { updateElement(index,e.detail)  }}
         on:delete={(e) => { formElements.splice(showPropertiesIdx,1);formElements=formElements;showPropertiesIdx=-1 }}
         value={data[element.name]}
         on:change={e => { executeRules(element,e.detail.value); }}
