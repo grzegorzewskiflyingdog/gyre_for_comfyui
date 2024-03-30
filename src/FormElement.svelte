@@ -142,7 +142,7 @@
             <input type="checkbox" name="hidden" bind:checked={element.hidden}  /> Hide Input in form
         </div>       
     {/if}
-    {#if element.type === 'text' || element.type === 'textarea'}
+    {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'}
         <div class="formLine">
             <label  for="placeholder"> Placeholder: </label>
         <input type="text" name="placeholder" value={element.placeholder} on:input={(e) => updateElement({ placeholder: e.target.value })} />
@@ -196,6 +196,12 @@
             <label for="step"> Step: </label>
             <input name="step" type="number" value={element.step} on:input={(e) => updateElement({ step: e.target.value })} />
        </div>
+    {/if}
+    {#if element.type === 'number'}
+       <button on:click={()=>{  updateElement({ type: "slider" }) }}>Convert to Slider</button>
+    {/if}
+    {#if element.type === 'slider'}
+       <button on:click={()=>{  updateElement({ type: "number" }) }}>Convert to Number</button>
     {/if}
     <div><button on:click={() => deleteElement()} class="delete">Delete</button></div>
 
