@@ -118,7 +118,8 @@
 
     async function loadLogList() {
         // todo: make server request and read $metadata of all existing workflows on filesystem
-        let result = await scanLocalNewFiles('logs')
+        let result = await scanLocalNewFiles('logs');
+        result = result.sort((a,b) => b.name.replace(/[^0-9]/g,"") - a.name.replace(/[^0-9]/g,""));
         workflowapiList.set(result)
     }
 
@@ -468,12 +469,12 @@
                     <Icon name="properties" {state} on:click={async (e) =>  {state="properties" }}  ></Icon>
                     <Icon name="editForm" {state} on:click={async (e) =>  {state="editForm" }}  ></Icon>
                     <Icon name="editRules" {state} on:click={async (e) =>  {state="editRules" }}  ></Icon>
-                    <Icon name="errorlogs" {state} on:click={async (e) =>  {state="errorlogs" }}  ></Icon>
+                    <Icon name="errorlogs" {state} on:click={async (e) =>  {await loadLogList(); state="errorlogs" }}  ></Icon>
                 {:else}
                     <Icon name="properties" deactivate="deactivate"  ></Icon>
                     <Icon name="editForm"   deactivate="deactivate" ></Icon>
                     <Icon name="editRules"   deactivate="deactivate"></Icon>
-                    <Icon name="errorlogs" {state} on:click={async (e) =>  {state="errorlogs" }}  ></Icon>
+                    <Icon name="errorlogs" {state} on:click={async (e) =>  {await loadLogList(); state="errorlogs" }}  ></Icon>
                 {/if}
             {/key}
         </div>
