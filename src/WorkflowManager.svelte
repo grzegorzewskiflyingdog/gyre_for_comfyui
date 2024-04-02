@@ -262,11 +262,12 @@
             $metadata = loadedworkflow.extra.gyre;
         }
         loadedworkflow = null;
-
         let file_path = graph.extra?.workspace_info?.name || "new.json";
         if (name) {
             file_path = name
         }
+        console.log("save file: ",file_path,"name: ",name,"gyrename: ",graph.extra?.workspace_info?.name);
+
         if (!file_path.endsWith('.json')) {
             // Add .json extension if it doesn't exist
             file_path += '.json';
@@ -276,9 +277,10 @@
 
 
 
-
+        console.log("  orginal name ",orginalname);
 
         if(orginalname != name && !duplicate) {
+            console.log("rename file orginal ",orginalname,"name",name);
             let new_file_path;
             if (orginalname) {
                 new_file_path = orginalname
@@ -288,9 +290,14 @@
             }
             await updateFile(new_file_path, graphJson);
             await renameFile(new_file_path,file_path)
+            duplicate = false;
+            orginalname = name;
         } else{
             await updateFile(file_path, graphJson);
-            duplicate = false;
+            if(duplicate){
+                orginalname = name;
+                duplicate = false;
+            }
         }
 
         // todo:get workflow fom comfyUI
