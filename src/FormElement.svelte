@@ -9,6 +9,7 @@
     const dispatch = createEventDispatcher()
     export let value
     export let readonly=""
+
     if (element.type==="slider") {
         if (!value) value=element.min
     }
@@ -22,7 +23,7 @@
             element.default=parseFloat(element.default)
         }
         dispatch('update', element)
-
+        
     }
 
     // Function to handle option updates for dropdowns
@@ -75,6 +76,10 @@
         <!-- svelte-ignore a11y-missing-attribute -->
         <img name="{element.name}" src="{layer_image_preview}">
     {/if}
+    {#if element.type === 'color_picker'}
+        <label for={element.name}>{element.label}:</label>
+        <input type="color" class="textInput colorInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
+    {/if}    
     {#if element.type === 'text'}
         <label for={element.name}>{element.label}:</label>
         <input type="text" class="textInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
@@ -141,7 +146,7 @@
             <input type="checkbox" name="hidden" bind:checked={element.hidden}  /> Hide Input in form
         </div>       
     {/if}
-    {#if element.type === 'text' || element.type === 'textarea'}
+    {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'  || element.type === 'color_picker'}}
         <div class="formLine">
             <label  for="placeholder"> Placeholder: </label>
         <input type="text" name="placeholder" value={element.placeholder} on:input={(e) => updateElement({ placeholder: e.target.value })} />
@@ -196,6 +201,12 @@
             <input name="step" type="number" value={element.step} on:input={(e) => updateElement({ step: e.target.value })} />
        </div>
     {/if}
+    {#if element.type === 'number'}
+       <button on:click={()=>{  updateElement({ type: "slider" }) }}>Convert to Slider</button>
+    {/if}
+    {#if element.type === 'slider'}
+       <button on:click={()=>{  updateElement({ type: "number" }) }}>Convert to Number</button>
+    {/if}
     <div><button on:click={() => deleteElement()} class="delete">Delete</button></div>
 
 </div>
@@ -241,6 +252,10 @@
         color:white;
         margin: 0;
         min-width: 280px;
+    }
+    .colorInput {
+        padding:0;
+        border:0;
     }
     .textInput,.textarea {
         width: 280px;

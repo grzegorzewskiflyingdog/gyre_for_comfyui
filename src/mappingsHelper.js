@@ -34,4 +34,30 @@ export class mappingsHelper {
         metadata.mappings[nodeId] = mappings
     }    
 
+    cleanUpMappings(metadata) {
+        let fieldNames={}
+        let allFields=this.getMappingFields(metadata)
+        for(let i=0;i<allFields.fields.length;i++) {
+            let field=allFields.fields[i]
+            fieldNames[field.name]=true
+        }
+        for(let i=0;i<allFields.defaultFields.length;i++) {
+            let field=allFields.defaultFields[i]
+            fieldNames[field.name]=true
+        }        
+        for(let i=0;i<allFields.outputFields.length;i++) {
+            let field=allFields.outputFields[i]
+            fieldNames[field.name]=true
+        }                
+        for (let nodeId in metadata.mappings) {
+            let mappings=metadata.mappings[nodeId]
+            let filteredArray=[]
+            for(let i=0;i<mappings.length;i++) {
+                let m=mappings[i]
+                if (fieldNames[m.fromField]) filteredArray.push(m)
+            }
+            metadata.mappings[nodeId]=filteredArray            
+        }
+    }
+
 }
