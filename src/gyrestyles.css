@@ -18,7 +18,7 @@
 
 .workflowManager .moveIcon {
     display: inline-block;
-    margin-left: 4px;
+    margin-left: -8px;
 }
 .workflowManager .title {
     display: inline-block;
