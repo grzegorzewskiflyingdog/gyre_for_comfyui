@@ -57,6 +57,14 @@ export default {
 			compact: true
 		  }),
 		  svelte({
+			emitCss: false,
+			compilerOptions: {
+				customElement: false,
+				// enable run-time checks when not in production
+				dev: !production
+			}
+		}), 
+	/*	  svelte({
 			    include: /^(?!CE_).*\.svelte$/,
 				emitCss: false,
 				compilerOptions: {
@@ -64,16 +72,16 @@ export default {
 					// enable run-time checks when not in production
 					dev: !production
 				}
-			}),
-			svelte({
-			/*	include: /^CE_.*\.svelte$/,*/
+			}),*/
+	/*		svelte({
+				include: /^CE_.*\.svelte$/,
 			include: "CE_LayerStack3D.svelte",
 				compilerOptions: {
 					customElement: true,
 					// enable run-time checks when not in production
 					dev: !production
 				}
-			}),
+			}),*/
 
 
 		// we'll extract any component CSS out into

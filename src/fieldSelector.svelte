@@ -127,6 +127,10 @@
         <Icon name="form_layers"></Icon><span>Layer Image</span>
     </div>     
     <!-- svelte-ignore a11y-click-events-have-key-events -->    
+    <div class="field"  on:click={(e) => {selectElement("drop_layers")}}>
+        <Icon name="form_layers"></Icon><span>Drop Layers</span>
+    </div>        
+    <!-- svelte-ignore a11y-click-events-have-key-events -->    
     <div class="field" on:click={(e) => {selectElement("currentLayer")}}>
         <Icon name="form_layers2" ></Icon><span>Selected Layer</span>
     </div>        

@@ -1,27 +1,30 @@
-<svelte:options tag="fds-layer-stack-3d"></svelte:options>
 
 
 <script>
 export let layers=[]
 export let state="3d"
-
+export let mode=""
 </script>
 <div class="layer-container stacked-top">
-  {#if layers.length===0}
-  <div class="layer bottom-layer " class:bottom-layer-flat={state==="flat"} style="background: url(/appdata/checker_thumb.png)"></div>
-  {/if}
-  {#if layers.length===1}
-  <div class="layer bottom-layer "  class:bottom-layer-flat={state==="flat"} style="background-image: url({layers[0]});"></div>
-  {/if}  
-  {#if layers.length===2}
-  <div class="layer mid-layer "  class:mid-layer-flat={state==="flat"} style="background-image: url({layers[1]})"></div>
-  <div class="layer bottom-layer " class:bottom-layer-flat={state==="flat"} style="background-image: url({layers[0]})"></div>
-  {/if}  
 
-  <!-- 
-  <div class="layer mid-layer light-blue-layer"></div>
-  <div class="layer top-layer white-layer"></div>
-  -->
+  {#if !mode==="drop"}
+    {#if layers.length===0}
+    <div class="layer bottom-layer " class:bottom-layer-flat={state==="flat"} style="background: url(/appdata/checker_thumb.png)"></div>
+    {/if}
+    {#if layers.length===1}
+    <div class="layer bottom-layer "  class:bottom-layer-flat={state==="flat"} style="background-image: url({layers[0]});"></div>
+    {/if}  
+    {#if layers.length===2}
+    <div class="layer mid-layer "  class:mid-layer-flat={state==="flat"} style="background-image: url({layers[1]})"></div>
+    <div class="layer bottom-layer " class:bottom-layer-flat={state==="flat"} style="background-image: url({layers[0]})"></div>
+    {/if}  
+  {:else}
+    <div class="layer drop-layer drop-ripple"  >
+      <div></div>
+      <div></div>
+    </div>
+  {/if}
+
 </div>
 <style>
             * {
@@ -53,7 +56,10 @@ export let state="3d"
     -1px 0 28px 0 rgba(34, 33, 81, 0.01),
     28px 28px 28px 0 rgba(34, 33, 81, 0.85);  
 }
-
+.drop-layer {
+  background: radial-gradient(#0099dd, #026e81);
+    transform: rotateX(45deg) rotateZ(45deg) translateZ(50px);
+}
 
 
 .bottom-layer {
@@ -74,5 +80,35 @@ export let state="3d"
     transform: rotateX(45deg) rotateZ(45deg) translateZ(150px);
 }
 
+.drop-ripple {
+  display: inline-block;
+  position: relative;
 
+}
+.drop-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: drop-ripples 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.drop-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes drop-ripples {
+  0% {
+    top: 46px;
+    left: 46px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 92px;
+    height: 92px;
+    opacity: 0;
+  }
+}
 </style>

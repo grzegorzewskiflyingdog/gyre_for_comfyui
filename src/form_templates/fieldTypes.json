@@ -74,6 +74,13 @@
         "menu_type": "currentLayer"
     },
     {
+        "name": "dropLayer",
+        "label": "Drop Layer",
+        "num_layers": 1,
+        "type": "drop_layers",
+        "menu_type": "currentLayer"
+    },
+    {
         "name": "preview",
         "type": "checkbox",
         "label": "Preview",
