@@ -5,7 +5,7 @@
     export let showProperties=false
     import {layer_image_preview} from "./images"
     import {metadata} from "./stores/metadata"
-    import LayerStack3D from "./CE_LayerStack3D.svelte"
+    import LayerStack3D from "./LayerStack3D.svelte"
 
     const dispatch = createEventDispatcher()
     export let value
