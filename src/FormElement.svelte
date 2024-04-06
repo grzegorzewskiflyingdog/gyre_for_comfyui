@@ -11,7 +11,6 @@
     export let value
     export let readonly=""
     let layers=[]
-
     if (element.type==="slider") {
         if (!value) value=element.min
     }
@@ -80,9 +79,11 @@
     {/if}
     {#if element.type==="drop_layers"} 
         <label for={element.name} class="layer_drop_layers">{element.label}:</label>
-        <div class="drop_layers">
-            <LayerStack3D mode="drop"></LayerStack3D>
-        </div>        
+            {#each Array(parseInt(element.num_layers)) as _, i}
+                <div class="drop_layers">
+                    <LayerStack3D mode="drop"></LayerStack3D>
+                </div>        
+            {/each}
     {/if}    
     {#if element.type==="layer_image_ids"}
     <LayerStack3D {layers}></LayerStack3D>
@@ -183,6 +184,10 @@
             <label  for="name"> Label: </label>
             <input type="text" name="name" value={element.label} on:change={(e) => updateElement({ label: e.target.value })} />
         </div>    
+        <div class="formLine">
+            <label  for="name"> Number: </label>
+            <input type="text" name="name" value={element.num_layers} on:change={(e) => updateElement({ num_layers: parseInt(e.target.value) })} />
+        </div>            
     {/if}    
     {#if element.type === 'dropdown'}
         {#each element.options as option, index}
