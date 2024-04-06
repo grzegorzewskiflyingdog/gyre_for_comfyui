@@ -1,7 +1,7 @@
 <script>
-  import FormBuilder from "./FormBuilder.svelte";
   import WorkflowManager from "./WorkflowManager.svelte";
-
+  import CE_LayerStack3D from "./CE_LayerStack3D.svelte"
+  customElements.define('fds-layer-stack-3d', CE_LayerStack3D);
 </script>
 
 <WorkflowManager></WorkflowManager>
