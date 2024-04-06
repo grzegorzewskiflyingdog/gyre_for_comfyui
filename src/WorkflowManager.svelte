@@ -27,7 +27,7 @@
     let selectedTag = ""
     let orginalname;
     let duplicate = false;
-    let debug=true
+    let debug=false
     function onMouseDown() {
         moving = true;
     }
