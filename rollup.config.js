@@ -66,8 +66,8 @@ export default {
 				}
 			}),
 			svelte({
-				include: /^CE_.*\.svelte$/,
-				emitCss: false,
+			/*	include: /^CE_.*\.svelte$/,*/
+			include: "CE_LayerStack3D.svelte",
 				compilerOptions: {
 					customElement: true,
 					// enable run-time checks when not in production

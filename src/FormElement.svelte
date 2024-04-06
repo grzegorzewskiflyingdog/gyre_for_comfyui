@@ -72,7 +72,8 @@
     {/if}
 
     {#if element.type==="layer_image"} 
-    <fds-layer-stack-3d {layers}></fds-layer-stack-3d>
+    test:
+    <fds-layer-stack-3d {layers} state="3d"></fds-layer-stack-3d>
         <label for={element.name} class="layer_image_label">{element.name}:</label>
         <!-- svelte-ignore a11y-missing-attribute -->
         <img name="{element.name}" src="{layer_image_preview}">
