@@ -16,7 +16,19 @@ export class mappingsHelper {
         if (metadata.forms && metadata.forms.default && metadata.forms.default.elements) fields=metadata.forms.default.elements
         let defaultFields=this.getDefaultFields()
         let outputFields=[{name:"resultImage"}]
-        let res= {fields,defaultFields,outputFields}
+        let res= {fields:JSON.parse(JSON.stringify(fields)),defaultFields,outputFields}
+        for(let i=0;i<fields.length;i++) {
+            let field=fields[i]
+            if (field.type==="drop_layers") {
+                if (field.num_layers===1) continue  // only one image
+                for(let k=0;k<field.num_layers;k++) {
+                    let newField={name:field.name+"_"+k,type:field.type,originalName:field.name,index:k}    // add new fields with underscore
+                    res.fields.push(newField)
+                }
+            }
+        }
+
+
         return res
     }
 
