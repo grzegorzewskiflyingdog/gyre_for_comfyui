@@ -55,6 +55,7 @@
     max-height: 600px;
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: thin;
 }
 .miniMenu .title {
     display: inline-block;

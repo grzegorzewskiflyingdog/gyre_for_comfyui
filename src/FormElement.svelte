@@ -105,8 +105,8 @@
       <!-- <input type="checkbox" checked={value}  on:change={e => {changeValue(e.target.value)}}/> {element.label}-->  
 
         <div class="checkbox-wrapper-3">
-        <input type="checkbox" id="cbx-3"  {readonly}  checked={value}  on:change={e => {changeValue(e.target.value)}} />
-        <label for="cbx-3" class="toggle"><span></span></label>
+        <input type="checkbox" id={element.name}  {readonly}  checked={value}  on:change={e => {changeValue(e.target.value)}} />
+        <label for={element.name} class="toggle"><span></span></label>
         </div>
 
     {:else if element.type === 'dropdown'}
@@ -413,16 +413,16 @@
     pointer-events: none;
   }
 
-  .checkbox-wrapper-3 #cbx-3:checked + .toggle:before {
+  .checkbox-wrapper-3 input:checked + .toggle:before {
     background: rgb(227, 206, 116);
   }
-  .checkbox-wrapper-3 #cbx-3:checked + .toggle span {
+  .checkbox-wrapper-3 input:checked + .toggle span {
     background: #cda600;
     transform: translateX(20px);
     transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
     box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
   }
-  .checkbox-wrapper-3 #cbx-3:checked + .toggle span:before {
+  .checkbox-wrapper-3 input:checked + .toggle span:before {
     transform: scale(1);
     opacity: 0;
     transition: all 0.4s ease;
