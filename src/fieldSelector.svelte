@@ -139,6 +139,10 @@
         <Icon name="form_preview" ></Icon><span>Preview</span>
     </div>   
     <!-- svelte-ignore a11y-click-events-have-key-events -->    
+    <div class="field" on:click={(e) => {selectElement("magnifier")}}>
+        <Icon name="form_magnifier" ></Icon><span>Magnifier</span>
+    </div>     
+    <!-- svelte-ignore a11y-click-events-have-key-events -->    
     <div class="field" on:click={(e) => {selectElement("addLayer")}}>
         <Icon name="form_layers3" ></Icon><span>Add Layer</span>
     </div>         

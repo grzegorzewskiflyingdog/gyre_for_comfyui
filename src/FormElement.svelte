@@ -3,7 +3,7 @@
 
     export let element;
     export let showProperties=false
-    import {layer_image_preview} from "./images"
+    import {layer_image_preview,magnifier_preview} from "./images"
     import {metadata} from "./stores/metadata"
     import LayerStack3D from "./LayerStack3D.svelte"
 
@@ -77,6 +77,11 @@
         <!-- svelte-ignore a11y-missing-attribute -->
         <img name="{element.name}" src="{layer_image_preview}">
     {/if}
+    {#if element.type==="magnifier"} 
+        <label for="magnifier" class="layer_image_label">Magnifier:</label>
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <img name="magnifier" src="{magnifier_preview}">
+    {/if}    
     {#if element.type==="drop_layers"} 
         <label for={element.name} class="layer_drop_layers">{element.label}:</label>
             {#each Array(parseInt(element.num_layers)) as _, i}
@@ -141,7 +146,7 @@
 <div class="element-properties" >
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="formClose" on:click={closeProperties}>X</div>
-    {#if element.type !== 'layer_image' &&  element.type!=="advanced_options"  &&  element.type!=="drop_layers"} 
+    {#if element.type !== 'layer_image' &&  element.type!=="advanced_options"  &&   element.type!=="magnifier" && element.type!=="drop_layers"} 
         <div class="formLine" >
             <label for="label">Label:</label>
             <input type="text" name="label" value={element.label} on:input={(e) => updateElement({ label: e.target.value })} />

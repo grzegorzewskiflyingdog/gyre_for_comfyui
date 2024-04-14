@@ -2,6 +2,10 @@
     "default": {
         "elements": [
             {
+                "name": "magnifier",
+                "type": "magnifier"
+            },            
+            {
                 "name": "currentLayer",
                 "type": "layer_image",
                 "label": "Value_6y0om",

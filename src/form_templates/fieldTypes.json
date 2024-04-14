@@ -90,6 +90,10 @@
 
     },
     {
+        "name": "magnifier",
+        "type": "magnifier"
+    },    
+    {
         "name": "newLayer",
         "type": "checkbox",
         "label": "New Layer",
