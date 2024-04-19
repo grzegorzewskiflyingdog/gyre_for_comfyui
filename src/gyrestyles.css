@@ -268,3 +268,6 @@ button:focus {
     top: 30px;
     right: 10px;
 }
+.workflowManager .inactive{
+    background-color: #9A9999;
+}

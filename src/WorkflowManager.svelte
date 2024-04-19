@@ -23,11 +23,14 @@
     let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated"]
     let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
     let workflowapiList= writable([]);
+    let workflowdebugList= writable([]);
+    let workflowformList= writable([]);
     let activatedTags = {}
     let selectedTag = ""
     let orginalname;
     let duplicate = false;
-    let debug=false
+    let debug=false;
+    let debugmode='errormode';
     function onMouseDown() {
         moving = true;
     }
@@ -121,6 +124,15 @@
         let result = await scanLocalNewFiles('logs');
         result = result.sort((a,b) => b.name.replace(/[^0-9]/g,"") - a.name.replace(/[^0-9]/g,""));
         workflowapiList.set(result)
+
+
+        result = await scanLocalNewFiles('debugs');
+        result = result.sort((a,b) => b.name.replace(/[^0-9]/g,"") - a.name.replace(/[^0-9]/g,""));
+        workflowdebugList.set(result);
+
+        result = await scanLocalNewFiles('formdata');
+        result = result.sort((a,b) => b.name.replace(/[^0-9]/g,"") - a.name.replace(/[^0-9]/g,""));
+        workflowformList.set(result);
     }
 
 
@@ -160,8 +172,9 @@
                     type
                 }),
             });
+
             let result = await response.json();
-            if(type!='logs') {
+            if(type!='logs' && type!='debugs' && type!='formdata') {
                 result = fixDatesFromServer(result);
                 allworkflows = result;
             }
@@ -208,12 +221,27 @@
             return el.name == workflow.name;
         })
         if (state=="errorlogs"){
-            current = $workflowapiList.find((el) => {
-                return el.name == workflow.name;
-            })
-            window.app.loadApiJson(JSON.parse(current.json));
-            state="errorlogs"
-            return;
+
+
+            if (debugmode=='errormode') {
+                current = $workflowapiList.find((el) => {
+                    return el.name == workflow.name;
+                })
+                window.app.loadApiJson(JSON.parse(current.json));
+                state = "errorlogs"
+                return;
+            }
+            if (debugmode=='debugmode'){
+                current = $workflowdebugList.find((el) => {
+                    return el.name == workflow.name;
+                })
+                let wf = JSON.parse(current.json);
+                window.app.loadGraphData(wf);
+                state="errorlogs"
+                return;
+            }
+
+
         }
         localStorage.setItem('lastgyreworkflowloaded',workflow.name);
         if (!loadedworkflow) {
@@ -423,6 +451,26 @@
     function refreshTags(e) {
         $metadata.tags=e.detail
     }
+
+    function download(text) {
+        var element = document.createElement('a');
+        element.setAttribute('href',
+            'data:text/plain;charset=utf-8, '
+            + encodeURIComponent(text));
+        element.setAttribute('download', 'formdata.json');
+        document.body.appendChild(element);
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+
+    function loadWorkflowForm(element){
+        let elem = $workflowformList.find((el)=>{return el.name=='formdata_'+element.name});
+        console.log("load form  element!!!",element,$workflowformList,elem);
+        download(elem.json);
+    }
+
 </script>
 
 <div id="workflowManager" class="workflowManager" style="left: {left}px; top: {top}px;">
@@ -568,18 +616,41 @@
             {/if}
 
             {#if state === "errorlogs"}
-                <h1>Error logs</h1>
-                {#if workflowList}
-                    {#each $workflowapiList as workflow}
-                        {#if isVisible(workflow)}
-                            <!-- svelte-ignore a11y-click-events-have-key-events -->
-                            <div style="position: relative" class="workflowEntry" on:click={loadWorkflow(workflow)}>
-                                {workflow.name}
-                            </div>
-                        {/if}
-                    {/each}
+                {#if debugmode=='errormode'}
+                    <h1>Error logs</h1>
+                {:else}
+                    <h1>Debug logs</h1>
+                {/if}
+                <button  class:inactive={debugmode!='errormode'} on:click={(e) => {debugmode='errormode'} }>Error Log</button>
+                <button class:inactive={debugmode!='debugmode'} on:click={(e) => {debugmode='debugmode'} }>Debug Log</button>
+
+                {#if debugmode=='errormode'}
+                    {#if workflowList}
+                        {#each $workflowapiList as workflow}
+                            {#if isVisible(workflow)}
+                                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                <div style="position: relative" class="workflowEntry" on:click={loadWorkflow(workflow)}>
+                                    {workflow.name}
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
+                {/if}
+
+                {#if debugmode=='debugmode'}
+                        {#each $workflowdebugList as workflow}
+                            {#if isVisible(workflow)}
+                                <div style="position: relative" class="workflowEntry" on:click={loadWorkflow(workflow)}>
+                                    {workflow.name}
+                                </div>
+                                <div style="position: relative" class="workflowEntry" on:click={loadWorkflowForm(workflow)}>
+                                    Form data {workflow.name}
+                                </div>
+                            {/if}
+                        {/each}
                 {/if}
             {/if}
+
         </div>
     </div>
     {/if} <!-- foldOut -->

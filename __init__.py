@@ -43,6 +43,11 @@ def get_my_workflows_dir():
 def get_my_log_dir():
     return os.path.join(comfy_path, 'gyre_logs')
 
+def get_my_debug_dir():
+    return os.path.join(comfy_path, 'gyre_debug')
+
+def get_my_formdata_dir():
+    return os.path.join(comfy_path, 'gyre_formdata')
 
 
 @server.PromptServer.instance.routes.post("/workspace/update_json_file")
@@ -114,6 +119,10 @@ async def readworkflowdir(request):
     path = None
     if (type and type=='logs'):
         path = get_my_log_dir()
+    elif  (type and type=='debugs'):
+        path = get_my_debug_dir()
+    elif  (type and type=='formdata'):
+        path = get_my_formdata_dir()
     else:
         path = get_my_workflows_dir()
     print("path")
@@ -177,9 +186,15 @@ async def upload_log_json_file(request):
     data = await request.json()
     file_path = data['file_path']
     json_str = data['json_str']
+    debug_dir = data['debugdir']
+    def write_json_to_file(json_str,debug_dir):
+        if debug_dir and debug_dir=='formdata':
+            my_workflows_dir = get_my_formdata_dir()
+        elif debug_dir:
+            my_workflows_dir = get_my_debug_dir()
+        else:
+            my_workflows_dir = get_my_log_dir()
 
-    def write_json_to_file(json_str):
-        my_workflows_dir = get_my_log_dir()
         full_path = os.path.join(my_workflows_dir, file_path)
         # Create the directory if it doesn't exist
         os.makedirs(os.path.dirname(full_path), exist_ok=True)
@@ -187,5 +202,5 @@ async def upload_log_json_file(request):
             file.write(json_str)
 
     # Offload the file update to a separate thread
-    await asyncio.to_thread(write_json_to_file, json_str)
+    await asyncio.to_thread(write_json_to_file, json_str,debug_dir)
     return web.Response(text="File log updated successfully")
