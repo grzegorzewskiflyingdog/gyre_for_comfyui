@@ -20,7 +20,7 @@
     let foldOut = false
     let name = ""   // current loaded workflow name
     let state = "list"
-    let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated"]
+    let tags = ["Txt2Image", "Inpainting", "ControlNet", "LayerMenu", "Deactivated","Img2Img"]
     let workflowList = writable([])    // todo:load all workflow basic data (name, last changed and gyre object) from server via server request
     let workflowapiList= writable([]);
     let workflowdebugList= writable([]);
