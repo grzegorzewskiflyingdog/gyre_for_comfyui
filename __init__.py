@@ -186,7 +186,8 @@ async def upload_log_json_file(request):
     data = await request.json()
     file_path = data['file_path']
     json_str = data['json_str']
-    debug_dir = data['debugdir']
+    debug_dir = None
+    if ('debugdir' in data): debug_dir = data['debugdir']
     def write_json_to_file(json_str,debug_dir):
         if debug_dir and debug_dir=='formdata':
             my_workflows_dir = get_my_formdata_dir()
