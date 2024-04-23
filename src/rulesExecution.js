@@ -85,8 +85,11 @@ export class rulesExecution {
     }
     
     isFloat(value) {
-        return !isNaN(value) && !Number.isInteger(parseInt(value)) && !isNaN(parseFloat(value))
-    }    
+        if (typeof value !== 'number' || isNaN(value)) {
+          return false; // It's not a number or is NaN (Not a Number)
+        }        
+        return value % 1 !== 0; // If there's a decimal part, it's a float
+      } 
     /**
      * execute rules on real data
      * @param {object} data the form data 
@@ -139,7 +142,7 @@ export class rulesExecution {
                     break 
 
             }
-         //   console.log("executed:",leftValue,rule.condition,rightValue,res)
+            console.log("executed:",leftValue,rule.condition,rightValue,res)
             if (!res) continue // rule will be not executed because condition is false
             if (rule.actionType==="setValue") {
 

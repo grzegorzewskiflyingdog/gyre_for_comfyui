@@ -30,6 +30,8 @@ export class ComfyUIPreparser {
      */
     executeAllRules(data) {
         let rules=new rulesExecution()
+        // marcin
+        if(!this.metadata.rules) return;
         rules.execute(data,this.fieldList,this.metadata.rules,{},"__ignore_arrays") // first execute rules on non array props
 
         for (let name in data) {
@@ -62,6 +64,9 @@ export class ComfyUIPreparser {
 
     getTestData() {
         return {
+            blend_factor: 0.5
+        }
+       /* return {
             prompt: "fashion dog",
             negativePrompt: "ugly",
             hasMask: false,
@@ -74,7 +79,7 @@ export class ComfyUIPreparser {
             seed: 123,
             steps: 20
         }
-    }
+    }*/
 
 }
 
