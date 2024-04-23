@@ -205,3 +205,58 @@ async def upload_log_json_file(request):
     # Offload the file update to a separate thread
     await asyncio.to_thread(write_json_to_file, json_str,debug_dir)
     return web.Response(text="File log updated successfully")
+
+@server.PromptServer.instance.routes.post("/workspace/collect_gyre_components")
+async def collect_gyre_components(request):
+    """
+    Scans sibling directories for 'entry' subfolders containing both 'gyre_init.js' and 'gyre_ui_components.json',
+    reads the JSON file and adds components with additional information to a list.
+    
+    Returns:
+        list of dictionaries: Each dictionary includes copyright, component name, component tag, and path.
+    """
+    # Get the current script's directory
+    current_dir = os.path.dirname(__file__)
+
+    # Get the parent directory (../ of current folder)
+    parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
+
+    # List all subdirectories at the same level as the current script's parent directory
+    subdirs = [d for d in os.listdir(parent_dir) if os.path.isdir(os.path.join(parent_dir, d))]
+
+    components_list = []
+    debug_list = []
+    # Iterate over each subdirectory
+    for subdir in subdirs:
+        # Path to the 'entry' subfolder
+        entry_folder_path = os.path.join(parent_dir, subdir, 'entry')
+
+        # Check if 'entry' subfolder exists
+        if os.path.exists(entry_folder_path):
+            # Check if 'gyre_init.js' and 'gyre_ui_components.json' files exist
+            gyre_init_js_path = os.path.join(entry_folder_path, 'gyre_init.js')
+            gyre_ui_components_json_path = os.path.join(entry_folder_path, 'gyre_ui_components.json')
+            if os.path.exists(gyre_init_js_path) and os.path.exists(gyre_ui_components_json_path):
+
+                # Read the JSON file
+                with open(gyre_ui_components_json_path, 'r') as json_file:
+                    gyre_ui_data = json.load(json_file)
+                debug_list.append(gyre_ui_data)
+
+                # Check if the components key exists in the JSON data
+                if 'components' in gyre_ui_data and isinstance(gyre_ui_data['components'], list):
+                    # Add copyright information and path to components
+                    for component in gyre_ui_data['components']:
+                        component_info = {
+                            'copyright': gyre_ui_data.get('copyright', 'Unknown'),
+                            'component_name': component.get('name', 'Unnamed'),
+                            'tag': component.get('tag', 'untagged'),
+                            'path': entry_folder_path
+                        }
+                        components_list.append(component_info)
+
+    return web.Response(text=json.dumps(components_list), content_type='application/json')
+
+
+
+

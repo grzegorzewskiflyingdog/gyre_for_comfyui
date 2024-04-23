@@ -53,6 +53,7 @@
             })
 
             loadWorkflow(current)
+            loadUIComponents()
         }
 
     })
@@ -118,7 +119,9 @@
         return true
     }
 
-
+    /**
+     * read all logs
+     */
     async function loadLogList() {
         // todo: make server request and read $metadata of all existing workflows on filesystem
         let result = await scanLocalNewFiles('logs');
@@ -135,7 +138,9 @@
         workflowformList.set(result);
     }
 
-
+    /**
+     * read all workflows
+     */
     async function loadList() {
         // todo: make server request and read $metadata of all existing workflows on filesystem
         let result = await scanLocalNewFiles()
@@ -154,6 +159,15 @@
         })
         console.log(data_workflow_list);
         workflowList.set(data_workflow_list)
+    }
+
+    /**
+     * get list with all UI components
+     */
+    async function loadUIComponents() {
+        // todo: make server request and read $metadata of all existing workflows on filesystem
+        let result = await scanUIComponents()
+        console.log("COMPONENTS",result)
     }
 
 
@@ -184,6 +198,26 @@
         }
     }
 
+    async function scanUIComponents() {
+        try {
+            const response = await fetch("/workspace/collect_gyre_components", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    path: ""
+                }),
+            });
+
+            let result = await response.json();        
+            return result;
+        } catch (error) {
+            console.error("Error scan UI components:", error);
+        }
+    }
+
+
     function fixDatesFromServer(result) {
         let newel = result.map((el) => {
             let objjs = JSON.parse(el.json);
@@ -198,7 +232,7 @@
 
 
     async function loadWorkflow(workflow) {
-        await loadList();
+        await loadList()
         // todo:check if current workflow is unsaved and make confirm otherwise
         // 1. make server request by workflow.name, getting full workflow data here
         // 2. update ComfyUI with new workflow
