@@ -78,8 +78,8 @@ export class ComfyUIPreparser {
             // some custom fields
             seed: 123,
             steps: 20
-        }
-    }*/
+        }*/
+    }
 
 }
 
