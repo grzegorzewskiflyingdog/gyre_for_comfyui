@@ -37,12 +37,13 @@ export class rulesExecution {
             if (value==="false") return false
         }
         if (field.type==="slider" || field.type==="number") {
-            if (this.isInteger(field.step)) {
-                return parseInt(value)
-            }
+            console.log("convertValue",field)
             if (this.isFloat(field.step)) {
                 return parseFloat(value)
             }
+            console.log("isInteger")
+            return parseInt(value)
+
         }
         return value
     }
@@ -79,9 +80,6 @@ export class rulesExecution {
         value=this.convertValue(value,field)
         data[arrayName][i][propertyName]=value
 
-    }
-    isInteger(value) {
-        return !isNaN(value) && Number.isInteger(parseInt(value))
     }
     
     isFloat(value) {
