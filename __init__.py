@@ -27,6 +27,7 @@ comfy_path = os.path.dirname(folder_paths.__file__)
 db_dir_path = os.path.join(workspace_path, "db")
 
 workspace_app = web.Application()
+
 dist_path = os.path.join(workspace_path, 'dist/build')
 if os.path.exists(dist_path):
     workspace_app.add_routes([
@@ -34,6 +35,23 @@ if os.path.exists(dist_path):
     ])
 
 server.PromptServer.instance.app.add_subapp("/dist/build/", workspace_app)
+
+
+async def handler(request):
+    return web.FileResponse(os.path.join(workspace_path, "dist\index.html"))
+
+
+gyre_app = web.Application()
+my_path = os.path.join(workspace_path, 'dist')
+if os.path.exists(my_path):
+    print("##my path exist##")
+    gyre_app.add_routes([
+        web.static("/", my_path),
+        web.get('/', handler)
+    ])
+
+server.PromptServer.instance.app.add_subapp("/dist/", gyre_app)
+
 
 
 def get_my_workflows_dir():
@@ -188,6 +206,7 @@ async def upload_log_json_file(request):
     json_str = data['json_str']
     debug_dir = None
     if ('debugdir' in data): debug_dir = data['debugdir']
+
     def write_json_to_file(json_str,debug_dir):
         if debug_dir and debug_dir=='formdata':
             my_workflows_dir = get_my_formdata_dir()
