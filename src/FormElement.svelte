@@ -62,10 +62,7 @@
 </script>
 
 <div class="element-preview" class:showHidden={element.hidden}>
-    {#if readonly!=="readonly"}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div class="editElementButton" on:click={openProperties}>Edit</div>
-    {/if}
+
     <!-- Element preview based on type -->
     {#if element.type==="advanced_options"} 
         <!-- svelte-ignore a11y-missing-attribute -->
@@ -140,7 +137,11 @@
     {:else if element.type === 'number'}
         <label for={element.name}>{element.label}:</label>
         <input type="number" min={element.min} max={element.max}  {readonly} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
-    {/if}    
+    {/if}   
+    {#if readonly!=="readonly"}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div class="editElementButton" on:click={openProperties}>Edit</div>
+{/if} 
 </div>
 {#if showProperties}
 <div class="element-properties" >
