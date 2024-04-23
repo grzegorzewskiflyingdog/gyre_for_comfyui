@@ -37,11 +37,9 @@ export class rulesExecution {
             if (value==="false") return false
         }
         if (field.type==="slider" || field.type==="number") {
-            console.log("convertValue",field)
             if (this.isFloat(field.step)) {
                 return parseFloat(value)
             }
-            console.log("isInteger")
             return parseInt(value)
 
         }

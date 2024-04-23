@@ -21,6 +21,7 @@
             value=element.default
             element.min=parseFloat(element.min)
             element.max=parseFloat(element.max)
+            if (!element.default) element.default=0
             element.default=parseFloat(element.default)
         }
         dispatch('update', element)
