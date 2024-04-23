@@ -29,7 +29,7 @@
     let selectedTag = ""
     let orginalname;
     let duplicate = false;
-    let debug=false;
+    let debug=false
     let debugmode='errormode';
     function onMouseDown() {
         moving = true;

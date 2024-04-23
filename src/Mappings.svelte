@@ -99,7 +99,7 @@
         label=label.charAt(0).toUpperCase() + label.slice(1)
         let field={name:fieldName,label,default:widget.value}
         if (type==="number") {
-            field.type="number"
+            field.type="slider"
             if (widget.options) {
                 field.min=widget.options.min
                 field.max=widget.options.max

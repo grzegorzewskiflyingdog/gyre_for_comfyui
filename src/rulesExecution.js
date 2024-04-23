@@ -37,12 +37,11 @@ export class rulesExecution {
             if (value==="false") return false
         }
         if (field.type==="slider" || field.type==="number") {
-            if (this.isInteger(field.step)) {
-                return parseInt(value)
-            }
             if (this.isFloat(field.step)) {
                 return parseFloat(value)
             }
+            return parseInt(value)
+
         }
         return value
     }
@@ -80,13 +79,13 @@ export class rulesExecution {
         data[arrayName][i][propertyName]=value
 
     }
-    isInteger(value) {
-        return !isNaN(value) && Number.isInteger(parseInt(value))
-    }
     
     isFloat(value) {
-        return !isNaN(value) && !Number.isInteger(parseInt(value)) && !isNaN(parseFloat(value))
-    }    
+        if (typeof value !== 'number' || isNaN(value)) {
+          return false; // It's not a number or is NaN (Not a Number)
+        }        
+        return value % 1 !== 0; // If there's a decimal part, it's a float
+      } 
     /**
      * execute rules on real data
      * @param {object} data the form data 
@@ -139,7 +138,7 @@ export class rulesExecution {
                     break 
 
             }
-         //   console.log("executed:",leftValue,rule.condition,rightValue,res)
+            console.log("executed:",leftValue,rule.condition,rightValue,res)
             if (!res) continue // rule will be not executed because condition is false
             if (rule.actionType==="setValue") {
 

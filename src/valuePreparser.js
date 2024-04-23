@@ -1,6 +1,6 @@
-
 import { rulesExecution } from './rulesExecution.js'
 import { loopPreparser } from './loopPreparser.js'
+
 
 export class valuePreparser {
 
@@ -20,17 +20,26 @@ export class valuePreparser {
       }
     /* mergedImage, mask, controlnet[].image
     */
-    async getImage(propertyName,arrayName="",index=0) {   
-        console.log("get image ",propertyName,arrayName,index)
-        return "" // filename on comfyUI
+    async getImage(propertyName, arrayName="",index=0) {
+        if(window.postMessageAdapter){
+            let instance = window.postMessageAdapter.getWorkflowImageRequestServerInstance();
+            let res = await instance.getSingleImage(propertyName, arrayName,index);
+            return res;
+        }
+        return null;
     }
     /**
      * get layer image
      * @param {string} layerName , special names: currentLayer, currentLayerAbove, currentLayerBelow
+     * @param {string} layerID , as alternative select layer by ID
      */
-    async getLayerImage(layerName) {
-        console.log("get layer image ",layerName)
-        return "" // filename on comfyUI
+    async getLayerImage(layerName,layerID) {
+        if(window.postMessageAdapter){
+            let instance = window.postMessageAdapter.getWorkflowImageRequestServerInstance();
+            let res = await instance.getLayerImage(layerName,layerID);
+            return res;
+        }
+        return null;
     }
     /**
      * convert value (e.g. boolean) also get images from frontend
@@ -52,7 +61,16 @@ export class valuePreparser {
                 }
         }
         if (field.type==="layer_image") {
-            return await this.getImage(field.name)
+            return await this.getLayerImage(field.name)
+        }
+        if (field.type==="drop_layers") {
+            let idx=0
+            if (field.originalName) {
+                idx=field.index
+            }
+            let arr=value.split(",")
+            let layerID=arr[idx]
+            return await this.getLayerImage(null,layerID)
         }
         return  this.rules.convertValue(value,field)
     }
@@ -98,15 +116,16 @@ export class valuePreparser {
             let node=this.workflow.nodes[i]
             if (this.loopParser.isNodeInGroup(node.id,groupName)) { // only nodes in group
                 let mappingList=this.metadata.mappings[node.id]
-                for(let i=0;i<mappingList.length;i++) {
-                    let mapping=mappingList[i]
-                    if (mapping && mapping.fromField===fromFieldName) {
-                        value=await this.convertValue(value,field,arrayName,index)
-                        node.widgets_values[parseInt(mapping.toIndex)]=value
+                if(mappingList && mappingList.length) {
+                    for (let i = 0; i < mappingList.length; i++) {
+                        let mapping = mappingList[i]
+                        if (mapping && mapping.fromField === fromFieldName) {
+                            value = await this.convertValue(value, field, arrayName, index)
+                            node.widgets_values[parseInt(mapping.toIndex)] = value
+                        }
                     }
-                }          
+                }
             }
-
         }
     }
 
