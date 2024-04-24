@@ -225,8 +225,8 @@ async def upload_log_json_file(request):
     await asyncio.to_thread(write_json_to_file, json_str,debug_dir)
     return web.Response(text="File log updated successfully")
 
-@server.PromptServer.instance.routes.post("/workspace/collect_gyre_components")
-async def collect_gyre_components(request):
+
+def collect_gyre_components():
     """
     Scans sibling directories for 'entry' subfolders containing both 'gyre_init.js' and 'gyre_ui_components.json',
     reads the JSON file and adds components with additional information to a list.
@@ -249,13 +249,15 @@ async def collect_gyre_components(request):
     for subdir in subdirs:
         # Path to the 'entry' subfolder
         entry_folder_path = os.path.join(parent_dir, subdir, 'entry')
-
+        subdir_name = os.path.basename(subdir)
         # Check if 'entry' subfolder exists
         if os.path.exists(entry_folder_path):
             # Check if 'gyre_init.js' and 'gyre_ui_components.json' files exist
             gyre_init_js_path = os.path.join(entry_folder_path, 'gyre_init.js')
             gyre_ui_components_json_path = os.path.join(entry_folder_path, 'gyre_ui_components.json')
             if os.path.exists(gyre_init_js_path) and os.path.exists(gyre_ui_components_json_path):
+                #relative_path = os.path.relpath(entry_folder_path, parent_dir)
+                #relative_path = os.path.relpath(subdir, parent_dir).replace('\\', '/')
 
                 # Read the JSON file
                 with open(gyre_ui_components_json_path, 'r') as json_file:
@@ -270,11 +272,50 @@ async def collect_gyre_components(request):
                             'copyright': gyre_ui_data.get('copyright', 'Unknown'),
                             'component_name': component.get('name', 'Unnamed'),
                             'tag': component.get('tag', 'untagged'),
-                            'path': entry_folder_path
+                            'path': subdir_name
                         }
                         components_list.append(component_info)
 
+    return components_list
+
+@server.PromptServer.instance.routes.post("/workspace/collect_gyre_components")
+async def collect_gyre_components_ws(request):
+    components_list=collect_gyre_components()
     return web.Response(text=json.dumps(components_list), content_type='application/json')
+
+@server.PromptServer.instance.routes.get("/workspace/init_components.js")
+async def create_js_file(request):
+    # Call the collect_gyre_components function to get the list of components
+    components = collect_gyre_components()
+
+    # Set containing unique relative paths to 'gyre_init.js'
+    unique_paths = set()
+
+    # Define the prefix for the path
+    prefix = "/extensions/custom_nodes/"
+
+    # Loop over each component to add unique script paths
+    for component in components:
+        # Construct the relative path to 'gyre_init.js'
+        relative_path = component['path'] + "/entry/gyre_init.js"
+        
+        # Add to the set of unique paths
+        unique_paths.add(relative_path)
+
+    # Initialize a string for the JavaScript code
+    js_code = ""
+
+    # Loop over the unique paths and build the script tags
+    for path in unique_paths:
+        # Build the JavaScript code to create the script element
+        js_code += f"""
+var script = document.createElement("script");
+script.async = false;
+script.src = "{prefix}{path}";
+document.head.appendChild(script);
+"""
+    
+    return  web.Response(text=js_code, content_type='text/javascript')
 
 
 
