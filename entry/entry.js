@@ -153,3 +153,15 @@ const observer = new MutationObserver(callback);
 
 // Start observing the target node for configured mutations
 observer.observe(targetNode, config);
+
+
+class Gyre {
+
+
+}
+var script = document.createElement("script");
+script.async = false;
+script.src = "/workspace/init_components.js";
+document.head.appendChild(script);
+
+console.log("init components ok")

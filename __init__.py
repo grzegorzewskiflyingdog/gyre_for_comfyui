@@ -250,10 +250,10 @@ def collect_gyre_components():
         # Path to the 'entry' subfolder
         entry_folder_path = os.path.join(parent_dir, subdir, 'entry')
         subdir_name = os.path.basename(subdir)
-        # Check if 'entry' subfolder exists
+        # Check if 'gyre_entry' subfolder exists
         if os.path.exists(entry_folder_path):
             # Check if 'gyre_init.js' and 'gyre_ui_components.json' files exist
-            gyre_init_js_path = os.path.join(entry_folder_path, 'gyre_init.js')
+            gyre_init_js_path = os.path.join(entry_folder_path, 'gyre_init.ts')
             gyre_ui_components_json_path = os.path.join(entry_folder_path, 'gyre_ui_components.json')
             if os.path.exists(gyre_init_js_path) and os.path.exists(gyre_ui_components_json_path):
                 #relative_path = os.path.relpath(entry_folder_path, parent_dir)
@@ -292,12 +292,12 @@ async def create_js_file(request):
     unique_paths = set()
 
     # Define the prefix for the path
-    prefix = "/extensions/custom_nodes/"
+    prefix = "/extensions/"
 
     # Loop over each component to add unique script paths
     for component in components:
         # Construct the relative path to 'gyre_init.js'
-        relative_path = component['path'] + "/entry/gyre_init.js"
+        relative_path = component['path'] + "/gyre_init.ts"
         
         # Add to the set of unique paths
         unique_paths.add(relative_path)
