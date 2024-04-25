@@ -65,7 +65,14 @@
      * for custom elements
      */
     function generateElement() {
-        let html="<"+element.tag+" class=\"custom\" value=\""+value+"\" ></"+element.tag+">"
+        // not using <svelte:element because we need custom parameters
+        let html="<"+element.tag+" class=\"custom\" value=\""+value+"\" "
+        for(let name in element.parameters) {   // add more parameters
+            if (name!=="label" && name!=="name" && name!=="default" && name!=="value") {
+                html+=name+"=\""+element[name]+"\" "
+            }
+        }
+        html+="></"+element.tag+">"
         return html
     }
     onMount(() => {
@@ -195,15 +202,17 @@
     {#if element.type==="custom"}
             {#each Object.entries(element.parameters) as [name, p]}
             <div class="formLine">
-                <label  for="{name}">{p.label}: </label>
+                
                 {#if p.type==="text"}
+                    <label  for="{name}">{p.label}: </label>
                     <input type="text" {name} value={p.default} on:input={(e) => {
                         let obj={}
                         obj[name]=e.target.value
                         updateElement(obj)}} />
                 {/if}
                 {#if p.type==="textarea"}
-                    <textarea {name} on:input={(e) => {
+                    <label  for="{name}" class="textarea_label">{p.label}: </label>
+                    <textarea class="textarea" {name} on:input={(e) => {
                         let obj={}
                         obj[name]=e.target.value
                         updateElement(obj)}} >{p.default}</textarea>
@@ -347,7 +356,7 @@
         vertical-align: 5px;
 
     }
-    .element-preview .textarea_label {
+    .element-preview .textarea_label, .element-properties .textarea_label {
         vertical-align: top;
     }
     .element-preview .layer_image_label {
@@ -377,6 +386,7 @@
         color:white;
         margin: 0;
     }    
+
     .formLine {
         display: block;
         margin-bottom: 10px;

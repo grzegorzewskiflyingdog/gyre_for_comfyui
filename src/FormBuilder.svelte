@@ -70,10 +70,10 @@
         tag: newElement.tag,
         name: newElement.parameters.name.default,
         label: newElement.parameters.label.default,
-        default: newElement.parameters.default.default
+        default: newElement.parameters.default.default,
+        parameters: newElement.parameters
       }
       newElement=field
-      console.log("add element",newElement)
     }
     formElements.push(newElement)
     ensureUniqueNames()
