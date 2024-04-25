@@ -161,13 +161,13 @@
         workflowList.set(data_workflow_list)
     }
 
+    let custom_ui_components
     /**
      * get list with all UI components
      */
     async function loadUIComponents() {
-        // todo: make server request and read $metadata of all existing workflows on filesystem
-        let result = await scanUIComponents()
-        console.log("COMPONENTS",result)
+        custom_ui_components = await scanUIComponents()
+        console.log("COMPONENTS",custom_ui_components)
     }
 
 
@@ -605,7 +605,7 @@
             {/if}
             {#if state === "editForm"}
                 <div style="margin-top:10px"></div>
-                <FormBuilder {refresh} on:refreshTags={(e)=>{ refreshTags(e)}} posX={parseInt(left)} posY={parseInt(top)}}></FormBuilder>
+                <FormBuilder {refresh} {custom_ui_components} on:refreshTags={(e)=>{ refreshTags(e)}} posX={parseInt(left)} posY={parseInt(top)}></FormBuilder>
             {/if}
             {#if state === "editRules"}
                 <div style="margin-top:10px"></div>

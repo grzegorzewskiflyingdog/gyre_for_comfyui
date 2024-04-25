@@ -270,8 +270,9 @@ def collect_gyre_components():
                     for component in gyre_ui_data['components']:
                         component_info = {
                             'copyright': gyre_ui_data.get('copyright', 'Unknown'),
-                            'component_name': component.get('name', 'Unnamed'),
+                            'name': component.get('name', 'Unnamed'),
                             'tag': component.get('tag', 'untagged'),
+                            'icon': component.get('icon', ''),
                             'path': subdir_name
                         }
                         components_list.append(component_info)

@@ -4,8 +4,9 @@
         export let name=""
         export let state=""
         export let deactivate=""
+        export let svg=""
         let activeClass=""
-        if (state===name) activeClass=" active"
+        if (state===name && !svg) activeClass=" active"
         if (deactivate==="deactivate") activeClass=" deactivate"
 
         const dispatch = createEventDispatcher();
@@ -35,14 +36,16 @@
             "form_magnifier":{class:"default deactivate"}, 
 
         }
-
-        let info=iconsInfo[name]
+        let info
+        if (svg) info={class:"default deactivate"}
+        else info=iconsInfo[name]
         let className="outer"
         if (info) className=info.class
         className+=activeClass
 </script>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class={className}  on:mousedown={(e) => { dispatch("mousedown",e) }}  on:click={(e) => { dispatch("click",e) }}    >
+    {#if svg}{@html svg}{/if}
     {#if name==="move"}
         <svg   xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFF"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

@@ -4,7 +4,7 @@
     import Icon from './Icon.svelte'
     import fieldTypes  from './form_templates/fieldTypes.json'
 
-
+    export let custom_ui_components
     const dispatch = createEventDispatcher()
     let showFieldSelector="none"
     
@@ -62,8 +62,8 @@
         }
         #fieldSelector h1 {
             font-size: 16px;
-            margin-top: 5px;
-            margin-bottom: 30px;
+            margin:0 ;
+            margin-bottom: 10px;
         }
         .field {
             cursor: pointer;
@@ -157,5 +157,12 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->    
     <div class="field" on:click={(e) => {selectElement("Seed")}}>
         <Icon name="form_text" ></Icon><span>Seed</span>
-    </div>          
+    </div>   
+    <h1>From Extensions</h1>       
+    {#each custom_ui_components as ui_element}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->    
+            <div class="field" on:click={(e) => {selectElement("Seed")}}>
+            {#if ui_element.icon}<Icon svg={ui_element.icon} ></Icon>{/if}<span>{ui_element.name}</span>
+    </div> 
+    {/each}
 </div>

@@ -15,6 +15,7 @@
   export let data={}            // the form data
   export let refresh  
   export let posX,posY        // position of the parent dialog
+  export let custom_ui_components
   if (!$metadata.forms[form_key]) $metadata.forms[form_key]={elements:[]}
   if (!$metadata.forms[form_key].elements) $metadata.forms[form_key].elements=[]
   let formElements = $metadata.forms[form_key].elements
@@ -216,7 +217,7 @@ let selectWorkflowType=false
 
 </script>
 
-<FieldSelector bind:this={fieldSelector} on:select={(e)=>{ addElement(e)}}></FieldSelector>
+<FieldSelector {custom_ui_components} bind:this={fieldSelector} on:select={(e)=>{ addElement(e)}}></FieldSelector>
 
 
 <div class="formBuilder">
