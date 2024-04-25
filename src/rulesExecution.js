@@ -96,6 +96,7 @@ export class rulesExecution {
      * @returns {object} {data,hiddenFields}  data and list of hidden fields
      */
     execute(data,fieldList,rules,arrayIdx={},arrayName="") {
+        if  (!rules) rules=[]
         if (!data) return {data,hiddenFields:{}}
         let hiddenFields=[]
         for(let i=0;i<rules.length;i++) {
