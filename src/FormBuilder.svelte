@@ -59,10 +59,22 @@
     }
   }
 
+
   function addElement(e) {
     fieldSelector.hideDialog()
     let newElement=e.detail
     if (!newElement) return
+    if (newElement.custom) {
+      let field={
+        type: "custom",
+        tag: newElement.tag,
+        name: newElement.parameters.name.default,
+        label: newElement.parameters.label.default,
+        default: newElement.parameters.default.default
+      }
+      newElement=field
+      console.log("add element",newElement)
+    }
     formElements.push(newElement)
     ensureUniqueNames()
     formElements=formElements

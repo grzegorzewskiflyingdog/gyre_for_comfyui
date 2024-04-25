@@ -44,7 +44,6 @@ async def handler(request):
 gyre_app = web.Application()
 my_path = os.path.join(workspace_path, 'dist')
 if os.path.exists(my_path):
-    print("##my path exist##")
     gyre_app.add_routes([
         web.static("/", my_path),
         web.get('/', handler)
@@ -104,7 +103,6 @@ def folder_handle(path, existFlowIds):
     # Create the directory if it doesn't exist
     #my_workflows_dir = get_my_workflows_dir()
     #full_path = os.path.join(my_workflows_dir, file_path)
-    print(f"###path ({path})") 
     os.makedirs(path, exist_ok=True)
     #my_workflows_dir = get_my_workflows_dir()
     #os.makedirs(os.path.dirname(my_workflows_dir), exist_ok=True)
@@ -132,8 +130,6 @@ async def readworkflowdir(request):
     reqJson = await request.json()
     type = None
     if ('type' in reqJson): type = reqJson['type']
-    print("load directory type")
-    print(type)
     path = None
     if (type and type=='logs'):
         path = get_my_log_dir()
@@ -143,8 +139,6 @@ async def readworkflowdir(request):
         path = get_my_formdata_dir()
     else:
         path = get_my_workflows_dir()
-    print("path")
-    print(path)
     existFlowIds = reqJson['existFlowIds']
 
     fileList = folder_handle(path, existFlowIds)
@@ -275,6 +269,9 @@ def collect_gyre_components():
                             'icon': component.get('icon', ''),
                             'path': subdir_name
                         }
+                        # Add 'defaults' sub-object if it exists
+                        if 'parameters' in component:
+                            component_info['parameters'] = component['parameters']
                         components_list.append(component_info)
 
     return components_list

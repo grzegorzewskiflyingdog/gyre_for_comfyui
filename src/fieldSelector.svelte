@@ -28,13 +28,19 @@
         for(let i=0;i<fieldTypes.length;i++) {
             let field=fieldTypes[i]
             if (field.menu_type===type) {
+                field=JSON.parse(JSON.stringify(field))
                 field.menu_type=null
                 return field
             }
             if (field.type===type) return field
         }
     }
-    function selectElement(type) {
+    function selectElement(type,customElement=null) {
+        if (customElement) {
+            customElement.custom=true
+            dispatch('select', customElement)
+            return
+        }
         let field=findFieldByType(type)
         if (!field) {
             alert("field type "+type+" not found")
@@ -161,8 +167,8 @@
     <h1>From Extensions</h1>       
     {#each custom_ui_components as ui_element}
             <!-- svelte-ignore a11y-click-events-have-key-events -->    
-            <div class="field" on:click={(e) => {selectElement("Seed")}}>
-            {#if ui_element.icon}<Icon svg={ui_element.icon} ></Icon>{/if}<span>{ui_element.name}</span>
-    </div> 
+            <div class="field" on:click={(e) => {selectElement(ui_element.tag,ui_element)}}>
+                {#if ui_element.icon}<Icon svg={ui_element.icon} ></Icon>{/if}<span>{ui_element.name}</span>
+            </div> 
     {/each}
 </div>

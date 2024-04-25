@@ -6,6 +6,7 @@
     import {layer_image_preview,magnifier_preview} from "./images"
     import {metadata} from "./stores/metadata"
     import LayerStack3D from "./LayerStack3D.svelte"
+    import { onMount } from 'svelte'
 
     const dispatch = createEventDispatcher()
     export let value
@@ -59,11 +60,36 @@
         value=newValue
         dispatch("change",{value:value})
     }
+
+    /**
+     * for custom elements
+     */
+    function generateElement() {
+        let html="<"+element.tag+" class=\"custom\" value=\""+value+"\" ></"+element.tag+">"
+        return html
+    }
+    onMount(() => {
+        if (!formRoot) return
+        let customElements=formRoot.getElementsByClassName("custom")
+        if (!customElements) return
+        for(let i=0;i<customElements.length;i++) {
+            let element=customElements[i]
+            element.addEventListener("change", (e) => changeValue(e.target.value))
+        }
+    })
     export let advancedOptions=true
+
+    let formRoot
 </script>
 
-<div class="element-preview" class:showHidden={element.hidden}>
-
+<div class="element-preview" bind:this={formRoot} class:showHidden={element.hidden}>
+    <!-- Element custom tag -->
+    {#if element.type==="custom"}
+        {#if element.label}
+            <label for={element.name}>{element.label}:</label>
+        {/if}
+        {@html generateElement()}
+    {/if}
     <!-- Element preview based on type -->
     {#if element.type==="advanced_options"} 
         <!-- svelte-ignore a11y-missing-attribute -->
@@ -148,7 +174,7 @@
 <div class="element-properties" >
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="formClose" on:click={closeProperties}>X</div>
-    {#if element.type !== 'layer_image' &&  element.type!=="advanced_options"  &&   element.type!=="magnifier" && element.type!=="drop_layers"} 
+    {#if element.type !== 'layer_image' &&  element.type!=="advanced_options"  && element.type!=="custom" && element.type!=="magnifier" && element.type!=="drop_layers"} 
         <div class="formLine" >
             <label for="label">Label:</label>
             <input type="text" name="label" value={element.label} on:input={(e) => updateElement({ label: e.target.value })} />
@@ -165,6 +191,25 @@
             <label  for="hidden">Hidden: </label>
             <input type="checkbox" name="hidden" bind:checked={element.hidden}  /> Hide Input in form
         </div>       
+    {/if}
+    {#if element.type==="custom"}
+            {#each Object.entries(element.parameters) as [name, p]}
+            <div class="formLine">
+                <label  for="{name}">{p.label}: </label>
+                {#if p.type==="text"}
+                    <input type="text" {name} value={p.default} on:input={(e) => {
+                        let obj={}
+                        obj[name]=e.target.value
+                        updateElement(obj)}} />
+                {/if}
+                {#if p.type==="textarea"}
+                    <textarea {name} on:input={(e) => {
+                        let obj={}
+                        obj[name]=e.target.value
+                        updateElement(obj)}} >{p.default}</textarea>
+                {/if}                
+            </div>
+          {/each}
     {/if}
     {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'  || element.type === 'color_picker'}}
         <div class="formLine">
