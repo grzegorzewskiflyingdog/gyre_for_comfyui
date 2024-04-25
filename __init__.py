@@ -14,6 +14,7 @@ import subprocess
 import os
 import json
 from .nodes import *
+import mimetypes
 
 WEB_DIRECTORY = "entry"
 DEFAULT_USER = "guest"
@@ -36,6 +37,7 @@ if os.path.exists(dist_path):
 
 server.PromptServer.instance.app.add_subapp("/dist/build/", workspace_app)
 
+mimetypes.types_map['.ts'] = 'application/javascript; charset=utf-8'
 
 async def handler(request):
     return web.FileResponse(os.path.join(workspace_path, "dist\index.html"))
@@ -285,13 +287,14 @@ async def collect_gyre_components_ws(request):
 async def create_js_file(request):
     # Call the collect_gyre_components function to get the list of components
     components = collect_gyre_components()
+    print(request.url)
 
     # Set containing unique relative paths to 'gyre_init.js'
     unique_paths = set()
 
     # Define the prefix for the path
     prefix = "/extensions/"
-
+    abspath = request.scheme+'://'+request.host
     # Loop over each component to add unique script paths
     for component in components:
         # Construct the relative path to 'gyre_init.js'
@@ -307,9 +310,11 @@ async def create_js_file(request):
     for path in unique_paths:
         # Build the JavaScript code to create the script element
         js_code += f"""
+if(!window.document.gyre) window.document.gyre = new Object();
+window.document.gyre.serverName = "{abspath}";
 var script = document.createElement("script");
 script.async = false;
-script.src = "{prefix}{path}";
+script.src = window.document.gyre.serverName+"{prefix}{path}";
 document.head.appendChild(script);
 """
     

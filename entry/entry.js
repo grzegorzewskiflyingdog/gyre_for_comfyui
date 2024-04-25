@@ -159,6 +159,7 @@ class Gyre {
 
 
 }
+let gyre=new Gyre()
 var script = document.createElement("script");
 script.async = false;
 script.src = "/workspace/init_components.js";
