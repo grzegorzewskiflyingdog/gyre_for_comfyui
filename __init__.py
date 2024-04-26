@@ -291,16 +291,30 @@ for component in components:
     unique_paths.add(component["path"])
 current_dir = os.path.dirname(__file__)
 # Get the parent directory (../ of current folder)
-parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))    
+parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
+
+
 for path in unique_paths:
     gyre_entry_folder_path = os.path.join(parent_dir, path, 'gyre_entry')
-    print("XXXXXXXXXX")
-    print(gyre_entry_folder_path)
-    print("/gyre_extensions/" + path + "/")
-
-    workspace_app = web.Application()
-    workspace_app.add_routes([web.static("/gyre_extensions/" + path + "/", gyre_entry_folder_path),])
+    if os.path.exists(my_path):
+        workspace_app = web.Application()
+        workspace_app.add_routes([web.static("/", gyre_entry_folder_path),])
     server.PromptServer.instance.app.add_subapp("/gyre_extensions/" + path + "/", workspace_app)    
+
+
+
+
+gyre_app = web.Application()
+my_path = os.path.join(workspace_path, 'gyre')
+if os.path.exists(my_path):
+    gyre_app.add_routes([
+        web.static("/", my_path),
+        #web.get('/', handler)
+    ])
+server.PromptServer.instance.app.add_subapp("/gyre/", gyre_app)
+
+
+
 
 
 @server.PromptServer.instance.routes.post("/workspace/collect_gyre_components")
