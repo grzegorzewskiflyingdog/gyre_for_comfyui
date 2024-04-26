@@ -2,7 +2,9 @@
 export class mappingsHelper {
 
     getDefaultFields() {
-        return [{name:"mergedImage",type:"image",notInRuleEditor:true},{name:"mask",type:"image",notInRuleEditor:true},{name:"hasMask"},{name:"hasInitImage"},{name:"prompt"},{name:"negativePrompt"},
+        return [{name:"mergedImage",type:"image",notInRuleEditor:true},{name:"mask",type:"image",notInRuleEditor:true},{name:"hasMask"},{name:"hasInitImage"}
+        ,{name:"prompt"},{name:"negativePrompt"},
+        ,{name:"document_width"},{name:"document_height"},
         {name:"controlnet[].type"},{name:"controlnet[].image",type:"image",notInRuleEditor:true},{name:"controlnet[].strength"},{name:"controlnet[].start_percent"},{name:"controlnet[].end_percent"},{name:"controlnet[].model"}]
     }
 /**
