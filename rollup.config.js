@@ -40,13 +40,13 @@ export default {
 	output: [ {
 		sourcemap: true,
 		format: 'iife',
-		name: 'app',
+		name: 'gyreapp',
 		file: 'dist/build/bundle.js'
 	},
 	{
 	sourcemap: true,
 	format: 'iife',
-	name: 'app',
+	name: 'gyreapp',
 	file: 'public/build/bundle.js'
 	}
 	],
