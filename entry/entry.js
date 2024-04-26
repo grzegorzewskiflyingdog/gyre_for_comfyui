@@ -158,12 +158,16 @@ class Gyre {
     script.src=src
     document.head.appendChild(script)
   }
+
+  init() {
+    var script = document.createElement("script");
+    script.async = false;
+    script.src = "/workspace/init_components.js";
+    document.head.appendChild(script);
+  }
 }
 globalThis.gyre=new Gyre()
+globalThis.gyre.init()
 
-var script = document.createElement("script");
-script.async = false;
-script.src = "/workspace/init_components.js";
-document.head.appendChild(script);
 
 console.log("init components ok")
