@@ -37,7 +37,7 @@ if os.path.exists(dist_path):
 
 server.PromptServer.instance.app.add_subapp("/dist/build/", workspace_app)
 
-mimetypes.types_map['.ts'] = 'application/javascript; charset=utf-8'
+#mimetypes.types_map['.ts'] = 'application/javascript; charset=utf-8'
 
 async def handler(request):
     return web.FileResponse(os.path.join(workspace_path, "dist\index.html"))
@@ -244,14 +244,17 @@ def collect_gyre_components():
     # Iterate over each subdirectory
     for subdir in subdirs:
         # Path to the 'entry' subfolder
-        entry_folder_path = os.path.join(parent_dir, subdir, 'entry')
+        entry_folder_path = os.path.join(parent_dir, subdir, 'gyre_entry')    
         subdir_name = os.path.basename(subdir)
+
+      
         # Check if 'gyre_entry' subfolder exists
-        if os.path.exists(entry_folder_path):
+        if os.path.exists(entry_folder_path):  
             # Check if 'gyre_init.js' and 'gyre_ui_components.json' files exist
-            gyre_init_js_path = os.path.join(entry_folder_path, 'gyre_init.ts')
+            gyre_init_js_path = os.path.join(entry_folder_path, 'gyre_init.js')
             gyre_ui_components_json_path = os.path.join(entry_folder_path, 'gyre_ui_components.json')
             if os.path.exists(gyre_init_js_path) and os.path.exists(gyre_ui_components_json_path):
+                
                 #relative_path = os.path.relpath(entry_folder_path, parent_dir)
                 #relative_path = os.path.relpath(subdir, parent_dir).replace('\\', '/')
 
@@ -262,6 +265,7 @@ def collect_gyre_components():
 
                 # Check if the components key exists in the JSON data
                 if 'components' in gyre_ui_data and isinstance(gyre_ui_data['components'], list):
+                    
                     # Add copyright information and path to components
                     for component in gyre_ui_data['components']:
                         component_info = {
@@ -273,10 +277,31 @@ def collect_gyre_components():
                         }
                         # Add 'defaults' sub-object if it exists
                         if 'parameters' in component:
-                            component_info['parameters'] = component['parameters']
+                            component_info['parameters'] = component['parameters'] 
                         components_list.append(component_info)
-
     return components_list
+
+
+# add each gyre extensions to web path
+# like "/gyre_extensions/(name of extension)/any file"
+# these files are served from "gyre_entry" folder
+components = collect_gyre_components()
+unique_paths = set()
+for component in components:
+    unique_paths.add(component["path"])
+current_dir = os.path.dirname(__file__)
+# Get the parent directory (../ of current folder)
+parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))    
+for path in unique_paths:
+    gyre_entry_folder_path = os.path.join(parent_dir, path, 'gyre_entry')
+    print("XXXXXXXXXX")
+    print(gyre_entry_folder_path)
+    print("/gyre_extensions/" + path + "/")
+
+    workspace_app = web.Application()
+    workspace_app.add_routes([web.static("/gyre_extensions/" + path + "/", gyre_entry_folder_path),])
+    server.PromptServer.instance.app.add_subapp("/gyre_extensions/" + path + "/", workspace_app)    
+
 
 @server.PromptServer.instance.routes.post("/workspace/collect_gyre_components")
 async def collect_gyre_components_ws(request):
@@ -292,31 +317,22 @@ async def create_js_file(request):
     # Set containing unique relative paths to 'gyre_init.js'
     unique_paths = set()
 
-    # Define the prefix for the path
-    prefix = "/extensions/"
     abspath = request.scheme+'://'+request.host
     # Loop over each component to add unique script paths
-    for component in components:
-        # Construct the relative path to 'gyre_init.js'
-        relative_path = component['path'] + "/gyre_init.ts"
-        
+    for component in components:        
         # Add to the set of unique paths
-        unique_paths.add(relative_path)
+        unique_paths.add(component["path"])
 
     # Initialize a string for the JavaScript code
-    js_code = ""
+    js_code = f"""globalThis.gyre.serverName = "{abspath}";"""
 
     # Loop over the unique paths and build the script tags
     for path in unique_paths:
         # Build the JavaScript code to create the script element
         js_code += f"""
-if(!window.document.gyre) window.document.gyre = new Object();
-window.document.gyre.serverName = "{abspath}";
-var script = document.createElement("script");
-script.async = false;
-script.src = window.document.gyre.serverName+"{prefix}{path}";
-document.head.appendChild(script);
-"""
+        globalThis.gyre.setCurrentExtensionName("{path}")
+        globalThis.gyre.loadScript("gyre_init.js")
+        """
     
     return  web.Response(text=js_code, content_type='text/javascript')
 

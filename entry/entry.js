@@ -110,22 +110,6 @@ const callback = function (mutationsList, observer) {
             ctx.restore();
             ctx.textAlign = "left";
           };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           const getNodeMenuOptions = LGraphCanvas.prototype.getNodeMenuOptions;
           LGraphCanvas.prototype.getNodeMenuOptions = function (node) {
             const response = getNodeMenuOptions.apply(this, arguments);
@@ -156,10 +140,27 @@ observer.observe(targetNode, config);
 
 
 class Gyre {
+  serverName
+  currentExtensionName
 
+  setCurrentExtensionName(extensionName) {
+    this.currentExtensionName=extensionName
+  }
+  getFullExtensionPath(extensionName) {
+    return this.serverName+"/gyre_extensions/"+extensionName
+  }
 
+  loadScript(path,extensionName="") {
+    if (!extensionName) extensionName=this.currentExtensionName
+    let src=this.getFullExtensionPath(extensionName)+"/"+path
+    let script=window.document.createElement("script")
+    script.async = false
+    script.src=src
+    document.head.appendChild(script)
+  }
 }
-let gyre=new Gyre()
+globalThis.gyre=new Gyre()
+
 var script = document.createElement("script");
 script.async = false;
 script.src = "/workspace/init_components.js";
