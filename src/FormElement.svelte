@@ -64,7 +64,8 @@
     /**
      * for custom elements
      */
-    function generateElement() {
+    function generateElement() {   
+             console.log("value",value)
         // not using <svelte:element because we need custom parameters
         let html="<"+element.tag+" class=\"custom\" value=\""+value+"\" "
         for(let name in element.parameters) {   // add more parameters
@@ -73,6 +74,7 @@
             }
         }
         html+="></"+element.tag+">"
+
         return html
     }
     onMount(() => {
