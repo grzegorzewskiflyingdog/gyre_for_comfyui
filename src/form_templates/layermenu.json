@@ -18,7 +18,14 @@
                 "label": "",
                 "options": [],
                 "default": ""
-            },            
+            },  
+            {
+                "name": "newLayer",
+                "type": "checkbox",
+                "label": "New Layer",
+                "options": [],
+                "default": "true"
+            },                              
             {
                 "name": "preview",
                 "type": "checkbox",
