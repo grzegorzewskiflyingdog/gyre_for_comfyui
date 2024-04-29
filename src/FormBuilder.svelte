@@ -133,8 +133,13 @@
    * @param index
    */
   function removeElement(index) {
-    selectWorkflowType=false
-    formElements.update(elements => elements.filter((_, i) => i !== index))
+//    selectWorkflowType=false
+    formElements.splice(showPropertiesIdx,1);
+    formElements=formElements;
+    showPropertiesIdx=-1 
+    $metadata.forms[form_key].elements=formElements    
+    let helper=new mappingsHelper()    
+    helper.cleanUpMappings($metadata)
   }
 
   let advancedOptions=true
@@ -257,11 +262,11 @@ let selectWorkflowType=false
       on:drop={() => handleDrop(event, index)}>
       <FormElement {element} bind:advancedOptions={advancedOptions}
         on:redrawAll={(e) => {formElements=formElements}}
-        on:remove={() => removeElement(index)}  
+
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
         on:update={(e) => { updateElement(index,e.detail)  }}
-        on:delete={(e) => { formElements.splice(showPropertiesIdx,1);formElements=formElements;showPropertiesIdx=-1 }}
+        on:delete={(e) => { removeElement(index) }}
         value={data[element.name]}
         on:change={e => { executeRules(element,e.detail.value); }}
         showProperties={showPropertiesIdx===index}/>

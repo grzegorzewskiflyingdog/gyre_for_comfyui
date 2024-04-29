@@ -558,6 +558,7 @@
                     <Icon name="editRules"   deactivate="deactivate"></Icon>
                     <Icon name="errorlogs" {state} on:click={async (e) =>  {await loadLogList(); state="errorlogs" }}  ></Icon>
                 {/if}
+                <Icon name="GyreLeftMenu" ></Icon>
             {/key}
         </div>
         <div class="content">
