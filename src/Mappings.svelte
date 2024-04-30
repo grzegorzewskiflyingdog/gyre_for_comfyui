@@ -39,13 +39,14 @@
     window.openGyreMappings=openGyreMappings    // expose open function so it can be called from ComfyUI menu extension
 
     // check of a widget (=a node property) is connected to a form field
-    function checkGyreMapping(node,widget) {
+    function checkGyreMapping(node,widget,index) {
         if  (!$metadata.mappings) return
         if (!$metadata.mappings[node.id]) return
         for(let i=0;i<$metadata.mappings[node.id].length;i++) {
             let mapping=$metadata.mappings[node.id][i]
-            if (mapping.toField===widget.name) {
-                mapping.toIndex=i
+          //  console.log("name",widget.name,index)
+            if (mapping.toField===widget.name) { 
+                mapping.toIndex=index
                 let label=(widget.label || widget.name)
                 return label+"="+mapping.fromField
             }
@@ -91,8 +92,6 @@
         if (checkIfFieldNameExists(fieldName)) return
         let widget=getWidget(fieldName)
         if (!widget) return
-        console.log(widget)
-
         let type=widget.type
         let label=fieldName
         label=label.replace(/_/g, " ");

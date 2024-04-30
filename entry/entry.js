@@ -58,7 +58,7 @@ const callback = function (mutationsList, observer) {
               if (window.gyreSetComboValues) window.gyreSetComboValues(w)
               
               if (!window.checkGyreMapping) continue
-              let label=window.checkGyreMapping(node,w)
+              let label=window.checkGyreMapping(node,w,i)
               if (label) {
               switch (w.type) {
                 case "button":            
