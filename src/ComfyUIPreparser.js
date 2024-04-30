@@ -54,19 +54,18 @@ export class ComfyUIPreparser {
     async setValues(data) {
         let vp=new valuePreparser(this.workflow)
         await vp.setValues(data)
+        await vp.removePrimitiveNodes()
     }
     async execute(data) {
         this.generateLoops(data)
         this.executeAllRules(data)
         console.log(data)
-        await this.setValues(data)
+        await this.setValues(data)        
     }
 
     getTestData() {
+
         return {
-            blend_factor: 0.5
-        }
-       /* return {
             prompt: "fashion dog",
             negativePrompt: "ugly",
             hasMask: false,
@@ -78,7 +77,7 @@ export class ComfyUIPreparser {
             // some custom fields
             seed: 123,
             steps: 20
-        }*/
+        }
     }
 
 }

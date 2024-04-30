@@ -12719,7 +12719,23 @@ var gyreapp = (function () {
           if (this.metadata.forms && this.metadata.forms.default)  this.fieldList=this.metadata.forms.default.elements;
         }
 
+        getWidgetIndex(nodeId,name) {
+            let nodeWidgets=this.workflow.extra.gyre.nodeWidgets;
+            for(let nId in nodeWidgets) {
+                if (parseInt(nId)===nodeId) {
+                    let widgets=nodeWidgets[nId];
+                    for(let i=0;i<widgets.length;i++) {
+                        let widget=widgets[i];
+                        if (widget.name===name) return i
+                    }
+                }
+            }
+            return -1
+        }
+        getLinkById(linkId) {
+            return this.workflow.links.find(linkArr => linkArr[0] === linkId)
 
+        }
         getNodeById(nodeId) {
             return this.workflow.nodes.find(node => node.id === nodeId)
           }
@@ -12788,10 +12804,29 @@ var gyreapp = (function () {
         async setNodesValue(field,fromFieldName,value) {
             for (let nodeId in this.metadata.mappings) {
                 let mappingList=this.metadata.mappings[nodeId];
+
+                if (!mappingList.length) continue
                 let nodeIdInt=parseInt(nodeId);
                 let node=this.loopParser.getNodeById(nodeIdInt);
                 if (!node) {
                     console.log("could not find node with id ",JSON.stringify(nodeIdInt));
+                }
+
+                /**
+                 * workaround for ComfyUI bug: linked values are not transferred to target node, have to do it manually
+                 */
+                let targetFieldName="";
+                let targetIndex=-1;
+                let targetNode=null;
+                if (node.outputs && node.outputs.length && node.outputs[0].widget) {
+                    targetFieldName=node.outputs[0].widget.name;
+                    let linkId=node.outputs[0].links[0];
+                    let link=this.getLinkById(linkId);
+                    let targetNodeId=link[3];
+                    targetIndex=this.getWidgetIndex(targetNodeId,targetFieldName);
+                    if (targetIndex>=0) {
+                        targetNode=this.getNodeById(targetNodeId);
+                    }
                 }
                 if (node) {
                     for(let i=0;i<mappingList.length;i++) {
@@ -12801,6 +12836,9 @@ var gyreapp = (function () {
                             value=await this.convertValue(value,field);
     //                        console.log("setNodesValue",node,value,mapping.toIndex)
                             node.widgets_values[parseInt(mapping.toIndex)]=value;
+                            if (targetNode) {
+                                targetNode.widgets_values[targetIndex]=value;
+                            }
                         }                
                     }
                 }
@@ -12834,6 +12872,22 @@ var gyreapp = (function () {
             }
         }
 
+        removePrimitiveNodes() {
+
+            // Iterate backwards to avoid indexing issues after removal
+            for (let i = this.workflow.nodes.length - 1; i >= 0; i--) {
+                const node = this.workflow.nodes[i];
+                if (node.type === "PrimitiveNode") {
+                    const outgoingLink = this.workflow.links.find(link => link[1] === node.id);
+            
+                    // Remove the  link
+                    if (outgoingLink) this.workflow.links = this.workflow.links.filter(link => link[0] !== outgoingLink[0]);
+            
+                    // Remove the GyreLoop node
+                    this.workflow.nodes.splice(i, 1);
+                }
+            }
+        }
         /**
          * Modify workflow values by using mapping and data from image editor
          * data object has to be filled with
@@ -12850,7 +12904,7 @@ var gyreapp = (function () {
                 let value=data[name];
                 if (!Array.isArray(value)) {
                     let field=this.rules.getField(name,this.fieldList);
-                    await this.setNodesValue(field,field.name,value);
+                    if (field) await this.setNodesValue(field,field.name,value);
                 } else {
                     // replace array of object values
                     let arrayName=name;
@@ -12924,19 +12978,18 @@ var gyreapp = (function () {
         async setValues(data) {
             let vp=new valuePreparser(this.workflow);
             await vp.setValues(data);
+            await vp.removePrimitiveNodes();
         }
         async execute(data) {
             this.generateLoops(data);
             this.executeAllRules(data);
             console.log(data);
-            await this.setValues(data);
+            await this.setValues(data);        
         }
 
         getTestData() {
+
             return {
-                blend_factor: 0.5
-            }
-           /* return {
                 prompt: "fashion dog",
                 negativePrompt: "ugly",
                 hasMask: false,
@@ -12948,7 +13001,7 @@ var gyreapp = (function () {
                 // some custom fields
                 seed: 123,
                 steps: 20
-            }*/
+            }
         }
 
     }
