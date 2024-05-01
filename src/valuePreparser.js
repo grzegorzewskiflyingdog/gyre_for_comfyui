@@ -105,6 +105,7 @@ export class valuePreparser {
             let node=this.loopParser.getNodeById(nodeIdInt)
             if (!node) {
                 console.log("could not find node with id ",JSON.stringify(nodeIdInt))
+                return
             }
 
             /**
