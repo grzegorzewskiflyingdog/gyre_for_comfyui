@@ -130,7 +130,6 @@ export class valuePreparser {
                     
                     if (mapping && mapping.fromField===fromFieldName) {
                         value=await this.convertValue(value,field)
-                        console.log("setNodesValue",node,value,mapping.toIndex)
                         node.widgets_values[parseInt(mapping.toIndex)]=value
                         if (targetNode) {
                             targetNode.widgets_values[targetIndex]=value

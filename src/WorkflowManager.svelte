@@ -294,6 +294,7 @@
     //    console.log("saveWorkflow");
         let helper=new mappingsHelper()
         helper.cleanUpMappings($metadata)
+        
         window.app.graph.serialize_widgets=true
         let graph = window.app.graph.serialize()
         for(let i=0;i<graph.nodes.length;i++) {

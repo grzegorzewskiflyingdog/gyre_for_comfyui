@@ -37,6 +37,9 @@ export class mappingsHelper {
     getNodeByType(workflow,type) {
         return workflow.nodes.find(node => node.type === type)
       }
+      getNodeById(workflow,id) {
+        return workflow.nodes.find(node => node.id === id)
+      }      
     addMapping(metadata,nodeId,fromField,toField) {
         if (!toField || !fromField) return
         if (!nodeId) return
@@ -68,15 +71,18 @@ export class mappingsHelper {
         // only use mappsings with existing fields
         for (let nodeId in metadata.mappings) {
             let mappings=metadata.mappings[nodeId]
-            if (!mappings) continue
             let filteredArray=[]
-            metadata.mappings[nodeId]=null
-            for(let i=0;i<mappings.length;i++) {
-                let m=mappings[i]
-                if (fieldNames[m.fromField]) filteredArray.push(m)
+            delete metadata.mappings[nodeId]
+            if (mappings) {
+                for(let i=0;i<mappings.length;i++) {
+                    let m=mappings[i]
+                    if (fieldNames[m.fromField]) filteredArray.push(m)
+                }
+                if (this.getNodeById(workflow,parseInt(nodeId))) metadata.mappings[nodeId]=filteredArray            // also check if node exists anymore                
             }
-            if (workflow.nodes[parseInt(nodeId)]) metadata.mappings[nodeId]=filteredArray            // also check if node exists anymore
+           
         }
+        console.log("mappings",metadata.mappings)
     }
 
 }
