@@ -68,7 +68,8 @@ export class ComfyUIPreparser {
         return {
             prompt: "fashion dog",
             negativePrompt: "ugly",
-            hasMask: false,
+            hasMask: true,
+            hasinitImage: true,
             controlnet:[
                 { type:"pose",image:"empty"},
                 { type:"depth",image:"empty"},

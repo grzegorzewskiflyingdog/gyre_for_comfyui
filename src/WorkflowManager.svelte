@@ -9,6 +9,7 @@
     import Icon from './Icon.svelte'
     import { ComfyUIPreparser } from './ComfyUIPreparser.js'
   import { component_subscribe } from "svelte/internal";
+    import { mappingsHelper } from './mappingsHelper.js'
 
     let allworkflows;
     let moving = false;
@@ -28,8 +29,8 @@
     let activatedTags = {}
     let selectedTag = ""
     let orginalname;
-    let duplicate = false;
-    let debug=true
+    let duplicate = false
+    let debug=false
     let debugmode='errormode';
     function onMouseDown() {
         moving = true;
@@ -86,23 +87,8 @@
         fileInput?.addEventListener("change", fileInputListener);
     }
     function getAvalableFileName(name) {
-        if (!name) return 'new';
-        return name;
-        let ind = 1;
-        let goodname = false;
-        let ext = name.split('.').pop();
-        name = name.replace(/\.[^/.]+$/, "");
-        let newname = name;
-        while (!goodname) {
-            let allcurrnames = allworkflows.map((el) => el.name);
-            if (allcurrnames.includes(name)) {
-                newname = `${name}(${ind})`;
-                ind = ind + 1;
-            } else {
-                goodname = true;
-            }
-        }
-        return `${newname}`;
+        if (!name) return 'new'
+        return name   
     }
 
 
@@ -167,7 +153,7 @@
      */
     async function loadUIComponents() {
         custom_ui_components = await scanUIComponents()
-        console.log("COMPONENTS",custom_ui_components)
+       // console.log("COMPONENTS",custom_ui_components)
     }
 
 
@@ -233,16 +219,13 @@
 
     async function loadWorkflow(workflow) {
         await loadList()
-        // todo:check if current workflow is unsaved and make confirm otherwise
-        // 1. make server request by workflow.name, getting full workflow data here
-        // 2. update ComfyUI with new workflow
-        // 3. set name and $metadata here
+
         if (!workflow.gyre) {
             workflow.gyre = {};
             workflow.gyre.tags = [];
         }
         orginalname = workflow.name;
-        console.log("load workflow!!",orginalname,workflow.name);
+      //  console.log("load workflow!!",orginalname,workflow.name);
         name = workflow.name
         $metadata = workflow.gyre        
         if (!$metadata.tags) $metadata.tags=[]
@@ -308,7 +291,9 @@
         console.log(workflow)
     }
     async function saveWorkflow() {
-        console.log("saveWorkflow");
+    //    console.log("saveWorkflow");
+        let helper=new mappingsHelper()
+        helper.cleanUpMappings($metadata)
         window.app.graph.serialize_widgets=true
         let graph = window.app.graph.serialize()
         for(let i=0;i<graph.nodes.length;i++) {
@@ -362,14 +347,6 @@
                 duplicate = false;
             }
         }
-
-        // todo:get workflow fom comfyUI
-        // $metadata should already point to extras.gyre - so nothing to do here
-        // 1. make server request, with  name and full workflow, store it on filesystem there
-        // 2. set unsaved state to false
-        // 3. load list of all workflows again
-      //  alert("save workflow " + name) // remove
-
         await loadList();
     }
 
@@ -675,9 +652,11 @@
                 {#if debugmode=='debugmode'}
                         {#each $workflowdebugList as workflow}
                             {#if isVisible(workflow)}
+                                <!-- svelte-ignore a11y-click-events-have-key-events -->
                                 <div style="position: relative" class="workflowEntry" on:click={loadWorkflow(workflow)}>
                                     {workflow.name}
                                 </div>
+                                <!-- svelte-ignore a11y-click-events-have-key-events -->
                                 <div style="position: relative" class="workflowEntry" on:click={loadWorkflowForm(workflow)}>
                                     Form data {workflow.name}
                                 </div>

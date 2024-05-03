@@ -100,12 +100,12 @@ export class valuePreparser {
         for (let nodeId in this.metadata.mappings) {
             let mappingList=this.metadata.mappings[nodeId]
 
-            if (!mappingList.length) continue
+            if (!mappingList || !mappingList.length) continue
             let nodeIdInt=parseInt(nodeId)
             let node=this.loopParser.getNodeById(nodeIdInt)
             if (!node) {
-                console.log("could not find node with id ",JSON.stringify(nodeIdInt))
-                return
+                console.log("could not find node with id ",nodeIdInt,fromFieldName,value)
+                continue
             }
 
             /**
@@ -130,7 +130,7 @@ export class valuePreparser {
                     
                     if (mapping && mapping.fromField===fromFieldName) {
                         value=await this.convertValue(value,field)
-//                        console.log("setNodesValue",node,value,mapping.toIndex)
+                        console.log("setNodesValue",node,value,mapping.toIndex)
                         node.widgets_values[parseInt(mapping.toIndex)]=value
                         if (targetNode) {
                             targetNode.widgets_values[targetIndex]=value

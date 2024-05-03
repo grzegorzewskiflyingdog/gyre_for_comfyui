@@ -49,6 +49,8 @@ export class mappingsHelper {
     }    
 
     cleanUpMappings(metadata) {
+        // @ts-ignore
+        let workflow=window.app.graph.serialize()
         let fieldNames={}
         let allFields=this.getMappingFields(metadata)
         for(let i=0;i<allFields.fields.length;i++) {
@@ -63,14 +65,17 @@ export class mappingsHelper {
             let field=allFields.outputFields[i]
             fieldNames[field.name]=true
         }        
+        // only use mappsings with existing fields
         for (let nodeId in metadata.mappings) {
             let mappings=metadata.mappings[nodeId]
+            if (!mappings) continue
             let filteredArray=[]
+            metadata.mappings[nodeId]=null
             for(let i=0;i<mappings.length;i++) {
                 let m=mappings[i]
                 if (fieldNames[m.fromField]) filteredArray.push(m)
             }
-            metadata.mappings[nodeId]=filteredArray            
+            if (workflow.nodes[parseInt(nodeId)]) metadata.mappings[nodeId]=filteredArray            // also check if node exists anymore
         }
     }
 
