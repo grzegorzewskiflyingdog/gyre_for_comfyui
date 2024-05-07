@@ -32,6 +32,7 @@
     let duplicate = false
     let debug=false
     let debugmode='errormode';
+    let virtualNodes = [];
     function onMouseDown() {
         moving = true;
     }
@@ -290,13 +291,32 @@
         let workflow=window.app.graph.serialize()
         console.log(workflow)
     }
+
+    async function getVirtualNodes() {
+        for (const outerNode of  window.app.graph.computeExecutionOrder(false)) {
+
+
+            const innerNodes = outerNode.getInnerNodes ? outerNode.getInnerNodes() : [outerNode];
+            for (const node of innerNodes) {
+                if (node.isVirtualNode) {
+                    virtualNodes.push(node.type);
+                }
+            }
+        }
+    }
+
+
     async function saveWorkflow() {
     //    console.log("saveWorkflow");
         let helper=new mappingsHelper()
         helper.cleanUpMappings($metadata)
-        
+        getVirtualNodes();
         window.app.graph.serialize_widgets=true
-        let graph = window.app.graph.serialize()
+        let graph = window.app.graph.serialize();
+
+        if (!$metadata.virtualNodes){
+            $metadata.virtualNodes=virtualNodes;
+        }
         for(let i=0;i<graph.nodes.length;i++) {
             let node=graph.nodes[i]
             let _node=window.app.graph._nodes[i]
@@ -304,6 +324,7 @@
             $metadata.nodeWidgets[node.id]=_node.widgets
          //   node.widgets=_node.widgets
         }
+
         console.log("window.app.graph",graph)
         // this is scenario just after loading workflow and not save it
         if (loadedworkflow && loadedworkflow.extra.workspace_info) {
