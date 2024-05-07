@@ -82,7 +82,6 @@ export class mappingsHelper {
             }
            
         }
-        console.log("mappings",metadata.mappings)
     }
 
 }

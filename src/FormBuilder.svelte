@@ -64,7 +64,7 @@
     fieldSelector.hideDialog()
     let newElement=e.detail
     if (!newElement) return
-    if (newElement.custom) {
+    if (newElement.custom) {    // custom element
       let field={
         type: "custom",
         tag: newElement.tag,
@@ -73,7 +73,15 @@
         default: newElement.parameters.default.default,
         parameters: newElement.parameters
       }
+      // set default values
+      for(let name in newElement.parameters) {
+        let p=newElement.parameters[name]
+        if (p.name!=="name" && p.name!=="label" && p.name!="default") {
+          field[name]=p["default"]
+        }
+      }
       newElement=field
+      console.log(field)
     }
     formElements.push(newElement)
     ensureUniqueNames()

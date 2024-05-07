@@ -25,8 +25,8 @@
             if (!element.default) element.default=0
             element.default=parseFloat(element.default)
         }
-        dispatch('update', element)
-        
+        if (element.type==="custom") generateElement()
+        dispatch('update', element)        
     }
 
     // Function to handle option updates for dropdowns
@@ -61,43 +61,44 @@
         dispatch("change",{value:value})
     }
 
+    let  html
     /**
      * for custom elements
      */
     function generateElement() {   
              console.log("value",value)
         // not using <svelte:element because we need custom parameters
-        let html="<"+element.tag+" class=\"custom\" value=\""+value+"\" "
+        html="<"+element.tag+" class=\"custom\" value=\""+value+"\" "
         for(let name in element.parameters) {   // add more parameters
             if (name!=="label" && name!=="name" && name!=="default" && name!=="value") {
                 html+=name+"=\""+element[name]+"\" "
             }
         }
         html+="></"+element.tag+">"
-
-        return html
     }
     onMount(() => {
-        if (!formRoot) return
-        let customElements=formRoot.getElementsByClassName("custom")
+        generateElement()
+        if (!elementRoot) return
+        let customElements=elementRoot.getElementsByClassName("custom")        // should be max 1
         if (!customElements) return
-        for(let i=0;i<customElements.length;i++) {
+        for(let i=0;i<customElements.length;i++) {  // for not really needed here
             let element=customElements[i]
             element.addEventListener("change", (e) => changeValue(e.target.value))
         }
+        
     })
     export let advancedOptions=true
 
-    let formRoot
+    let elementRoot
 </script>
 
-<div class="element-preview" bind:this={formRoot} class:showHidden={element.hidden}>
+<div class="element-preview" bind:this={elementRoot} class:showHidden={element.hidden}>
     <!-- Element custom tag -->
     {#if element.type==="custom"}
         {#if element.label}
             <label for={element.name}>{element.label}:</label>
         {/if}
-        {@html generateElement()}
+        {@html html}
     {/if}
     <!-- Element preview based on type -->
     {#if element.type==="advanced_options"} 
