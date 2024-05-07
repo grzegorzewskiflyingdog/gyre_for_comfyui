@@ -275,6 +275,10 @@ def collect_gyre_components():
                             'icon': component.get('icon', ''),
                             'path': subdir_name
                         }
+                        if 'split_value_num' in component:
+                              component_info['split_value_num'] = component['split_value_num'] 
+                        if 'split_value_type' in component:
+                              component_info['split_value_type'] = component['split_value_type']                               
                         # Add 'defaults' sub-object if it exists
                         if 'parameters' in component:
                             component_info['parameters'] = component['parameters'] 

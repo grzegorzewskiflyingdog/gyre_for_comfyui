@@ -73,6 +73,8 @@
         default: newElement.parameters.default.default,
         parameters: newElement.parameters
       }
+      if (newElement.split_value_num) field.split_value_num=newElement.split_value_num
+      if (newElement.split_value_type) field.split_value_type=newElement.split_value_type
       // set default values
       for(let name in newElement.parameters) {
         let p=newElement.parameters[name]
@@ -81,7 +83,6 @@
         }
       }
       newElement=field
-      console.log(field)
     }
     formElements.push(newElement)
     ensureUniqueNames()

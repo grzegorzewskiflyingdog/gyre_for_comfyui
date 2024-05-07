@@ -21,6 +21,12 @@ export class mappingsHelper {
         let res= {fields:JSON.parse(JSON.stringify(fields)),defaultFields,outputFields}
         for(let i=0;i<fields.length;i++) {
             let field=fields[i]
+            if (field.split_value_num && field.split_value_type) {
+                for(let k=0;k<field.split_value_num;k++) {
+                    let newField={name:field.name+"_"+k,type:field.split_value_type,originalName:field.name,index:k}    // add new fields with underscore
+                    res.fields.push(newField)
+                }
+            }
             if (field.type==="drop_layers") {
                 if (field.num_layers===1) continue  // only one image
                 for(let k=0;k<field.num_layers;k++) {
