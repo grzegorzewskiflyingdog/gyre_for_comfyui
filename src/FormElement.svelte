@@ -26,6 +26,7 @@
             element.default=parseFloat(element.default)
         }
         if (element.type==="custom") generateElement()
+        console.log("update",element)
         dispatch('update', element)        
     }
 
@@ -66,7 +67,6 @@
      * for custom elements
      */
     function generateElement() {   
-             console.log("value",value)
         // not using <svelte:element because we need custom parameters
         html="<"+element.tag+" class=\"custom\" value=\""+value+"\" "
         for(let name in element.parameters) {   // add more parameters
@@ -208,17 +208,17 @@
                 
                 {#if p.type==="text"}
                     <label  for="{name}">{p.label}: </label>
-                    <input type="text" {name} value={p.default} on:input={(e) => {
+                    <input type="text" {name} value={element[name]} on:change={(e) => {
                         let obj={}
                         obj[name]=e.target.value
                         updateElement(obj)}} />
                 {/if}
                 {#if p.type==="textarea"}
                     <label  for="{name}" class="textarea_label">{p.label}: </label>
-                    <textarea class="textarea" {name} on:input={(e) => {
+                    <textarea class="textarea" {name} on:change={(e) => {
                         let obj={}
                         obj[name]=e.target.value
-                        updateElement(obj)}} >{p.default}</textarea>
+                        updateElement(obj)}} >{element[name]}</textarea>
                 {/if}                
             </div>
           {/each}

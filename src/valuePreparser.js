@@ -219,4 +219,30 @@ export class valuePreparser {
         }
 
     }
+    /**
+     * split values in CSV format from string into seperate values with field_0, field_1
+     * values are separated by ;
+     * Definition by split_value_num and split_value_type
+     * @param {*} data 
+     */
+    splitCustomValues(data) {
+        for (let name in data) {
+            let value=data[name]
+            let field=this.rules.getField(name,this.fieldList)
+            if (field && field.split_value_num && field.split_value_type) {
+                let arr=value.split(";")
+                for(let i=0;i<field.split_value_num;i++) {
+                    let v=arr[i]
+                    // type conversion
+                    if (field.split_value_type==="float") v=parseFloat(v)
+                    if (field.split_value_type==="number") v=parseInt(v)    
+                    if (field.split_value_type==="boolean") {
+                        v=false
+                        if (v==="true") v=true
+                    }   
+                    data[name+"_"+i]=v
+                }
+            }
+        }
+    }
 }

@@ -30,7 +30,7 @@
     let selectedTag = ""
     let orginalname;
     let duplicate = false
-    let debug=false
+    let debug=true
     let debugmode='errormode';
     let virtualNodes = [];
     function onMouseDown() {

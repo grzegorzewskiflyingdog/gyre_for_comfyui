@@ -56,10 +56,14 @@ export class ComfyUIPreparser {
         await vp.setValues(data)
         await vp.removePrimitiveNodes()
     }
+    splitCustomValues(data) {
+        let vp=new valuePreparser(this.workflow)
+        vp.splitCustomValues(data)
+    }
     async execute(data) {
+        this.splitCustomValues(data)
         this.generateLoops(data)
         this.executeAllRules(data)
-        console.log(data)
         await this.setValues(data)        
     }
 
@@ -70,6 +74,7 @@ export class ComfyUIPreparser {
             negativePrompt: "ugly",
             hasMask: true,
             hasinitImage: true,
+            rise: "10;100",
             controlnet:[
                 { type:"pose",image:"empty"},
                 { type:"depth",image:"empty"},

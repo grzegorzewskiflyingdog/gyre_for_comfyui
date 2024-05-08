@@ -131,10 +131,14 @@
   function updateElement(index,element) {
     formElements[index]=element
     ensureUniqueNames()
+    console.log("after ensureUniqueNames",element)
     setDefaultValues()
+    console.log("after setDefaultValues",element)
+
     $metadata.forms[form_key].elements=formElements
     let helper=new mappingsHelper()
     helper.cleanUpMappings($metadata)
+    console.log("after cleanUpMappings",element)
 
   }
   /**
