@@ -7,6 +7,8 @@
   import { mappingsHelper } from './mappingsHelper.js'
   import FieldSelector from "./fieldSelector.svelte"
   import { createEventDispatcher } from 'svelte'
+  import { onMount } from 'svelte';
+
   const dispatch = createEventDispatcher()
 
   if (!$metadata.forms) $metadata.forms={}
@@ -47,7 +49,7 @@
       // If the name doesn't exist, add it to the nameMap
       nameMap[name] = 1
     }
-  });
+  })
 }
   $: {
     if (refresh) {
@@ -58,7 +60,15 @@
       formElements=formElements
     }
   }
+  onMount(() => {
+    if (!data || !formElements) return
 
+    let re=new rulesExecution()    
+    let res=re.execute(data,formElements,$metadata.rules,{"controlnet":0})
+    if (!res) return
+    data=res.data
+    if (res.hiddenFields.length || res.showFields.length) formElements=formElements
+  })
 
   function addElement(e) {
     fieldSelector.hideDialog()
@@ -189,6 +199,7 @@
     let res=re.execute(data,formElements,$metadata.rules,{"controlnet":0})
     if (!res) return
     data=res.data
+    if (res.hiddenFields.length || res.showFields.length) formElements=formElements
   }
   function setDefaultValues() {
     if (!formElements) return

@@ -99,6 +99,7 @@ export class rulesExecution {
         if  (!rules) rules=[]
         if (!data) return {data,hiddenFields:{}}
         let hiddenFields=[]
+        let showFields=[]
         for(let i=0;i<rules.length;i++) {
             // { fieldName, condition, actionType, rightValue, targetField, actionValue }
             let rule=rules[i]
@@ -154,9 +155,29 @@ export class rulesExecution {
             }
             if (rule.actionType==="hideField") {
                 hiddenFields.push(rule.targetField)
+                let targetFieldName=rule.targetField
+                let targetField=this.getField(targetFieldName,fieldList)
+                if (!targetField) {
+                    console.error("rule execution target field not found:",targetFieldName)
+                    continue                    
+                }             
+                targetField.hideIt=true  
+                targetField.showIt=false         
+
             }
+            if (rule.actionType==="showField") {
+                showFields.push(rule.targetField)
+                let targetFieldName=rule.targetField
+                let targetField=this.getField(targetFieldName,fieldList)
+                if (!targetField) {
+                    console.error("rule execution target field not found:",targetFieldName)
+                    continue                    
+                }       
+                targetField.showIt=true         
+                targetField.hideIt=false  
+            }            
         }        
-        return {data,hiddenFields}
+        return {data,hiddenFields,showFields}
     }
 
 }

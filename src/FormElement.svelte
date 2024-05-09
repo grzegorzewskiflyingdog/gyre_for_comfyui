@@ -92,7 +92,7 @@
     let elementRoot
 </script>
 
-<div class="element-preview" bind:this={elementRoot} class:showHidden={element.hidden}>
+<div class="element-preview" bind:this={elementRoot} class:showHidden={(element.hidden && !element.showIt) || element.hideIt}>
     <!-- Element custom tag -->
     {#if element.type==="custom"}
         {#if element.label}
