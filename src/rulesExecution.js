@@ -100,19 +100,23 @@ export class rulesExecution {
         if (!data) return {data,hiddenFields:{}}
         let hiddenFields=[]
         let showFields=[]
+
         for(let i=0;i<rules.length;i++) {
             // { fieldName, condition, actionType, rightValue, targetField, actionValue }
             let rule=rules[i]
             let field=this.getField(rule.fieldName,fieldList)
+
             if (arrayName==="__ignore_arrays" &&  this.checkArray(field.name)) continue 
+
             let leftValue=this.getValue(data,rule.fieldName,fieldList,arrayIdx)
             let rightValue=rule.rightValue
             if (!field) {
                 console.error("rule execution field not found:",rule.fieldName)
                 continue
             }
-            if (arrayName && !this.checkArray(field.name)) continue  // array mode, but field is not an array
-            if (arrayName && this.getArrayName(field.name)!==arrayName) continue    // other arrays ignore
+            if (arrayName && arrayName!=="__ignore_arrays" && !this.checkArray(field.name)) continue  // array mode, but field is not an array
+            if (arrayName && arrayName!=="__ignore_arrays" &&  this.getArrayName(field.name)!==arrayName) continue    // other arrays ignore
+
             rightValue=this.convertValue(rightValue,field)
             leftValue=this.convertValue(leftValue,field)
 
@@ -142,40 +146,43 @@ export class rulesExecution {
             }
             console.log("executed:",leftValue,rule.condition,rightValue,res)
             if (!res) continue // rule will be not executed because condition is false
-            if (rule.actionType==="setValue") {
 
-                let targetFieldName=rule.targetField
-                let targetField=this.getField(targetFieldName,fieldList)
+            let targetFieldName
+            let targetField
+            if (rule.targetField) {
+                targetFieldName=rule.targetField
+                targetField=this.getField(targetFieldName,fieldList)
                 if (!targetField) {
                     console.error("rule execution target field not found:",targetFieldName)
                     continue                    
-                }
+                }                  
+            }
+          
+            if (rule.actionType==="setValue") {
                 let value=rule.actionValue
                 this.setValue(data,value,targetFieldName,fieldList,arrayIdx)
             }
             if (rule.actionType==="hideField") {
-                hiddenFields.push(rule.targetField)
-                let targetFieldName=rule.targetField
-                let targetField=this.getField(targetFieldName,fieldList)
-                if (!targetField) {
-                    console.error("rule execution target field not found:",targetFieldName)
-                    continue                    
-                }             
+                hiddenFields.push(rule.targetField)        
                 targetField.hideIt=true  
                 targetField.showIt=false         
 
             }
             if (rule.actionType==="showField") {
-                showFields.push(rule.targetField)
-                let targetFieldName=rule.targetField
-                let targetField=this.getField(targetFieldName,fieldList)
-                if (!targetField) {
-                    console.error("rule execution target field not found:",targetFieldName)
-                    continue                    
-                }       
+                showFields.push(rule.targetField) 
                 targetField.showIt=true         
                 targetField.hideIt=false  
-            }            
+            }  
+            if (rule.actionType==="copyValue") {
+                let fromFieldName=rule.actionValue
+                let fromField=this.getField(rule.actionValue,fieldList)
+                if (!fromField) {
+                    console.error("rule execution from field not found:",fromFieldName)
+                    continue                    
+                }
+                let value=this.getValue(data,fromFieldName,fieldList,arrayIdx)
+                this.setValue(data,value,targetFieldName,fieldList,arrayIdx)
+            }
         }        
         return {data,hiddenFields,showFields}
     }

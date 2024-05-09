@@ -1,5 +1,6 @@
 import { rulesExecution } from './rulesExecution.js'
 import { loopPreparser } from './loopPreparser.js'
+import { mappingsHelper } from './mappingsHelper.js'
 
 
 export class valuePreparser {
@@ -11,7 +12,10 @@ export class valuePreparser {
       if (!workflow.extra.gyre) return
       this.metadata=workflow.extra.gyre
       this.fieldList=[]
-      if (this.metadata.forms && this.metadata.forms.default)  this.fieldList=this.metadata.forms.default.elements
+      if (this.metadata.forms && this.metadata.forms.default)  {
+        this.fieldList=new mappingsHelper().getMappingFields(this.metadata).fields
+        //this.fieldList=this.metadata.forms.default.elements
+      }
     }
 
     getWidgetIndex(nodeId,name) {

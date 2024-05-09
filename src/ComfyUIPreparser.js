@@ -1,6 +1,7 @@
 import { rulesExecution } from './rulesExecution.js'
 import { loopPreparser } from './loopPreparser.js'
 import { valuePreparser } from './valuePreparser.js'
+import { mappingsHelper } from './mappingsHelper.js'
 
 export class ComfyUIPreparser {
 
@@ -9,7 +10,9 @@ export class ComfyUIPreparser {
         if (!workflow.extra.gyre) return
         this.metadata=workflow.extra.gyre
         this.fieldList=[]
-        if (this.metadata.forms && this.metadata.forms.default)  this.fieldList=this.metadata.forms.default.elements    
+        if (this.metadata.forms && this.metadata.forms.default)  {
+            this.fieldList=new mappingsHelper().getMappingFields(this.metadata).fields
+        }  
     }
     /**
      * extend workflow to set all loop nodes
@@ -33,7 +36,6 @@ export class ComfyUIPreparser {
         // marcin
         if(!this.metadata.rules) return;
         rules.execute(data,this.fieldList,this.metadata.rules,{},"__ignore_arrays") // first execute rules on non array props
-
         for (let name in data) {
             let value=data[name]
             if (Array.isArray(value)) {     // e.g. controlnet
@@ -64,7 +66,8 @@ export class ComfyUIPreparser {
         this.splitCustomValues(data)
         this.generateLoops(data)
         this.executeAllRules(data)
-        await this.setValues(data)        
+        await this.setValues(data)      
+        console.log("data",data)  
     }
 
     getTestData() {
@@ -75,6 +78,9 @@ export class ComfyUIPreparser {
             hasMask: true,
             hasinitImage: true,
             rise: "10;100",
+            rise_red: "1;2",
+            rise_gray: "100;101",
+            blend_if_channel: "gray",
             controlnet:[
                 { type:"pose",image:"empty"},
                 { type:"depth",image:"empty"},

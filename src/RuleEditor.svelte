@@ -33,7 +33,13 @@
       rules=rules
       $metadata.rules = rules;
     }
-  
+    function cloneRule(index) {
+      let rule=rules[index]
+      rule=JSON.parse(JSON.stringify(rule))
+      rules.push(rule)
+      editingIndex=rules.length-1
+      $metadata.rules = rules;
+    }
     function editRule(index) {
       editingIndex = index;
     }
@@ -147,6 +153,7 @@
             <option value="setValue">Set Value</option>
             <option value="showField">Show another Field</option>
             <option value="hideField">Hide another Field</option>
+            <option value="copyValue">Copy from another Field</option>
           </select>
         {#if rule.actionType === 'setValue'}
           <div class="action-row">
@@ -183,8 +190,32 @@
           <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
       </div>
         {/if}
-
-        <div><button on:click={() => deleteRule(index)} class="delete">Delete</button></div>
+        {#if rule.actionType === 'copyValue'}
+        <div class="action-row"> Copy 
+          <select bind:value={rule.actionValue} class="oneLine input">
+            <option value="">From Field...</option>
+            <optgroup label="Form">              
+              {#each fields as field}
+                {#if field!==rule.fieldName && field.type!=="layer_image" && field.type!=="magnifier" && field.type!=="advanced_options"}
+                  <option value={field.name}>{field.name}</option>
+                {/if}
+              {/each}
+            </optgroup>            
+          </select>
+          <select bind:value={rule.targetField} class="oneLine input">
+            <option value="">To Field...</option>
+            <optgroup label="Form">              
+              {#each fields as field}
+                {#if field!==rule.fieldName && field.type!=="layer_image" && field.type!=="magnifier" && field.type!=="advanced_options"}
+                  <option value={field.name}>{field.name}</option>
+                {/if}
+              {/each}
+            </optgroup>            
+          </select>
+          <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
+      </div>
+        {/if}
+        <div><button on:click={() => deleteRule(index)} class="delete">Delete</button> <button on:click={() => cloneRule(index)} class="">Clone</button></div>
         
 
       {:else}
@@ -195,6 +226,7 @@
           {#if rule.actionType==="setValue"}set {rule.targetField}={rule.actionValue}{/if}
           {#if rule.actionType==="showField"}show {rule.targetField}{/if}
           {#if rule.actionType==="hideField"}hide {rule.targetField}{/if}
+          {#if rule.actionType==="copyValue"}copy {rule.actionValue} to {rule.targetField}{/if}
 
         </div>
       {/if}

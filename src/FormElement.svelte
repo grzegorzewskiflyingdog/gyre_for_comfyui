@@ -222,6 +222,10 @@
                 {/if}                
             </div>
           {/each}
+          <div class="formLine">
+            <label  for="hidden">Hidden: </label>
+            <input type="checkbox" name="hidden" bind:checked={element.hidden}  /> Hide Input in form
+        </div>                
     {/if}
     {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'  || element.type === 'color_picker'}}
         <div class="formLine">
