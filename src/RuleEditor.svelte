@@ -145,7 +145,8 @@
           <select bind:value={rule.actionType}  class="input">
             <option value="">Action...</option>
             <option value="setValue">Set Value</option>
-            <option value="showField">Show/Hide</option>
+            <option value="showField">Show another Field</option>
+            <option value="hideField">Hide another Field</option>
           </select>
         {#if rule.actionType === 'setValue'}
           <div class="action-row">
@@ -166,6 +167,23 @@
               <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
           </div>
         {/if}
+        {#if rule.actionType === 'showField' || rule.actionType === 'hideField'}
+        <div class="action-row">
+          <select bind:value={rule.targetField} class="oneLine input">
+            <option value="">Field...</option>
+            <optgroup label="Form">              
+              {#each fields as field}
+                {#if field!==rule.fieldName && field.type!=="layer_image" && field.type!=="magnifier" && field.type!=="advanced_options"}
+                  <option value={field.name}>{field.name}</option>
+                {/if}
+              {/each}
+            </optgroup>            
+          </select>
+          
+          <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
+      </div>
+        {/if}
+
         <div><button on:click={() => deleteRule(index)} class="delete">Delete</button></div>
         
 
@@ -173,7 +191,12 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="edit-button" on:click={() => editRule(index)}>Edit</div>
         <!-- Display Rule Summary -->
-        <div> if {rule.fieldName} {rule.condition} {rule.rightValue}: {#if rule.actionType==="setValue"}set {rule.targetField}={rule.actionValue}{/if}</div>
+        <div> if {rule.fieldName} {rule.condition} {rule.rightValue}: 
+          {#if rule.actionType==="setValue"}set {rule.targetField}={rule.actionValue}{/if}
+          {#if rule.actionType==="showField"}show {rule.targetField}{/if}
+          {#if rule.actionType==="hideField"}hide {rule.targetField}{/if}
+
+        </div>
       {/if}
     </div>
   {/each}

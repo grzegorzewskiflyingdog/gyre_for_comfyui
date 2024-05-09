@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var gyreapp = (function () {
     'use strict';
 
@@ -840,7 +840,7 @@ var gyreapp = (function () {
     	let t0;
     	let t1;
     	let if_block2_anchor;
-    	let if_block0 = /*layers*/ ctx[0].length === 0 && create_if_block_3$3(ctx);
+    	let if_block0 = /*layers*/ ctx[0].length === 0 && create_if_block_3$4(ctx);
     	let if_block1 = /*layers*/ ctx[0].length === 1 && create_if_block_2$4(ctx);
     	let if_block2 = /*layers*/ ctx[0].length === 2 && create_if_block_1$6(ctx);
 
@@ -866,7 +866,7 @@ var gyreapp = (function () {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_3$3(ctx);
+    					if_block0 = create_if_block_3$4(ctx);
     					if_block0.c();
     					if_block0.m(t0.parentNode, t0);
     				}
@@ -923,7 +923,7 @@ var gyreapp = (function () {
     }
 
     // (11:4) {#if layers.length===0}
-    function create_if_block_3$3(ctx) {
+    function create_if_block_3$4(ctx) {
     	let div;
 
     	const block = {
@@ -949,7 +949,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3$3.name,
+    		id: create_if_block_3$4.name,
     		type: "if",
     		source: "(11:4) {#if layers.length===0}",
     		ctx
@@ -2789,9 +2789,9 @@ var gyreapp = (function () {
     	let if_block2 = (/*element*/ ctx[0].type === 'text' || /*element*/ ctx[0].type === 'textarea' || /*element*/ ctx[0].type === 'number' || /*element*/ ctx[0].type === 'color_picker') && create_if_block_9$2(ctx);
     	let if_block3 = /*element*/ ctx[0].type === 'layer_image' && create_if_block_8$2(ctx);
     	let if_block4 = /*element*/ ctx[0].type === 'drop_layers' && create_if_block_7$2(ctx);
-    	let if_block5 = /*element*/ ctx[0].type === 'dropdown' && create_if_block_6$2(ctx);
-    	let if_block6 = /*element*/ ctx[0].type === 'pre_filled_dropdown' && create_if_block_4$2(ctx);
-    	let if_block7 = (/*element*/ ctx[0].type === 'slider' || /*element*/ ctx[0].type === 'number') && create_if_block_3$2(ctx);
+    	let if_block5 = /*element*/ ctx[0].type === 'dropdown' && create_if_block_6$3(ctx);
+    	let if_block6 = /*element*/ ctx[0].type === 'pre_filled_dropdown' && create_if_block_4$3(ctx);
+    	let if_block7 = (/*element*/ ctx[0].type === 'slider' || /*element*/ ctx[0].type === 'number') && create_if_block_3$3(ctx);
     	let if_block8 = /*element*/ ctx[0].type === 'number' && create_if_block_2$3(ctx);
     	let if_block9 = /*element*/ ctx[0].type === 'slider' && create_if_block_1$5(ctx);
 
@@ -2939,7 +2939,7 @@ var gyreapp = (function () {
     				if (if_block5) {
     					if_block5.p(ctx, dirty);
     				} else {
-    					if_block5 = create_if_block_6$2(ctx);
+    					if_block5 = create_if_block_6$3(ctx);
     					if_block5.c();
     					if_block5.m(div2, t7);
     				}
@@ -2952,7 +2952,7 @@ var gyreapp = (function () {
     				if (if_block6) {
     					if_block6.p(ctx, dirty);
     				} else {
-    					if_block6 = create_if_block_4$2(ctx);
+    					if_block6 = create_if_block_4$3(ctx);
     					if_block6.c();
     					if_block6.m(div2, t8);
     				}
@@ -2965,7 +2965,7 @@ var gyreapp = (function () {
     				if (if_block7) {
     					if_block7.p(ctx, dirty);
     				} else {
-    					if_block7 = create_if_block_3$2(ctx);
+    					if_block7 = create_if_block_3$3(ctx);
     					if_block7.c();
     					if_block7.m(div2, t9);
     				}
@@ -3800,7 +3800,7 @@ var gyreapp = (function () {
     }
 
     // (256:4) {#if element.type === 'dropdown'}
-    function create_if_block_6$2(ctx) {
+    function create_if_block_6$3(ctx) {
     	let t0;
     	let button;
     	let mounted;
@@ -3876,7 +3876,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_6$2.name,
+    		id: create_if_block_6$3.name,
     		type: "if",
     		source: "(256:4) {#if element.type === 'dropdown'}",
     		ctx
@@ -4009,7 +4009,7 @@ var gyreapp = (function () {
     }
 
     // (268:4) {#if element.type === 'pre_filled_dropdown'}
-    function create_if_block_4$2(ctx) {
+    function create_if_block_4$3(ctx) {
     	let div;
     	let label;
     	let t1;
@@ -4017,7 +4017,7 @@ var gyreapp = (function () {
     	let option;
     	let mounted;
     	let dispose;
-    	let if_block = /*$metadata*/ ctx[7].combo_values && create_if_block_5$2(ctx);
+    	let if_block = /*$metadata*/ ctx[7].combo_values && create_if_block_5$3(ctx);
 
     	const block = {
     		c: function create() {
@@ -4066,7 +4066,7 @@ var gyreapp = (function () {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_5$2(ctx);
+    					if_block = create_if_block_5$3(ctx);
     					if_block.c();
     					if_block.m(select, null);
     				}
@@ -4089,7 +4089,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4$2.name,
+    		id: create_if_block_4$3.name,
     		type: "if",
     		source: "(268:4) {#if element.type === 'pre_filled_dropdown'}",
     		ctx
@@ -4099,7 +4099,7 @@ var gyreapp = (function () {
     }
 
     // (273:16) {#if $metadata.combo_values}
-    function create_if_block_5$2(ctx) {
+    function create_if_block_5$3(ctx) {
     	let each_1_anchor;
     	let each_value = Object.entries(/*$metadata*/ ctx[7].combo_values);
     	validate_each_argument(each_value);
@@ -4159,7 +4159,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_5$2.name,
+    		id: create_if_block_5$3.name,
     		type: "if",
     		source: "(273:16) {#if $metadata.combo_values}",
     		ctx
@@ -4213,7 +4213,7 @@ var gyreapp = (function () {
     }
 
     // (281:4) {#if element.type === 'slider' || element.type === 'number'}
-    function create_if_block_3$2(ctx) {
+    function create_if_block_3$3(ctx) {
     	let div0;
     	let label0;
     	let t1;
@@ -4336,7 +4336,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3$2.name,
+    		id: create_if_block_3$3.name,
     		type: "if",
     		source: "(281:4) {#if element.type === 'slider' || element.type === 'number'}",
     		ctx
@@ -6281,7 +6281,7 @@ var gyreapp = (function () {
     }
 
     // (127:4) {#if name==="form_layers"}
-    function create_if_block_6$1(ctx) {
+    function create_if_block_6$2(ctx) {
     	let svg_1;
     	let path;
 
@@ -6308,7 +6308,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_6$1.name,
+    		id: create_if_block_6$2.name,
     		type: "if",
     		source: "(127:4) {#if name===\\\"form_layers\\\"}",
     		ctx
@@ -6318,7 +6318,7 @@ var gyreapp = (function () {
     }
 
     // (130:4) {#if name==="form_layers2"}
-    function create_if_block_5$1(ctx) {
+    function create_if_block_5$2(ctx) {
     	let svg_1;
     	let path;
 
@@ -6345,7 +6345,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_5$1.name,
+    		id: create_if_block_5$2.name,
     		type: "if",
     		source: "(130:4) {#if name===\\\"form_layers2\\\"}",
     		ctx
@@ -6355,7 +6355,7 @@ var gyreapp = (function () {
     }
 
     // (133:4) {#if name==="form_preview"}
-    function create_if_block_4$1(ctx) {
+    function create_if_block_4$2(ctx) {
     	let svg_1;
     	let path0;
     	let path1;
@@ -6387,7 +6387,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4$1.name,
+    		id: create_if_block_4$2.name,
     		type: "if",
     		source: "(133:4) {#if name===\\\"form_preview\\\"}",
     		ctx
@@ -6397,7 +6397,7 @@ var gyreapp = (function () {
     }
 
     // (139:4) {#if name==="form_layers3"}
-    function create_if_block_3$1(ctx) {
+    function create_if_block_3$2(ctx) {
     	let svg_1;
     	let path0;
     	let path1;
@@ -6429,7 +6429,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_3$1.name,
+    		id: create_if_block_3$2.name,
     		type: "if",
     		source: "(139:4) {#if name===\\\"form_layers3\\\"}",
     		ctx
@@ -6607,10 +6607,10 @@ var gyreapp = (function () {
     	let if_block18 = /*name*/ ctx[0] === "form_checkbox" && create_if_block_9$1(ctx);
     	let if_block19 = /*name*/ ctx[0] === "form_dropdown" && create_if_block_8$1(ctx);
     	let if_block20 = /*name*/ ctx[0] === "form_slider" && create_if_block_7$1(ctx);
-    	let if_block21 = /*name*/ ctx[0] === "form_layers" && create_if_block_6$1(ctx);
-    	let if_block22 = /*name*/ ctx[0] === "form_layers2" && create_if_block_5$1(ctx);
-    	let if_block23 = /*name*/ ctx[0] === "form_preview" && create_if_block_4$1(ctx);
-    	let if_block24 = /*name*/ ctx[0] === "form_layers3" && create_if_block_3$1(ctx);
+    	let if_block21 = /*name*/ ctx[0] === "form_layers" && create_if_block_6$2(ctx);
+    	let if_block22 = /*name*/ ctx[0] === "form_layers2" && create_if_block_5$2(ctx);
+    	let if_block23 = /*name*/ ctx[0] === "form_preview" && create_if_block_4$2(ctx);
+    	let if_block24 = /*name*/ ctx[0] === "form_layers3" && create_if_block_3$2(ctx);
     	let if_block25 = /*name*/ ctx[0] == "form_advanced" && create_if_block_2$2(ctx);
     	let if_block26 = /*name*/ ctx[0] == "form_colorpicker" && create_if_block_1$4(ctx);
     	let if_block27 = /*name*/ ctx[0] == "form_magnifier" && create_if_block$6(ctx);
@@ -6982,7 +6982,7 @@ var gyreapp = (function () {
 
     			if (/*name*/ ctx[0] === "form_layers") {
     				if (if_block21) ; else {
-    					if_block21 = create_if_block_6$1(ctx);
+    					if_block21 = create_if_block_6$2(ctx);
     					if_block21.c();
     					if_block21.m(div, t21);
     				}
@@ -6993,7 +6993,7 @@ var gyreapp = (function () {
 
     			if (/*name*/ ctx[0] === "form_layers2") {
     				if (if_block22) ; else {
-    					if_block22 = create_if_block_5$1(ctx);
+    					if_block22 = create_if_block_5$2(ctx);
     					if_block22.c();
     					if_block22.m(div, t22);
     				}
@@ -7004,7 +7004,7 @@ var gyreapp = (function () {
 
     			if (/*name*/ ctx[0] === "form_preview") {
     				if (if_block23) ; else {
-    					if_block23 = create_if_block_4$1(ctx);
+    					if_block23 = create_if_block_4$2(ctx);
     					if_block23.c();
     					if_block23.m(div, t23);
     				}
@@ -7015,7 +7015,7 @@ var gyreapp = (function () {
 
     			if (/*name*/ ctx[0] === "form_layers3") {
     				if (if_block24) ; else {
-    					if_block24 = create_if_block_3$1(ctx);
+    					if_block24 = create_if_block_3$2(ctx);
     					if_block24.c();
     					if_block24.m(div, t24);
     				}
@@ -9748,70 +9748,80 @@ var gyreapp = (function () {
     const file$2 = "src\\RuleEditor.svelte";
 
     function add_css$3(target) {
-    	append_styles(target, "svelte-14rkto5", ".rule-row.svelte-14rkto5.svelte-14rkto5{position:relative;padding:10px;border:1px solid #ccc;margin-bottom:5px}.rule-row.svelte-14rkto5:hover .edit-button.svelte-14rkto5{display:block}.edit-button.svelte-14rkto5.svelte-14rkto5{display:none;position:absolute;top:0;right:0;cursor:pointer;font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;color:black;background-color:rgb(227, 206, 116);border-color:rgb(128, 128, 128);border-radius:5px;padding:5px}.close-button.svelte-14rkto5.svelte-14rkto5{position:absolute;top:5px;right:5px;cursor:pointer}.action-row.svelte-14rkto5.svelte-14rkto5{}.oneLine.svelte-14rkto5.svelte-14rkto5{display:inline-block;margin-right:10px;width:120px;font-size:14px}.input.svelte-14rkto5.svelte-14rkto5{background-color:black;color:white;font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;padding:3px}.rightValue.svelte-14rkto5.svelte-14rkto5{width:150px}.ruleEditor.svelte-14rkto5 button.svelte-14rkto5{font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;font-size:14px;min-width:70px;color:black;background-color:rgb(227, 206, 116);border-color:rgb(128, 128, 128);border-radius:5px;cursor:pointer;margin-right:10px}.ruleEditor.svelte-14rkto5 .delete.svelte-14rkto5{background-color:red;color:white}.ruleEditor.svelte-14rkto5 h1.svelte-14rkto5{font-size:16px;margin-bottom:30px}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUnVsZUVkaXRvci5zdmVsdGUiLCJzb3VyY2VzIjpbIlJ1bGVFZGl0b3Iuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgXHJcbiAgICBcclxuXHJcbiAgICBpbXBvcnQgeyBtZXRhZGF0YX0gZnJvbSAnLi9zdG9yZXMvbWV0YWRhdGEnXHJcbiAgICBpbXBvcnQgSW5wdXRDb21ibyAgZnJvbSAnLi9JbnB1dENvbWJvLnN2ZWx0ZSdcclxuICAgIGltcG9ydCB7IG9uTW91bnQgfSBmcm9tICdzdmVsdGUnO1xyXG4gICAgaW1wb3J0IHsgbWFwcGluZ3NIZWxwZXIgfSBmcm9tICcuL21hcHBpbmdzSGVscGVyLmpzJ1xyXG4gICAgbGV0IG1IPW5ldyBtYXBwaW5nc0hlbHBlcigpXHJcblxyXG4gICAgbGV0IE1hcHBpbmdzQ29wbXBvbmVudFxyXG4gICAgbGV0IGNvbmRpdGlvbnMgPSBbJz09JywgJyE9JywgJz4nLCAnPCcsICc+PScsICc8PSddO1xyXG4gICAgbGV0IGVkaXRpbmdJbmRleCA9IG51bGw7IC8vIEluZGV4IG9mIHRoZSBjdXJyZW50bHkgZWRpdGluZyBydWxlXHJcbiAgICBpZiAoISRtZXRhZGF0YS5ydWxlcykgJG1ldGFkYXRhLnJ1bGVzPVtdXHJcbiAgICBsZXQgZmllbGRzPSRtZXRhZGF0YS5mb3Jtcy5kZWZhdWx0LmVsZW1lbnRzIC8vIGdldCBmb3JtIGZpZWxkc1xyXG4gICAgbGV0IHJ1bGVzID0gJG1ldGFkYXRhLnJ1bGVzXHJcbiAgICBsZXQgbWFwcGluZ0ZpZWxkcz17ZGVmYXVsdGZpZWxkczpbXX1cclxuICAgIGZ1bmN0aW9uIGFkZFJ1bGUoKSB7XHJcbiAgICAgIHJ1bGVzLnB1c2goeyBmaWVsZE5hbWU6ICcnLCBjb25kaXRpb246ICcnLCBhY3Rpb25UeXBlOiAnJywgcmlnaHRWYWx1ZTonJywgdGFyZ2V0RmllbGQ6ICcnLCBhY3Rpb25WYWx1ZTogJycgfSk7XHJcbiAgICAgIHJ1bGVzPXJ1bGVzXHJcbiAgICAgIGVkaXRpbmdJbmRleD1ydWxlcy5sZW5ndGgtMVxyXG4gICAgICAkbWV0YWRhdGEucnVsZXMgPSBydWxlcztcclxuICAgIH1cclxuICAgIG9uTW91bnQoKCkgPT4ge1xyXG4gICAgICBtYXBwaW5nRmllbGRzPW1ILmdldE1hcHBpbmdGaWVsZHMoJG1ldGFkYXRhKVxyXG4gICAgICBjb25zb2xlLmxvZyhtYXBwaW5nRmllbGRzKVxyXG4gICAgfSk7XHJcbiAgICBmdW5jdGlvbiBkZWxldGVSdWxlKGluZGV4KSB7XHJcbiAgICAgIHJ1bGVzLnNwbGljZShpbmRleCwgMSk7XHJcbiAgICAgIGlmIChlZGl0aW5nSW5kZXggPT09IGluZGV4KSB7XHJcbiAgICAgICAgZWRpdGluZ0luZGV4ID0gbnVsbDsgLy8gUmVzZXQgZWRpdGluZyBpbmRleCBpZiB0aGUgY3VycmVudGx5IGVkaXRlZCBydWxlIGlzIGRlbGV0ZWRcclxuICAgICAgfVxyXG4gICAgICBydWxlcz1ydWxlc1xyXG4gICAgICAkbWV0YWRhdGEucnVsZXMgPSBydWxlcztcclxuICAgIH1cclxuICBcclxuICAgIGZ1bmN0aW9uIGVkaXRSdWxlKGluZGV4KSB7XHJcbiAgICAgIGVkaXRpbmdJbmRleCA9IGluZGV4O1xyXG4gICAgfVxyXG4gIDwvc2NyaXB0PlxyXG4gIFxyXG4gIDxzdHlsZT5cclxuICAgIC5ydWxlLXJvdyB7XHJcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgICAgcGFkZGluZzogMTBweDtcclxuICAgICAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcclxuICAgICAgbWFyZ2luLWJvdHRvbTogNXB4O1xyXG4gICAgfVxyXG4gICAgLnJ1bGUtcm93OmhvdmVyIC5lZGl0LWJ1dHRvbiB7XHJcbiAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgfVxyXG4gICAgLmVkaXQtYnV0dG9uIHtcclxuICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgICB0b3A6IDA7XHJcbiAgICAgIHJpZ2h0OiAwO1xyXG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAgIGZvbnQtZmFtaWx5OiBzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sIFwiU2Vnb2UgVUlcIiwgUm9ib3RvLCBVYnVudHUsIENhbnRhcmVsbCwgXCJOb3RvIFNhbnNcIiwgc2Fucy1zZXJpZiwgXCJTZWdvZSBVSVwiLCBIZWx2ZXRpY2EsIEFyaWFsO1xyXG4gICAgICAgIGNvbG9yOiBibGFjaztcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjI3LCAyMDYsIDExNik7XHJcbiAgICAgICAgYm9yZGVyLWNvbG9yOiByZ2IoMTI4LCAxMjgsIDEyOCk7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gICAgICAgIHBhZGRpbmc6IDVweDtcclxuICAgIH1cclxuICAgIC5jbG9zZS1idXR0b24ge1xyXG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICAgIHRvcDogNXB4O1xyXG4gICAgICByaWdodDogNXB4O1xyXG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcblxyXG4gICAgfSAgICBcclxuICAgIC5hY3Rpb24tcm93IHtcclxuXHJcbiAgICB9XHJcbiAgICAub25lTGluZSB7XHJcbiAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogMTBweDtcclxuICAgICAgICB3aWR0aDoxMjBweDtcclxuICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcblxyXG4gICAgfVxyXG4gICAgLmlucHV0IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxuICAgICAgICBjb2xvcjogd2hpdGU7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgXCJTZWdvZSBVSVwiLCBSb2JvdG8sIFVidW50dSwgQ2FudGFyZWxsLCBcIk5vdG8gU2Fuc1wiLCBzYW5zLXNlcmlmLCBcIlNlZ29lIFVJXCIsIEhlbHZldGljYSwgQXJpYWw7XHJcbiAgICAgICAgcGFkZGluZzogM3B4O1xyXG4gICAgfVxyXG4gICAgLnJpZ2h0VmFsdWUge1xyXG4gICAgICAgIHdpZHRoOiAxNTBweDtcclxuICAgIH1cclxuICAgIC5ydWxlRWRpdG9yIGJ1dHRvbiB7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgXCJTZWdvZSBVSVwiLCBSb2JvdG8sIFVidW50dSwgQ2FudGFyZWxsLCBcIk5vdG8gU2Fuc1wiLCBzYW5zLXNlcmlmLCBcIlNlZ29lIFVJXCIsIEhlbHZldGljYSwgQXJpYWw7XHJcbiAgICAgICAgZm9udC1zaXplOiAxNHB4O1xyXG4gICAgICAgIG1pbi13aWR0aDogNzBweDtcclxuICAgICAgICBjb2xvcjogYmxhY2s7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIyNywgMjA2LCAxMTYpO1xyXG4gICAgICAgIGJvcmRlci1jb2xvcjogcmdiKDEyOCwgMTI4LCAxMjgpO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OiAxMHB4O1xyXG4gICAgfVxyXG4gICAgLnJ1bGVFZGl0b3IgLmRlbGV0ZSB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xyXG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgIC5ydWxlRWRpdG9yIGgxIHtcclxuICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgICBtYXJnaW4tYm90dG9tOiAzMHB4O1xyXG4gICAgfVxyXG4gIDwvc3R5bGU+XHJcbiAgXHJcblxyXG4gPGRpdiBjbGFzcz1cInJ1bGVFZGl0b3JcIj5cclxuICA8aDE+UnVsZXM8L2gxPlxyXG5cclxuICB7I2VhY2ggcnVsZXMgYXMgcnVsZSwgaW5kZXh9XHJcbiAgICA8ZGl2IGNsYXNzPVwicnVsZS1yb3dcIj5cclxuICAgICAgeyNpZiBlZGl0aW5nSW5kZXggPT09IGluZGV4fVxyXG4gICAgICAgIDwhLS0gc3ZlbHRlLWlnbm9yZSBhMTF5LWNsaWNrLWV2ZW50cy1oYXZlLWtleS1ldmVudHMgLS0+XHJcbiAgICAgICAgPGRpdiBjbGFzcz1cImNsb3NlLWJ1dHRvblwiIG9uOmNsaWNrPXsoKSA9PiB7IGVkaXRpbmdJbmRleD0tMSB9fT5YPC9kaXY+XHJcblxyXG4gICAgICAgIDwhLS0gSW5wdXRzIGZvciBlZGl0aW5nIC0tPlxyXG5cclxuICAgICAgICAgIDxzZWxlY3QgYmluZDp2YWx1ZT17cnVsZS5maWVsZE5hbWV9ICBjbGFzcz1cIm9uZUxpbmUgaW5wdXRcIj5cclxuICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT1cIlwiPkZpZWxkLi4uPC9vcHRpb24+XHJcbiAgICAgICAgICAgIDxvcHRncm91cCBsYWJlbD1cIkZvcm1cIj5cclxuICAgICAgICAgICAgICB7I2VhY2ggZmllbGRzIGFzIGZpZWxkfVxyXG4gICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT17ZmllbGQubmFtZX0+e2ZpZWxkLm5hbWV9PC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgey9lYWNofVxyXG4gICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICAgICAgPG9wdGdyb3VwIGxhYmVsPVwiRGVmYXVsdHNcIj5cclxuICAgICAgICAgICAgICAgIHsjZWFjaCBtYXBwaW5nRmllbGRzLmRlZmF1bHRGaWVsZHMgYXMgZmllbGR9XHJcbiAgICAgICAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9e2ZpZWxkLm5hbWV9PntmaWVsZC5uYW1lfTwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgey9lYWNofVxyXG4gICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICA8L3NlbGVjdD5cclxuICAgICAgICAgIDxzZWxlY3QgYmluZDp2YWx1ZT17cnVsZS5jb25kaXRpb259IGNsYXNzPVwib25lTGluZSBpbnB1dFwiPlxyXG4gICAgICAgICAgICA8b3B0aW9uIHZhbHVlPVwiXCI+Q29uZGl0aW9uLi4uPC9vcHRpb24+XHJcbiAgICAgICAgICAgIHsjZWFjaCBjb25kaXRpb25zIGFzIGNvbmRpdGlvbn1cclxuICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPXtjb25kaXRpb259Pntjb25kaXRpb259PC9vcHRpb24+XHJcbiAgICAgICAgICAgIHsvZWFjaH1cclxuICAgICAgICAgIDwvc2VsZWN0PlxyXG4gICAgICAgICAgPGlucHV0IHR5cGU9XCJ0ZXh0XCIgY2xhc3M9XCJpbnB1dCByaWdodFZhbHVlXCIgcGxhY2Vob2xkZXI9XCJWYWx1ZVwiIGJpbmQ6dmFsdWU9e3J1bGUucmlnaHRWYWx1ZX0+XHJcblxyXG4gICAgICAgICAgPHNlbGVjdCBiaW5kOnZhbHVlPXtydWxlLmFjdGlvblR5cGV9ICBjbGFzcz1cImlucHV0XCI+XHJcbiAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9XCJcIj5BY3Rpb24uLi48L29wdGlvbj5cclxuICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT1cInNldFZhbHVlXCI+U2V0IFZhbHVlPC9vcHRpb24+XHJcbiAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9XCJzaG93RmllbGRcIj5TaG93L0hpZGU8L29wdGlvbj5cclxuICAgICAgICAgIDwvc2VsZWN0PlxyXG4gICAgICAgIHsjaWYgcnVsZS5hY3Rpb25UeXBlID09PSAnc2V0VmFsdWUnfVxyXG4gICAgICAgICAgPGRpdiBjbGFzcz1cImFjdGlvbi1yb3dcIj5cclxuICAgICAgICAgICAgICA8c2VsZWN0IGJpbmQ6dmFsdWU9e3J1bGUudGFyZ2V0RmllbGR9IGNsYXNzPVwib25lTGluZSBpbnB1dFwiPlxyXG4gICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT1cIlwiPkZpZWxkLi4uPC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICA8b3B0Z3JvdXAgbGFiZWw9XCJGb3JtXCI+XHJcbiAgICAgICAgICAgICAgICAgIHsjZWFjaCBmaWVsZHMgYXMgZmllbGR9XHJcbiAgICAgICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT17ZmllbGQubmFtZX0+e2ZpZWxkLm5hbWV9PC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgIHsvZWFjaH1cclxuICAgICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICAgICAgICA8b3B0Z3JvdXAgbGFiZWw9XCJEZWZhdWx0c1wiPlxyXG4gICAgICAgICAgICAgICAgICB7I2VhY2ggbWFwcGluZ0ZpZWxkcy5kZWZhdWx0RmllbGRzIGFzIGZpZWxkfVxyXG4gICAgICAgICAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9e2ZpZWxkLm5hbWV9PntmaWVsZC5uYW1lfTwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgICB7L2VhY2h9XHJcbiAgICAgICAgICAgICAgICA8L29wdGdyb3VwPlxyXG4gICAgICAgICAgICAgIDwvc2VsZWN0PlxyXG4gICAgICAgICAgICAgID0gPElucHV0Q29tYm8gIGJpbmQ6dmFsdWU9e3J1bGUuYWN0aW9uVmFsdWV9IH0+PC9JbnB1dENvbWJvPlxyXG4gICAgICAgICAgICAgIDwhLS0gPGlucHV0IHR5cGU9XCJ0ZXh0XCIgYmluZDp2YWx1ZT17cnVsZS5hY3Rpb25WYWx1ZX0gcGxhY2Vob2xkZXI9XCJWYWx1ZVwiICBjbGFzcz1cIm9uZUxpbmUgaW5wdXRcIiBzdHlsZT1cIndpZHRoOjI3MHB4XCI+LS0+XHJcbiAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICB7L2lmfVxyXG4gICAgICAgIDxkaXY+PGJ1dHRvbiBvbjpjbGljaz17KCkgPT4gZGVsZXRlUnVsZShpbmRleCl9IGNsYXNzPVwiZGVsZXRlXCI+RGVsZXRlPC9idXR0b24+PC9kaXY+XHJcbiAgICAgICAgXHJcblxyXG4gICAgICB7OmVsc2V9XHJcbiAgICAgICAgPCEtLSBzdmVsdGUtaWdub3JlIGExMXktY2xpY2stZXZlbnRzLWhhdmUta2V5LWV2ZW50cyAtLT5cclxuICAgICAgICA8ZGl2IGNsYXNzPVwiZWRpdC1idXR0b25cIiBvbjpjbGljaz17KCkgPT4gZWRpdFJ1bGUoaW5kZXgpfT5FZGl0PC9kaXY+XHJcbiAgICAgICAgPCEtLSBEaXNwbGF5IFJ1bGUgU3VtbWFyeSAtLT5cclxuICAgICAgICA8ZGl2PiBpZiB7cnVsZS5maWVsZE5hbWV9IHtydWxlLmNvbmRpdGlvbn0ge3J1bGUucmlnaHRWYWx1ZX06IHsjaWYgcnVsZS5hY3Rpb25UeXBlPT09XCJzZXRWYWx1ZVwifXNldCB7cnVsZS50YXJnZXRGaWVsZH09e3J1bGUuYWN0aW9uVmFsdWV9ey9pZn08L2Rpdj5cclxuICAgICAgey9pZn1cclxuICAgIDwvZGl2PlxyXG4gIHsvZWFjaH1cclxuICA8YnV0dG9uIG9uOmNsaWNrPXthZGRSdWxlfT5BZGQgUnVsZTwvYnV0dG9uPlxyXG48L2Rpdj5cclxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTBDSSx1Q0FBVSxDQUNSLFFBQVEsQ0FBRSxRQUFRLENBQ2xCLE9BQU8sQ0FBRSxJQUFJLENBQ2IsTUFBTSxDQUFFLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUN0QixhQUFhLENBQUUsR0FDakIsQ0FDQSx3QkFBUyxNQUFNLENBQUMsMkJBQWEsQ0FDM0IsT0FBTyxDQUFFLEtBQ1gsQ0FDQSwwQ0FBYSxDQUNYLE9BQU8sQ0FBRSxJQUFJLENBQ2IsUUFBUSxDQUFFLFFBQVEsQ0FDbEIsR0FBRyxDQUFFLENBQUMsQ0FDTixLQUFLLENBQUUsQ0FBQyxDQUNSLE1BQU0sQ0FBRSxPQUFPLENBQ2YsV0FBVyxDQUFFLFNBQVMsQ0FBQyxDQUFDLGFBQWEsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLEtBQUssQ0FDakksS0FBSyxDQUFFLEtBQUssQ0FDWixnQkFBZ0IsQ0FBRSxJQUFJLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUNwQyxZQUFZLENBQUUsSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FDaEMsYUFBYSxDQUFFLEdBQUcsQ0FDbEIsT0FBTyxDQUFFLEdBQ2IsQ0FDQSwyQ0FBYyxDQUNaLFFBQVEsQ0FBRSxRQUFRLENBQ2xCLEdBQUcsQ0FBRSxHQUFHLENBQ1IsS0FBSyxDQUFFLEdBQUcsQ0FDVixNQUFNLENBQUUsT0FFVixDQUNBLHlDQUFZLENBRVosQ0FDQSxzQ0FBUyxDQUNMLE9BQU8sQ0FBRSxZQUFZLENBQ3JCLFlBQVksQ0FBRSxJQUFJLENBQ2xCLE1BQU0sS0FBSyxDQUNYLFNBQVMsQ0FBRSxJQUVmLENBQ0Esb0NBQU8sQ0FDSCxnQkFBZ0IsQ0FBRSxLQUFLLENBQ3ZCLEtBQUssQ0FBRSxLQUFLLENBQ1osV0FBVyxDQUFFLFNBQVMsQ0FBQyxDQUFDLGFBQWEsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLEtBQUssQ0FDbkksT0FBTyxDQUFFLEdBQ2IsQ0FDQSx5Q0FBWSxDQUNSLEtBQUssQ0FBRSxLQUNYLENBQ0EsMEJBQVcsQ0FBQyxxQkFBTyxDQUNmLFdBQVcsQ0FBRSxTQUFTLENBQUMsQ0FBQyxhQUFhLENBQUMsQ0FBQyxVQUFVLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxTQUFTLENBQUMsQ0FBQyxXQUFXLENBQUMsQ0FBQyxVQUFVLENBQUMsQ0FBQyxVQUFVLENBQUMsQ0FBQyxTQUFTLENBQUMsQ0FBQyxLQUFLLENBQ25JLFNBQVMsQ0FBRSxJQUFJLENBQ2YsU0FBUyxDQUFFLElBQUksQ0FDZixLQUFLLENBQUUsS0FBSyxDQUNaLGdCQUFnQixDQUFFLElBQUksR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQ3BDLFlBQVksQ0FBRSxJQUFJLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUNoQyxhQUFhLENBQUUsR0FBRyxDQUNsQixNQUFNLENBQUUsT0FBTyxDQUNmLFlBQVksQ0FBRSxJQUNsQixDQUNBLDBCQUFXLENBQUMsc0JBQVEsQ0FDaEIsZ0JBQWdCLENBQUUsR0FBRyxDQUNyQixLQUFLLENBQUUsS0FDWCxDQUNBLDBCQUFXLENBQUMsaUJBQUcsQ0FDYixTQUFTLENBQUUsSUFBSSxDQUNmLGFBQWEsQ0FBRSxJQUNqQiJ9 */");
+    	append_styles(target, "svelte-14rkto5", ".rule-row.svelte-14rkto5.svelte-14rkto5{position:relative;padding:10px;border:1px solid #ccc;margin-bottom:5px}.rule-row.svelte-14rkto5:hover .edit-button.svelte-14rkto5{display:block}.edit-button.svelte-14rkto5.svelte-14rkto5{display:none;position:absolute;top:0;right:0;cursor:pointer;font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;color:black;background-color:rgb(227, 206, 116);border-color:rgb(128, 128, 128);border-radius:5px;padding:5px}.close-button.svelte-14rkto5.svelte-14rkto5{position:absolute;top:5px;right:5px;cursor:pointer}.action-row.svelte-14rkto5.svelte-14rkto5{}.oneLine.svelte-14rkto5.svelte-14rkto5{display:inline-block;margin-right:10px;width:120px;font-size:14px}.input.svelte-14rkto5.svelte-14rkto5{background-color:black;color:white;font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;padding:3px}.rightValue.svelte-14rkto5.svelte-14rkto5{width:150px}.ruleEditor.svelte-14rkto5 button.svelte-14rkto5{font-family:system-ui, -apple-system, \"Segoe UI\", Roboto, Ubuntu, Cantarell, \"Noto Sans\", sans-serif, \"Segoe UI\", Helvetica, Arial;font-size:14px;min-width:70px;color:black;background-color:rgb(227, 206, 116);border-color:rgb(128, 128, 128);border-radius:5px;cursor:pointer;margin-right:10px}.ruleEditor.svelte-14rkto5 .delete.svelte-14rkto5{background-color:red;color:white}.ruleEditor.svelte-14rkto5 h1.svelte-14rkto5{font-size:16px;margin-bottom:30px}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUnVsZUVkaXRvci5zdmVsdGUiLCJzb3VyY2VzIjpbIlJ1bGVFZGl0b3Iuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgXHJcbiAgICBcclxuXHJcbiAgICBpbXBvcnQgeyBtZXRhZGF0YX0gZnJvbSAnLi9zdG9yZXMvbWV0YWRhdGEnXHJcbiAgICBpbXBvcnQgSW5wdXRDb21ibyAgZnJvbSAnLi9JbnB1dENvbWJvLnN2ZWx0ZSdcclxuICAgIGltcG9ydCB7IG9uTW91bnQgfSBmcm9tICdzdmVsdGUnO1xyXG4gICAgaW1wb3J0IHsgbWFwcGluZ3NIZWxwZXIgfSBmcm9tICcuL21hcHBpbmdzSGVscGVyLmpzJ1xyXG4gICAgbGV0IG1IPW5ldyBtYXBwaW5nc0hlbHBlcigpXHJcblxyXG4gICAgbGV0IE1hcHBpbmdzQ29wbXBvbmVudFxyXG4gICAgbGV0IGNvbmRpdGlvbnMgPSBbJz09JywgJyE9JywgJz4nLCAnPCcsICc+PScsICc8PSddO1xyXG4gICAgbGV0IGVkaXRpbmdJbmRleCA9IG51bGw7IC8vIEluZGV4IG9mIHRoZSBjdXJyZW50bHkgZWRpdGluZyBydWxlXHJcbiAgICBpZiAoISRtZXRhZGF0YS5ydWxlcykgJG1ldGFkYXRhLnJ1bGVzPVtdXHJcbiAgICBsZXQgZmllbGRzPSRtZXRhZGF0YS5mb3Jtcy5kZWZhdWx0LmVsZW1lbnRzIC8vIGdldCBmb3JtIGZpZWxkc1xyXG4gICAgbGV0IHJ1bGVzID0gJG1ldGFkYXRhLnJ1bGVzXHJcbiAgICBsZXQgbWFwcGluZ0ZpZWxkcz17ZGVmYXVsdGZpZWxkczpbXX1cclxuICAgIGZ1bmN0aW9uIGFkZFJ1bGUoKSB7XHJcbiAgICAgIHJ1bGVzLnB1c2goeyBmaWVsZE5hbWU6ICcnLCBjb25kaXRpb246ICcnLCBhY3Rpb25UeXBlOiAnJywgcmlnaHRWYWx1ZTonJywgdGFyZ2V0RmllbGQ6ICcnLCBhY3Rpb25WYWx1ZTogJycgfSk7XHJcbiAgICAgIHJ1bGVzPXJ1bGVzXHJcbiAgICAgIGVkaXRpbmdJbmRleD1ydWxlcy5sZW5ndGgtMVxyXG4gICAgICAkbWV0YWRhdGEucnVsZXMgPSBydWxlcztcclxuICAgIH1cclxuICAgIG9uTW91bnQoKCkgPT4ge1xyXG4gICAgICBtYXBwaW5nRmllbGRzPW1ILmdldE1hcHBpbmdGaWVsZHMoJG1ldGFkYXRhKVxyXG4gICAgICBjb25zb2xlLmxvZyhtYXBwaW5nRmllbGRzKVxyXG4gICAgfSk7XHJcbiAgICBmdW5jdGlvbiBkZWxldGVSdWxlKGluZGV4KSB7XHJcbiAgICAgIHJ1bGVzLnNwbGljZShpbmRleCwgMSk7XHJcbiAgICAgIGlmIChlZGl0aW5nSW5kZXggPT09IGluZGV4KSB7XHJcbiAgICAgICAgZWRpdGluZ0luZGV4ID0gbnVsbDsgLy8gUmVzZXQgZWRpdGluZyBpbmRleCBpZiB0aGUgY3VycmVudGx5IGVkaXRlZCBydWxlIGlzIGRlbGV0ZWRcclxuICAgICAgfVxyXG4gICAgICBydWxlcz1ydWxlc1xyXG4gICAgICAkbWV0YWRhdGEucnVsZXMgPSBydWxlcztcclxuICAgIH1cclxuICBcclxuICAgIGZ1bmN0aW9uIGVkaXRSdWxlKGluZGV4KSB7XHJcbiAgICAgIGVkaXRpbmdJbmRleCA9IGluZGV4O1xyXG4gICAgfVxyXG4gIDwvc2NyaXB0PlxyXG4gIFxyXG4gIDxzdHlsZT5cclxuICAgIC5ydWxlLXJvdyB7XHJcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgICAgcGFkZGluZzogMTBweDtcclxuICAgICAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcclxuICAgICAgbWFyZ2luLWJvdHRvbTogNXB4O1xyXG4gICAgfVxyXG4gICAgLnJ1bGUtcm93OmhvdmVyIC5lZGl0LWJ1dHRvbiB7XHJcbiAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgfVxyXG4gICAgLmVkaXQtYnV0dG9uIHtcclxuICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgICB0b3A6IDA7XHJcbiAgICAgIHJpZ2h0OiAwO1xyXG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAgIGZvbnQtZmFtaWx5OiBzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sIFwiU2Vnb2UgVUlcIiwgUm9ib3RvLCBVYnVudHUsIENhbnRhcmVsbCwgXCJOb3RvIFNhbnNcIiwgc2Fucy1zZXJpZiwgXCJTZWdvZSBVSVwiLCBIZWx2ZXRpY2EsIEFyaWFsO1xyXG4gICAgICAgIGNvbG9yOiBibGFjaztcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjI3LCAyMDYsIDExNik7XHJcbiAgICAgICAgYm9yZGVyLWNvbG9yOiByZ2IoMTI4LCAxMjgsIDEyOCk7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gICAgICAgIHBhZGRpbmc6IDVweDtcclxuICAgIH1cclxuICAgIC5jbG9zZS1idXR0b24ge1xyXG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICAgIHRvcDogNXB4O1xyXG4gICAgICByaWdodDogNXB4O1xyXG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcblxyXG4gICAgfSAgICBcclxuICAgIC5hY3Rpb24tcm93IHtcclxuXHJcbiAgICB9XHJcbiAgICAub25lTGluZSB7XHJcbiAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogMTBweDtcclxuICAgICAgICB3aWR0aDoxMjBweDtcclxuICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcblxyXG4gICAgfVxyXG4gICAgLmlucHV0IHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxuICAgICAgICBjb2xvcjogd2hpdGU7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgXCJTZWdvZSBVSVwiLCBSb2JvdG8sIFVidW50dSwgQ2FudGFyZWxsLCBcIk5vdG8gU2Fuc1wiLCBzYW5zLXNlcmlmLCBcIlNlZ29lIFVJXCIsIEhlbHZldGljYSwgQXJpYWw7XHJcbiAgICAgICAgcGFkZGluZzogM3B4O1xyXG4gICAgfVxyXG4gICAgLnJpZ2h0VmFsdWUge1xyXG4gICAgICAgIHdpZHRoOiAxNTBweDtcclxuICAgIH1cclxuICAgIC5ydWxlRWRpdG9yIGJ1dHRvbiB7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6IHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgXCJTZWdvZSBVSVwiLCBSb2JvdG8sIFVidW50dSwgQ2FudGFyZWxsLCBcIk5vdG8gU2Fuc1wiLCBzYW5zLXNlcmlmLCBcIlNlZ29lIFVJXCIsIEhlbHZldGljYSwgQXJpYWw7XHJcbiAgICAgICAgZm9udC1zaXplOiAxNHB4O1xyXG4gICAgICAgIG1pbi13aWR0aDogNzBweDtcclxuICAgICAgICBjb2xvcjogYmxhY2s7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIyNywgMjA2LCAxMTYpO1xyXG4gICAgICAgIGJvcmRlci1jb2xvcjogcmdiKDEyOCwgMTI4LCAxMjgpO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OiAxMHB4O1xyXG4gICAgfVxyXG4gICAgLnJ1bGVFZGl0b3IgLmRlbGV0ZSB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xyXG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgIC5ydWxlRWRpdG9yIGgxIHtcclxuICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgICBtYXJnaW4tYm90dG9tOiAzMHB4O1xyXG4gICAgfVxyXG4gIDwvc3R5bGU+XHJcbiAgXHJcblxyXG4gPGRpdiBjbGFzcz1cInJ1bGVFZGl0b3JcIj5cclxuICA8aDE+UnVsZXM8L2gxPlxyXG5cclxuICB7I2VhY2ggcnVsZXMgYXMgcnVsZSwgaW5kZXh9XHJcbiAgICA8ZGl2IGNsYXNzPVwicnVsZS1yb3dcIj5cclxuICAgICAgeyNpZiBlZGl0aW5nSW5kZXggPT09IGluZGV4fVxyXG4gICAgICAgIDwhLS0gc3ZlbHRlLWlnbm9yZSBhMTF5LWNsaWNrLWV2ZW50cy1oYXZlLWtleS1ldmVudHMgLS0+XHJcbiAgICAgICAgPGRpdiBjbGFzcz1cImNsb3NlLWJ1dHRvblwiIG9uOmNsaWNrPXsoKSA9PiB7IGVkaXRpbmdJbmRleD0tMSB9fT5YPC9kaXY+XHJcblxyXG4gICAgICAgIDwhLS0gSW5wdXRzIGZvciBlZGl0aW5nIC0tPlxyXG5cclxuICAgICAgICAgIDxzZWxlY3QgYmluZDp2YWx1ZT17cnVsZS5maWVsZE5hbWV9ICBjbGFzcz1cIm9uZUxpbmUgaW5wdXRcIj5cclxuICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT1cIlwiPkZpZWxkLi4uPC9vcHRpb24+XHJcbiAgICAgICAgICAgIDxvcHRncm91cCBsYWJlbD1cIkZvcm1cIj5cclxuICAgICAgICAgICAgICB7I2VhY2ggZmllbGRzIGFzIGZpZWxkfVxyXG4gICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT17ZmllbGQubmFtZX0+e2ZpZWxkLm5hbWV9PC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgey9lYWNofVxyXG4gICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICAgICAgPG9wdGdyb3VwIGxhYmVsPVwiRGVmYXVsdHNcIj5cclxuICAgICAgICAgICAgICAgIHsjZWFjaCBtYXBwaW5nRmllbGRzLmRlZmF1bHRGaWVsZHMgYXMgZmllbGR9XHJcbiAgICAgICAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9e2ZpZWxkLm5hbWV9PntmaWVsZC5uYW1lfTwvb3B0aW9uPlxyXG4gICAgICAgICAgICAgICAgey9lYWNofVxyXG4gICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICA8L3NlbGVjdD5cclxuICAgICAgICAgIDxzZWxlY3QgYmluZDp2YWx1ZT17cnVsZS5jb25kaXRpb259IGNsYXNzPVwib25lTGluZSBpbnB1dFwiPlxyXG4gICAgICAgICAgICA8b3B0aW9uIHZhbHVlPVwiXCI+Q29uZGl0aW9uLi4uPC9vcHRpb24+XHJcbiAgICAgICAgICAgIHsjZWFjaCBjb25kaXRpb25zIGFzIGNvbmRpdGlvbn1cclxuICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPXtjb25kaXRpb259Pntjb25kaXRpb259PC9vcHRpb24+XHJcbiAgICAgICAgICAgIHsvZWFjaH1cclxuICAgICAgICAgIDwvc2VsZWN0PlxyXG4gICAgICAgICAgPGlucHV0IHR5cGU9XCJ0ZXh0XCIgY2xhc3M9XCJpbnB1dCByaWdodFZhbHVlXCIgcGxhY2Vob2xkZXI9XCJWYWx1ZVwiIGJpbmQ6dmFsdWU9e3J1bGUucmlnaHRWYWx1ZX0+XHJcblxyXG4gICAgICAgICAgPHNlbGVjdCBiaW5kOnZhbHVlPXtydWxlLmFjdGlvblR5cGV9ICBjbGFzcz1cImlucHV0XCI+XHJcbiAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9XCJcIj5BY3Rpb24uLi48L29wdGlvbj5cclxuICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT1cInNldFZhbHVlXCI+U2V0IFZhbHVlPC9vcHRpb24+XHJcbiAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9XCJzaG93RmllbGRcIj5TaG93IGFub3RoZXIgRmllbGQ8L29wdGlvbj5cclxuICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT1cImhpZGVGaWVsZFwiPkhpZGUgYW5vdGhlciBGaWVsZDwvb3B0aW9uPlxyXG4gICAgICAgICAgPC9zZWxlY3Q+XHJcbiAgICAgICAgeyNpZiBydWxlLmFjdGlvblR5cGUgPT09ICdzZXRWYWx1ZSd9XHJcbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiYWN0aW9uLXJvd1wiPlxyXG4gICAgICAgICAgICAgIDxzZWxlY3QgYmluZDp2YWx1ZT17cnVsZS50YXJnZXRGaWVsZH0gY2xhc3M9XCJvbmVMaW5lIGlucHV0XCI+XHJcbiAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPVwiXCI+RmllbGQuLi48L29wdGlvbj5cclxuICAgICAgICAgICAgICAgIDxvcHRncm91cCBsYWJlbD1cIkZvcm1cIj5cclxuICAgICAgICAgICAgICAgICAgeyNlYWNoIGZpZWxkcyBhcyBmaWVsZH1cclxuICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPXtmaWVsZC5uYW1lfT57ZmllbGQubmFtZX08L29wdGlvbj5cclxuICAgICAgICAgICAgICAgICAgey9lYWNofVxyXG4gICAgICAgICAgICAgICAgPC9vcHRncm91cD5cclxuICAgICAgICAgICAgICAgIDxvcHRncm91cCBsYWJlbD1cIkRlZmF1bHRzXCI+XHJcbiAgICAgICAgICAgICAgICAgIHsjZWFjaCBtYXBwaW5nRmllbGRzLmRlZmF1bHRGaWVsZHMgYXMgZmllbGR9XHJcbiAgICAgICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT17ZmllbGQubmFtZX0+e2ZpZWxkLm5hbWV9PC9vcHRpb24+XHJcbiAgICAgICAgICAgICAgICAgIHsvZWFjaH1cclxuICAgICAgICAgICAgICAgIDwvb3B0Z3JvdXA+XHJcbiAgICAgICAgICAgICAgPC9zZWxlY3Q+XHJcbiAgICAgICAgICAgICAgPSA8SW5wdXRDb21ibyAgYmluZDp2YWx1ZT17cnVsZS5hY3Rpb25WYWx1ZX0gfT48L0lucHV0Q29tYm8+XHJcbiAgICAgICAgICAgICAgPCEtLSA8aW5wdXQgdHlwZT1cInRleHRcIiBiaW5kOnZhbHVlPXtydWxlLmFjdGlvblZhbHVlfSBwbGFjZWhvbGRlcj1cIlZhbHVlXCIgIGNsYXNzPVwib25lTGluZSBpbnB1dFwiIHN0eWxlPVwid2lkdGg6MjcwcHhcIj4tLT5cclxuICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgIHsvaWZ9XHJcbiAgICAgICAgeyNpZiBydWxlLmFjdGlvblR5cGUgPT09ICdzaG93RmllbGQnIHx8IHJ1bGUuYWN0aW9uVHlwZSA9PT0gJ2hpZGVGaWVsZCd9XHJcbiAgICAgICAgPGRpdiBjbGFzcz1cImFjdGlvbi1yb3dcIj5cclxuICAgICAgICAgIDxzZWxlY3QgYmluZDp2YWx1ZT17cnVsZS50YXJnZXRGaWVsZH0gY2xhc3M9XCJvbmVMaW5lIGlucHV0XCI+XHJcbiAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9XCJcIj5GaWVsZC4uLjwvb3B0aW9uPlxyXG4gICAgICAgICAgICA8b3B0Z3JvdXAgbGFiZWw9XCJGb3JtXCI+ICAgICAgICAgICAgICBcclxuICAgICAgICAgICAgICB7I2VhY2ggZmllbGRzIGFzIGZpZWxkfVxyXG4gICAgICAgICAgICAgICAgeyNpZiBmaWVsZCE9PXJ1bGUuZmllbGROYW1lICYmIGZpZWxkLnR5cGUhPT1cImxheWVyX2ltYWdlXCIgJiYgZmllbGQudHlwZSE9PVwibWFnbmlmaWVyXCIgJiYgZmllbGQudHlwZSE9PVwiYWR2YW5jZWRfb3B0aW9uc1wifVxyXG4gICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPXtmaWVsZC5uYW1lfT57ZmllbGQubmFtZX08L29wdGlvbj5cclxuICAgICAgICAgICAgICAgIHsvaWZ9XHJcbiAgICAgICAgICAgICAgey9lYWNofVxyXG4gICAgICAgICAgICA8L29wdGdyb3VwPiAgICAgICAgICAgIFxyXG4gICAgICAgICAgPC9zZWxlY3Q+XHJcbiAgICAgICAgICBcclxuICAgICAgICAgIDwhLS0gPGlucHV0IHR5cGU9XCJ0ZXh0XCIgYmluZDp2YWx1ZT17cnVsZS5hY3Rpb25WYWx1ZX0gcGxhY2Vob2xkZXI9XCJWYWx1ZVwiICBjbGFzcz1cIm9uZUxpbmUgaW5wdXRcIiBzdHlsZT1cIndpZHRoOjI3MHB4XCI+LS0+XHJcbiAgICAgIDwvZGl2PlxyXG4gICAgICAgIHsvaWZ9XHJcblxyXG4gICAgICAgIDxkaXY+PGJ1dHRvbiBvbjpjbGljaz17KCkgPT4gZGVsZXRlUnVsZShpbmRleCl9IGNsYXNzPVwiZGVsZXRlXCI+RGVsZXRlPC9idXR0b24+PC9kaXY+XHJcbiAgICAgICAgXHJcblxyXG4gICAgICB7OmVsc2V9XHJcbiAgICAgICAgPCEtLSBzdmVsdGUtaWdub3JlIGExMXktY2xpY2stZXZlbnRzLWhhdmUta2V5LWV2ZW50cyAtLT5cclxuICAgICAgICA8ZGl2IGNsYXNzPVwiZWRpdC1idXR0b25cIiBvbjpjbGljaz17KCkgPT4gZWRpdFJ1bGUoaW5kZXgpfT5FZGl0PC9kaXY+XHJcbiAgICAgICAgPCEtLSBEaXNwbGF5IFJ1bGUgU3VtbWFyeSAtLT5cclxuICAgICAgICA8ZGl2PiBpZiB7cnVsZS5maWVsZE5hbWV9IHtydWxlLmNvbmRpdGlvbn0ge3J1bGUucmlnaHRWYWx1ZX06IFxyXG4gICAgICAgICAgeyNpZiBydWxlLmFjdGlvblR5cGU9PT1cInNldFZhbHVlXCJ9c2V0IHtydWxlLnRhcmdldEZpZWxkfT17cnVsZS5hY3Rpb25WYWx1ZX17L2lmfVxyXG4gICAgICAgICAgeyNpZiBydWxlLmFjdGlvblR5cGU9PT1cInNob3dGaWVsZFwifXNob3cge3J1bGUudGFyZ2V0RmllbGR9ey9pZn1cclxuICAgICAgICAgIHsjaWYgcnVsZS5hY3Rpb25UeXBlPT09XCJoaWRlRmllbGRcIn1oaWRlIHtydWxlLnRhcmdldEZpZWxkfXsvaWZ9XHJcblxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICB7L2lmfVxyXG4gICAgPC9kaXY+XHJcbiAgey9lYWNofVxyXG4gIDxidXR0b24gb246Y2xpY2s9e2FkZFJ1bGV9PkFkZCBSdWxlPC9idXR0b24+XHJcbjwvZGl2PlxyXG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBMENJLHVDQUFVLENBQ1IsUUFBUSxDQUFFLFFBQVEsQ0FDbEIsT0FBTyxDQUFFLElBQUksQ0FDYixNQUFNLENBQUUsR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQ3RCLGFBQWEsQ0FBRSxHQUNqQixDQUNBLHdCQUFTLE1BQU0sQ0FBQywyQkFBYSxDQUMzQixPQUFPLENBQUUsS0FDWCxDQUNBLDBDQUFhLENBQ1gsT0FBTyxDQUFFLElBQUksQ0FDYixRQUFRLENBQUUsUUFBUSxDQUNsQixHQUFHLENBQUUsQ0FBQyxDQUNOLEtBQUssQ0FBRSxDQUFDLENBQ1IsTUFBTSxDQUFFLE9BQU8sQ0FDZixXQUFXLENBQUUsU0FBUyxDQUFDLENBQUMsYUFBYSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsS0FBSyxDQUNqSSxLQUFLLENBQUUsS0FBSyxDQUNaLGdCQUFnQixDQUFFLElBQUksR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQ3BDLFlBQVksQ0FBRSxJQUFJLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUNoQyxhQUFhLENBQUUsR0FBRyxDQUNsQixPQUFPLENBQUUsR0FDYixDQUNBLDJDQUFjLENBQ1osUUFBUSxDQUFFLFFBQVEsQ0FDbEIsR0FBRyxDQUFFLEdBQUcsQ0FDUixLQUFLLENBQUUsR0FBRyxDQUNWLE1BQU0sQ0FBRSxPQUVWLENBQ0EseUNBQVksQ0FFWixDQUNBLHNDQUFTLENBQ0wsT0FBTyxDQUFFLFlBQVksQ0FDckIsWUFBWSxDQUFFLElBQUksQ0FDbEIsTUFBTSxLQUFLLENBQ1gsU0FBUyxDQUFFLElBRWYsQ0FDQSxvQ0FBTyxDQUNILGdCQUFnQixDQUFFLEtBQUssQ0FDdkIsS0FBSyxDQUFFLEtBQUssQ0FDWixXQUFXLENBQUUsU0FBUyxDQUFDLENBQUMsYUFBYSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsS0FBSyxDQUNuSSxPQUFPLENBQUUsR0FDYixDQUNBLHlDQUFZLENBQ1IsS0FBSyxDQUFFLEtBQ1gsQ0FDQSwwQkFBVyxDQUFDLHFCQUFPLENBQ2YsV0FBVyxDQUFFLFNBQVMsQ0FBQyxDQUFDLGFBQWEsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLEtBQUssQ0FDbkksU0FBUyxDQUFFLElBQUksQ0FDZixTQUFTLENBQUUsSUFBSSxDQUNmLEtBQUssQ0FBRSxLQUFLLENBQ1osZ0JBQWdCLENBQUUsSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FDcEMsWUFBWSxDQUFFLElBQUksR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQ2hDLGFBQWEsQ0FBRSxHQUFHLENBQ2xCLE1BQU0sQ0FBRSxPQUFPLENBQ2YsWUFBWSxDQUFFLElBQ2xCLENBQ0EsMEJBQVcsQ0FBQyxzQkFBUSxDQUNoQixnQkFBZ0IsQ0FBRSxHQUFHLENBQ3JCLEtBQUssQ0FBRSxLQUNYLENBQ0EsMEJBQVcsQ0FBQyxpQkFBRyxDQUNiLFNBQVMsQ0FBRSxJQUFJLENBQ2YsYUFBYSxDQUFFLElBQ2pCIn0= */");
     }
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[20] = list[i];
-    	child_ctx[21] = list;
-    	child_ctx[22] = i;
+    	child_ctx[21] = list[i];
+    	child_ctx[22] = list;
+    	child_ctx[23] = i;
     	return child_ctx;
     }
 
     function get_each_context_1$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[23] = list[i];
+    	child_ctx[24] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[23] = list[i];
+    	child_ctx[24] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_3$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[28] = list[i];
+    	child_ctx[24] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_4$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[23] = list[i];
+    	child_ctx[31] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_5$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[23] = list[i];
+    	child_ctx[24] = list[i];
     	return child_ctx;
     }
 
-    // (172:6) {:else}
+    function get_each_context_6$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[24] = list[i];
+    	return child_ctx;
+    }
+
+    // (190:6) {:else}
     function create_else_block$1(ctx) {
     	let div0;
     	let t1;
     	let div1;
     	let t2;
-    	let t3_value = /*rule*/ ctx[20].fieldName + "";
+    	let t3_value = /*rule*/ ctx[21].fieldName + "";
     	let t3;
     	let t4;
-    	let t5_value = /*rule*/ ctx[20].condition + "";
+    	let t5_value = /*rule*/ ctx[21].condition + "";
     	let t5;
     	let t6;
-    	let t7_value = /*rule*/ ctx[20].rightValue + "";
+    	let t7_value = /*rule*/ ctx[21].rightValue + "";
     	let t7;
     	let t8;
+    	let t9;
+    	let t10;
     	let mounted;
     	let dispose;
 
     	function click_handler_2() {
-    		return /*click_handler_2*/ ctx[16](/*index*/ ctx[22]);
+    		return /*click_handler_2*/ ctx[17](/*index*/ ctx[23]);
     	}
 
-    	let if_block = /*rule*/ ctx[20].actionType === "setValue" && create_if_block_2$1(ctx);
+    	let if_block0 = /*rule*/ ctx[21].actionType === "setValue" && create_if_block_6$1(ctx);
+    	let if_block1 = /*rule*/ ctx[21].actionType === "showField" && create_if_block_5$1(ctx);
+    	let if_block2 = /*rule*/ ctx[21].actionType === "hideField" && create_if_block_4$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -9825,11 +9835,15 @@ var gyreapp = (function () {
     			t5 = text(t5_value);
     			t6 = space();
     			t7 = text(t7_value);
-    			t8 = text(": ");
-    			if (if_block) if_block.c();
+    			t8 = text(": \r\n          ");
+    			if (if_block0) if_block0.c();
+    			t9 = space();
+    			if (if_block1) if_block1.c();
+    			t10 = space();
+    			if (if_block2) if_block2.c();
     			attr_dev(div0, "class", "edit-button svelte-14rkto5");
-    			add_location(div0, file$2, 173, 8, 5768);
-    			add_location(div1, file$2, 175, 8, 5885);
+    			add_location(div0, file$2, 191, 8, 6656);
+    			add_location(div1, file$2, 193, 8, 6773);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -9842,7 +9856,11 @@ var gyreapp = (function () {
     			append_dev(div1, t6);
     			append_dev(div1, t7);
     			append_dev(div1, t8);
-    			if (if_block) if_block.m(div1, null);
+    			if (if_block0) if_block0.m(div1, null);
+    			append_dev(div1, t9);
+    			if (if_block1) if_block1.m(div1, null);
+    			append_dev(div1, t10);
+    			if (if_block2) if_block2.m(div1, null);
 
     			if (!mounted) {
     				dispose = listen_dev(div0, "click", click_handler_2, false, false, false, false);
@@ -9851,21 +9869,47 @@ var gyreapp = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*rules*/ 2 && t3_value !== (t3_value = /*rule*/ ctx[20].fieldName + "")) set_data_dev(t3, t3_value);
-    			if (dirty[0] & /*rules*/ 2 && t5_value !== (t5_value = /*rule*/ ctx[20].condition + "")) set_data_dev(t5, t5_value);
-    			if (dirty[0] & /*rules*/ 2 && t7_value !== (t7_value = /*rule*/ ctx[20].rightValue + "")) set_data_dev(t7, t7_value);
+    			if (dirty[0] & /*rules*/ 2 && t3_value !== (t3_value = /*rule*/ ctx[21].fieldName + "")) set_data_dev(t3, t3_value);
+    			if (dirty[0] & /*rules*/ 2 && t5_value !== (t5_value = /*rule*/ ctx[21].condition + "")) set_data_dev(t5, t5_value);
+    			if (dirty[0] & /*rules*/ 2 && t7_value !== (t7_value = /*rule*/ ctx[21].rightValue + "")) set_data_dev(t7, t7_value);
 
-    			if (/*rule*/ ctx[20].actionType === "setValue") {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
+    			if (/*rule*/ ctx[21].actionType === "setValue") {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_2$1(ctx);
-    					if_block.c();
-    					if_block.m(div1, null);
+    					if_block0 = create_if_block_6$1(ctx);
+    					if_block0.c();
+    					if_block0.m(div1, t9);
     				}
-    			} else if (if_block) {
-    				if_block.d(1);
-    				if_block = null;
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (/*rule*/ ctx[21].actionType === "showField") {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_5$1(ctx);
+    					if_block1.c();
+    					if_block1.m(div1, t10);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+
+    			if (/*rule*/ ctx[21].actionType === "hideField") {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+    				} else {
+    					if_block2 = create_if_block_4$1(ctx);
+    					if_block2.c();
+    					if_block2.m(div1, null);
+    				}
+    			} else if (if_block2) {
+    				if_block2.d(1);
+    				if_block2 = null;
     			}
     		},
     		i: noop,
@@ -9874,7 +9918,9 @@ var gyreapp = (function () {
     			if (detaching) detach_dev(div0);
     			if (detaching) detach_dev(t1);
     			if (detaching) detach_dev(div1);
-    			if (if_block) if_block.d();
+    			if (if_block0) if_block0.d();
+    			if (if_block1) if_block1.d();
+    			if (if_block2) if_block2.d();
     			mounted = false;
     			dispose();
     		}
@@ -9884,7 +9930,7 @@ var gyreapp = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(172:6) {:else}",
+    		source: "(190:6) {:else}",
     		ctx
     	});
 
@@ -9909,57 +9955,60 @@ var gyreapp = (function () {
     	let option2;
     	let option3;
     	let option4;
-    	let t10;
+    	let option5;
     	let t11;
+    	let t12;
+    	let t13;
     	let div1;
     	let button;
     	let current;
     	let mounted;
     	let dispose;
-    	let each_value_5 = /*fields*/ ctx[4];
-    	validate_each_argument(each_value_5);
+    	let each_value_6 = /*fields*/ ctx[4];
+    	validate_each_argument(each_value_6);
     	let each_blocks_2 = [];
 
-    	for (let i = 0; i < each_value_5.length; i += 1) {
-    		each_blocks_2[i] = create_each_block_5$2(get_each_context_5$2(ctx, each_value_5, i));
+    	for (let i = 0; i < each_value_6.length; i += 1) {
+    		each_blocks_2[i] = create_each_block_6$1(get_each_context_6$1(ctx, each_value_6, i));
     	}
 
-    	let each_value_4 = /*mappingFields*/ ctx[2].defaultFields;
-    	validate_each_argument(each_value_4);
+    	let each_value_5 = /*mappingFields*/ ctx[2].defaultFields;
+    	validate_each_argument(each_value_5);
     	let each_blocks_1 = [];
 
-    	for (let i = 0; i < each_value_4.length; i += 1) {
-    		each_blocks_1[i] = create_each_block_4$2(get_each_context_4$2(ctx, each_value_4, i));
+    	for (let i = 0; i < each_value_5.length; i += 1) {
+    		each_blocks_1[i] = create_each_block_5$2(get_each_context_5$2(ctx, each_value_5, i));
     	}
 
     	function select0_change_handler() {
-    		/*select0_change_handler*/ ctx[9].call(select0, /*each_value*/ ctx[21], /*index*/ ctx[22]);
+    		/*select0_change_handler*/ ctx[9].call(select0, /*each_value*/ ctx[22], /*index*/ ctx[23]);
     	}
 
-    	let each_value_3 = /*conditions*/ ctx[3];
-    	validate_each_argument(each_value_3);
+    	let each_value_4 = /*conditions*/ ctx[3];
+    	validate_each_argument(each_value_4);
     	let each_blocks = [];
 
-    	for (let i = 0; i < each_value_3.length; i += 1) {
-    		each_blocks[i] = create_each_block_3$2(get_each_context_3$2(ctx, each_value_3, i));
+    	for (let i = 0; i < each_value_4.length; i += 1) {
+    		each_blocks[i] = create_each_block_4$2(get_each_context_4$2(ctx, each_value_4, i));
     	}
 
     	function select1_change_handler() {
-    		/*select1_change_handler*/ ctx[10].call(select1, /*each_value*/ ctx[21], /*index*/ ctx[22]);
+    		/*select1_change_handler*/ ctx[10].call(select1, /*each_value*/ ctx[22], /*index*/ ctx[23]);
     	}
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[11].call(input, /*each_value*/ ctx[21], /*index*/ ctx[22]);
+    		/*input_input_handler*/ ctx[11].call(input, /*each_value*/ ctx[22], /*index*/ ctx[23]);
     	}
 
     	function select2_change_handler() {
-    		/*select2_change_handler*/ ctx[12].call(select2, /*each_value*/ ctx[21], /*index*/ ctx[22]);
+    		/*select2_change_handler*/ ctx[12].call(select2, /*each_value*/ ctx[22], /*index*/ ctx[23]);
     	}
 
-    	let if_block = /*rule*/ ctx[20].actionType === 'setValue' && create_if_block_1$2(ctx);
+    	let if_block0 = /*rule*/ ctx[21].actionType === 'setValue' && create_if_block_3$1(ctx);
+    	let if_block1 = (/*rule*/ ctx[21].actionType === 'showField' || /*rule*/ ctx[21].actionType === 'hideField') && create_if_block_1$2(ctx);
 
     	function click_handler_1() {
-    		return /*click_handler_1*/ ctx[15](/*index*/ ctx[22]);
+    		return /*click_handler_1*/ ctx[16](/*index*/ ctx[23]);
     	}
 
     	const block = {
@@ -10000,10 +10049,14 @@ var gyreapp = (function () {
     			option3 = element("option");
     			option3.textContent = "Set Value";
     			option4 = element("option");
-    			option4.textContent = "Show/Hide";
-    			t10 = space();
-    			if (if_block) if_block.c();
+    			option4.textContent = "Show another Field";
+    			option5 = element("option");
+    			option5.textContent = "Hide another Field";
     			t11 = space();
+    			if (if_block0) if_block0.c();
+    			t12 = space();
+    			if (if_block1) if_block1.c();
+    			t13 = space();
     			div1 = element("div");
     			button = element("button");
     			button.textContent = "Delete";
@@ -10017,13 +10070,13 @@ var gyreapp = (function () {
     			attr_dev(optgroup1, "label", "Defaults");
     			add_location(optgroup1, file$2, 130, 14, 3789);
     			attr_dev(select0, "class", "oneLine input svelte-14rkto5");
-    			if (/*rule*/ ctx[20].fieldName === void 0) add_render_callback(select0_change_handler);
+    			if (/*rule*/ ctx[21].fieldName === void 0) add_render_callback(select0_change_handler);
     			add_location(select0, file$2, 123, 10, 3474);
     			option1.__value = "";
     			option1.value = option1.__value;
     			add_location(option1, file$2, 137, 12, 4103);
     			attr_dev(select1, "class", "oneLine input svelte-14rkto5");
-    			if (/*rule*/ ctx[20].condition === void 0) add_render_callback(select1_change_handler);
+    			if (/*rule*/ ctx[21].condition === void 0) add_render_callback(select1_change_handler);
     			add_location(select1, file$2, 136, 10, 4031);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "input rightValue svelte-14rkto5");
@@ -10038,12 +10091,15 @@ var gyreapp = (function () {
     			option4.__value = "showField";
     			option4.value = option4.__value;
     			add_location(option4, file$2, 147, 12, 4581);
+    			option5.__value = "hideField";
+    			option5.value = option5.__value;
+    			add_location(option5, file$2, 148, 12, 4648);
     			attr_dev(select2, "class", "input svelte-14rkto5");
-    			if (/*rule*/ ctx[20].actionType === void 0) add_render_callback(select2_change_handler);
+    			if (/*rule*/ ctx[21].actionType === void 0) add_render_callback(select2_change_handler);
     			add_location(select2, file$2, 144, 10, 4409);
     			attr_dev(button, "class", "delete svelte-14rkto5");
-    			add_location(button, file$2, 168, 13, 5586);
-    			add_location(div1, file$2, 168, 8, 5581);
+    			add_location(button, file$2, 186, 13, 6474);
+    			add_location(div1, file$2, 186, 8, 6469);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -10066,7 +10122,7 @@ var gyreapp = (function () {
     				}
     			}
 
-    			select_option(select0, /*rule*/ ctx[20].fieldName, true);
+    			select_option(select0, /*rule*/ ctx[21].fieldName, true);
     			insert_dev(target, t3, anchor);
     			insert_dev(target, select1, anchor);
     			append_dev(select1, option1);
@@ -10077,19 +10133,22 @@ var gyreapp = (function () {
     				}
     			}
 
-    			select_option(select1, /*rule*/ ctx[20].condition, true);
+    			select_option(select1, /*rule*/ ctx[21].condition, true);
     			insert_dev(target, t5, anchor);
     			insert_dev(target, input, anchor);
-    			set_input_value(input, /*rule*/ ctx[20].rightValue);
+    			set_input_value(input, /*rule*/ ctx[21].rightValue);
     			insert_dev(target, t6, anchor);
     			insert_dev(target, select2, anchor);
     			append_dev(select2, option2);
     			append_dev(select2, option3);
     			append_dev(select2, option4);
-    			select_option(select2, /*rule*/ ctx[20].actionType, true);
-    			insert_dev(target, t10, anchor);
-    			if (if_block) if_block.m(target, anchor);
+    			append_dev(select2, option5);
+    			select_option(select2, /*rule*/ ctx[21].actionType, true);
     			insert_dev(target, t11, anchor);
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t12, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, t13, anchor);
     			insert_dev(target, div1, anchor);
     			append_dev(div1, button);
     			current = true;
@@ -10111,17 +10170,17 @@ var gyreapp = (function () {
     			ctx = new_ctx;
 
     			if (dirty[0] & /*fields*/ 16) {
-    				each_value_5 = /*fields*/ ctx[4];
-    				validate_each_argument(each_value_5);
+    				each_value_6 = /*fields*/ ctx[4];
+    				validate_each_argument(each_value_6);
     				let i;
 
-    				for (i = 0; i < each_value_5.length; i += 1) {
-    					const child_ctx = get_each_context_5$2(ctx, each_value_5, i);
+    				for (i = 0; i < each_value_6.length; i += 1) {
+    					const child_ctx = get_each_context_6$1(ctx, each_value_6, i);
 
     					if (each_blocks_2[i]) {
     						each_blocks_2[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks_2[i] = create_each_block_5$2(child_ctx);
+    						each_blocks_2[i] = create_each_block_6$1(child_ctx);
     						each_blocks_2[i].c();
     						each_blocks_2[i].m(optgroup0, null);
     					}
@@ -10131,21 +10190,21 @@ var gyreapp = (function () {
     					each_blocks_2[i].d(1);
     				}
 
-    				each_blocks_2.length = each_value_5.length;
+    				each_blocks_2.length = each_value_6.length;
     			}
 
     			if (dirty[0] & /*mappingFields*/ 4) {
-    				each_value_4 = /*mappingFields*/ ctx[2].defaultFields;
-    				validate_each_argument(each_value_4);
+    				each_value_5 = /*mappingFields*/ ctx[2].defaultFields;
+    				validate_each_argument(each_value_5);
     				let i;
 
-    				for (i = 0; i < each_value_4.length; i += 1) {
-    					const child_ctx = get_each_context_4$2(ctx, each_value_4, i);
+    				for (i = 0; i < each_value_5.length; i += 1) {
+    					const child_ctx = get_each_context_5$2(ctx, each_value_5, i);
 
     					if (each_blocks_1[i]) {
     						each_blocks_1[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks_1[i] = create_each_block_4$2(child_ctx);
+    						each_blocks_1[i] = create_each_block_5$2(child_ctx);
     						each_blocks_1[i].c();
     						each_blocks_1[i].m(optgroup1, null);
     					}
@@ -10155,25 +10214,25 @@ var gyreapp = (function () {
     					each_blocks_1[i].d(1);
     				}
 
-    				each_blocks_1.length = each_value_4.length;
+    				each_blocks_1.length = each_value_5.length;
     			}
 
     			if (dirty[0] & /*rules, mappingFields, fields*/ 22) {
-    				select_option(select0, /*rule*/ ctx[20].fieldName);
+    				select_option(select0, /*rule*/ ctx[21].fieldName);
     			}
 
     			if (dirty[0] & /*conditions*/ 8) {
-    				each_value_3 = /*conditions*/ ctx[3];
-    				validate_each_argument(each_value_3);
+    				each_value_4 = /*conditions*/ ctx[3];
+    				validate_each_argument(each_value_4);
     				let i;
 
-    				for (i = 0; i < each_value_3.length; i += 1) {
-    					const child_ctx = get_each_context_3$2(ctx, each_value_3, i);
+    				for (i = 0; i < each_value_4.length; i += 1) {
+    					const child_ctx = get_each_context_4$2(ctx, each_value_4, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_3$2(child_ctx);
+    						each_blocks[i] = create_each_block_4$2(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(select1, null);
     					}
@@ -10183,51 +10242,64 @@ var gyreapp = (function () {
     					each_blocks[i].d(1);
     				}
 
-    				each_blocks.length = each_value_3.length;
+    				each_blocks.length = each_value_4.length;
     			}
 
     			if (dirty[0] & /*rules, mappingFields, fields*/ 22) {
-    				select_option(select1, /*rule*/ ctx[20].condition);
+    				select_option(select1, /*rule*/ ctx[21].condition);
     			}
 
-    			if (dirty[0] & /*rules, mappingFields, fields*/ 22 && input.value !== /*rule*/ ctx[20].rightValue) {
-    				set_input_value(input, /*rule*/ ctx[20].rightValue);
+    			if (dirty[0] & /*rules, mappingFields, fields*/ 22 && input.value !== /*rule*/ ctx[21].rightValue) {
+    				set_input_value(input, /*rule*/ ctx[21].rightValue);
     			}
 
     			if (dirty[0] & /*rules, mappingFields, fields*/ 22) {
-    				select_option(select2, /*rule*/ ctx[20].actionType);
+    				select_option(select2, /*rule*/ ctx[21].actionType);
     			}
 
-    			if (/*rule*/ ctx[20].actionType === 'setValue') {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
+    			if (/*rule*/ ctx[21].actionType === 'setValue') {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
 
     					if (dirty[0] & /*rules*/ 2) {
-    						transition_in(if_block, 1);
+    						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block = create_if_block_1$2(ctx);
-    					if_block.c();
-    					transition_in(if_block, 1);
-    					if_block.m(t11.parentNode, t11);
+    					if_block0 = create_if_block_3$1(ctx);
+    					if_block0.c();
+    					transition_in(if_block0, 1);
+    					if_block0.m(t12.parentNode, t12);
     				}
-    			} else if (if_block) {
+    			} else if (if_block0) {
     				group_outros();
 
-    				transition_out(if_block, 1, 1, () => {
-    					if_block = null;
+    				transition_out(if_block0, 1, 1, () => {
+    					if_block0 = null;
     				});
 
     				check_outros();
     			}
+
+    			if (/*rule*/ ctx[21].actionType === 'showField' || /*rule*/ ctx[21].actionType === 'hideField') {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_1$2(ctx);
+    					if_block1.c();
+    					if_block1.m(t13.parentNode, t13);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(if_block);
+    			transition_in(if_block0);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(if_block);
+    			transition_out(if_block0);
     			current = false;
     		},
     		d: function destroy(detaching) {
@@ -10243,9 +10315,11 @@ var gyreapp = (function () {
     			if (detaching) detach_dev(input);
     			if (detaching) detach_dev(t6);
     			if (detaching) detach_dev(select2);
-    			if (detaching) detach_dev(t10);
-    			if (if_block) if_block.d(detaching);
     			if (detaching) detach_dev(t11);
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t12);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(t13);
     			if (detaching) detach_dev(div1);
     			mounted = false;
     			run_all(dispose);
@@ -10263,13 +10337,13 @@ var gyreapp = (function () {
     	return block;
     }
 
-    // (176:70) {#if rule.actionType==="setValue"}
-    function create_if_block_2$1(ctx) {
+    // (195:10) {#if rule.actionType==="setValue"}
+    function create_if_block_6$1(ctx) {
     	let t0;
-    	let t1_value = /*rule*/ ctx[20].targetField + "";
+    	let t1_value = /*rule*/ ctx[21].targetField + "";
     	let t1;
     	let t2;
-    	let t3_value = /*rule*/ ctx[20].actionValue + "";
+    	let t3_value = /*rule*/ ctx[21].actionValue + "";
     	let t3;
 
     	const block = {
@@ -10286,8 +10360,8 @@ var gyreapp = (function () {
     			insert_dev(target, t3, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*rules*/ 2 && t1_value !== (t1_value = /*rule*/ ctx[20].targetField + "")) set_data_dev(t1, t1_value);
-    			if (dirty[0] & /*rules*/ 2 && t3_value !== (t3_value = /*rule*/ ctx[20].actionValue + "")) set_data_dev(t3, t3_value);
+    			if (dirty[0] & /*rules*/ 2 && t1_value !== (t1_value = /*rule*/ ctx[21].targetField + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*rules*/ 2 && t3_value !== (t3_value = /*rule*/ ctx[21].actionValue + "")) set_data_dev(t3, t3_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t0);
@@ -10299,9 +10373,79 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$1.name,
+    		id: create_if_block_6$1.name,
     		type: "if",
-    		source: "(176:70) {#if rule.actionType===\\\"setValue\\\"}",
+    		source: "(195:10) {#if rule.actionType===\\\"setValue\\\"}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (196:10) {#if rule.actionType==="showField"}
+    function create_if_block_5$1(ctx) {
+    	let t0;
+    	let t1_value = /*rule*/ ctx[21].targetField + "";
+    	let t1;
+
+    	const block = {
+    		c: function create() {
+    			t0 = text("show ");
+    			t1 = text(t1_value);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t1, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*rules*/ 2 && t1_value !== (t1_value = /*rule*/ ctx[21].targetField + "")) set_data_dev(t1, t1_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5$1.name,
+    		type: "if",
+    		source: "(196:10) {#if rule.actionType===\\\"showField\\\"}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (197:10) {#if rule.actionType==="hideField"}
+    function create_if_block_4$1(ctx) {
+    	let t0;
+    	let t1_value = /*rule*/ ctx[21].targetField + "";
+    	let t1;
+
+    	const block = {
+    		c: function create() {
+    			t0 = text("hide ");
+    			t1 = text(t1_value);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t1, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*rules*/ 2 && t1_value !== (t1_value = /*rule*/ ctx[21].targetField + "")) set_data_dev(t1, t1_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_4$1.name,
+    		type: "if",
+    		source: "(197:10) {#if rule.actionType===\\\"hideField\\\"}",
     		ctx
     	});
 
@@ -10309,16 +10453,16 @@ var gyreapp = (function () {
     }
 
     // (127:14) {#each fields as field}
-    function create_each_block_5$2(ctx) {
+    function create_each_block_6$1(ctx) {
     	let option;
-    	let t_value = /*field*/ ctx[23].name + "";
+    	let t_value = /*field*/ ctx[24].name + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = /*field*/ ctx[23].name;
+    			option.__value = /*field*/ ctx[24].name;
     			option.value = option.__value;
     			add_location(option, file$2, 127, 16, 3675);
     		},
@@ -10334,7 +10478,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_5$2.name,
+    		id: create_each_block_6$1.name,
     		type: "each",
     		source: "(127:14) {#each fields as field}",
     		ctx
@@ -10344,9 +10488,9 @@ var gyreapp = (function () {
     }
 
     // (132:16) {#each mappingFields.defaultFields as field}
-    function create_each_block_4$2(ctx) {
+    function create_each_block_5$2(ctx) {
     	let option;
-    	let t_value = /*field*/ ctx[23].name + "";
+    	let t_value = /*field*/ ctx[24].name + "";
     	let t;
     	let option_value_value;
 
@@ -10354,7 +10498,7 @@ var gyreapp = (function () {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = option_value_value = /*field*/ ctx[23].name;
+    			option.__value = option_value_value = /*field*/ ctx[24].name;
     			option.value = option.__value;
     			add_location(option, file$2, 132, 18, 3898);
     		},
@@ -10363,9 +10507,9 @@ var gyreapp = (function () {
     			append_dev(option, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*mappingFields*/ 4 && t_value !== (t_value = /*field*/ ctx[23].name + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*mappingFields*/ 4 && t_value !== (t_value = /*field*/ ctx[24].name + "")) set_data_dev(t, t_value);
 
-    			if (dirty[0] & /*mappingFields*/ 4 && option_value_value !== (option_value_value = /*field*/ ctx[23].name)) {
+    			if (dirty[0] & /*mappingFields*/ 4 && option_value_value !== (option_value_value = /*field*/ ctx[24].name)) {
     				prop_dev(option, "__value", option_value_value);
     				option.value = option.__value;
     			}
@@ -10377,7 +10521,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_4$2.name,
+    		id: create_each_block_5$2.name,
     		type: "each",
     		source: "(132:16) {#each mappingFields.defaultFields as field}",
     		ctx
@@ -10387,16 +10531,16 @@ var gyreapp = (function () {
     }
 
     // (139:12) {#each conditions as condition}
-    function create_each_block_3$2(ctx) {
+    function create_each_block_4$2(ctx) {
     	let option;
-    	let t_value = /*condition*/ ctx[28] + "";
+    	let t_value = /*condition*/ ctx[31] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = /*condition*/ ctx[28];
+    			option.__value = /*condition*/ ctx[31];
     			option.value = option.__value;
     			add_location(option, file$2, 139, 14, 4202);
     		},
@@ -10412,7 +10556,7 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_3$2.name,
+    		id: create_each_block_4$2.name,
     		type: "each",
     		source: "(139:12) {#each conditions as condition}",
     		ctx
@@ -10421,8 +10565,8 @@ var gyreapp = (function () {
     	return block;
     }
 
-    // (150:8) {#if rule.actionType === 'setValue'}
-    function create_if_block_1$2(ctx) {
+    // (151:8) {#if rule.actionType === 'setValue'}
+    function create_if_block_3$1(ctx) {
     	let div;
     	let select;
     	let option;
@@ -10434,34 +10578,34 @@ var gyreapp = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	let each_value_2 = /*fields*/ ctx[4];
-    	validate_each_argument(each_value_2);
+    	let each_value_3 = /*fields*/ ctx[4];
+    	validate_each_argument(each_value_3);
     	let each_blocks_1 = [];
 
-    	for (let i = 0; i < each_value_2.length; i += 1) {
-    		each_blocks_1[i] = create_each_block_2$2(get_each_context_2$2(ctx, each_value_2, i));
+    	for (let i = 0; i < each_value_3.length; i += 1) {
+    		each_blocks_1[i] = create_each_block_3$2(get_each_context_3$2(ctx, each_value_3, i));
     	}
 
-    	let each_value_1 = /*mappingFields*/ ctx[2].defaultFields;
-    	validate_each_argument(each_value_1);
+    	let each_value_2 = /*mappingFields*/ ctx[2].defaultFields;
+    	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
-    	for (let i = 0; i < each_value_1.length; i += 1) {
-    		each_blocks[i] = create_each_block_1$2(get_each_context_1$2(ctx, each_value_1, i));
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks[i] = create_each_block_2$2(get_each_context_2$2(ctx, each_value_2, i));
     	}
 
     	function select_change_handler() {
-    		/*select_change_handler*/ ctx[13].call(select, /*each_value*/ ctx[21], /*index*/ ctx[22]);
+    		/*select_change_handler*/ ctx[13].call(select, /*each_value*/ ctx[22], /*index*/ ctx[23]);
     	}
 
     	function inputcombo_value_binding(value) {
-    		/*inputcombo_value_binding*/ ctx[14](value, /*rule*/ ctx[20]);
+    		/*inputcombo_value_binding*/ ctx[14](value, /*rule*/ ctx[21]);
     	}
 
     	let inputcombo_props = { "}": true };
 
-    	if (/*rule*/ ctx[20].actionValue !== void 0) {
-    		inputcombo_props.value = /*rule*/ ctx[20].actionValue;
+    	if (/*rule*/ ctx[21].actionValue !== void 0) {
+    		inputcombo_props.value = /*rule*/ ctx[21].actionValue;
     	}
 
     	inputcombo = new InputCombo({ props: inputcombo_props, $$inline: true });
@@ -10489,16 +10633,16 @@ var gyreapp = (function () {
     			create_component(inputcombo.$$.fragment);
     			option.__value = "";
     			option.value = option.__value;
-    			add_location(option, file$2, 152, 16, 4822);
+    			add_location(option, file$2, 153, 16, 4898);
     			attr_dev(optgroup0, "label", "Form");
-    			add_location(optgroup0, file$2, 153, 16, 4874);
+    			add_location(optgroup0, file$2, 154, 16, 4950);
     			attr_dev(optgroup1, "label", "Defaults");
-    			add_location(optgroup1, file$2, 158, 16, 5084);
+    			add_location(optgroup1, file$2, 159, 16, 5160);
     			attr_dev(select, "class", "oneLine input svelte-14rkto5");
-    			if (/*rule*/ ctx[20].targetField === void 0) add_render_callback(select_change_handler);
-    			add_location(select, file$2, 151, 14, 4744);
+    			if (/*rule*/ ctx[21].targetField === void 0) add_render_callback(select_change_handler);
+    			add_location(select, file$2, 152, 14, 4820);
     			attr_dev(div, "class", "action-row svelte-14rkto5");
-    			add_location(div, file$2, 150, 10, 4704);
+    			add_location(div, file$2, 151, 10, 4780);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10520,7 +10664,7 @@ var gyreapp = (function () {
     				}
     			}
 
-    			select_option(select, /*rule*/ ctx[20].targetField, true);
+    			select_option(select, /*rule*/ ctx[21].targetField, true);
     			append_dev(div, t1);
     			mount_component(inputcombo, div, null);
     			current = true;
@@ -10534,17 +10678,17 @@ var gyreapp = (function () {
     			ctx = new_ctx;
 
     			if (dirty[0] & /*fields*/ 16) {
-    				each_value_2 = /*fields*/ ctx[4];
-    				validate_each_argument(each_value_2);
+    				each_value_3 = /*fields*/ ctx[4];
+    				validate_each_argument(each_value_3);
     				let i;
 
-    				for (i = 0; i < each_value_2.length; i += 1) {
-    					const child_ctx = get_each_context_2$2(ctx, each_value_2, i);
+    				for (i = 0; i < each_value_3.length; i += 1) {
+    					const child_ctx = get_each_context_3$2(ctx, each_value_3, i);
 
     					if (each_blocks_1[i]) {
     						each_blocks_1[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks_1[i] = create_each_block_2$2(child_ctx);
+    						each_blocks_1[i] = create_each_block_3$2(child_ctx);
     						each_blocks_1[i].c();
     						each_blocks_1[i].m(optgroup0, null);
     					}
@@ -10554,21 +10698,21 @@ var gyreapp = (function () {
     					each_blocks_1[i].d(1);
     				}
 
-    				each_blocks_1.length = each_value_2.length;
+    				each_blocks_1.length = each_value_3.length;
     			}
 
     			if (dirty[0] & /*mappingFields*/ 4) {
-    				each_value_1 = /*mappingFields*/ ctx[2].defaultFields;
-    				validate_each_argument(each_value_1);
+    				each_value_2 = /*mappingFields*/ ctx[2].defaultFields;
+    				validate_each_argument(each_value_2);
     				let i;
 
-    				for (i = 0; i < each_value_1.length; i += 1) {
-    					const child_ctx = get_each_context_1$2(ctx, each_value_1, i);
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2$2(ctx, each_value_2, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_1$2(child_ctx);
+    						each_blocks[i] = create_each_block_2$2(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(optgroup1, null);
     					}
@@ -10578,18 +10722,18 @@ var gyreapp = (function () {
     					each_blocks[i].d(1);
     				}
 
-    				each_blocks.length = each_value_1.length;
+    				each_blocks.length = each_value_2.length;
     			}
 
     			if (dirty[0] & /*rules, mappingFields, fields*/ 22) {
-    				select_option(select, /*rule*/ ctx[20].targetField);
+    				select_option(select, /*rule*/ ctx[21].targetField);
     			}
 
     			const inputcombo_changes = {};
 
     			if (!updating_value && dirty[0] & /*rules*/ 2) {
     				updating_value = true;
-    				inputcombo_changes.value = /*rule*/ ctx[20].actionValue;
+    				inputcombo_changes.value = /*rule*/ ctx[21].actionValue;
     				add_flush_callback(() => updating_value = false);
     			}
 
@@ -10616,28 +10760,28 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$2.name,
+    		id: create_if_block_3$1.name,
     		type: "if",
-    		source: "(150:8) {#if rule.actionType === 'setValue'}",
+    		source: "(151:8) {#if rule.actionType === 'setValue'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (155:18) {#each fields as field}
-    function create_each_block_2$2(ctx) {
+    // (156:18) {#each fields as field}
+    function create_each_block_3$2(ctx) {
     	let option;
-    	let t_value = /*field*/ ctx[23].name + "";
+    	let t_value = /*field*/ ctx[24].name + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = /*field*/ ctx[23].name;
+    			option.__value = /*field*/ ctx[24].name;
     			option.value = option.__value;
-    			add_location(option, file$2, 155, 20, 4962);
+    			add_location(option, file$2, 156, 20, 5038);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -10651,19 +10795,19 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_2$2.name,
+    		id: create_each_block_3$2.name,
     		type: "each",
-    		source: "(155:18) {#each fields as field}",
+    		source: "(156:18) {#each fields as field}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (160:18) {#each mappingFields.defaultFields as field}
-    function create_each_block_1$2(ctx) {
+    // (161:18) {#each mappingFields.defaultFields as field}
+    function create_each_block_2$2(ctx) {
     	let option;
-    	let t_value = /*field*/ ctx[23].name + "";
+    	let t_value = /*field*/ ctx[24].name + "";
     	let t;
     	let option_value_value;
 
@@ -10671,18 +10815,18 @@ var gyreapp = (function () {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = option_value_value = /*field*/ ctx[23].name;
+    			option.__value = option_value_value = /*field*/ ctx[24].name;
     			option.value = option.__value;
-    			add_location(option, file$2, 160, 20, 5197);
+    			add_location(option, file$2, 161, 20, 5273);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
     			append_dev(option, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*mappingFields*/ 4 && t_value !== (t_value = /*field*/ ctx[23].name + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*mappingFields*/ 4 && t_value !== (t_value = /*field*/ ctx[24].name + "")) set_data_dev(t, t_value);
 
-    			if (dirty[0] & /*mappingFields*/ 4 && option_value_value !== (option_value_value = /*field*/ ctx[23].name)) {
+    			if (dirty[0] & /*mappingFields*/ 4 && option_value_value !== (option_value_value = /*field*/ ctx[24].name)) {
     				prop_dev(option, "__value", option_value_value);
     				option.value = option.__value;
     			}
@@ -10694,9 +10838,201 @@ var gyreapp = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
+    		id: create_each_block_2$2.name,
+    		type: "each",
+    		source: "(161:18) {#each mappingFields.defaultFields as field}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (170:8) {#if rule.actionType === 'showField' || rule.actionType === 'hideField'}
+    function create_if_block_1$2(ctx) {
+    	let div;
+    	let select;
+    	let option;
+    	let optgroup;
+    	let mounted;
+    	let dispose;
+    	let each_value_1 = /*fields*/ ctx[4];
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1$2(get_each_context_1$2(ctx, each_value_1, i));
+    	}
+
+    	function select_change_handler_1() {
+    		/*select_change_handler_1*/ ctx[15].call(select, /*each_value*/ ctx[22], /*index*/ ctx[23]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			select = element("select");
+    			option = element("option");
+    			option.textContent = "Field...";
+    			optgroup = element("optgroup");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			option.__value = "";
+    			option.value = option.__value;
+    			add_location(option, file$2, 172, 12, 5849);
+    			attr_dev(optgroup, "label", "Form");
+    			add_location(optgroup, file$2, 173, 12, 5897);
+    			attr_dev(select, "class", "oneLine input svelte-14rkto5");
+    			if (/*rule*/ ctx[21].targetField === void 0) add_render_callback(select_change_handler_1);
+    			add_location(select, file$2, 171, 10, 5775);
+    			attr_dev(div, "class", "action-row svelte-14rkto5");
+    			add_location(div, file$2, 170, 8, 5739);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, select);
+    			append_dev(select, option);
+    			append_dev(select, optgroup);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(optgroup, null);
+    				}
+    			}
+
+    			select_option(select, /*rule*/ ctx[21].targetField, true);
+
+    			if (!mounted) {
+    				dispose = listen_dev(select, "change", select_change_handler_1);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty[0] & /*fields, rules*/ 18) {
+    				each_value_1 = /*fields*/ ctx[4];
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1$2(ctx, each_value_1, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_1$2(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(optgroup, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
+
+    			if (dirty[0] & /*rules, mappingFields, fields*/ 22) {
+    				select_option(select, /*rule*/ ctx[21].targetField);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_each(each_blocks, detaching);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$2.name,
+    		type: "if",
+    		source: "(170:8) {#if rule.actionType === 'showField' || rule.actionType === 'hideField'}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (176:16) {#if field!==rule.fieldName && field.type!=="layer_image" && field.type!=="magnifier" && field.type!=="advanced_options"}
+    function create_if_block_2$1(ctx) {
+    	let option;
+    	let t_value = /*field*/ ctx[24].name + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			option = element("option");
+    			t = text(t_value);
+    			option.__value = /*field*/ ctx[24].name;
+    			option.value = option.__value;
+    			add_location(option, file$2, 176, 18, 6132);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, option, anchor);
+    			append_dev(option, t);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(option);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2$1.name,
+    		type: "if",
+    		source: "(176:16) {#if field!==rule.fieldName && field.type!==\\\"layer_image\\\" && field.type!==\\\"magnifier\\\" && field.type!==\\\"advanced_options\\\"}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (175:14) {#each fields as field}
+    function create_each_block_1$2(ctx) {
+    	let if_block_anchor;
+    	let if_block = /*field*/ ctx[24] !== /*rule*/ ctx[21].fieldName && /*field*/ ctx[24].type !== "layer_image" && /*field*/ ctx[24].type !== "magnifier" && /*field*/ ctx[24].type !== "advanced_options" && create_if_block_2$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*field*/ ctx[24] !== /*rule*/ ctx[21].fieldName && /*field*/ ctx[24].type !== "layer_image" && /*field*/ ctx[24].type !== "magnifier" && /*field*/ ctx[24].type !== "advanced_options") {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block_2$1(ctx);
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
     		id: create_each_block_1$2.name,
     		type: "each",
-    		source: "(160:18) {#each mappingFields.defaultFields as field}",
+    		source: "(175:14) {#each fields as field}",
     		ctx
     	});
 
@@ -10713,7 +11049,7 @@ var gyreapp = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*editingIndex*/ ctx[0] === /*index*/ ctx[22]) return 0;
+    		if (/*editingIndex*/ ctx[0] === /*index*/ ctx[23]) return 0;
     		return 1;
     	}
 
@@ -10823,7 +11159,7 @@ var gyreapp = (function () {
     			attr_dev(h1, "class", "svelte-14rkto5");
     			add_location(h1, file$2, 113, 2, 3163);
     			attr_dev(button, "class", "svelte-14rkto5");
-    			add_location(button, file$2, 179, 2, 6073);
+    			add_location(button, file$2, 202, 2, 7135);
     			attr_dev(div, "class", "ruleEditor svelte-14rkto5");
     			add_location(div, file$2, 112, 1, 3135);
     		},
@@ -10851,7 +11187,7 @@ var gyreapp = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*deleteRule, rules, mappingFields, fields, conditions, editingIndex, editRule*/ 223) {
+    			if (dirty[0] & /*deleteRule, rules, fields, mappingFields, conditions, editingIndex, editRule*/ 223) {
     				each_value = /*rules*/ ctx[1];
     				validate_each_argument(each_value);
     				let i;
@@ -10919,7 +11255,7 @@ var gyreapp = (function () {
     function instance$3($$self, $$props, $$invalidate) {
     	let $metadata;
     	validate_store(metadata, 'metadata');
-    	component_subscribe($$self, metadata, $$value => $$invalidate(17, $metadata = $$value));
+    	component_subscribe($$self, metadata, $$value => $$invalidate(18, $metadata = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('RuleEditor', slots, []);
     	let mH = new mappingsHelper();
@@ -11018,6 +11354,13 @@ var gyreapp = (function () {
     		}
     	}
 
+    	function select_change_handler_1(each_value, index) {
+    		each_value[index].targetField = select_value(this);
+    		$$invalidate(1, rules);
+    		$$invalidate(2, mappingFields);
+    		$$invalidate(4, fields);
+    	}
+
     	const click_handler_1 = index => deleteRule(index);
     	const click_handler_2 = index => editRule(index);
 
@@ -11069,6 +11412,7 @@ var gyreapp = (function () {
     		select2_change_handler,
     		select_change_handler,
     		inputcombo_value_binding,
+    		select_change_handler_1,
     		click_handler_1,
     		click_handler_2
     	];
