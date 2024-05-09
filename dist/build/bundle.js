@@ -13910,12 +13910,9 @@ var gyreapp = (function () {
                     for(let i=0;i<field.split_value_num;i++) {
                         let v=arr[i];
                         // type conversion
-                        if (field.split_value_type==="float") v=parseFloat(v);
-                        if (field.split_value_type==="number") v=parseInt(v);    
-                        if (field.split_value_type==="boolean") {
-                            v=false;
-                            if (v==="true") v=true;
-                        }   
+                        let splitField={name:name+"_"+i,type:field.split_value_type,step:parseFloat(v)};
+
+                        v=this.rules.convertValue( v,splitField);  
                         data[name+"_"+i]=v;
                     }
                 }
@@ -13983,9 +13980,9 @@ var gyreapp = (function () {
             vp.splitCustomValues(data);
         }
         async execute(data) {
-            this.splitCustomValues(data);
             this.generateLoops(data);
             this.executeAllRules(data);
+            this.splitCustomValues(data);
             await this.setValues(data);      
             console.log("data",data);  
         }
@@ -13997,9 +13994,9 @@ var gyreapp = (function () {
                 negativePrompt: "ugly",
                 hasMask: true,
                 hasinitImage: true,
-                rise: "10;100",
-                rise_red: "1;2",
-                rise_gray: "100;101",
+                rise: "0.0;0.3432423",
+                rise_red: "0.1;0.55534",
+                rise_gray: "2;55",
                 blend_if_channel: "gray",
                 controlnet:[
                     { type:"pose",image:"empty"},

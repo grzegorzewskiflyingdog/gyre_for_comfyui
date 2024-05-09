@@ -238,12 +238,9 @@ export class valuePreparser {
                 for(let i=0;i<field.split_value_num;i++) {
                     let v=arr[i]
                     // type conversion
-                    if (field.split_value_type==="float") v=parseFloat(v)
-                    if (field.split_value_type==="number") v=parseInt(v)    
-                    if (field.split_value_type==="boolean") {
-                        v=false
-                        if (v==="true") v=true
-                    }   
+                    let splitField={name:name+"_"+i,type:field.split_value_type,step:parseFloat(v)}
+
+                    v=this.rules.convertValue( v,splitField)  
                     data[name+"_"+i]=v
                 }
             }

@@ -63,9 +63,9 @@ export class ComfyUIPreparser {
         vp.splitCustomValues(data)
     }
     async execute(data) {
-        this.splitCustomValues(data)
         this.generateLoops(data)
         this.executeAllRules(data)
+        this.splitCustomValues(data)
         await this.setValues(data)      
         console.log("data",data)  
     }
@@ -77,9 +77,9 @@ export class ComfyUIPreparser {
             negativePrompt: "ugly",
             hasMask: true,
             hasinitImage: true,
-            rise: "10;100",
-            rise_red: "1;2",
-            rise_gray: "100;101",
+            rise: "0.0;0.3432423",
+            rise_red: "0.1;0.55534",
+            rise_gray: "2;55",
             blend_if_channel: "gray",
             controlnet:[
                 { type:"pose",image:"empty"},
