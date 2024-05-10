@@ -92,6 +92,7 @@ export class valuePreparser {
             let layerID=arr[idx]
             return await this.getLayerImage(null,layerID)
         }
+        if(field.type=="number" && !field.step && value) field.step=value;
         return  this.rules.convertValue(value,field)
     }
     /**
