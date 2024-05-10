@@ -56,7 +56,7 @@ export class ComfyUIPreparser {
     async setValues(data) {
         let vp=new valuePreparser(this.workflow)
         await vp.setValues(data)
-        await vp.removePrimitiveNodes()
+        await vp.removeVirtualNodes()
     }
     splitCustomValues(data) {
         let vp=new valuePreparser(this.workflow)

@@ -171,23 +171,28 @@ export class valuePreparser {
             }
         }
     }
-
-    removePrimitiveNodes() {
+    removeVirtualNodes() {
 
         // Iterate backwards to avoid indexing issues after removal
         for (let i = this.workflow.nodes.length - 1; i >= 0; i--) {
             const node = this.workflow.nodes[i];
-            if (node.type === "PrimitiveNode") {
+            let isVirtualNode = false;
+            if(this.workflow.extra.gyre.virtualNodes && this.workflow.extra.gyre.virtualNodes.length){
+                isVirtualNode =  this.workflow.extra.gyre.virtualNodes.includes(node.type);
+            }
+
+            if (isVirtualNode || node.type === "PrimitiveNode") {
                 const outgoingLink = this.workflow.links.find(link => link[1] === node.id);
-        
+
                 // Remove the  link
                 if (outgoingLink) this.workflow.links = this.workflow.links.filter(link => link[0] !== outgoingLink[0])
-        
+
                 // Remove the GyreLoop node
                 this.workflow.nodes.splice(i, 1)
             }
         }
     }
+
     /**
      * Modify workflow values by using mapping and data from image editor
      * data object has to be filled with
