@@ -26,7 +26,6 @@
             element.default=parseFloat(element.default)
         }
         if (element.type==="custom") generateElement()
-        console.log("update",element)
         dispatch('update', element)        
     }
 
@@ -57,6 +56,9 @@
     function deleteElement() {
         dispatch("delete",{})
     }
+    function cloneElement() {
+        dispatch("clone",element)
+    }    
     function changeValue(newValue) {
         value=newValue
         dispatch("change",{value:value})
@@ -302,7 +304,7 @@
     {#if element.type === 'slider'}
        <button on:click={()=>{  updateElement({ type: "number" }) }}>Convert to Number</button>
     {/if}
-    <div><button on:click={() => deleteElement()} class="delete">Delete</button></div>
+    <div><button on:click={() => deleteElement()} class="delete">Delete</button> <button on:click={() => cloneElement()} >Clone</button></div>
 
 </div>
 {/if}

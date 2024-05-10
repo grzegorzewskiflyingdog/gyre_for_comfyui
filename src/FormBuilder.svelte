@@ -141,15 +141,19 @@
   function updateElement(index,element) {
     formElements[index]=element
     ensureUniqueNames()
-    console.log("after ensureUniqueNames",element)
     setDefaultValues()
-    console.log("after setDefaultValues",element)
-
     $metadata.forms[form_key].elements=formElements
     let helper=new mappingsHelper()
     helper.cleanUpMappings($metadata)
-    console.log("after cleanUpMappings",element)
+  }
 
+  function cloneElement(index,element) {
+    let cloneElement=JSON.parse(JSON.stringify(element))
+    formElements.push(cloneElement)
+    ensureUniqueNames()
+    formElements=formElements
+    showPropertiesIdx=formElements.length-1
+    setDefaultValues()    
   }
   /**
    * remove one element from form
@@ -290,6 +294,7 @@ let selectWorkflowType=false
         on:openProperties={() => {showPropertiesIdx=index }} 
         on:closeProperties={() => {showPropertiesIdx=-1 }}
         on:update={(e) => { updateElement(index,e.detail)  }}
+        on:clone={(e) => { cloneElement(index,e.detail)  }}
         on:delete={(e) => { removeElement(index) }}
         value={data[element.name]}
         on:change={e => { executeRules(element,e.detail.value); }}
