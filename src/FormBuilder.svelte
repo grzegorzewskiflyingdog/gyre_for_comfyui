@@ -297,7 +297,7 @@ let selectWorkflowType=false
         on:clone={(e) => { cloneElement(index,e.detail)  }}
         on:delete={(e) => { removeElement(index) }}
         value={data[element.name]}
-        on:change={e => { executeRules(element,e.detail.value); }}
+        on:change={e => { executeRules(element,e.detail.value); formElements=formElements; }}
         showProperties={showPropertiesIdx===index}/>
       </div>
   {/each}

@@ -150,10 +150,10 @@
 
           <select bind:value={rule.actionType}  class="input">
             <option value="">Action...</option>
-            <option value="setValue">Set Value</option>
-            <option value="showField">Show another Field</option>
-            <option value="hideField">Hide another Field</option>
-            <option value="copyValue">Copy from another Field</option>
+            <option value="setValue">Set value</option>
+            <option value="showField">Show another field</option>
+            <option value="hideField">Hide another field</option>
+            <option value="copyParameter">Copy parameter from another field</option>
           </select>
         {#if rule.actionType === 'setValue'}
           <div class="action-row">
@@ -190,7 +190,7 @@
           <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
       </div>
         {/if}
-        {#if rule.actionType === 'copyValue'}
+        {#if rule.actionType === 'copyValue' || rule.actionType === 'copyParameter'}
         <div class="action-row"> Copy 
           <select bind:value={rule.actionValue} class="oneLine input">
             <option value="">From Field...</option>
@@ -202,6 +202,7 @@
               {/each}
             </optgroup>            
           </select>
+
           <select bind:value={rule.targetField} class="oneLine input">
             <option value="">To Field...</option>
             <optgroup label="Form">              
@@ -212,6 +213,9 @@
               {/each}
             </optgroup>            
           </select>
+          {#if rule.actionType === 'copyParameter'}
+           <input bind:value={rule.targetParameter} class="oneLine input">
+          {/if}
           <!-- <input type="text" bind:value={rule.actionValue} placeholder="Value"  class="oneLine input" style="width:270px">-->
       </div>
         {/if}
@@ -227,6 +231,7 @@
           {#if rule.actionType==="showField"}show {rule.targetField}{/if}
           {#if rule.actionType==="hideField"}hide {rule.targetField}{/if}
           {#if rule.actionType==="copyValue"}copy {rule.actionValue} to {rule.targetField}{/if}
+          {#if rule.actionType==="copyParameter"}copy {rule.actionValue} to {rule.targetField}.{rule.targetParameter}{/if}
 
         </div>
       {/if}

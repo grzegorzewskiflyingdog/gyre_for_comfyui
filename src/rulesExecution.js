@@ -183,6 +183,18 @@ export class rulesExecution {
                 let value=this.getValue(data,fromFieldName,fieldList,arrayIdx)
                 this.setValue(data,value,targetFieldName,fieldList,arrayIdx)
             }
+            if (rule.actionType==="copyParameter") {
+                let fromFieldName=rule.actionValue
+                let fromField=this.getField(rule.actionValue,fieldList)
+                if (!fromField) {
+                    console.error("rule execution from field not found:",fromFieldName)
+                    continue                    
+                }
+                let value=this.getValue(data,fromFieldName,fieldList,arrayIdx)
+                let field=this.getField(targetFieldName,fieldList)
+                field[rule.targetParameter]=value
+                console.log(field)
+            }
         }        
         return {data,hiddenFields,showFields}
     }

@@ -77,6 +77,7 @@
             }
         }
         html+="></"+element.tag+">"
+        console.log("render",html)
     }
     onMount(() => {
         generateElement()
