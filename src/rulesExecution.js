@@ -192,8 +192,9 @@ export class rulesExecution {
                 }
                 let value=this.getValue(data,fromFieldName,fieldList,arrayIdx)
                 let field=this.getField(targetFieldName,fieldList)
+                field._force_render=true
                 field[rule.targetParameter]=value
-                console.log(field)
+                
             }
         }        
         return {data,hiddenFields,showFields}

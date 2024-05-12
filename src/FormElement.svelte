@@ -65,6 +65,12 @@
     }
 
     let  html
+    $: {
+        if (element && element._force_render) {
+            generateElement()
+            element._force_render=false
+        }
+    }
     /**
      * for custom elements
      */
