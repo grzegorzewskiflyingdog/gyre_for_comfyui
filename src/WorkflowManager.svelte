@@ -322,13 +322,15 @@
             let _node=window.app.graph._nodes[i]
             if (!$metadata.nodeWidgets) $metadata.nodeWidgets={}
             // remove image list from values
-            let newwidgets = JSON.parse(JSON.stringify(_node.widgets));
-            newwidgets.forEach((el)=>{
-                if (el.name=='image'){
-                    el.options.values = [];
-                }
-            })
-            $metadata.nodeWidgets[node.id]=newwidgets;
+            if  (_node && _node.widgets!=void 0) {
+                let newwidgets = JSON.parse(JSON.stringify(_node.widgets));
+                newwidgets.forEach((el) => {
+                    if (el.name == 'image') {
+                        el.options.values = [];
+                    }
+                })
+                $metadata.nodeWidgets[node.id] = newwidgets;
+            }
          //   node.widgets=_node.widgets
         }
 
