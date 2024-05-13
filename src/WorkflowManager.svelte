@@ -294,9 +294,8 @@
 
     async function getVirtualNodes() {
         for (const outerNode of  window.app.graph.computeExecutionOrder(false)) {
-
-
             const innerNodes = outerNode.getInnerNodes ? outerNode.getInnerNodes() : [outerNode];
+            debugger;
             for (const node of innerNodes) {
                 if (node.isVirtualNode) {
                     virtualNodes.push(node.type);
@@ -314,7 +313,7 @@
         window.app.graph.serialize_widgets=true
         let graph = window.app.graph.serialize();
 
-        if (!$metadata.virtualNodes){
+        if (!$metadata.virtualNodes || ($metadata.virtualNodes && !$metadata.virtualNodes.length)){
             $metadata.virtualNodes=virtualNodes;
         }
         for(let i=0;i<graph.nodes.length;i++) {
