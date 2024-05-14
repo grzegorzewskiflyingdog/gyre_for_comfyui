@@ -65,7 +65,6 @@
         const fileInput = document.getElementById("comfy-file-input");
         const fileInputListener = async () => {
             if (fileInput && fileInput.files && fileInput.files.length > 0) {
-                console.log(fileInput, fileInput.files);
                 new Date(fileInput.files[0].lastModified).toDateString()
                 let fixedfilename = getAvalableFileName(fileInput.files[0].name);
                 let graph = window.app.graph.serialize();
@@ -144,7 +143,7 @@
             }
             return res
         })
-        console.log(data_workflow_list);
+
         workflowList.set(data_workflow_list)
     }
 
@@ -295,7 +294,6 @@
     async function getVirtualNodes() {
         for (const outerNode of  window.app.graph.computeExecutionOrder(false)) {
             const innerNodes = outerNode.getInnerNodes ? outerNode.getInnerNodes() : [outerNode];
-            debugger;
             for (const node of innerNodes) {
                 if (node.isVirtualNode) {
                     virtualNodes.push(node.type);
@@ -334,7 +332,7 @@
          //   node.widgets=_node.widgets
         }
 
-        console.log("window.app.graph",graph)
+        
         // this is scenario just after loading workflow and not save it
         if (loadedworkflow && loadedworkflow.extra.workspace_info) {
             graph.extra = loadedworkflow.extra;
@@ -345,7 +343,7 @@
         if (name) {
             file_path = name
         }
-        console.log("save file: ",file_path,"name: ",name,"gyrename: ",graph.extra?.workspace_info?.name);
+        // console.log("save file: ",file_path,"name: ",name,"gyrename: ",graph.extra?.workspace_info?.name);
 
         if (!file_path.endsWith('.json')) {
             // Add .json extension if it doesn't exist
@@ -354,12 +352,7 @@
         if ($metadata && graph.extra) graph.extra.gyre = $metadata;
         const graphJson = JSON.stringify(graph);
 
-
-
-        console.log("  orginal name ",orginalname);
-
         if(orginalname != name && !duplicate) {
-            console.log("rename file orginal ",orginalname,"name",name);
             let new_file_path;
             if (orginalname) {
                 new_file_path = orginalname
@@ -466,7 +459,6 @@
         $metadata = $metadata
     }
     function deleteWorkflow(workflow) {
-        console.log("delete workflow",workflow);
         if (confirm("Delete Workflow?") == true) {
             let name = workflow.name;
             if (!name.endsWith('.json')) {
@@ -509,7 +501,6 @@
 
     function loadWorkflowForm(element){
         let elem = $workflowformList.find((el)=>{return el.name=='formdata_'+element.name});
-        console.log("load form  element!!!",element,$workflowformList,elem);
         download(elem.json);
     }
 

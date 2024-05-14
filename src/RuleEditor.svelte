@@ -23,7 +23,6 @@
     }
     onMount(() => {
       mappingFields=mH.getMappingFields($metadata)
-      console.log(mappingFields)
     });
     function deleteRule(index) {
       rules.splice(index, 1);
