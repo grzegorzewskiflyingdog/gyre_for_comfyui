@@ -313,9 +313,10 @@
         window.app.graph.serialize_widgets=true
         let graph = window.app.graph.serialize();
 
-        if (!$metadata.virtualNodes || ($metadata.virtualNodes && !$metadata.virtualNodes.length)){
+        //if (!$metadata.virtualNodes || ($metadata.virtualNodes && !$metadata.virtualNodes.length)){
+            virtualNodes= [...new Set(virtualNodes)];
             $metadata.virtualNodes=virtualNodes;
-        }
+        //}
         for(let i=0;i<graph.nodes.length;i++) {
             let node=graph.nodes[i]
             let _node=window.app.graph._nodes[i]
