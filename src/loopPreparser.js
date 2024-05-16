@@ -209,7 +209,7 @@ export class loopPreparser {
         newNode.pos[0] += originalGroup.bounding[2]+70 // Shift the new group to prevent overlap
         this.nodeMapping[node.id] = newNode.id; // Map old ID to new ID
         this.workflow.nodes.push(newNode);
-        console.log("add node", newNode)
+       // console.log("add node", newNode)
       }
     });
 

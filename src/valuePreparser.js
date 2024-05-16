@@ -73,7 +73,7 @@ export class valuePreparser {
         if (field.type==="image") {
 
                 if (!arrayName) {
-                    console.log("get image for field",field.name)
+
                     return await this.getImage(field.name)
                 } else {
                     let propertyName= field.name.split(".")[1]  // e.g. image from controlnet[].image

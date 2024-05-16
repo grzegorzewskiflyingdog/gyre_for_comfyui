@@ -117,7 +117,7 @@ const callback = function (mutationsList, observer) {
             response.push({
               "content": "Gyre Mappings...",
               "callback": (item, options, e, menu, node)=>{
-                console.log("node:",node.id,node.widgets )
+              //  console.log("node:",node.id,node.widgets )
                 window.openGyreMappings(node,e)
               }            
             })

@@ -67,7 +67,7 @@ export class ComfyUIPreparser {
         this.executeAllRules(data)
         this.splitCustomValues(data)
         await this.setValues(data)      
-        console.log("data",data)  
+      //  console.log("data",data)  
     }
 
     getTestData() {
