@@ -566,7 +566,9 @@
                     <Icon name="editRules"   deactivate="deactivate"></Icon>
                     <Icon name="errorlogs" {state} on:click={async (e) =>  {await loadLogList(); state="errorlogs" }}  ></Icon>
                 {/if}
-                <Icon name="GyreLeftMenu" ></Icon>
+                <a href="gyre/dist/index.html" target="_blank">
+                <Icon name="GyreLeftMenu"></Icon>
+                </a>
             {/key}
         </div>
         <div class="content">

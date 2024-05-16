@@ -15,6 +15,10 @@ import os
 import json
 from .nodes import *
 import mimetypes
+import zipfile
+import io
+import shutil
+import pickle
 
 WEB_DIRECTORY = "entry"
 DEFAULT_USER = "guest"
@@ -30,6 +34,7 @@ db_dir_path = os.path.join(workspace_path, "db")
 workspace_app = web.Application()
 
 dist_path = os.path.join(workspace_path, 'dist/build')
+gyre_path = os.path.join(workspace_path, 'gyre')
 if os.path.exists(dist_path):
     workspace_app.add_routes([
         web.static("/", dist_path),
@@ -356,4 +361,66 @@ async def create_js_file(request):
 
 
 
+def download_and_extract_github_repo():
+    print("check update required")
+    updaterequired =  check_update_required()
+    if(updaterequired==False):
+        print("update not required")
+        return
 
+    url = f'https://github.com/grzegorzewskiflyingdog/aistudio/archive/refs/heads/main.zip'
+    response = requests.get(url)
+    if response.status_code == 200:
+        with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
+            zip_ref.extractall(gyre_path)
+        print(f'Repository {url} downloaded and extracted to {gyre_path}')
+        source_directory = os.path.join(gyre_path,"aistudio-main","dist")
+        target_directory = os.path.join(source_directory, '..', '..', os.path.basename(source_directory))
+        shutil.move(source_directory, target_directory)
+    else:
+        print(f'Failed to download repository: {response.status_code}')
+
+
+
+def read_version_from_file(filename):
+    try:
+        # Read the pickled file
+        with open(filename, 'rb') as file:
+            version = pickle.load(file)
+            return version
+    except FileNotFoundError:
+        # If the file does not exist, return an empty string
+        return ""
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return ""
+
+
+
+def check_update_required():
+        filename = 'version.pkl'
+        # Send a GET request to the URL to get the content of package.json
+        oldversion = read_version_from_file(filename)
+        response = requests.get(f'https://raw.githubusercontent.com/grzegorzewskiflyingdog/aistudio/main/package.json')
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Parse the JSON content
+            package_info = response.json()
+            # Extract the version property
+            version = package_info.get('version')
+            with open(filename, 'wb') as file:
+                            pickle.dump(version, file)
+                            print(f"Version {version} saved to {filename}")
+            if version:
+                if(oldversion!=version):
+                    print("other version")
+                    return True
+                else:
+                    print("same version")
+                    return False
+            else:
+                print("Version property not found in package.json")
+        else:
+            print(f"Failed to fetch package.json. Status code: {response.status_code}")
+
+download_and_extract_github_repo()
