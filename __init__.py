@@ -365,7 +365,7 @@ def download_and_extract_github_repo():
     print("check update required")
     updaterequired =  check_update_required()
     if(updaterequired==False):
-        print("update not required")
+        print("update Gyre not required")
         return
     print(f'Download new version of Gyre application it can take some time please wait...')
     url = f'https://github.com/grzegorzewskiflyingdog/aistudio/archive/refs/heads/main.zip'
@@ -410,13 +410,13 @@ def check_update_required():
             version = package_info.get('version')
             with open(filename, 'wb') as file:
                             pickle.dump(version, file)
-                            print(f"Version {version} saved to {filename}")
+                            #print(f"Version {version} saved to {filename}")
             if version:
                 if(oldversion!=version):
-                    print("other version")
+                    print("other gyre version: {version} installed version: {oldversion} update required")
                     return True
                 else:
-                    print("same version")
+                    print(f"same gyre version {version}")
                     return False
             else:
                 print("Version property not found in package.json")
