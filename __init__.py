@@ -367,7 +367,7 @@ def download_and_extract_github_repo():
     if(updaterequired==False):
         print("update not required")
         return
-
+    print(f'Download new version of Gyre application it can take some time please wait...')
     url = f'https://github.com/grzegorzewskiflyingdog/aistudio/archive/refs/heads/main.zip'
     response = requests.get(url)
     if response.status_code == 200:
