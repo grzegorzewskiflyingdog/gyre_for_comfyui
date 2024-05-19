@@ -96,7 +96,10 @@
         
     })
     export let advancedOptions=true
-
+    function getParameterValue(value,defaultValue) {
+        if (!value) return defaultValue
+        return value
+    }
     let elementRoot
 </script>
 
@@ -167,8 +170,10 @@
     <label for={element.name}>{element.label}:</label>
         {#if element.widget_name && $metadata.combo_values[element.widget_name] }
         <select name="{element.name}" class="dropdown"  {readonly} on:change={e => {changeValue(e.target.value)}}>
-          {#each $metadata.combo_values[element.widget_name] as v}
-                <option value={v}  selected={value===v}>{v} </option>
+            {#each $metadata.combo_values[element.widget_name] as v}
+                {#if !element.regex || new RegExp(element.regex).test(v)}
+                    <option value={v}  selected={value===v}>{v} </option>
+                {/if}
             {/each} 
         </select>      
         {:else if !element.widget_name}  
@@ -288,7 +293,11 @@
                     {/each}
                 {/if}
             </select>
-    </div>
+        </div>
+        <div class="formLine">
+            <label  for="rexex"> Filter RegEx: </label>
+            <input type="text" name="regex" value={getParameterValue(element.regex,"")} on:change={(e) => updateElement({ regex: e.target.value })} />
+        </div>            
     {/if}
     {#if element.type === 'slider' || element.type === 'number'}
         <div class="formLine">
