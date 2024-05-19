@@ -219,7 +219,7 @@
 
     async function loadWorkflow(workflow) {
         await loadList()
-
+        if (!workflow) return
         if (!workflow.gyre) {
             workflow.gyre = {};
             workflow.gyre.tags = [];

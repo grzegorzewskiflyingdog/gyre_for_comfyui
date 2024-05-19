@@ -6,6 +6,7 @@
 
     export let render=true
     import { mappingsHelper } from './mappingsHelper.js'
+  import { insert_hydration_dev } from 'svelte/internal';
 
     let showGyreMappings="none"
     let gyreMappingsDialogLeft="100px"
@@ -30,6 +31,7 @@
         gyreMappingsDialogTop=y+"px"
         
         widgets=node.widgets
+        console.log("W",widgets)
         nodeType=node.type
         if (!$metadata.mappings) $metadata.mappings={}
         mappings=$metadata.mappings[nodeId]
@@ -166,7 +168,10 @@
     }
 </script>
 {#if render}
+
 <div id="gyre_mappings" style="display:{showGyreMappings};left:{gyreMappingsDialogLeft};top:{gyreMappingsDialogTop}" >
+    {#if widgets && widgets.length}
+
     <h1>Field Mappings</h1>
         <div>{nodeType}</div>
 
@@ -219,8 +224,16 @@
             </div>
         {/each}
 
-        <div class="close"><Icon name="close" on:click={(e)=>{closeDialog()}}></Icon></div>
+{:else}        
+<p style="margin-top:30px">
+Nothing to do here. Please select node with widgets. So for example you cannot set mappings on a "Preview image node" use "Save image" instead.
+</p>
+
+{/if}
+<div class="close"><Icon name="close" on:click={(e)=>{closeDialog()}}></Icon></div>
+
 </div>
+
 {/if}
 <style>
 
