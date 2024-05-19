@@ -145,10 +145,10 @@
     {/if}    
     {#if element.type === 'text'}
         <label for={element.name}>{element.label}:</label>
-        <input type="text" class="textInput" placeholder="{element.placeholder}" {readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
+        <input type="text" class="textInput" placeholder="{element.placeholder}" readonly={readonly || element.readonly}  {value} on:change={e => {changeValue(e.target.value)}}/>
     {:else if element.type === 'textarea'}
         <label for={element.name} class="textarea_label">{element.label}:</label>
-        <textarea class="textarea" placeholder="{element.placeholder}"  {readonly} name="{element.name}" on:change={e => {changeValue(e.target.value)}}>{value}</textarea>
+        <textarea class="textarea" placeholder="{element.placeholder}"  readonly={readonly || element.readonly} name="{element.name}" on:change={e => {changeValue(e.target.value)}}>{value}</textarea>
     {:else if element.type === 'checkbox' }
         <label for={element.name} class="checkboxLabel">{element.label}:</label>
 
@@ -183,15 +183,15 @@
         {/if}
     {:else if element.type === 'slider'}
         <label for={element.name} class="slider_label">{element.label}:</label>
-        <span class="slidervalue">{value}</span><input  {readonly} type="range" min={element.min} max={element.max} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
+        <span class="slidervalue">{value}</span><input  readonly={readonly || element.readonly} type="range" min={element.min} max={element.max} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
     {:else if element.type === 'number'}
         <label for={element.name}>{element.label}:</label>
-        <input type="number" min={element.min} max={element.max}  {readonly} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
+        <input type="number" min={element.min} max={element.max}  readonly={readonly || element.readonly} step={element.step} {value} name="{element.name}" on:change={e => {changeValue(e.target.value)}}/>
     {/if}   
     {#if readonly!=="readonly"}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="editElementButton" on:click={openProperties}>Edit</div>
-{/if} 
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+     <div class="editElementButton" on:click={openProperties}>Edit</div>
+    {/if} 
 </div>
 {#if showProperties}
 <div class="element-properties" >
@@ -214,6 +214,12 @@
             <label  for="hidden">Hidden: </label>
             <input type="checkbox" name="hidden" bind:checked={element.hidden}  /> Hide Input in form
         </div>       
+    {/if}
+    {#if element.type==="slider" || element.type==="text" || element.type==="textarea" || element.type==="number"}
+    <div class="formLine">
+        <label  for="hidden">Hidden: </label>
+        <input type="checkbox" name="hidden" bind:checked={element.readonly}  /> Readonly
+    </div>    
     {/if}
     {#if element.type==="custom"}
             {#each Object.entries(element.parameters) as [name, p]}
@@ -240,7 +246,7 @@
             <input type="checkbox" name="hidden" bind:checked={element.hidden}  /> Hide Input in form
         </div>                
     {/if}
-    {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'  || element.type === 'color_picker'}}
+    {#if element.type === 'text' || element.type === 'textarea' || element.type === 'number'  || element.type === 'color_picker'}
         <div class="formLine">
             <label  for="placeholder"> Placeholder: </label>
         <input type="text" name="placeholder" value={element.placeholder} on:input={(e) => updateElement({ placeholder: e.target.value })} />
